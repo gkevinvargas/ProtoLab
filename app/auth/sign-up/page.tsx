@@ -1,11 +1,76 @@
+
+import { IconAtom } from "@tabler/icons-react";
 import { SignUpForm } from "@/components/sign-up-form";
 
-export default function Page() {
+export default function SignUpPage() {
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
-        <SignUpForm />
+    <main className="min-h-screen bg-[#F5F9FF] px-5 py-8 md:px-10">
+      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center">
+        <div className="grid w-full overflow-hidden rounded-[2rem] bg-white shadow-xl shadow-blue-100/60 md:grid-cols-2">
+
+          {/* Panel de presentación */}
+          <section className="relative flex flex-col justify-between overflow-hidden bg-[#3478F6] p-8 text-white md:min-h-[650px] md:p-12">
+
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[35px] border-white/10" />
+
+            <div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full border-[40px] border-white/10" />
+
+            <div className="relative z-10 flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-[#3478F6]">
+                <IconAtom size={28} />
+              </div>
+
+              <span className="text-2xl font-bold tracking-tight">
+                ProtoLab
+              </span>
+            </div>
+
+            <div className="relative z-10 my-12">
+              <span className="mb-5 inline-block rounded-full bg-white/15 px-4 py-2 text-sm font-medium">
+                Comienza tu experiencia
+              </span>
+
+              <h1 className="max-w-md text-4xl font-bold leading-tight md:text-5xl">
+                El primer paso para crear algo extraordinario.
+              </h1>
+
+              <p className="mt-6 max-w-md text-base leading-relaxed text-blue-100">
+                Crea tu cuenta y descubre nuevas formas de aprender,
+                experimentar y desarrollar tus habilidades tecnológicas.
+              </p>
+            </div>
+
+            <div className="relative z-10 flex items-center gap-2 text-sm text-blue-100">
+              <span className="h-2 w-2 rounded-full bg-[#21B8A6]" />
+              Aprende creando en ProtoLab.
+            </div>
+          </section>
+
+          {/* Panel del formulario */}
+          <section className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
+            <div className="mx-auto w-full max-w-md">
+
+              <div className="mb-9">
+                <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-[#3478F6]">
+                  Únete a ProtoLab
+                </p>
+
+                <h2 className="text-3xl font-bold text-[#24324A]">
+                  Crear una cuenta
+                </h2>
+
+                <p className="mt-3 text-sm leading-relaxed text-[#718096]">
+                  Regístrate para comenzar a explorar nuestros laboratorios.
+                </p>
+              </div>
+
+              <SignUpForm />
+
+            </div>
+          </section>
+
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
