@@ -1,0 +1,280 @@
+{
+  "schemaVersion": "1.0.0",
+  "practice": {
+    "id": "carga-capacitor-rc",
+    "title": "Carga de un capacitor RC",
+    "description": "Observa cómo un capacitor se carga a través de una resistencia conectada a una fuente de corriente continua.",
+    "subject": "Electrónica básica",
+    "difficulty": "principiante",
+    "estimatedDurationMinutes": 20,
+    "learningObjectives": [
+      "Identificar la resistencia y el capacitor en un circuito RC.",
+      "Comprender la constante de tiempo tau = R por C.",
+      "Observar cómo el voltaje del capacitor aumenta gradualmente durante la carga."
+    ],
+    "instructions": [
+      {
+        "step": 1,
+        "text": "Identifica la batería de 9 V, la resistencia de 10 kΩ y el capacitor de 100 µF."
+      },
+      {
+        "step": 2,
+        "text": "Comprueba que la batería, la resistencia y el capacitor formen un circuito cerrado en serie."
+      },
+      {
+        "step": 3,
+        "text": "Selecciona el modo Carga RC y ejecuta el análisis temporal."
+      },
+      {
+        "step": 4,
+        "text": "Observa cómo el voltaje del capacitor se aproxima gradualmente al voltaje de la fuente."
+      }
+    ],
+    "allowedComponentTypes": [
+      "bateria",
+      "resistencia",
+      "capacitor",
+      "interruptor"
+    ],
+    "evaluation": {
+      "passingScore": 70,
+      "requiredAnalysis": "rc",
+      "criteria": [
+        {
+          "id": "componentes",
+          "type": "component-count",
+          "title": "Componentes requeridos",
+          "description": "Incluye una batería, una resistencia y un capacitor.",
+          "points": 10,
+          "expectedCounts": {
+            "bateria": 1,
+            "resistencia": 1,
+            "capacitor": 1
+          },
+          "exact": true
+        },
+        {
+          "id": "conexiones",
+          "type": "connection-topology",
+          "title": "Conexiones del circuito RC",
+          "description": "Conecta la batería, la resistencia y el capacitor en serie para realizar la carga.",
+          "points": 35,
+          "exact": true,
+          "expectedConnections": [
+            {
+              "from": {
+                "reference": "V1",
+                "terminalId": "left"
+              },
+              "to": {
+                "reference": "R1",
+                "terminalId": "left"
+              }
+            },
+            {
+              "from": {
+                "reference": "R1",
+                "terminalId": "right"
+              },
+              "to": {
+                "reference": "C1",
+                "terminalId": "left"
+              }
+            },
+            {
+              "from": {
+                "reference": "C1",
+                "terminalId": "right"
+              },
+              "to": {
+                "reference": "V1",
+                "terminalId": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fuente",
+          "type": "component-value",
+          "title": "Voltaje de alimentación",
+          "description": "Configura la fuente de 9 V.",
+          "points": 5,
+          "reference": "V1",
+          "expectedValue": 9,
+          "unit": "V",
+          "tolerance": 0.01
+        },
+        {
+          "id": "resistencia",
+          "type": "component-value",
+          "title": "Valor de resistencia",
+          "description": "Utiliza una resistencia de 10 kΩ.",
+          "points": 10,
+          "reference": "R1",
+          "expectedValue": 10,
+          "unit": "kΩ",
+          "tolerance": 0.01
+        },
+        {
+          "id": "capacitor",
+          "type": "component-value",
+          "title": "Capacitancia",
+          "description": "Utiliza un capacitor de 100 µF.",
+          "points": 10,
+          "reference": "C1",
+          "expectedValue": 100,
+          "unit": "µF",
+          "tolerance": 0.01
+        },
+        {
+          "id": "analisis",
+          "type": "analysis-status",
+          "title": "Ejecución del análisis",
+          "description": "Completa el análisis transitorio RC sin errores bloqueantes.",
+          "points": 10
+        },
+        {
+          "id": "modo",
+          "type": "rc-mode",
+          "title": "Modo de operación",
+          "description": "Selecciona el modo de carga del capacitor.",
+          "points": 5,
+          "expectedMode": "charge"
+        },
+        {
+          "id": "constante-tiempo",
+          "type": "rc-measurement-range",
+          "title": "Constante de tiempo",
+          "description": "La constante de tiempo debe aproximarse a 1 segundo.",
+          "points": 10,
+          "metric": "timeConstantSeconds",
+          "min": 0.95,
+          "max": 1.05
+        },
+        {
+          "id": "voltaje-final",
+          "type": "rc-measurement-range",
+          "title": "Voltaje final",
+          "description": "Al finalizar cinco constantes de tiempo, el capacitor debe aproximarse a 9 V.",
+          "points": 5,
+          "metric": "finalVoltageV",
+          "min": 8.8,
+          "max": 9.1
+        }
+      ]
+    }
+  },
+  "canvas": {
+    "width": 1600,
+    "height": 1000,
+    "unit": "px",
+    "origin": "top-left",
+    "componentAnchor": "center-top"
+  },
+  "components": [
+    {
+      "id": "bat-rc-charge",
+      "type": "bateria",
+      "reference": "V1",
+      "value": 9,
+      "unit": "V",
+      "position": {
+        "x": 180,
+        "y": 390
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "+",
+          "polarity": "positive"
+        },
+        {
+          "id": "right",
+          "label": "−",
+          "polarity": "negative"
+        }
+      ]
+    },
+    {
+      "id": "res-rc-charge",
+      "type": "resistencia",
+      "reference": "R1",
+      "value": 10,
+      "unit": "kΩ",
+      "position": {
+        "x": 780,
+        "y": 200
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "1",
+          "polarity": "neutral"
+        },
+        {
+          "id": "right",
+          "label": "2",
+          "polarity": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "cap-rc-charge",
+      "type": "capacitor",
+      "reference": "C1",
+      "value": 100,
+      "unit": "µF",
+      "position": {
+        "x": 1370,
+        "y": 390
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "1",
+          "polarity": "neutral"
+        },
+        {
+          "id": "right",
+          "label": "2",
+          "polarity": "neutral"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "wire-rc-charge-1",
+      "from": {
+        "componentId": "bat-rc-charge",
+        "terminalId": "left"
+      },
+      "to": {
+        "componentId": "res-rc-charge",
+        "terminalId": "left"
+      }
+    },
+    {
+      "id": "wire-rc-charge-2",
+      "from": {
+        "componentId": "res-rc-charge",
+        "terminalId": "right"
+      },
+      "to": {
+        "componentId": "cap-rc-charge",
+        "terminalId": "left"
+      }
+    },
+    {
+      "id": "wire-rc-charge-3",
+      "from": {
+        "componentId": "cap-rc-charge",
+        "terminalId": "right"
+      },
+      "to": {
+        "componentId": "bat-rc-charge",
+        "terminalId": "right"
+      }
+    }
+  ]
+}

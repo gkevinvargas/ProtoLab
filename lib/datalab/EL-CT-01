@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "EL-CT-01",
+  "laboratorio_id": "electrolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Voltaje, corriente y Ley de Ohm",
+  "descripcion": "Introduce los conceptos fundamentales de la electricidad y aprende a calcular la relación entre corriente, resistencia y voltaje.",
+  "orden": 1,
+  "duracion_estimada_minutos": 15,
+  "objetivos": [
+    "Diferenciar entre voltaje, corriente eléctrica y resistencia.",
+    "Aplicar la fórmula de la Ley de Ohm en circuitos de corriente directa.",
+    "Predecir el comportamiento de un componente al variar la tensión de alimentación."
+  ],
+  "secciones": [
+    {
+      "titulo": "Magnitudes eléctricas fundamentales",
+      "parrafos": [
+        "El voltaje es la fuerza que impulsa a los electrones a través de un conductor, medido en voltios (V).",
+        "La corriente representa el flujo de electrones (amperios, A) y la resistencia es la oposición que presenta un material (ohmios, Ω)."
+      ]
+    },
+    {
+      "titulo": "Relación matemática (Ley de Ohm)",
+      "parrafos": [
+        "La Ley de Ohm establece que la corriente es directamente proporcional al voltaje e inversamente proporcional a la resistencia.",
+        "Si aumentas la resistencia en un circuito manteniendo el voltaje fijo, la corriente disminuye proporcionalmente."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "EL-PI-01",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Calcular la caída de tensión en una resistencia conectada a una fuente de alimentación de 5V."
+    },
+    {
+      "practica_id": "EL-PC-01",
+      "tipo_contenido": "practica_complementaria",
+      "aplicacion": "Diseñar un circuito divisor de voltaje para proteger componentes sensibles en prototipos de robótica."
+    }
+  ]
+}

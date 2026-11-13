@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-02",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Filtrado analítico y toma de decisiones",
+  "descripcion": "Descubre cómo aislar subconjuntos de datos mediante filtros condicionales para extraer conclusiones precisas en escenarios complejos.",
+  "orden": 2,
+  "duracion_estimada_minutos": 15,
+  "objetivos": [
+    "Aplicar criterios de filtrado cruzado en tablas de datos relacionales.",
+    "Diferenciar entre tendencias estacionales y comportamientos anómalos puntuales.",
+    "Sustentar decisiones técnicas respaldadas por evidencia cuantitativa."
+  ],
+  "secciones": [
+    {
+      "titulo": "El propósito del filtrado de datos",
+      "parrafos": [
+        "Cuando manejamos grandes volúmenes de información, observar todos los registros a la vez dificulta la detección de patrones.",
+        "Filtrar por categorías específicas (como 'Horas Pico' o 'Valle nocturno') permite aislar comportamientos particulares y evaluar su impacto real."
+      ]
+    },
+    {
+      "titulo": "Correlación entre variables operativas",
+      "parrafos": [
+        "El análisis avanzado busca relaciones causales entre distintos conjuntos de datos, como el rendimiento académico frente al consumo de recursos en un makerspace.",
+        "Cruzar estas variables evita conjeturas subjetivas y fortalece el pensamiento crítico basado en métricas."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-PI-02",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Ejecutar consultas de filtrado dinámico en el explorador de registros para resolver retos de evaluación."
+    },
+    {
+      "practica_id": "DL-PC-02",
+      "tipo_contenido": "practica_complementaria",
+      "aplicacion": "Generar reportes analíticos automatizados y exportar las conclusiones en formato de portafolio."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+
+{
+  "schema_version": "1.0.0",
+  "evaluacion_id": "evaluacion-diagnostico-vocacional",
+  "version_evaluacion": "1.0.0",
+
+  "configuracion": {
+    "escala_minima": 1,
+    "escala_maxima": 100,
+    "areas_evaluadas": [
+      "robolab",
+      "electrolab",
+      "datalab"
+    ],
+    "dimensiones_evaluadas": [
+      "intereses",
+      "aptitudes",
+      "oferta_laboral"
+    ]
+  },
+
+  "evaluacion_privada_backend": {
+    "respuestas_correctas": [
+  { "identificador_pregunta": "LP01", "opciones_correctas": ["B"] },
+  { "identificador_pregunta": "LP02", "opciones_correctas": ["D"] },
+  { "identificador_pregunta": "EL01", "opciones_correctas": ["A"] },
+  { "identificador_pregunta": "EL02", "opciones_correctas": ["C"] },
+  { "identificador_pregunta": "PE01", "opciones_correctas": ["D"] },
+  { "identificador_pregunta": "PE02", "opciones_correctas": ["B"] }
+],
+    "ponderaciones": [],
+    "reglas_calculo": [],
+    "reglas_desempate": []
+  },
+
+  "configuracion_oferta_laboral": {
+  "alcance": "municipal",
+  "estado": "Jalisco",
+  "municipio_id": "14120",
+  "presencia_empresarial": {
+    "fuente": "INEGI · DENUE",
+    "edicion": "2026-05",
+    "conteos": {
+      "robolab": 7,
+      "electrolab": 11,
+      "datalab": 1
+    },
+    "clases_scian": {
+      "robolab": ["333245", "333510", "333999", "811312", "541510"],
+      "electrolab": ["334210", "334410", "334519", "336320"],
+      "datalab": ["518210", "541510"]
+    }
+  }
+}
+}
