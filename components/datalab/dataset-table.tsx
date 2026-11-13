@@ -1,5 +1,6 @@
 // components/datalab/dataset-table.tsx
 "use client";
+
 import React from 'react';
 
 interface DatasetTableProps {
@@ -7,97 +8,83 @@ interface DatasetTableProps {
   filtroCategoria: string;
 }
 
-export const DatasetTable: React.FC<DatasetTableProps> = ({ datasetId, filtroCategoria }) => {
-  // Definimos datos dinámicos para cada dataset activo
-  const datasetsMap: Record<number, { columnas: string[]; datos: Record<string, string>[] }> = {
-    0: {
-      columnas: ['PERIODO', 'FRANJA', 'CONSUMO', 'ESTADO'],
-      datos: [
-        { PERIODO: '00:00 - 04:00', FRANJA: 'Valle', CONSUMO: '140 kWh', ESTADO: 'Bajo' },
-        { PERIODO: '04:00 - 08:00', FRANJA: 'Apertura', CONSUMO: '220 kWh', ESTADO: 'Normal' },
-        { PERIODO: '08:00 - 12:00', FRANJA: 'Matutino', CONSUMO: '410 kWh', ESTADO: 'Medio' },
-        { PERIODO: '12:00 - 16:00', FRANJA: 'Mediodia', CONSUMO: '380 kWh', ESTADO: 'Medio' },
-        { PERIODO: '16:00 - 20:00', FRANJA: 'Pico', CONSUMO: '580 kWh', ESTADO: 'Critico' },
-        { PERIODO: '20:00 - 24:00', FRANJA: 'Cierre', CONSUMO: '290 kWh', ESTADO: 'Descenso' },
-      ]
-    },
-    1: {
-      columnas: ['ESTUDIANTE', 'MODULO', 'CALIFICACIÓN', 'ESTADO'],
-      datos: [
-        { ESTUDIANTE: 'Equipo Alfa', FRANJA: 'RoboLab', CONSUMO: '95 Pts', ESTADO: 'Aprobado' },
-        { ESTUDIANTE: 'Equipo Beta', FRANJA: 'DataLab', CONSUMO: '88 Pts', ESTADO: 'Normal' },
-        { ESTUDIANTE: 'Equipo Gamma', FRANJA: 'ElectroLab', CONSUMO: '60 Pts', ESTADO: 'Bajo' },
-        { ESTUDIANTE: 'Equipo Delta', FRANJA: 'RoboLab', CONSUMO: '100 Pts', ESTADO: 'Critico' },
-      ]
-    },
-    2: {
-      columnas: ['KIT / SENSOR', 'CATEGORÍA', 'UNIDADES', 'ESTADO'],
-      datos: [
-        { ESTUDIANTE: 'Kit Arduino Uno', FRANJA: 'Sensores', CONSUMO: '45 Kits', ESTADO: 'Medio' },
-        { ESTUDIANTE: 'Sensor ultrasónico', FRANJA: 'Robótica', CONSUMO: '120 Unidades', ESTADO: 'Critico' },
-        { ESTUDIANTE: 'Multímetro digital', FRANJA: 'ElectroLab', CONSUMO: '30 Unidades', ESTADO: 'Bajo' },
-      ]
-    },
-    3: {
-      columnas: ['MUNICIPIO', 'REGIÓN', 'POBLACIÓN', 'TASA STEM'],
-      datos: [
-        { ESTUDIANTE: 'Macuspana', FRANJA: 'Centro', CONSUMO: '155,000', ESTADO: 'Normal' },
-        { ESTUDIANTE: 'Centro (Villahermosa)', FRANJA: 'Centro', CONSUMO: '683,000', ESTADO: 'Critico' },
-        { ESTUDIANTE: 'Carメンas', FRANJA: 'Pantanos', CONSUMO: '102,000', ESTADO: 'Bajo' },
-      ]
-    }
+export const DatasetTable: React.FC<DatasetTableProps> = ({ datasetId }) => {
+  // Definimos las filas de la tabla para cada dataset / práctica (0 al 6)
+  const tablasPorId: Record<number, Array<{ col1: string; col2: string; col3: string; col4: string }>> = {
+    0: [
+      { col1: "00:00 - 04:00", col2: "Valle", col3: "140 kWh", col4: "Bajo" },
+      { col1: "04:00 - 08:00", col2: "Apertura", col3: "220 kWh", col4: "Normal" },
+      { col1: "08:00 - 12:00", col2: "Matutino", col3: "410 kWh", col4: "Medio" },
+      { col1: "12:00 - 16:00", col2: "Mediodía", col3: "380 kWh", col4: "Medio" },
+      { col1: "16:00 - 20:00", col2: "Pico", col3: "580 kWh", col4: "Crítico" },
+      { col1: "20:00 - 24:00", col2: "Cierre", col3: "290 kWh", col4: "Descenso" },
+    ],
+    1: [
+      { col1: "Equipo Alfa", col2: "RoboLab", col3: "95 Pts", col4: "Aprobado" },
+      { col1: "Equipo Beta", col2: "DataLab", col3: "88 Pts", col4: "Normal" },
+      { col1: "Equipo Gamma", col2: "ElectroLab", col3: "60 Pts", col4: "Bajo" },
+      { col1: "Equipo Delta", col2: "RoboLab", col3: "100 Pts", col4: "Crítico" },
+    ],
+    2: [
+      { col1: "Kit Arduino Uno", col2: "Sensores", col3: "45 Kits", col4: "Medio" },
+      { col1: "Sensor ultrasónico", col2: "Robótica", col3: "120 Unidades", col4: "Crítico" },
+      { col1: "Multímetro digital", col2: "ElectroLab", col3: "30 Unidades", col4: "Bajo" },
+    ],
+    3: [
+      { col1: "Macuspana", col2: "Centro", col3: "155,000 Hab.", col4: "Normal" },
+      { col1: "Villahermosa", col2: "Centro", col3: "683,000 Hab.", col4: "Crítico" },
+      { col1: "Cárdenas", col2: "Pantanos", col3: "102,000 Hab.", col4: "Bajo" },
+    ],
+    // Tablas específicas para las prácticas DL-CT (IDs 4, 5, 6)
+    4: [
+      { col1: "Clase 0-20%", col2: "Frecuencia baja", col3: "15%", col4: "Estable" },
+      { col1: "Clase 20-40%", col2: "Frecuencia media", col3: "30%", col4: "Normal" },
+      { col1: "Clase 40-60%", col2: "Densidad operativa", col3: "85%", col4: "Crítico / Pico" },
+      { col1: "Clase 60-80%", col2: "Descenso de carga", col3: "45%", col4: "Regular" },
+      { col1: "Clase 80-100%", col2: "Valle final", col3: "20%", col4: "Mínimo" },
+    ],
+    5: [
+      { col1: "Filtro Base", col2: "Bruto", col3: "300 Reg.", col4: "Sin procesar" },
+      { col1: "Segmento A", col2: "Condicional 1", col3: "180 Reg.", col4: "Filtrado" },
+      { col1: "Segmento B", col2: "Condicional 2", col3: "95 Reg.", col4: "Segmentado" },
+      { col1: "Anómalo", col2: "Aislado cruzado", col3: "420 Reg.", col4: "Crítico" },
+    ],
+    6: [
+      { col1: "Semana 1", col2: "Histórico", col3: "50 u.", col4: "Normal" },
+      { col1: "Semana 2", col2: "Histórico", col3: "55 u.", col4: "Normal" },
+      { col1: "Semana 3", col2: "Histórico", col3: "53 u.", col4: "Normal" },
+      { col1: "Semana 4", col2: "Outlier detectado", col3: "190 u.", col4: "Valor Atípico" },
+    ]
   };
 
-  const actualData = datasetsMap[datasetId] || datasetsMap[0];
-  const columnas = actualData.columnas;
-
-  // Sistema de Filtrado Real basado en el botón seleccionado
-  const datosFiltrados = actualData.datos.filter(fila => {
-    if (filtroCategoria === 'Todo') return true;
-    const valorColumnaEstado = Object.values(fila).join(' ');
-    if (filtroCategoria === 'Horas Pico' && (valorColumnaEstado.includes('Pico') || valorColumnaEstado.includes('100 Pts') || valorColumnaEstado.includes('683,000'))) return true;
-    if (filtroCategoria === 'Valle nocturno' && (valorColumnaEstado.includes('Valle') || valorColumnaEstado.includes('Bajo') || valorColumnaEstado.includes('Macuspana'))) return true;
-    return false;
-  });
+  const filas = tablasPorId[datasetId] || tablasPorId[0];
 
   return (
-    <div className="overflow-x-auto w-full">
-      <table className="w-full text-left text-[11px] text-slate-700">
-        <thead className="text-[10px] uppercase text-slate-500 font-semibold border-b border-slate-100">
-          <tr>
-            {columnas.map((col) => (
-              <th key={col} className="pb-2">{col}</th>
-            ))}
+    <div className="overflow-x-auto">
+      <table className="w-full text-left text-xs">
+        <thead>
+          <tr className="border-b border-slate-100 text-slate-400 font-bold uppercase">
+            <th className="pb-2">Registro / Variable</th>
+            <th className="pb-2">Categoría</th>
+            <th className="pb-2">Métrica</th>
+            <th className="pb-2">Estado</th>
           </tr>
         </thead>
-        <tbody>
-          {datosFiltrados.length > 0 ? (
-            datosFiltrados.map((fila, index) => {
-              const valores = Object.values(fila);
-              return (
-                <tr key={index} className="border-b border-slate-50 hover:bg-slate-50">
-                  <td className="py-2.5 font-medium text-slate-800">{valores[0]}</td>
-                  <td className="py-2.5 text-slate-600">{valores[1]}</td>
-                  <td className="py-2.5 font-semibold text-slate-900">{valores[2]}</td>
-                  <td className="py-2.5">
-                    <span className={`px-2 py-0.5 rounded font-medium ${
-                      valores[3] === 'Critico' || valores[3] === 'Aprobado' ? 'bg-red-50 text-red-600' :
-                      valores[3] === 'Medio' ? 'bg-indigo-50 text-indigo-600' :
-                      'bg-slate-100 text-slate-500'
-                    }`}>
-                      {valores[3]}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan={columnas.length} className="py-6 text-center text-slate-400 italic">
-                No hay registros que coincidan con este filtro.
+        <tbody className="divide-y divide-slate-50">
+          {filas.map((fila, index) => (
+            <tr key={index} className="hover:bg-slate-50/50">
+              <td className="py-2.5 font-medium text-slate-800">{fila.col1}</td>
+              <td className="py-2.5 text-slate-600">{fila.col2}</td>
+              <td className="py-2.5 text-slate-600">{fila.col3}</td>
+              <td className="py-2.5">
+                <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                  fila.col4.includes('Crítico') || fila.col4.includes('Atípico') ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-600'
+                }`}>
+                  {fila.col4}
+                </span>
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>

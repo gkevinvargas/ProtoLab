@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-03",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Análisis de Tendencias y Detección de Outliers",
+  "descripcion": "Comprende cómo identificar valores atípicos y proyectar tendencias a futuro mediante el estudio histórico de series temporales.",
+  "orden": 3,
+  "duracion_estimada_minutos": 15,
+  "objetivos": [
+    "Reconocer valores atípicos (outliers) que alteran las métricas promedio de una muestra.",
+    "Interpretar proyecciones de crecimiento basadas en registros históricos.",
+    "Validar la integridad de los datos antes de exportar informes ejecutivos."
+  ],
+  "secciones": [
+    {
+      "titulo": "Identificación de valores atípicos",
+      "parrafos": [
+        "Un valor atípico es una observación que se desvía significativamente del resto de la muestra, pudiendo representar errores de medición o eventos extraordinarios.",
+        "Detectar estos puntos evita sesgos analíticos al calcular promedios y desviaciones estándar."
+      ]
+    },
+    {
+      "titulo": "Proyección de tendencias",
+      "parrafos": [
+        "Analizar el comportamiento histórico de los datos permite anticipar escenarios de carga o demanda a mediano plazo.",
+        "Las herramientas visuales de líneas y dispersión facilitan la lectura de estas trayectorias de crecimiento."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-PI-03",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Detectar anomalías en los datasets de crecimiento regional y consumo energético."
+    }
+  ]
+}

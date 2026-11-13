@@ -1,106 +1,89 @@
 // components/datalab/data-chart.tsx
 "use client";
-import React, { useState } from 'react';
 
-interface DataChartProps { 
+import React from 'react';
+
+interface DataChartProps {
   datasetId: number;
-  tipoGrafica: string;
+  tipoGrafica: 'barras' | 'dispersion' | 'libre';
 }
 
 export const DataChart: React.FC<DataChartProps> = ({ datasetId, tipoGrafica }) => {
-  const [escalaTemporal, setEscalaTemporal] = useState<'hrs' | 'meses' | 'anos'>('hrs');
+  const datasetsData = [
+    {
+      titulo: "Consumo Energético (kWh)",
+      etiquetas: ["00-04 hrs", "04-08 hrs", "08-12 hrs", "12-16 hrs", "16-20 hrs", "20-24 hrs"],
+      valores: [140, 220, 410, 380, 580, 290],
+      color: "bg-cyan-500"
+    },
+    {
+      titulo: "Rendimiento STEM (Puntaje)",
+      etiquetas: ["Equipo Alfa", "Equipo Beta", "Equipo Gamma", "Equipo Delta"],
+      valores: [95, 88, 60, 100],
+      color: "bg-blue-600"
+    },
+    {
+      titulo: "Ventas de Makerspace (Unidades)",
+      etiquetas: ["Sensor Ultrasónico", "Kit Arduino", "Multímetro", "Módulos Básicos"],
+      valores: [450, 320, 210, 180],
+      color: "bg-purple-500"
+    },
+    {
+      titulo: "Crecimiento Local (Habitantes est.)",
+      etiquetas: ["Macuspana", "Cárdenas", "Centro / Villahermosa", "Zona Pantanos"],
+      valores: [154000, 128000, 350000, 45000],
+      color: "bg-emerald-500"
+    },
+    // Nuevas gráficas para las prácticas DL-CT (IDs 4, 5, 6)
+    {
+      titulo: "DL-CT-01: Distribución de Frecuencias (%)",
+      etiquetas: ["0-20%", "20-40%", "40-60% (Crítico)", "60-80%", "80-100%"],
+      valores: [15, 30, 85, 45, 20],
+      color: "bg-amber-500"
+    },
+    {
+      titulo: "DL-CT-02: Filtrado Cruzado de Tendencias",
+      etiquetas: ["Filtro Base", "Segmento A", "Segmento B", "Aislado (Anómalo)"],
+      valores: [300, 180, 95, 420],
+      color: "bg-rose-500"
+    },
+    {
+      titulo: "DL-CT-03: Serie Temporal con Outliers",
+      etiquetas: ["Semana 1", "Semana 2", "Semana 3", "Semana 4 (Outlier)"],
+      valores: [50, 55, 53, 190],
+      color: "bg-indigo-500"
+    }
+  ];
 
-  // Datasets con proporciones drásticamente distintas para que el cambio temporal sea evidente y analítico
-  const temporalMap = {
-    hrs: [
-      { label: '00-04', val: 140, color: 'bg-slate-400' },
-      { label: '04-08', val: 220, color: 'bg-blue-500' },
-      { label: '08-12', val: 410, color: 'bg-blue-600' },
-      { label: '12-16', val: 380, color: 'bg-indigo-600' },
-      { label: '16-20', val: 580, color: 'bg-teal-600' }, // Pico máximo operativo
-      { label: '20-24', val: 290, color: 'bg-purple-600' },
-    ],
-    meses: [
-      { label: 'Ene-Mar', val: 1200, color: 'bg-blue-400' },
-      { label: 'Abr-Jun', val: 2800, color: 'bg-blue-600' },
-      { label: 'Jul-Sep', val: 8900, color: 'bg-teal-500' }, // Pico masivo por temporada de verano/climatización
-      { label: 'Oct-Dic', val: 3400, color: 'bg-purple-600' },
-    ],
-    anos: [
-      { label: '2023', val: 15000, color: 'bg-slate-400' },
-      { label: '2024', val: 34000, color: 'bg-blue-500' },
-      { label: '2025', val: 62000, color: 'bg-cyan-600' },
-      { label: '2026', val: 98000, color: 'bg-emerald-600' }, // Crecimiento exponencial interanual
-    ]
-  };
-
-  const datos = temporalMap[escalaTemporal];
-  
-  // Usamos un techo fijo o de referencia general según la escala para que las alturas sean impactantes y reales
-  const techoMaximo = escalaTemporal === 'hrs' ? 600 : escalaTemporal === 'meses' ? 10000 : 100000;
+  const actualData = datasetsData[datasetId] || datasetsData[0];
+  const maxValor = Math.max(...actualData.valores);
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
-      
-      {/* Selector de Intervalo Temporal Interactivo */}
-      <div className="w-full flex items-center justify-between border-b border-slate-100 pb-3">
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
-          <button
-            onClick={() => setEscalaTemporal('hrs')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${escalaTemporal === 'hrs' ? 'bg-white text-blue-600 shadow-sm font-bold' : 'text-slate-500 hover:text-slate-800'}`}
-          >
-            Horas (24h)
-          </button>
-          <button
-            onClick={() => setEscalaTemporal('meses')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${escalaTemporal === 'meses' ? 'bg-white text-blue-600 shadow-sm font-bold' : 'text-slate-500 hover:text-slate-800'}`}
-          >
-            Meses (Estacional)
-          </button>
-          <button
-            onClick={() => setEscalaTemporal('anos')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${escalaTemporal === 'anos' ? 'bg-white text-blue-600 shadow-sm font-bold' : 'text-slate-500 hover:text-slate-800'}`}
-          >
-            Años (Histórico)
-          </button>
-        </div>
-        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-          Análisis Temporal: <span className="text-blue-600">{escalaTemporal.toUpperCase()}</span>
-        </span>
+    <div className="flex flex-col gap-4 p-4">
+      <div className="flex justify-between items-center text-xs text-slate-400 font-semibold">
+        <span>{actualData.titulo}</span>
+        <span className="uppercase text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-600">Modo: {tipoGrafica}</span>
       </div>
 
-      {/* Render Dinámico de la Gráfica */}
-      {tipoGrafica === 'barras' || tipoGrafica === 'libre' ? (
-        <div className="w-full flex items-end justify-center gap-6 h-40 px-4 pt-2">
-          {datos.map((item, index) => {
-            const alturaPorcentaje = Math.min(Math.max((item.val / techoMaximo) * 100, 10), 100);
-            return (
-              <div key={index} className="flex-1 flex flex-col items-center gap-2 h-full justify-end max-w-[64px]">
-                <span className="text-[10px] font-extrabold text-slate-700 bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100 shadow-2xs">
-                  {item.val.toLocaleString()}
-                </span>
-                <div 
-                  className={`w-full rounded-t-lg transition-all duration-500 ${item.color} shadow-md`}
-                  style={{ height: `${alturaPorcentaje}%` }}
-                />
-                <span className="text-[10px] text-slate-600 font-bold truncate w-full text-center mt-1">
-                  {item.label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="w-full h-40 flex items-center justify-around px-4 bg-slate-50/50 rounded-xl border border-slate-100">
-          {datos.map((item, index) => (
-            <div key={index} className="flex flex-col items-center gap-2">
-              <div className="w-3.5 h-3.5 rounded-full bg-blue-600 ring-4 ring-blue-100 shadow-sm"></div>
-              <span className="text-xs font-black text-slate-800">{item.val.toLocaleString()}</span>
-              <span className="text-[10px] text-slate-500 font-bold">{item.label}</span>
+      <div className="flex items-end justify-around gap-2 h-44 pt-6 border-b border-slate-100 px-2">
+        {actualData.valores.map((val, idx) => {
+          const alturaPorcentaje = Math.round((val / maxValor) * 100);
+          return (
+            <div key={idx} className="flex flex-col items-center gap-2 flex-1 h-full justify-end group">
+              <span className="text-[10px] font-bold text-slate-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                {val}
+              </span>
+              <div 
+                className={`w-full max-w-[45px] rounded-t-lg transition-all duration-500 ${actualData.color} ${tipoGrafica === 'dispersion' ? 'rounded-full w-4 h-4 mx-auto' : ''}`}
+                style={{ height: tipoGrafica === 'dispersion' ? '20px' : `${Math.max(alturaPorcentaje, 15)}%` }}
+              ></div>
+              <span className="text-[10px] font-medium text-slate-500 text-center truncate w-full">
+                {actualData.etiquetas[idx]}
+              </span>
             </div>
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
     </div>
   );
 };
