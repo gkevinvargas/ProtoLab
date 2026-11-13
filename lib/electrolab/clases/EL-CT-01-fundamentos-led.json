@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "EL-CT-01",
+  "laboratorio_id": "electrolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Fundamentos del LED",
+  "descripcion": "Identifica qué es un LED, cómo produce luz y cuáles son sus terminales antes de construir un circuito sencillo.",
+  "orden": 1,
+  "duracion_estimada_minutos": 5,
+  "objetivos": [
+    "Describir la función básica de un LED.",
+    "Identificar el ánodo y el cátodo de un LED.",
+    "Distinguir el sentido en el que debe circular la corriente para encenderlo."
+  ],
+  "secciones": [
+    {
+      "titulo": "¿Qué es un LED?",
+      "parrafos": [
+        "Un LED (diodo emisor de luz) es un componente semiconductor que produce luz cuando circula corriente a través de él en el sentido adecuado.",
+        "A diferencia de una resistencia, no se comporta igual en ambos sentidos: permite el paso de corriente principalmente cuando está polarizado directamente."
+      ]
+    },
+    {
+      "titulo": "Sus dos terminales",
+      "parrafos": [
+        "Ánodo (A): terminal que debe conectarse hacia el lado positivo de la fuente, pasando por el circuito.",
+        "Cátodo (K): terminal que debe conectarse hacia el lado negativo de la fuente.",
+        "En un LED físico, la pata más larga suele ser el ánodo y el borde plano de la cápsula suele señalar el cátodo. Comprueba siempre las marcas del componente."
+      ]
+    },
+    {
+      "titulo": "Voltaje y corriente",
+      "parrafos": [
+        "El voltaje es la diferencia de potencial que impulsa las cargas eléctricas y se mide en voltios (V).",
+        "La corriente representa el flujo de carga eléctrica y se mide en amperios (A) o miliamperios (mA).",
+        "Un LED necesita una corriente limitada para funcionar sin dañarse; por eso normalmente se utiliza junto con una resistencia."
+      ]
+    },
+    {
+      "titulo": "Ejemplo resuelto",
+      "parrafos": [
+        "Se desea encender un LED cuyos terminales están identificados como A (ánodo) y K (cátodo).",
+        "Se conecta el ánodo hacia el positivo de la batería y el cátodo hacia el negativo, incluyendo una resistencia en el recorrido.",
+        "Con la polaridad correcta y un camino cerrado puede circular corriente y el LED enciende. Si se invierten sus terminales, normalmente no circula corriente y permanece apagado."
+      ]
+    },
+    {
+      "titulo": "Idea clave",
+      "parrafos": [
+        "Antes de conectar un LED, identifica sus terminales. La polaridad determina si podrá conducir y emitir luz."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "encendido-led-basico",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Reconocer el LED y sus terminales para colocarlo con la polaridad correcta durante la construcción del circuito de encendido."
+    }
+  ]
+}

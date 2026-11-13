@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "EL-CT-03",
+  "laboratorio_id": "electrolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Ley de Ohm y resistencia limitadora para un LED",
+  "descripcion": "Utiliza la ley de Ohm para estimar la corriente del LED y comprender por qué se elige una resistencia en serie.",
+  "orden": 3,
+  "duracion_estimada_minutos": 5,
+  "objetivos": [
+    "Aplicar la ley de Ohm para calcular corriente y resistencia.",
+    "Estimar la corriente de un circuito con LED a partir del voltaje de la fuente y la caída del LED.",
+    "Explicar cómo la resistencia ayuda a proteger el LED."
+  ],
+  "secciones": [
+    {
+      "titulo": "Ley de Ohm",
+      "parrafos": [
+        "La ley de Ohm relaciona voltaje, corriente y resistencia mediante la expresión V = I × R.",
+        "Para calcular corriente se utiliza I = V / R. Para calcular resistencia se utiliza R = V / I.",
+        "La resistencia se mide en ohmios (Ω), el voltaje en voltios (V) y la corriente en amperios (A)."
+      ]
+    },
+    {
+      "titulo": "¿Cómo se calcula la resistencia del LED?",
+      "parrafos": [
+        "La resistencia debe absorber la diferencia entre el voltaje de la fuente y la caída de voltaje del LED.",
+        "La fórmula simplificada es: R = (Vfuente − VLED) / ILED.",
+        "Una resistencia mayor reduce la corriente; una resistencia menor permite una corriente mayor. La corriente debe mantenerse dentro de los límites indicados por el fabricante del LED."
+      ]
+    },
+    {
+      "titulo": "Ejemplo resuelto: elegir una resistencia",
+      "parrafos": [
+        "Datos: fuente de 9 V, caída del LED de 2 V y corriente objetivo de 18 mA (0.018 A).",
+        "Voltaje en la resistencia: 9 V − 2 V = 7 V.",
+        "Aplicando la fórmula: R = 7 V / 0.018 A = 388.9 Ω.",
+        "Se puede elegir el valor comercial cercano de 390 Ω. La corriente aproximada será I = 7 V / 390 Ω = 0.0179 A, es decir, 17.9 mA."
+      ]
+    },
+    {
+      "titulo": "Relación con la práctica del simulador",
+      "parrafos": [
+        "El circuito de ejemplo de ElectroLab utiliza una batería de 9 V, un LED de 2 V y una resistencia de 220 Ω.",
+        "Con el modelo ideal simplificado, la corriente estimada es I = (9 V − 2 V) / 220 Ω = 0.0318 A, aproximadamente 31.8 mA. El simulador puede mostrar una variación por el modelo eléctrico aproximado del LED.",
+        "Este valor sirve para analizar el ejemplo dentro del simulador. Para un montaje físico no debe asumirse que 220 Ω es adecuado para cualquier LED: se debe consultar su hoja de datos y calcular una resistencia que respete su corriente máxima. En el ejemplo de 18 mA, 390 Ω es una elección más apropiada."
+      ]
+    },
+    {
+      "titulo": "¿Qué debes comprobar?",
+      "parrafos": [
+        "Verifica el valor de la resistencia y la caída de voltaje configurada para el LED.",
+        "Después de simular, revisa el voltaje y la corriente obtenidos. Compara el resultado con el cálculo teórico y considera las aproximaciones del modelo.",
+        "Una corriente excesiva puede dañar un LED real; la resistencia en serie ayuda a limitarla."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "encendido-led-basico",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Aplicar la ley de Ohm para estimar la corriente del circuito de 9 V, 220 Ω y LED de 2 V; comparar el cálculo con las mediciones de la simulación y evaluar la función de la resistencia limitadora."
+    }
+  ]
+}
