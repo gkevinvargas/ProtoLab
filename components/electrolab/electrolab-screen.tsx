@@ -7,6 +7,8 @@ import rcDischargePracticeJson from '@/lib/electrolab/examples/rc-descarga.json'
 import { evaluatePractice, loadPracticeIntoEditor, simulateCircuit, simulateRCTransient } from '@/lib/electrolab';
 import type { ElectroLabPractice, EditorCircuitState, SimulationResult, RCTransientMode, RCTransientResult, PracticeEvaluationResult } from '@/lib/electrolab';
 import { Sidebar } from '../ui/sidebar';
+import { BannerPractica } from '../ui/labs/banner';
+import { Header } from '../ui/labs/Header';
 
 type ComponentKind = 'bateria' | 'resistencia' | 'led' | 'capacitor' | 'interruptor';
 type LabComponent = {
@@ -1005,6 +1007,10 @@ export default function ElectroLabScreen() {
         {mobileMenuOpen && <button className="fixed inset-0 z-30 bg-black/60 md:hidden" onClick={() => setMobileMenuOpen(false)} aria-label="Cerrar menú" />}
 
         <main className="flex min-w-0 flex-1 flex-col">
+          
+          <Header nombreLaboratorio="ElectroLab" tipoContenido='Prácticas' tipoEditor='Editor de circuitos' />
+
+          {/*
           <header className="flex h-[76px] shrink-0 items-center justify-between border-b border-[#E7EDF5] bg-white px-4 sm:px-7">
             <div className="flex items-center gap-3">
               <button type="button" onClick={() => setMobileMenuOpen(true)} className="rounded-lg p-2 text-[#718096] hover:bg-[#F5F9FF] md:hidden" aria-label="Abrir menú"><Icon name="menu" /></button>
@@ -1016,9 +1022,20 @@ export default function ElectroLabScreen() {
               <button type="button" onClick={() => practiceFileInputRef.current?.click()} className="flex items-center gap-2 rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-3 py-2 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC]"><Icon name="upload" size={15}/><span>Cargar JSON</span></button>
             </div>
           </header>
+          */}
+          
 
           <div className="flex-1 overflow-auto">
-            <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
+            <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
+
+              <BannerPractica
+                nombreLaboratorio='ElectroLab'
+                nombrePractica={currentPractice?.practice.title ?? 'Circuito libre'}
+                nivelPractica={currentPractice?.practice.difficulty ?? 'Sin nivel'}
+                descripcionPractica={currentPractice?.practice.description ?? 'Construye un circuito agregando componentes al área de trabajo'}
+              />
+
+              {/*
               <div className="mb-4">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <span className="max-w-[260px] truncate rounded-md bg-[#F0EAFE] px-2 py-1 text-[9px] font-bold uppercase tracking-[.16em] text-[#8865D8]">{currentPractice ? currentPractice.practice.id : 'Práctica libre'}</span>
@@ -1030,6 +1047,7 @@ export default function ElectroLabScreen() {
                 <p className="mt-1 max-w-3xl text-xs leading-relaxed text-[#718096] sm:text-sm">{currentPractice?.practice.description ?? 'Construye un circuito agregando componentes al área de trabajo.'}</p>
                 <p className="mt-1 text-[10px] text-[#A0AEC0]">{practiceFileName}</p>
               </div>
+              */}
 
               <details open aria-labelledby="practice-instructions-heading" className="group mb-5 rounded-2xl border border-[#DCE9FF] bg-white shadow-sm">
                 <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2 rounded-t-2xl border-b border-[#E7EDF5] bg-[#F4F8FF] px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#8865D8] sm:px-5">
