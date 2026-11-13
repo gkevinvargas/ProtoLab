@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "1.0.0",
+  "practice": {
+    "id": "encendido-led-basico",
+    "title": "Encendido de un LED",
+    "description": "Construye un circuito en serie con una batería, una resistencia y un LED. Identifica la polaridad del diodo y observa cómo se completa el circuito.",
+    "subject": "Electrónica básica",
+    "difficulty": "principiante",
+    "estimatedDurationMinutes": 15,
+    "learningObjectives": [
+      "Identificar los terminales positivo y negativo de una fuente de alimentación.",
+      "Reconocer el ánodo y el cátodo de un LED.",
+      "Comprender la función de una resistencia en serie con un LED."
+    ],
+    "instructions": [
+      {
+        "step": 1,
+        "text": "Identifica los terminales positivo y negativo de la batería."
+      },
+      {
+        "step": 2,
+        "text": "Conecta el terminal positivo de la batería con un extremo de la resistencia."
+      },
+      {
+        "step": 3,
+        "text": "Conecta el otro extremo de la resistencia con el ánodo del LED."
+      },
+      {
+        "step": 4,
+        "text": "Conecta el cátodo del LED con el terminal negativo de la batería."
+      }
+    ],
+    "allowedComponentTypes": [
+      "bateria",
+      "resistencia",
+      "led"
+    ],
+    "evaluation": {
+      "passingScore": 70,
+      "requiredAnalysis": "dc",
+      "criteria": [
+        {
+          "id": "componentes",
+          "type": "component-count",
+          "title": "Componentes requeridos",
+          "description": "Incluye una batería, una resistencia y un LED, sin componentes adicionales.",
+          "points": 15,
+          "expectedCounts": {
+            "bateria": 1,
+            "resistencia": 1,
+            "led": 1
+          },
+          "exact": true
+        },
+        {
+          "id": "conexiones",
+          "type": "connection-topology",
+          "title": "Conexiones del circuito",
+          "description": "Forma el circuito en serie y respeta la polaridad de la fuente y del LED.",
+          "points": 35,
+          "exact": true,
+          "expectedConnections": [
+            {
+              "from": {
+                "reference": "V1",
+                "terminalId": "left"
+              },
+              "to": {
+                "reference": "R1",
+                "terminalId": "left"
+              }
+            },
+            {
+              "from": {
+                "reference": "R1",
+                "terminalId": "right"
+              },
+              "to": {
+                "reference": "D1",
+                "terminalId": "left"
+              }
+            },
+            {
+              "from": {
+                "reference": "D1",
+                "terminalId": "right"
+              },
+              "to": {
+                "reference": "V1",
+                "terminalId": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fuente",
+          "type": "component-value",
+          "title": "Voltaje de alimentación",
+          "description": "Configura la batería con el valor indicado en la práctica.",
+          "points": 10,
+          "reference": "V1",
+          "expectedValue": 9,
+          "unit": "V",
+          "tolerance": 0.01
+        },
+        {
+          "id": "resistencia",
+          "type": "component-value",
+          "title": "Valor de la resistencia",
+          "description": "Utiliza la resistencia solicitada para limitar la corriente del LED.",
+          "points": 10,
+          "reference": "R1",
+          "expectedValue": 220,
+          "unit": "Ω",
+          "tolerance": 0.5
+        },
+        {
+          "id": "led-valor",
+          "type": "component-value",
+          "title": "Caída directa del LED",
+          "description": "Configura la caída directa indicada para el LED.",
+          "points": 5,
+          "reference": "D1",
+          "expectedValue": 2,
+          "unit": "V",
+          "tolerance": 0.01
+        },
+        {
+          "id": "simulacion",
+          "type": "analysis-status",
+          "title": "Ejecución de la simulación",
+          "description": "Completa el análisis de corriente continua sin errores bloqueantes.",
+          "points": 10
+        },
+        {
+          "id": "led-encendido",
+          "type": "dc-state",
+          "title": "Funcionamiento del LED",
+          "description": "El LED debe quedar polarizado en directa y encendido.",
+          "points": 10,
+          "reference": "D1",
+          "expectedState": "Encendido"
+        },
+        {
+          "id": "corriente-led",
+          "type": "dc-measurement-range",
+          "title": "Corriente del LED",
+          "description": "La corriente debe encontrarse dentro del rango esperado para este ejercicio.",
+          "points": 5,
+          "reference": "D1",
+          "metric": "currentA",
+          "min": 0.02,
+          "max": 0.04
+        }
+      ]
+    }
+  },
+  "canvas": {
+    "width": 1600,
+    "height": 1000,
+    "unit": "px",
+    "origin": "top-left",
+    "componentAnchor": "center-top"
+  },
+  "components": [
+    {
+      "id": "bat-1",
+      "type": "bateria",
+      "reference": "V1",
+      "value": 9,
+      "unit": "V",
+      "position": {
+        "x": 200,
+        "y": 360
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "+",
+          "polarity": "positive"
+        },
+        {
+          "id": "right",
+          "label": "−",
+          "polarity": "negative"
+        }
+      ]
+    },
+    {
+      "id": "res-1",
+      "type": "resistencia",
+      "reference": "R1",
+      "value": 220,
+      "unit": "Ω",
+      "position": {
+        "x": 800,
+        "y": 170
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "1",
+          "polarity": "neutral"
+        },
+        {
+          "id": "right",
+          "label": "2",
+          "polarity": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "led-1",
+      "type": "led",
+      "reference": "D1",
+      "value": 2,
+      "unit": "V",
+      "position": {
+        "x": 1400,
+        "y": 360
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "A",
+          "polarity": "positive"
+        },
+        {
+          "id": "right",
+          "label": "K",
+          "polarity": "negative"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "wire-1",
+      "from": {
+        "componentId": "bat-1",
+        "terminalId": "left"
+      },
+      "to": {
+        "componentId": "res-1",
+        "terminalId": "left"
+      }
+    },
+    {
+      "id": "wire-2",
+      "from": {
+        "componentId": "res-1",
+        "terminalId": "right"
+      },
+      "to": {
+        "componentId": "led-1",
+        "terminalId": "left"
+      }
+    },
+    {
+      "id": "wire-3",
+      "from": {
+        "componentId": "led-1",
+        "terminalId": "right"
+      },
+      "to": {
+        "componentId": "bat-1",
+        "terminalId": "right"
+      }
+    }
+  ]
+}

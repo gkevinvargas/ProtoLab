@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0.0",
+  "practice": {
+    "id": "descarga-capacitor-rc",
+    "title": "Descarga de un capacitor RC",
+    "description": "Observa cómo disminuye el voltaje almacenado en un capacitor cuando se descarga a través de una resistencia.",
+    "subject": "Electrónica básica",
+    "difficulty": "principiante",
+    "estimatedDurationMinutes": 20,
+    "learningObjectives": [
+      "Relacionar la resistencia y la capacitancia con la constante de tiempo.",
+      "Comprender la descarga exponencial de un capacitor.",
+      "Interpretar el voltaje y la corriente durante la descarga."
+    ],
+    "instructions": [
+      {
+        "step": 1,
+        "text": "Identifica la resistencia de 10 kΩ y el capacitor de 100 µF."
+      },
+      {
+        "step": 2,
+        "text": "Comprueba que la resistencia esté conectada en paralelo con el capacitor."
+      },
+      {
+        "step": 3,
+        "text": "En el selector de análisis, elige Descarga RC y establece un voltaje inicial de 5 V."
+      },
+      {
+        "step": 4,
+        "text": "Ejecuta el análisis y observa cómo el voltaje del capacitor disminuye con el tiempo."
+      }
+    ],
+    "allowedComponentTypes": [
+      "resistencia",
+      "capacitor"
+    ],
+    "evaluation": {
+      "passingScore": 70,
+      "requiredAnalysis": "rc",
+      "criteria": [
+        {
+          "id": "componentes",
+          "type": "component-count",
+          "title": "Componentes requeridos",
+          "description": "Incluye una resistencia y un capacitor, sin batería durante la descarga.",
+          "points": 15,
+          "expectedCounts": {
+            "resistencia": 1,
+            "capacitor": 1
+          },
+          "exact": true
+        },
+        {
+          "id": "conexiones",
+          "type": "connection-topology",
+          "title": "Conexiones del circuito RC",
+          "description": "Conecta los dos terminales de la resistencia con los terminales correspondientes del capacitor.",
+          "points": 35,
+          "exact": true,
+          "expectedConnections": [
+            {
+              "from": {
+                "reference": "R1",
+                "terminalId": "left"
+              },
+              "to": {
+                "reference": "C1",
+                "terminalId": "left"
+              }
+            },
+            {
+              "from": {
+                "reference": "R1",
+                "terminalId": "right"
+              },
+              "to": {
+                "reference": "C1",
+                "terminalId": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "resistencia",
+          "type": "component-value",
+          "title": "Valor de resistencia",
+          "description": "Utiliza una resistencia de 10 kΩ.",
+          "points": 10,
+          "reference": "R1",
+          "expectedValue": 10,
+          "unit": "kΩ",
+          "tolerance": 0.01
+        },
+        {
+          "id": "capacitor",
+          "type": "component-value",
+          "title": "Capacitancia",
+          "description": "Utiliza un capacitor de 100 µF.",
+          "points": 10,
+          "reference": "C1",
+          "expectedValue": 100,
+          "unit": "µF",
+          "tolerance": 0.01
+        },
+        {
+          "id": "analisis",
+          "type": "analysis-status",
+          "title": "Ejecución del análisis",
+          "description": "Completa el análisis transitorio RC sin errores bloqueantes.",
+          "points": 10
+        },
+        {
+          "id": "modo",
+          "type": "rc-mode",
+          "title": "Modo de operación",
+          "description": "Selecciona el modo de descarga del capacitor.",
+          "points": 5,
+          "expectedMode": "discharge"
+        },
+        {
+          "id": "constante-tiempo",
+          "type": "rc-measurement-range",
+          "title": "Constante de tiempo",
+          "description": "La constante de tiempo debe aproximarse a 1 segundo.",
+          "points": 10,
+          "metric": "timeConstantSeconds",
+          "min": 0.95,
+          "max": 1.05
+        },
+        {
+          "id": "voltaje-final",
+          "type": "rc-measurement-range",
+          "title": "Voltaje final",
+          "description": "Después de cinco constantes de tiempo, el voltaje residual debe ser cercano a cero.",
+          "points": 5,
+          "metric": "finalVoltageV",
+          "min": 0,
+          "max": 0.06
+        }
+      ]
+    }
+  },
+  "canvas": {
+    "width": 1600,
+    "height": 1000,
+    "unit": "px",
+    "origin": "top-left",
+    "componentAnchor": "center-top"
+  },
+  "components": [
+    {
+      "id": "res-rc-discharge",
+      "type": "resistencia",
+      "reference": "R1",
+      "value": 10,
+      "unit": "kΩ",
+      "position": {
+        "x": 520,
+        "y": 200
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "1",
+          "polarity": "neutral"
+        },
+        {
+          "id": "right",
+          "label": "2",
+          "polarity": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "cap-rc-discharge",
+      "type": "capacitor",
+      "reference": "C1",
+      "value": 100,
+      "unit": "µF",
+      "position": {
+        "x": 1120,
+        "y": 390
+      },
+      "terminals": [
+        {
+          "id": "left",
+          "label": "1",
+          "polarity": "neutral"
+        },
+        {
+          "id": "right",
+          "label": "2",
+          "polarity": "neutral"
+        }
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "wire-rc-discharge-1",
+      "from": {
+        "componentId": "res-rc-discharge",
+        "terminalId": "left"
+      },
+      "to": {
+        "componentId": "cap-rc-discharge",
+        "terminalId": "left"
+      }
+    },
+    {
+      "id": "wire-rc-discharge-2",
+      "from": {
+        "componentId": "res-rc-discharge",
+        "terminalId": "right"
+      },
+      "to": {
+        "componentId": "cap-rc-discharge",
+        "terminalId": "right"
+      }
+    }
+  ]
+}
