@@ -58,7 +58,7 @@ const laboratorios = [
 
 const nombresLaboratorios = Object.fromEntries(laboratorios);
 const clasificaciones = ["Principal", "Complementaria", "Exploratoria"];
-const pasosAprendizaje = ["Empieza en", "Complementa con", "Explora"];
+const pasosAprendizaje = ["Empieza en", "Complementa con"];
 
 export default function DiagnosticHome() {
   const [step, setStep] = useState<"interests" | "questions">("interests");
@@ -75,6 +75,8 @@ export default function DiagnosticHome() {
     presenciaEmpresarial: Record<DiagnosticAreaId, number> | null;
     rankingPreliminar: DiagnosticPreliminaryRanking;
   } | null>(null);
+
+  const [mensajeRuta, setMensajeRuta] = useState("");
 
   const [prioridadesEmpate, setPrioridadesEmpate] = useState<DiagnosticAreaId[]>([]);
 
@@ -94,6 +96,20 @@ export default function DiagnosticHome() {
   });
   const ordenAprendizaje = gruposRanking.flatMap(({ ordenadas }) => ordenadas);
   const rutaLista = ordenAprendizaje.length === laboratorios.length;
+
+  function guardarRuta() {
+    if (!rutaLista) return;
+
+    try {
+      localStorage.setItem(
+        "protolab:ruta-aprendizaje",
+        JSON.stringify(ordenAprendizaje.slice(0, 2))
+      );
+      setMensajeRuta("Tu ruta quedó guardada en este navegador.");
+    } catch {
+      setMensajeRuta("No se pudo guardar la ruta en este navegador.");
+    }
+  }
 
   const interests = content.catalogo_intereses.intereses;
   const questions = content.preguntas;
@@ -198,6 +214,7 @@ export default function DiagnosticHome() {
     }
 
     setPrioridadesEmpate([]);
+    setMensajeRuta("");
     setIsSubmitting(true);
     setPuntajes(null);
     setServerErrors([]);
@@ -717,18 +734,35 @@ export default function DiagnosticHome() {
                   Ruta de aprendizaje recomendada
                 </h2>
                 {rutaLista ? (
-                  <ol className="mt-3 grid gap-3 sm:grid-cols-3">
-                    {ordenAprendizaje.map((area, posicion) => (
-                      <li key={area} className="rounded-lg bg-slate-50 p-3">
-                        <p className="text-sm text-slate-600">
-                          {pasosAprendizaje[posicion]}
-                        </p>
-                        <p className="font-medium text-slate-900">
-                          {nombresLaboratorios[area]}
-                        </p>
-                      </li>
-                    ))}
-                  </ol>
+                  <>
+                    <ol className="mt-3 grid gap-3 sm:grid-cols-2">
+                      {ordenAprendizaje.slice(0, 2).map((area, posicion) => (
+                        <li key={area} className="rounded-lg bg-slate-50 p-3">
+                          <p className="text-sm text-slate-600">
+                            {pasosAprendizaje[posicion]}
+                          </p>
+                          <p className="font-medium text-slate-900">
+                            {nombresLaboratorios[area]}
+                          </p>
+                        </li>
+                      ))}
+                    </ol>
+
+                    <p className="mt-3 text-sm text-slate-600">
+                      Área exploratoria · {nombresLaboratorios[ordenAprendizaje[2]]}.
+                      Disponible en Mis módulos, fuera del avance de la ruta.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={guardarRuta}
+                      className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                    >
+                      Guardar ruta de aprendizaje
+                    </button>
+                    <p role="status" className="mt-2 text-sm text-slate-600">
+                      {mensajeRuta}
+                    </p>
+                  </>
                 ) : (
                   <p className="mt-2 text-sm text-slate-600">
                     Resuelve el empate del ranking para ver tu ruta.
