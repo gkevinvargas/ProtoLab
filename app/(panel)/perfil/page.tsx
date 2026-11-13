@@ -37,18 +37,12 @@ export default function PerfilPage() {
     e.preventDefault();
     setIsEditing(false);
   };
-
+  
   return (
-    <div className="min-h-screen bg-slate-50 flex font-sans text-slate-800">
-      
-      {/* Componente Sidebar */}
-      <Sidebar />
-
-      {/* Contenido principal */}
-      <main className="flex-1 p-8 max-w-5xl mx-auto flex flex-col gap-8">
+    <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
         
         {/* ENCABEZADO DE PERFIL */}
-        <header className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <header className="bg-white border border-slate-200 rounded-2xl p-6 mb-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-5">
             <div className="w-20 h-20 bg-gradient-to-br from-slate-200 to-slate-300 rounded-2xl flex items-center justify-center text-slate-600 text-2xl font-black shadow-inner">
               {isLoggedIn && perfil.nombre ? `${perfil.nombre.charAt(0)}${perfil.apellido_paterno.charAt(0)}` : <IconUser size={32} />}
@@ -259,8 +253,6 @@ export default function PerfilPage() {
           </div>
 
         </div>
-
-      </main>
     </div>
   );
 }

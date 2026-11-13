@@ -30,7 +30,7 @@ export function ForgotPasswordForm() {
         await supabase.auth.resetPasswordForEmail(
           email.trim().toLowerCase(),
           {
-            redirectTo: `${window.location.origin}/auth/confirm?next=/auth/update-password`,
+            redirectTo: `${window.location.origin}/confirm?next=/update-password`,
           }
         );
 

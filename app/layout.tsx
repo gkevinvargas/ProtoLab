@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import {Geist, Geist_Mono} from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css";
 import React from "react";
+import { Header } from "@/components/ui/labs/Header";
+import { Sidebar } from "@/components/ui/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,14 +13,14 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets:["latin"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   //Te dedico este archivo Ximena <3
   title: "Protolab | Aprende creando",
-  description: 
-  "Plataforma educativa interactiva de programacion, robotica, analisis de datos y electronica."
+  description:
+    "Plataforma educativa interactiva de programacion, robotica, analisis de datos y electronica."
 
 }
 
@@ -27,13 +29,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return(
+  return (
     <html
-    lang="es"
-    className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      lang="es"
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+      <body className="min-h-screen">
 
-    <body className="min-h-screen">{children}</body>
+        {/* CONTENIDO PRINCIPAL */}
+        {children}
+
+      </body>
     </html>
   )
 }

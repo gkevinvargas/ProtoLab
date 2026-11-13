@@ -55,14 +55,21 @@ export async function updateSession(request: NextRequest) {
     // Las páginas privadas conservan su redirección al login.
     if (
       request.nextUrl.pathname !== "/" &&
+      !user &&
       !request.nextUrl.pathname.startsWith("/login") &&
-      !request.nextUrl.pathname.startsWith("/auth")
+      !request.nextUrl.pathname.startsWith("/forgot-password") &&
+      !request.nextUrl.pathname.startsWith("/sign-up") &&
+      !request.nextUrl.pathname.startsWith("/sign-up-success") &&
+      !request.nextUrl.pathname.startsWith("/confirm") &&
+      !request.nextUrl.pathname.startsWith("/error") &&
+      !request.nextUrl.pathname.startsWith("/forgot-password") &&
+      !request.nextUrl.pathname.startsWith("/update-password")
     ) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/auth/login";
-      return NextResponse.redirect(url);
+        const url = request.nextUrl.clone();
+        url.pathname = "/";
+        return NextResponse.redirect(url);
+      }
     }
-  }
 
-  return supabaseResponse;
-}
+    return supabaseResponse;
+  }

@@ -1,12 +1,12 @@
 "use client"
 
-import { IconBulb, IconClock, IconHome, IconLayoutGrid, IconX } from "@tabler/icons-react";
+import { IconAtom, IconBulb, IconClock, IconHome, IconLayoutGrid, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import { NavLink } from "./nav-link";
 import { useState } from "react";
 
 const secciones = [
-  { href: "/", label: "Inicio", icon: IconHome },
+  { href: "/inicio", label: "Inicio", icon: IconHome },
   { href: "#modulos", label: "Mis módulos", icon: IconLayoutGrid },
   { href: "/progreso", label: "Mi progreso", icon: IconClock },
 ]
@@ -15,8 +15,9 @@ export function Sidebar() {
   const [menuTelefono, setMenuTelefono] = useState(false)
   return (
     <aside className="hidden w-64 shrink-0 flex-col border-r border-[#E7EDF5] bg-white p-6 md:flex">
-      <Link href="/" className="mb-10 flex items-center gap-3">
+      <Link href="/inicio" className="mb-10 flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#3478F6] text-2xl text-white">
+          <IconAtom size={27} stroke={2} />
         </div>
         <div>
           <h1 className="text-xl font-extrabold tracking-tight">

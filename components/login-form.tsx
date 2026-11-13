@@ -41,7 +41,7 @@ export function LoginForm() {
         throw authError;
       }
 
-      router.replace("/protected");
+      router.replace("/inicio");
       router.refresh();
     } catch {
       setError(
@@ -91,7 +91,7 @@ export function LoginForm() {
           </label>
 
           <Link
-            href="/auth/forgot-password"
+            href="/forgot-password"
             className="text-xs font-semibold text-[#3478F6] hover:underline"
           >
             ¿Olvidaste tu contraseña?
@@ -155,7 +155,7 @@ export function LoginForm() {
       <p className="pt-3 text-center text-sm text-[#718096]">
         ¿Aún no tienes una cuenta?{" "}
         <Link
-          href="/auth/sign-up"
+          href="/sign-up"
           className="font-semibold text-[#3478F6] hover:underline"
         >
           Crear cuenta

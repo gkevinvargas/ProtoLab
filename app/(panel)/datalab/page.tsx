@@ -1,6 +1,6 @@
 import { DataLabOverview } from "@/components/datalab/datalab-overview";
 import { Sidebar } from "@/components/datalab/sidebar";
-import RecorridoTeorico from "@/components/laboratorios/RecorridoTeorico";
+//import RecorridoTeorico from "@/components/laboratorios/RecorridoTeorico";
 import primeraClase from "@/lib/datalab/DL-CT-01.json";
 import segundaClase from "@/lib/datalab/DL-CT-02.json";
 
@@ -26,9 +26,9 @@ export default function DataLabPage() {
         </header>
 
         <main className="min-w-0 flex-1 p-4 sm:p-8">
-          <RecorridoTeorico clases={clasesDataLab}>
+          {/*<RecorridoTeorico clases={clasesDataLab}>*/}
             <DataLabOverview />
-          </RecorridoTeorico>
+          {/*</RecorridoTeorico>*/}
         </main>
       </div>
     </div>

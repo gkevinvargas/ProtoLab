@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { practicasRoboLab, type Orientation } from "@/app/robolab/robolab-data";import RoboLabGrid from '@/components/robolab/RoboLabGrid';
+import { practicasRoboLab, type Orientation } from "@/app/(panel)/robolab/robolab-data";import RoboLabGrid from '@/components/robolab/RoboLabGrid';
 import ClaseTeorica from "@/components/laboratorios/ClaseTeorica";
-import claseTeorica from "@/app/robolab/clase-teorica.json";
-import segundaClase from "@/app/robolab/RL-CT-02.json";
+import claseTeorica from "@/app/(panel)/robolab/clase-teorica.json";
+import segundaClase from "@/app/(panel)/robolab/RL-CT-02.json";
 
 type CommandType = 'AVANZAR' | 'IZQUIERDA' | 'DERECHA';
 

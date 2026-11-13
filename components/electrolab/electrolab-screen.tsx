@@ -45,30 +45,30 @@ function Icon({ name, size = 18, className = '' }: { name: IconName; size?: numb
   };
 
   const drawings: Record<IconName, ReactNode> = {
-    grid: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>,
-    circuit: <><path d="M4 7h5l3 5h8"/><path d="M4 17h5l3-5"/><circle cx="4" cy="7" r="1.5"/><circle cx="20" cy="12" r="1.5"/><circle cx="4" cy="17" r="1.5"/><path d="M12 4v3m0 10v3"/></>,
-    box: <><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></>,
-    book: <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z"/><path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h8"/></>,
-    settings: <><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.2 2.1-2 2-2.1-1.2-.2.1a8 8 0 0 1-1.8.7l-.6 2.2h-2.8l-.6-2.2a8 8 0 0 1-1.8-.7l-2.1 1.2-2-2 1.2-2.1-.1-.2a8 8 0 0 1-.7-1.8L1.8 12.6V9.8L4 9.2a8 8 0 0 1 .7-1.8l-.1-.2-1.2-2.1 2-2 2.1 1.2.2-.1a8 8 0 0 1 1.8-.7l.6-2.2h2.8l.6 2.2a8 8 0 0 1 1.8.7l2.1-1.2 2 2-1.2 2.1.1.2a8 8 0 0 1 .7 1.8l2.2.6v2.8l-2.2.6a8 8 0 0 1-.7 1.8Z" transform="translate(1 1) scale(.92)"/></>,
-    chevron: <path d="m9 18 6-6-6-6"/>,
-    plus: <><path d="M12 5v14M5 12h14"/></>,
-    battery: <><rect x="3" y="7" width="17" height="10" rx="2"/><path d="M22 10v4M8 10v4m4-2h4"/></>,
-    resistor: <><path d="M2 12h3l2-5 4 10 4-10 4 10 2-5h3"/></>,
-    led: <><path d="M3 12h5m8 0h5"/><path d="M8 7v10l8-5-8-5Z"/><path d="m14 5 3-3m-1 7 4-1"/></>,
-    capacitor: <><path d="M2 12h7m6 0h7M9 5v14m6-14v14"/></>,
-    switch: <><path d="M3 12h5m8 0h5M8 12l6-7"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></>,
-    play: <path d="m8 5 11 7-11 7V5Z"/>,
-    terminal: <><path d="m7 8-4 4 4 4m10-8 4 4-4 4M14 5l-4 14"/></>,
-    trash: <><path d="M4 7h16M10 11v6m4-6v6M5 7l1 14h12l1-14M9 7V4h6v3"/></>,
-    save: <><path d="M5 3h12l4 4v14H3V3h2Z"/><path d="M7 3v6h10V3M7 21v-8h10v8"/></>,
-    search: <><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></>,
-    sliders: <><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#FFFFFF"/><circle cx="15" cy="12" r="2" fill="#FFFFFF"/><circle cx="8" cy="18" r="2" fill="#FFFFFF"/></>,
-    info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></>,
-    activity: <path d="M3 12h4l3-8 4 16 3-8h4"/>,
-    check: <path d="m5 12 4 4L19 6"/>,
-    menu: <><path d="M4 6h16M4 12h16M4 18h16"/></>,
-    close: <><path d="m6 6 12 12M18 6 6 18"/></>,
-    upload: <><path d="M12 16V4m-5 5 5-5 5 5"/><path d="M4 16v4h16v-4"/></>,
+    grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+    circuit: <><path d="M4 7h5l3 5h8" /><path d="M4 17h5l3-5" /><circle cx="4" cy="7" r="1.5" /><circle cx="20" cy="12" r="1.5" /><circle cx="4" cy="17" r="1.5" /><path d="M12 4v3m0 10v3" /></>,
+    box: <><path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="M3 8v8l9 5 9-5V8M12 13v8" /></>,
+    book: <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" /><path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h8" /></>,
+    settings: <><circle cx="12" cy="12" r="3" /><path d="m19.4 15 .1.1 1.2 2.1-2 2-2.1-1.2-.2.1a8 8 0 0 1-1.8.7l-.6 2.2h-2.8l-.6-2.2a8 8 0 0 1-1.8-.7l-2.1 1.2-2-2 1.2-2.1-.1-.2a8 8 0 0 1-.7-1.8L1.8 12.6V9.8L4 9.2a8 8 0 0 1 .7-1.8l-.1-.2-1.2-2.1 2-2 2.1 1.2.2-.1a8 8 0 0 1 1.8-.7l.6-2.2h2.8l.6 2.2a8 8 0 0 1 1.8.7l2.1-1.2 2 2-1.2 2.1.1.2a8 8 0 0 1 .7 1.8l2.2.6v2.8l-2.2.6a8 8 0 0 1-.7 1.8Z" transform="translate(1 1) scale(.92)" /></>,
+    chevron: <path d="m9 18 6-6-6-6" />,
+    plus: <><path d="M12 5v14M5 12h14" /></>,
+    battery: <><rect x="3" y="7" width="17" height="10" rx="2" /><path d="M22 10v4M8 10v4m4-2h4" /></>,
+    resistor: <><path d="M2 12h3l2-5 4 10 4-10 4 10 2-5h3" /></>,
+    led: <><path d="M3 12h5m8 0h5" /><path d="M8 7v10l8-5-8-5Z" /><path d="m14 5 3-3m-1 7 4-1" /></>,
+    capacitor: <><path d="M2 12h7m6 0h7M9 5v14m6-14v14" /></>,
+    switch: <><path d="M3 12h5m8 0h5M8 12l6-7" /><circle cx="8" cy="12" r="1.5" /><circle cx="16" cy="12" r="1.5" /></>,
+    play: <path d="m8 5 11 7-11 7V5Z" />,
+    terminal: <><path d="m7 8-4 4 4 4m10-8 4 4-4 4M14 5l-4 14" /></>,
+    trash: <><path d="M4 7h16M10 11v6m4-6v6M5 7l1 14h12l1-14M9 7V4h6v3" /></>,
+    save: <><path d="M5 3h12l4 4v14H3V3h2Z" /><path d="M7 3v6h10V3M7 21v-8h10v8" /></>,
+    search: <><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 5 5" /></>,
+    sliders: <><path d="M4 6h16M4 12h16M4 18h16" /><circle cx="9" cy="6" r="2" fill="#FFFFFF" /><circle cx="15" cy="12" r="2" fill="#FFFFFF" /><circle cx="8" cy="18" r="2" fill="#FFFFFF" /></>,
+    info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v5m0-8h.01" /></>,
+    activity: <path d="M3 12h4l3-8 4 16 3-8h4" />,
+    check: <path d="m5 12 4 4L19 6" />,
+    menu: <><path d="M4 6h16M4 12h16M4 18h16" /></>,
+    close: <><path d="m6 6 12 12M18 6 6 18" /></>,
+    upload: <><path d="M12 16V4m-5 5 5-5 5 5" /><path d="M4 16v4h16v-4" /></>,
   };
 
   return <svg {...common}>{drawings[name]}</svg>;
@@ -199,7 +199,7 @@ function PropertiesFields({
   if (!component) {
     return (
       <div className="flex min-h-[220px] flex-col items-center justify-center px-6 py-8 text-center">
-        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F0F7FF] text-[#718096]"><Icon name="sliders" size={21}/></div>
+        <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F0F7FF] text-[#718096]"><Icon name="sliders" size={21} /></div>
         <p className="text-xs font-medium text-[#526575]">Sin selección</p>
         <p className="mt-1 max-w-[220px] text-[10px] leading-relaxed text-[#718096]">Selecciona un componente del lienzo para consultar y modificar sus propiedades.</p>
       </div>
@@ -209,16 +209,16 @@ function PropertiesFields({
   return (
     <div className="p-4 sm:p-5">
       <div className="mb-4 flex items-center gap-3 rounded-xl border border-[#E7EDF5] bg-[#F7FAFC] p-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#F0EAFE] text-[#8865D8]"><Icon name={componentDefaults[component.kind].icon} size={21}/></div>
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#F0EAFE] text-[#8865D8]"><Icon name={componentDefaults[component.kind].icon} size={21} /></div>
         <div className="min-w-0"><p className="truncate text-xs font-semibold text-[#24324A]">{componentDefaults[component.kind].label}</p><p className="mt-0.5 text-[10px] text-[#718096]">{componentDefaults[component.kind].description}</p></div>
       </div>
       <div className="space-y-3.5">
         <label className="block"><span className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]">Referencia</span><input value={component.reference} onFocus={onSaveHistory} onChange={(event) => onUpdate({ reference: event.target.value })} className="min-h-11 w-full rounded-lg border border-[#E7EDF5] bg-[#F7FAFC] px-3 py-2.5 text-sm text-[#34445D] outline-none transition focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15" /></label>
-        <label className="block"><span className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]">Valor</span><div className="flex min-h-11 overflow-hidden rounded-lg border border-[#E7EDF5] bg-[#F7FAFC] focus-within:border-[#8865D8] focus-within:ring-2 focus-within:ring-[#8865D8]/15"><input value={component.value} onFocus={onSaveHistory} onChange={(event) => onUpdate({ value: event.target.value })} className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-[#34445D] outline-none"/><span className="flex min-w-12 items-center justify-center border-l border-[#E7EDF5] bg-[#F0F7FF] px-2 text-xs text-[#718096]">{component.unit || '—'}</span></div></label>
+        <label className="block"><span className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]">Valor</span><div className="flex min-h-11 overflow-hidden rounded-lg border border-[#E7EDF5] bg-[#F7FAFC] focus-within:border-[#8865D8] focus-within:ring-2 focus-within:ring-[#8865D8]/15"><input value={component.value} onFocus={onSaveHistory} onChange={(event) => onUpdate({ value: event.target.value })} className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-[#34445D] outline-none" /><span className="flex min-w-12 items-center justify-center border-l border-[#E7EDF5] bg-[#F0F7FF] px-2 text-xs text-[#718096]">{component.unit || '—'}</span></div></label>
         <div><span className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]">Tipo de componente</span><div className="flex min-h-11 items-center rounded-lg border border-[#E7EDF5] bg-[#F0F7FF] px-3 py-2.5 text-sm text-[#526575]">{componentDefaults[component.kind].label}</div></div>
       </div>
-      <div className="my-4 border-t border-[#E7EDF5]"/>
-      <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]"><Icon name="terminal" size={13}/>Información</div>
+      <div className="my-4 border-t border-[#E7EDF5]" />
+      <div className="mb-2 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[#718096]"><Icon name="terminal" size={13} />Información</div>
       <div className="space-y-2 rounded-lg bg-[#F7FAFC] p-3 text-[10px]">
         <div className="flex justify-between gap-2"><span className="text-[#718096]">Identificador</span><span className="max-w-[150px] truncate font-mono text-[#526575]">{component.id}</span></div>
       </div>
@@ -286,9 +286,9 @@ function TransientResults({ result }: { result: RCTransientResult }) {
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><div><p className="text-[11px] font-semibold text-[#34445D]">Voltaje del capacitor</p><p className="text-[9px] text-[#718096]">{result.capacitorReference} · Vc(t)</p></div><span className="rounded-md bg-[#F0EAFE] px-2 py-1 text-[9px] font-semibold text-[#7654C5]">Voltios</span></div>
             <svg viewBox="0 0 680 160" className="h-auto w-full" role="img" aria-label="Gráfica del voltaje del capacitor a través del tiempo">
               <title>Voltaje del capacitor en función del tiempo</title>
-              {[0, 1, 2, 3, 4].map((line) => <line key={line} x1="34" x2="646" y1={14 + line * 33} y2={14 + line * 33} stroke="#E7EDF5" strokeDasharray="3 4"/>)}
-              <line x1="34" x2="646" y1="146" y2="146" stroke="#CBD5E1"/>
-              <polyline points={voltagePoints} fill="none" stroke="#8865D8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              {[0, 1, 2, 3, 4].map((line) => <line key={line} x1="34" x2="646" y1={14 + line * 33} y2={14 + line * 33} stroke="#E7EDF5" strokeDasharray="3 4" />)}
+              <line x1="34" x2="646" y1="146" y2="146" stroke="#CBD5E1" />
+              <polyline points={voltagePoints} fill="none" stroke="#8865D8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
               <text x="34" y="158" fontSize="9" fill="#718096">0 s</text><text x="646" y="158" fontSize="9" textAnchor="end" fill="#718096">{formatTime(result.durationSeconds)}</text>
             </svg>
           </div>
@@ -297,9 +297,9 @@ function TransientResults({ result }: { result: RCTransientResult }) {
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><div><p className="text-[11px] font-semibold text-[#34445D]">Magnitud de la corriente del capacitor</p><p className="text-[9px] text-[#718096]">|Ic(t)| · miliamperios (mA)</p></div><span className="rounded-md bg-[#E8F8F5] px-2 py-1 text-[9px] font-semibold text-[#168F80]">mA</span></div>
             <svg viewBox="0 0 680 160" className="h-auto w-full" role="img" aria-label="Gráfica de la magnitud de la corriente del capacitor a través del tiempo">
               <title>Magnitud de la corriente del capacitor en función del tiempo</title>
-              {[0, 1, 2, 3, 4].map((line) => <line key={line} x1="34" x2="646" y1={14 + line * 33} y2={14 + line * 33} stroke="#E7EDF5" strokeDasharray="3 4"/>)}
-              <line x1="34" x2="646" y1="146" y2="146" stroke="#CBD5E1"/>
-              <polyline points={currentPoints} fill="none" stroke="#21B8A6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              {[0, 1, 2, 3, 4].map((line) => <line key={line} x1="34" x2="646" y1={14 + line * 33} y2={14 + line * 33} stroke="#E7EDF5" strokeDasharray="3 4" />)}
+              <line x1="34" x2="646" y1="146" y2="146" stroke="#CBD5E1" />
+              <polyline points={currentPoints} fill="none" stroke="#21B8A6" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
               <text x="34" y="158" fontSize="9" fill="#718096">0 s</text><text x="646" y="158" fontSize="9" textAnchor="end" fill="#718096">{formatTime(result.durationSeconds)}</text>
             </svg>
           </div>
@@ -407,9 +407,9 @@ function EvaluationModal({
         className="my-auto flex max-h-[min(92dvh,900px)] w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-white/70 bg-white shadow-[0_24px_80px_rgba(13,28,52,.28)] outline-none focus-visible:ring-2 focus-visible:ring-[#8865D8]"
       >
         <div className={`relative overflow-hidden px-5 pb-5 pt-5 sm:px-7 sm:pb-6 ${passed ? 'bg-gradient-to-br from-[#ECFDF5] via-white to-[#F0F7FF]' : 'bg-gradient-to-br from-[#FFF1F2] via-white to-[#FFF7ED]'}`}>
-          <button type="button" onClick={onClose} aria-label="Cerrar evaluación" className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg border border-[#E7EDF5] bg-white/90 text-[#718096] transition hover:bg-white hover:text-[#24324A] focus:outline-none focus:ring-2 focus:ring-[#8865D8]"><Icon name="close" size={17}/></button>
+          <button type="button" onClick={onClose} aria-label="Cerrar evaluación" className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg border border-[#E7EDF5] bg-white/90 text-[#718096] transition hover:bg-white hover:text-[#24324A] focus:outline-none focus:ring-2 focus:ring-[#8865D8]"><Icon name="close" size={17} /></button>
           <div className="flex items-center gap-2">
-            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${passed ? 'bg-[#D1FAE5] text-[#15803D]' : 'bg-[#FFE4E6] text-[#BE123C]'}`}><Icon name={passed ? 'check' : 'info'} size={19}/></span>
+            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${passed ? 'bg-[#D1FAE5] text-[#15803D]' : 'bg-[#FFE4E6] text-[#BE123C]'}`}><Icon name={passed ? 'check' : 'info'} size={19} /></span>
             <span className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[.12em] ${passed ? 'bg-[#D1FAE5] text-[#166534]' : 'bg-[#FFE4E6] text-[#9F1239]'}`}>{passed ? 'Práctica aprobada' : 'Práctica no aprobada'}</span>
           </div>
           <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -422,7 +422,7 @@ function EvaluationModal({
               <p className="text-[10px] text-[#718096]">Mínimo para aprobar: {result.passingScore}/100</p>
             </div>
           </div>
-          <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#E7EDF5]"><div className={`h-full rounded-full transition-all ${passed ? 'bg-[#16A34A]' : 'bg-[#F4728B]'}`} style={{ width: `${result.score}%` }}/></div>
+          <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#E7EDF5]"><div className={`h-full rounded-full transition-all ${passed ? 'bg-[#16A34A]' : 'bg-[#F4728B]'}`} style={{ width: `${result.score}%` }} /></div>
           <p id="evaluation-modal-summary" className="mt-3 text-xs leading-relaxed text-[#526575]">{passed ? '¡Buen trabajo! Cumpliste con la calificación mínima de esta práctica.' : `Necesitas ${result.passingScore} puntos para aprobar. Revisa los criterios que no alcanzaste y corrige tu circuito.`}</p>
         </div>
 
@@ -435,7 +435,7 @@ function EvaluationModal({
             {result.criteria.map((criterion) => (
               <div key={criterion.id} className={`rounded-xl border px-3.5 py-3 ${criterion.passed ? 'border-[#D8F0E3] bg-[#FBFEFC]' : 'border-[#F5E1D8] bg-[#FFFCFA]'}`}>
                 <div className="flex items-start gap-3">
-                  <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${criterion.passed ? 'bg-[#DCFCE7] text-[#15803D]' : 'bg-[#FFE4E6] text-[#BE123C]'}`}><Icon name={criterion.passed ? 'check' : 'close'} size={13}/></span>
+                  <span className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${criterion.passed ? 'bg-[#DCFCE7] text-[#15803D]' : 'bg-[#FFE4E6] text-[#BE123C]'}`}><Icon name={criterion.passed ? 'check' : 'close'} size={13} /></span>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
                       <p className="text-xs font-semibold text-[#34445D]">{criterion.title}</p>
@@ -474,7 +474,7 @@ function ResultsContent({
 
   return (
     <div className="flex min-h-[220px] flex-col items-center justify-center px-4 py-8 text-center">
-      <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F0EAFE] text-[#8865D8]"><Icon name="activity" size={22}/></div>
+      <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#F0EAFE] text-[#8865D8]"><Icon name="activity" size={22} /></div>
       <p className="text-[11px] font-semibold text-[#34445D]">Todavía no hay resultados</p>
       <p className="mt-1 max-w-[240px] text-[10px] leading-relaxed text-[#718096]">Ejecuta Simular DC o Analizar RC. Los resultados se mostrarán aquí, sin duplicar paneles en la parte inferior.</p>
     </div>
@@ -973,275 +973,191 @@ export default function ElectroLabScreen({
   ];
 
   return (
-    <div className="min-h-screen bg-[#F7FAFC] text-[#24324A]">
-      <div className="flex min-h-screen">
-        
-        {/*
-        <aside className={`${mobileMenuOpen ? 'fixed inset-y-0 left-0 z-40 flex' : 'hidden'} w-[250px] shrink-0 flex-col border-r border-[#E7EDF5] bg-white md:static md:flex`}>
-          <div className="flex h-[76px] items-center gap-3 border-b border-[#E7EDF5] px-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#3478F6] text-white"><Icon name="circuit" size={23} /></div>
-            <div><div className="text-[17px] font-bold tracking-tight">Proto<span className="text-[#3478F6]">Lab</span></div><div className="text-[10px] uppercase tracking-[.2em] text-[#718096]">Módulo de electrónica</div></div>
-            <button type="button" onClick={() => setMobileMenuOpen(false)} className="ml-auto rounded-lg p-2 text-[#718096] hover:bg-[#F5F9FF] md:hidden" aria-label="Cerrar menú"><Icon name="close" /></button>
-          </div>
 
-          <div className="px-4 pt-7">
-            <p className="px-3 pb-3 text-[10px] font-bold uppercase tracking-[.18em] text-[#718096]">Espacio de trabajo</p>
-            <nav className="space-y-1">
-              {navigation.map((item) => {
-                const active = activeNav === item.label;
-                return <button key={item.label} type="button" onClick={() => { setActiveNav(item.label); setMobileMenuOpen(false); }} className={`flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left text-[13px] transition ${active ? 'bg-[#EAF1FF] font-semibold text-[#8865D8]' : 'text-[#718096] hover:bg-[#F5F9FF] hover:text-[#24324A]'}`}><Icon name={item.icon} size={18} /><span>{item.label}</span>{active && <span className="ml-auto h-1.5 w-1.5 rounded-full bg-[#21B8A6]" />}</button>;
-              })}
-            </nav>
-          </div>
+    <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
 
-          <div className="mx-4 mt-8 border-t border-[#E7EDF5] pt-6">
-            <p className="px-3 pb-3 text-[10px] font-bold uppercase tracking-[.18em] text-[#718096]">Preferencias</p>
-            <button type="button" onClick={() => setActiveNav('Configuración')} className={`flex w-full items-center gap-3 rounded-lg px-3 py-3 text-[13px] transition ${activeNav === 'Configuración' ? 'bg-[#EAF1FF] text-[#8865D8]' : 'text-[#718096] hover:bg-[#F5F9FF] hover:text-[#24324A]'}`}><Icon name="settings" size={18} />Configuración</button>
-          </div>
+      <BannerPractica
+        nombreLaboratorio='ElectroLab'
+        nombrePractica={currentPractice?.practice.title ?? 'Circuito libre'}
+        nivelPractica={currentPractice?.practice.difficulty ?? 'Sin nivel'}
+        descripcionPractica={currentPractice?.practice.description ?? 'Construye un circuito agregando componentes al área de trabajo'}
+      />
 
-          <div className="mt-auto p-4">
-            <div className="rounded-xl border border-[#DCE9FF] bg-[#F0F7FF] p-4">
-              <div className="mb-2 flex items-center gap-2 text-[#8865D8]"><Icon name="info" size={16} /><span className="text-xs font-semibold">Área de aprendizaje</span></div>
-              <p className="text-[11px] leading-relaxed text-[#718096]">Experimenta con componentes y construye circuitos en un entorno seguro.</p>
-            </div>
-            <div className="mt-4 flex items-center gap-3 px-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#DCE9FF] text-xs font-bold text-[#8865D8]">ES</div>
-              <div className="min-w-0"><p className="text-xs font-medium text-[#34445D]">Estudiante</p><p className="text-[10px] text-[#718096]">Cuenta de laboratorio</p></div>
-              <span className="ml-auto h-2 w-2 rounded-full bg-emerald-400" />
+      <details open aria-labelledby="practice-instructions-heading" className="group mb-5 rounded-2xl border border-[#DCE9FF] bg-white shadow-sm">
+        <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2 rounded-t-2xl border-b border-[#E7EDF5] bg-[#F4F8FF] px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#8865D8] sm:px-5">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EAF1FF] text-[#3478F6]"><Icon name="book" size={17} /></span>
+            <div>
+              <h3 id="practice-instructions-heading" className="text-xs font-semibold text-[#24324A]">Instrucciones de la práctica</h3>
+              <p className="mt-0.5 text-[10px] text-[#718096]">Revisa estos pasos antes de construir o simular el circuito.</p>
             </div>
           </div>
-        </aside> 
-        */}
-        
-        
-        <Sidebar />
-        
+          <span className="flex items-center gap-2">
+            {currentPractice && <span className="rounded-full border border-[#DCE9FF] bg-white px-2.5 py-1 text-[9px] font-medium text-[#526575]">{currentPractice.practice.instructions.length} pasos</span>}
+            <span aria-hidden="true" className="text-base text-[#718096] transition-transform group-open:rotate-180">⌄</span>
+          </span>
+        </summary>
+        <div className="space-y-4 px-4 py-4 sm:px-5">
+          {currentPractice ? <>
+            <ol className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+              {currentPractice.practice.instructions.map((instruction) => <li key={instruction.step} className="flex items-start gap-2.5 rounded-xl border border-[#E7EDF5] bg-[#FBFCFE] p-3 text-[11px] leading-relaxed text-[#526575]">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F0EAFE] text-[10px] font-bold text-[#7654C5]">{instruction.step}</span>
+                <span>{instruction.text}</span>
+              </li>)}
+            </ol>
+            {currentPractice.practice.learningObjectives.length > 0 && <div className="flex flex-col gap-2 border-t border-[#E7EDF5] pt-3 sm:flex-row sm:items-start">
+              <p className="shrink-0 text-[10px] font-semibold uppercase tracking-wide text-[#718096]">Objetivos de aprendizaje</p>
+              <ul className="flex flex-wrap gap-x-5 gap-y-1 text-[10px] leading-relaxed text-[#718096]">
+                {currentPractice.practice.learningObjectives.map((objective, index) => <li key={`${index}-${objective}`} className="list-inside list-disc">{objective}</li>)}
+              </ul>
+            </div>}
+          </> : <p className="text-[11px] leading-relaxed text-[#718096]">No hay una práctica JSON cargada. Puedes construir un circuito libre o cargar una práctica desde un archivo JSON.</p>}
+          <p className="border-t border-[#E7EDF5] pt-3 text-[10px] leading-relaxed text-[#718096]">Uso del editor: arrastra los componentes para moverlos, selecciona dos terminales para crear un cable y usa Eliminar o la tecla Suprimir para quitar el elemento seleccionado.</p>
+        </div>
+      </details>
 
-        {mobileMenuOpen && <button className="fixed inset-0 z-30 bg-black/60 md:hidden" onClick={() => setMobileMenuOpen(false)} aria-label="Cerrar menú" />}
+      <section aria-label="Controles de la práctica" className="mb-4 rounded-2xl border border-[#E7EDF5] bg-white p-3 shadow-sm sm:p-4">
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end">
+            {!onApproved && (
+              <label className="flex w-full min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096] sm:max-w-[380px]">Práctica de ejemplo
+                <select aria-label="Cargar una práctica de ejemplo" defaultValue="" onChange={(event) => { const selected = event.target.value; if (selected === 'led') loadEmbeddedPractice(ledPracticeJson as unknown, 'led-basico.json'); if (selected === 'rc-charge') loadEmbeddedPractice(rcChargePracticeJson as unknown, 'rc-carga.json'); if (selected === 'rc-discharge') loadEmbeddedPractice(rcDischargePracticeJson as unknown, 'rc-descarga.json'); event.currentTarget.value = ''; }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
+                  <option value="">Seleccionar ejemplo…</option><option value="led">LED básico</option><option value="rc-charge">Carga RC</option><option value="rc-discharge">Descarga RC</option>
+                </select>
+              </label>
+            )}
+            <button type="button" onClick={runSimulation} disabled={!currentPractice || components.length === 0} title="Calcular el punto de operación de corriente continua" className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#3478F6] px-4 text-xs font-semibold text-white transition hover:bg-[#2868DD] disabled:cursor-not-allowed disabled:opacity-45"><Icon name="play" size={15} />Simular DC</button>
+            <button ref={evaluationButtonRef} type="button" onClick={runEvaluation} disabled={!canEvaluate} title={!currentPractice?.practice.evaluation ? 'Esta práctica no tiene criterios de evaluación' : !canEvaluate ? `Ejecuta primero el análisis ${requiredAnalysis?.toUpperCase() ?? 'requerido'}` : 'Evaluar el circuito con la rúbrica de la práctica'} className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#BFE7D3] bg-[#ECFDF5] px-4 text-xs font-semibold text-[#16804A] transition hover:bg-[#DDF8E9] disabled:cursor-not-allowed disabled:border-[#E7EDF5] disabled:bg-[#F7FAFC] disabled:text-[#A0AEC0]"><Icon name="check" size={15} />Evaluar práctica</button>
+          </div>
+          {currentPractice?.practice.evaluation && !canEvaluate && <p className="text-[9px] leading-relaxed text-[#8A98A9]">Para habilitar la evaluación, ejecuta primero el análisis {requiredAnalysis?.toUpperCase()} requerido por esta práctica.</p>}
+          {currentPractice && !currentPractice.practice.evaluation && <p className="text-[9px] leading-relaxed text-[#8A98A9]">Este archivo JSON no incluye una rúbrica; puedes simular el circuito, pero no obtener una calificación automática.</p>}
 
-        <main className="flex min-w-0 flex-1 flex-col">
-          
-          <Header nombreLaboratorio="ElectroLab" tipoContenido='Prácticas' tipoEditor='Editor de circuitos' />
+          {components.some((component) => component.kind === 'capacitor') && <div className="grid max-w-[560px] grid-cols-2 items-end gap-2 border-t border-[#E7EDF5] pt-3 sm:grid-cols-[minmax(0,1fr)_minmax(120px,.65fr)_auto]">
+            <label className="flex min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096]">Análisis RC
+              <select value={transientMode} onChange={(event) => { const mode = event.target.value as RCTransientMode; setTransientMode(mode); setTransientInitialVoltage(mode === 'charge' ? '0' : '5'); }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
+                <option value="charge">Carga</option><option value="discharge">Descarga</option>
+              </select>
+            </label>
+            <label className="flex min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096]">V inicial (V)
+              <input type="number" step="any" value={transientInitialVoltage} onChange={(event) => setTransientInitialVoltage(event.target.value)} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15" aria-label="Voltaje inicial del capacitor en voltios" />
+            </label>
+            <button type="button" onClick={runRCAnalysis} disabled={!currentPractice || components.length === 0} title="Calcular la carga o descarga del capacitor a través del tiempo" className="col-span-2 flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-4 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC] disabled:cursor-not-allowed disabled:opacity-45 sm:col-span-1"><Icon name="activity" size={15} />Analizar RC</button>
+          </div>}
+        </div>
+      </section>
 
-          {/*
-          <header className="flex h-[76px] shrink-0 items-center justify-between border-b border-[#E7EDF5] bg-white px-4 sm:px-7">
-            <div className="flex items-center gap-3">
-              <button type="button" onClick={() => setMobileMenuOpen(true)} className="rounded-lg p-2 text-[#718096] hover:bg-[#F5F9FF] md:hidden" aria-label="Abrir menú"><Icon name="menu" /></button>
-              <div><div className="flex items-center gap-2 text-[11px] text-[#718096]"><span>ElectroLab</span><Icon name="chevron" size={12}/><span className="text-[#526575]">Prácticas</span></div><h1 className="mt-1 text-[15px] font-semibold tracking-tight text-[#24324A] sm:text-base">Editor de circuitos</h1></div>
+      {!(simulationResult || transientResult) && <div role="status" aria-live="polite" aria-atomic="true" className="mb-3 flex items-start gap-2 rounded-lg border border-[#E7EDF5] bg-[#F8FAFD] px-3 py-2.5 text-[10px] leading-relaxed text-[#718096]">
+        <Icon name="info" size={14} className="mt-0.5 shrink-0 text-[#8865D8]" />
+        <span>{notice}</span>
+      </div>}
+      {validationErrors.length > 0 && <div role="alert" className="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-700"><p className="font-semibold">No se pudo cargar la práctica</p><ul className="mt-1 list-inside list-disc space-y-1">{validationErrors.slice(0, 6).map((message, index) => <li key={`${index}-${message}`}>{message}</li>)}</ul>{validationErrors.length > 6 && <p className="mt-1 text-[10px]">Se omitieron {validationErrors.length - 6} errores adicionales.</p>}</div>}
+
+      <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <section className="min-w-0 overflow-hidden rounded-2xl border border-[#E7EDF5] bg-white shadow-2xl shadow-black/10">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7EDF5] px-4 py-3 sm:px-5">
+            <div className="flex items-center gap-2"><div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F0EAFE] text-[#8865D8]"><Icon name="circuit" size={15} /></div><div><p className="text-xs font-semibold text-[#34445D]">Área de trabajo</p><p className="text-[10px] text-[#718096]">Lienzo de construcción</p></div></div>
+            <div className="flex flex-wrap items-center gap-1.5"><button type="button" onClick={undo} disabled={undoStack.current.length === 0} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:bg-[#F5F9FF] disabled:opacity-35" title="Deshacer">↶</button><button type="button" onClick={redo} disabled={redoStack.current.length === 0} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:bg-[#F5F9FF] disabled:opacity-35" title="Rehacer">↷</button><button type="button" onClick={() => setSnapEnabled((value) => !value)} className={`rounded-md border px-2.5 py-1.5 text-[10px] ${snapEnabled ? 'border-[#C9BDF0] bg-[#F0EAFE] text-[#7654C5]' : 'border-[#E7EDF5] text-[#718096]'}`}>Ajuste: {snapEnabled ? 'ON' : 'OFF'}</button><button type="button" onClick={() => setZoom((value) => Math.max(.6, Math.round((value - .1) * 10) / 10))} disabled={zoom <= .6} className="rounded-md border border-[#E7EDF5] px-2 py-1.5 text-[10px] text-[#718096] disabled:opacity-35">−</button><span className="min-w-[38px] text-center text-[10px] tabular-nums text-[#718096]">{Math.round(zoom * 100)}%</span><button type="button" onClick={() => setZoom((value) => Math.min(1.6, Math.round((value + .1) * 10) / 10))} disabled={zoom >= 1.6} className="rounded-md border border-[#E7EDF5] px-2 py-1.5 text-[10px] text-[#718096] disabled:opacity-35">+</button><button type="button" onClick={() => setZoom(1)} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096]">100%</button><button type="button" onClick={resetCircuit} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:text-[#34445D]">Restablecer</button><button type="button" onClick={openProperties} disabled={!selectedComponent} className="flex items-center gap-1.5 rounded-md border border-[#C9BDF0] bg-[#F0EAFE] px-2.5 py-1.5 text-[10px] font-medium text-[#7654C5] hover:bg-[#E9E1FC] disabled:cursor-not-allowed disabled:opacity-40 xl:hidden" aria-label="Abrir propiedades del componente seleccionado"><Icon name="sliders" size={13} />Propiedades</button><button type="button" onClick={openResults} className="flex items-center gap-1.5 rounded-md border border-[#DCE9FF] bg-[#F0F7FF] px-2.5 py-1.5 text-[10px] font-medium text-[#3478F6] hover:bg-[#EAF1FF] xl:hidden" aria-label="Abrir resultados de la simulación"><Icon name="activity" size={13} />Resultados</button><button type="button" onClick={removeSelected} disabled={!selectedComponent && !selectedConnectionId} title="Eliminar selección (Suprimir)" className="flex items-center gap-1.5 rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:border-rose-300 hover:text-rose-500 disabled:cursor-not-allowed disabled:opacity-40"><Icon name="trash" size={13} />Eliminar</button></div>
+          </div>
+
+          <div className="border-b border-[#E7EDF5] bg-[#F8FAFD] px-4 py-3 sm:px-5">
+            <div className="flex items-center justify-between gap-3"><div><p className="text-[10px] font-semibold uppercase tracking-[.15em] text-[#718096]">Añadir componentes</p><p className="mt-0.5 text-[10px] text-[#A0AEC0]">Componentes disponibles para esta práctica</p></div><span className="hidden text-[10px] text-[#718096] sm:inline">{components.length} elementos</span></div>
+            <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+              {(Object.keys(componentDefaults) as ComponentKind[]).filter((kind) => !currentPractice || currentPractice.practice.allowedComponentTypes.includes(kind)).map((kind) => <button key={kind} type="button" onClick={() => addComponent(kind)} className="flex shrink-0 items-center gap-2 rounded-lg border border-[#E7EDF5] bg-white px-3 py-2 text-[11px] font-medium text-[#526575] transition hover:border-[#A78BFA] hover:bg-[#F0F7FF] hover:text-[#8865D8]"><Icon name={componentDefaults[kind].icon} size={15} />{componentDefaults[kind].label}<Icon name="plus" size={12} className="text-[#718096]" /></button>)}
             </div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <span className="hidden items-center gap-2 rounded-full border border-[#E7EDF5] bg-[#F7FAFC] px-3 py-1.5 text-[11px] text-[#718096] lg:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400"/> JSON local</span>
-              <input ref={practiceFileInputRef} type="file" accept=".json,application/json" className="sr-only" onChange={handlePracticeFileChange} aria-label="Seleccionar archivo JSON de una práctica" />
-              {!onApproved && (
-                <button type="button" onClick={() => practiceFileInputRef.current?.click()} className="flex items-center gap-2 rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-3 py-2 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC]"><Icon name="upload" size={15}/><span>Cargar JSON</span></button>
-              )}
-            </div>
-          </header>
-          */}
-          
+            {currentPractice?.practice.allowedComponentTypes.length === 0 && <p className="mt-2 text-[10px] text-[#A0AEC0]">Esta práctica no permite agregar componentes adicionales.</p>}
+          </div>
 
-          <div className="flex-1 overflow-auto">
-            <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
-
-              <BannerPractica
-                nombreLaboratorio='ElectroLab'
-                nombrePractica={currentPractice?.practice.title ?? 'Circuito libre'}
-                nivelPractica={currentPractice?.practice.difficulty ?? 'Sin nivel'}
-                descripcionPractica={currentPractice?.practice.description ?? 'Construye un circuito agregando componentes al área de trabajo'}
-              />
-
-              {/*
-              <div className="mb-4">
-                <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <span className="max-w-[260px] truncate rounded-md bg-[#F0EAFE] px-2 py-1 text-[9px] font-bold uppercase tracking-[.16em] text-[#8865D8]">{currentPractice ? currentPractice.practice.id : 'Práctica libre'}</span>
-                  <span className="text-[10px] text-[#718096]">•</span>
-                  <span className="text-[11px] capitalize text-[#718096]">{currentPractice?.practice.difficulty ?? 'sin nivel'}</span>
-                  {currentPractice && <><span className="text-[10px] text-[#718096]">•</span><span className="text-[11px] text-[#718096]">{currentPractice.practice.estimatedDurationMinutes} min</span></>}
-                </div>
-                <h2 className="text-xl font-semibold tracking-tight text-[#24324A] sm:text-2xl">{currentPractice?.practice.title ?? 'Circuito libre'}</h2>
-                <p className="mt-1 max-w-3xl text-xs leading-relaxed text-[#718096] sm:text-sm">{currentPractice?.practice.description ?? 'Construye un circuito agregando componentes al área de trabajo.'}</p>
-                <p className="mt-1 text-[10px] text-[#A0AEC0]">{practiceFileName}</p>
-              </div>
-              */}
-
-              <details open aria-labelledby="practice-instructions-heading" className="group mb-5 rounded-2xl border border-[#DCE9FF] bg-white shadow-sm">
-                <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2 rounded-t-2xl border-b border-[#E7EDF5] bg-[#F4F8FF] px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#8865D8] sm:px-5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EAF1FF] text-[#3478F6]"><Icon name="book" size={17}/></span>
-                    <div>
-                      <h3 id="practice-instructions-heading" className="text-xs font-semibold text-[#24324A]">Instrucciones de la práctica</h3>
-                      <p className="mt-0.5 text-[10px] text-[#718096]">Revisa estos pasos antes de construir o simular el circuito.</p>
-                    </div>
-                  </div>
-                  <span className="flex items-center gap-2">
-                    {currentPractice && <span className="rounded-full border border-[#DCE9FF] bg-white px-2.5 py-1 text-[9px] font-medium text-[#526575]">{currentPractice.practice.instructions.length} pasos</span>}
-                    <span aria-hidden="true" className="text-base text-[#718096] transition-transform group-open:rotate-180">⌄</span>
-                  </span>
-                </summary>
-                <div className="space-y-4 px-4 py-4 sm:px-5">
-                  {currentPractice ? <>
-                    <ol className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
-                      {currentPractice.practice.instructions.map((instruction) => <li key={instruction.step} className="flex items-start gap-2.5 rounded-xl border border-[#E7EDF5] bg-[#FBFCFE] p-3 text-[11px] leading-relaxed text-[#526575]">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F0EAFE] text-[10px] font-bold text-[#7654C5]">{instruction.step}</span>
-                        <span>{instruction.text}</span>
-                      </li>)}
-                    </ol>
-                    {currentPractice.practice.learningObjectives.length > 0 && <div className="flex flex-col gap-2 border-t border-[#E7EDF5] pt-3 sm:flex-row sm:items-start">
-                      <p className="shrink-0 text-[10px] font-semibold uppercase tracking-wide text-[#718096]">Objetivos de aprendizaje</p>
-                      <ul className="flex flex-wrap gap-x-5 gap-y-1 text-[10px] leading-relaxed text-[#718096]">
-                        {currentPractice.practice.learningObjectives.map((objective, index) => <li key={`${index}-${objective}`} className="list-inside list-disc">{objective}</li>)}
-                      </ul>
-                    </div>}
-                  </> : <p className="text-[11px] leading-relaxed text-[#718096]">No hay una práctica JSON cargada. Puedes construir un circuito libre o cargar una práctica desde un archivo JSON.</p>}
-                  <p className="border-t border-[#E7EDF5] pt-3 text-[10px] leading-relaxed text-[#718096]">Uso del editor: arrastra los componentes para moverlos, selecciona dos terminales para crear un cable y usa Eliminar o la tecla Suprimir para quitar el elemento seleccionado.</p>
-                </div>
-              </details>
-
-              <section aria-label="Controles de la práctica" className="mb-4 rounded-2xl border border-[#E7EDF5] bg-white p-3 shadow-sm sm:p-4">
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end">
-                    {!onApproved && (
-                      <label className="flex w-full min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096] sm:max-w-[380px]">Práctica de ejemplo
-                        <select aria-label="Cargar una práctica de ejemplo" defaultValue="" onChange={(event) => { const selected = event.target.value; if (selected === 'led') loadEmbeddedPractice(ledPracticeJson as unknown, 'led-basico.json'); if (selected === 'rc-charge') loadEmbeddedPractice(rcChargePracticeJson as unknown, 'rc-carga.json'); if (selected === 'rc-discharge') loadEmbeddedPractice(rcDischargePracticeJson as unknown, 'rc-descarga.json'); event.currentTarget.value = ''; }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
-                          <option value="">Seleccionar ejemplo…</option><option value="led">LED básico</option><option value="rc-charge">Carga RC</option><option value="rc-discharge">Descarga RC</option>
-                        </select>
-                      </label>
-                    )}
-                    <button type="button" onClick={runSimulation} disabled={!currentPractice || components.length === 0} title="Calcular el punto de operación de corriente continua" className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#3478F6] px-4 text-xs font-semibold text-white transition hover:bg-[#2868DD] disabled:cursor-not-allowed disabled:opacity-45"><Icon name="play" size={15}/>Simular DC</button>
-                    <button ref={evaluationButtonRef} type="button" onClick={runEvaluation} disabled={!canEvaluate} title={!currentPractice?.practice.evaluation ? 'Esta práctica no tiene criterios de evaluación' : !canEvaluate ? `Ejecuta primero el análisis ${requiredAnalysis?.toUpperCase() ?? 'requerido'}` : 'Evaluar el circuito con la rúbrica de la práctica'} className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#BFE7D3] bg-[#ECFDF5] px-4 text-xs font-semibold text-[#16804A] transition hover:bg-[#DDF8E9] disabled:cursor-not-allowed disabled:border-[#E7EDF5] disabled:bg-[#F7FAFC] disabled:text-[#A0AEC0]"><Icon name="check" size={15}/>Evaluar práctica</button>
-                  </div>
-                  {currentPractice?.practice.evaluation && !canEvaluate && <p className="text-[9px] leading-relaxed text-[#8A98A9]">Para habilitar la evaluación, ejecuta primero el análisis {requiredAnalysis?.toUpperCase()} requerido por esta práctica.</p>}
-                  {currentPractice && !currentPractice.practice.evaluation && <p className="text-[9px] leading-relaxed text-[#8A98A9]">Este archivo JSON no incluye una rúbrica; puedes simular el circuito, pero no obtener una calificación automática.</p>}
-
-                  {components.some((component) => component.kind === 'capacitor') && <div className="grid max-w-[560px] grid-cols-2 items-end gap-2 border-t border-[#E7EDF5] pt-3 sm:grid-cols-[minmax(0,1fr)_minmax(120px,.65fr)_auto]">
-                    <label className="flex min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096]">Análisis RC
-                      <select value={transientMode} onChange={(event) => { const mode = event.target.value as RCTransientMode; setTransientMode(mode); setTransientInitialVoltage(mode === 'charge' ? '0' : '5'); }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
-                        <option value="charge">Carga</option><option value="discharge">Descarga</option>
-                      </select>
-                    </label>
-                    <label className="flex min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096]">V inicial (V)
-                      <input type="number" step="any" value={transientInitialVoltage} onChange={(event) => setTransientInitialVoltage(event.target.value)} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15" aria-label="Voltaje inicial del capacitor en voltios" />
-                    </label>
-                    <button type="button" onClick={runRCAnalysis} disabled={!currentPractice || components.length === 0} title="Calcular la carga o descarga del capacitor a través del tiempo" className="col-span-2 flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-4 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC] disabled:cursor-not-allowed disabled:opacity-45 sm:col-span-1"><Icon name="activity" size={15}/>Analizar RC</button>
-                  </div>}
-                </div>
-              </section>
-
-              {!(simulationResult || transientResult) && <div role="status" aria-live="polite" aria-atomic="true" className="mb-3 flex items-start gap-2 rounded-lg border border-[#E7EDF5] bg-[#F8FAFD] px-3 py-2.5 text-[10px] leading-relaxed text-[#718096]">
-                <Icon name="info" size={14} className="mt-0.5 shrink-0 text-[#8865D8]"/>
-                <span>{notice}</span>
-              </div>}
-              {validationErrors.length > 0 && <div role="alert" className="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-700"><p className="font-semibold">No se pudo cargar la práctica</p><ul className="mt-1 list-inside list-disc space-y-1">{validationErrors.slice(0, 6).map((message, index) => <li key={`${index}-${message}`}>{message}</li>)}</ul>{validationErrors.length > 6 && <p className="mt-1 text-[10px]">Se omitieron {validationErrors.length - 6} errores adicionales.</p>}</div>}
-
-              <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
-                <section className="min-w-0 overflow-hidden rounded-2xl border border-[#E7EDF5] bg-white shadow-2xl shadow-black/10">
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E7EDF5] px-4 py-3 sm:px-5">
-                    <div className="flex items-center gap-2"><div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F0EAFE] text-[#8865D8]"><Icon name="circuit" size={15}/></div><div><p className="text-xs font-semibold text-[#34445D]">Área de trabajo</p><p className="text-[10px] text-[#718096]">Lienzo de construcción</p></div></div>
-                    <div className="flex flex-wrap items-center gap-1.5"><button type="button" onClick={undo} disabled={undoStack.current.length === 0} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:bg-[#F5F9FF] disabled:opacity-35" title="Deshacer">↶</button><button type="button" onClick={redo} disabled={redoStack.current.length === 0} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:bg-[#F5F9FF] disabled:opacity-35" title="Rehacer">↷</button><button type="button" onClick={() => setSnapEnabled((value) => !value)} className={`rounded-md border px-2.5 py-1.5 text-[10px] ${snapEnabled ? 'border-[#C9BDF0] bg-[#F0EAFE] text-[#7654C5]' : 'border-[#E7EDF5] text-[#718096]'}`}>Ajuste: {snapEnabled ? 'ON' : 'OFF'}</button><button type="button" onClick={() => setZoom((value) => Math.max(.6, Math.round((value - .1) * 10) / 10))} disabled={zoom <= .6} className="rounded-md border border-[#E7EDF5] px-2 py-1.5 text-[10px] text-[#718096] disabled:opacity-35">−</button><span className="min-w-[38px] text-center text-[10px] tabular-nums text-[#718096]">{Math.round(zoom * 100)}%</span><button type="button" onClick={() => setZoom((value) => Math.min(1.6, Math.round((value + .1) * 10) / 10))} disabled={zoom >= 1.6} className="rounded-md border border-[#E7EDF5] px-2 py-1.5 text-[10px] text-[#718096] disabled:opacity-35">+</button><button type="button" onClick={() => setZoom(1)} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096]">100%</button><button type="button" onClick={resetCircuit} className="rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:text-[#34445D]">Restablecer</button><button type="button" onClick={openProperties} disabled={!selectedComponent} className="flex items-center gap-1.5 rounded-md border border-[#C9BDF0] bg-[#F0EAFE] px-2.5 py-1.5 text-[10px] font-medium text-[#7654C5] hover:bg-[#E9E1FC] disabled:cursor-not-allowed disabled:opacity-40 xl:hidden" aria-label="Abrir propiedades del componente seleccionado"><Icon name="sliders" size={13}/>Propiedades</button><button type="button" onClick={openResults} className="flex items-center gap-1.5 rounded-md border border-[#DCE9FF] bg-[#F0F7FF] px-2.5 py-1.5 text-[10px] font-medium text-[#3478F6] hover:bg-[#EAF1FF] xl:hidden" aria-label="Abrir resultados de la simulación"><Icon name="activity" size={13}/>Resultados</button><button type="button" onClick={removeSelected} disabled={!selectedComponent && !selectedConnectionId} title="Eliminar selección (Suprimir)" className="flex items-center gap-1.5 rounded-md border border-[#E7EDF5] px-2.5 py-1.5 text-[10px] text-[#718096] hover:border-rose-300 hover:text-rose-500 disabled:cursor-not-allowed disabled:opacity-40"><Icon name="trash" size={13}/>Eliminar</button></div>
-                  </div>
-
-                  <div className="border-b border-[#E7EDF5] bg-[#F8FAFD] px-4 py-3 sm:px-5">
-                    <div className="flex items-center justify-between gap-3"><div><p className="text-[10px] font-semibold uppercase tracking-[.15em] text-[#718096]">Añadir componentes</p><p className="mt-0.5 text-[10px] text-[#A0AEC0]">Componentes disponibles para esta práctica</p></div><span className="hidden text-[10px] text-[#718096] sm:inline">{components.length} elementos</span></div>
-                    <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-                      {(Object.keys(componentDefaults) as ComponentKind[]).filter((kind) => !currentPractice || currentPractice.practice.allowedComponentTypes.includes(kind)).map((kind) => <button key={kind} type="button" onClick={() => addComponent(kind)} className="flex shrink-0 items-center gap-2 rounded-lg border border-[#E7EDF5] bg-white px-3 py-2 text-[11px] font-medium text-[#526575] transition hover:border-[#A78BFA] hover:bg-[#F0F7FF] hover:text-[#8865D8]"><Icon name={componentDefaults[kind].icon} size={15}/>{componentDefaults[kind].label}<Icon name="plus" size={12} className="text-[#718096]"/></button>)}
-                    </div>
-                    {currentPractice?.practice.allowedComponentTypes.length === 0 && <p className="mt-2 text-[10px] text-[#A0AEC0]">Esta práctica no permite agregar componentes adicionales.</p>}
-                  </div>
-
-                  <div className="overflow-auto bg-[#F7FAFC]">
-                    <div
-                      className="relative"
-                      style={{
-                        width: `${1600 * zoom}px`,
-                        height: `${1000 * zoom}px`,
-                        minWidth: `${1600 * zoom}px`,
-                        backgroundImage: 'radial-gradient(rgba(113,128,150,.16) 1px, transparent 1px)',
-                        backgroundSize: '22px 22px',
-                      }}
-                    >
-                      {/* Elementos fijos del lienzo: no cambian con el zoom. */}
-                      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(247,250,252,.45),transparent_18%,transparent_82%,rgba(247,250,252,.45))]" />
-                        <div className="absolute left-5 top-5 rounded-md border border-[#E7EDF5] bg-[#F0F7FF]/90 px-2.5 py-1.5 text-[9px] font-medium uppercase tracking-[.14em] text-[#718096]">Esquema · vista de diseño</div>
-                        <div className="absolute right-5 top-5 flex items-center gap-2 rounded-md border border-[#E7EDF5] bg-[#F0F7FF]/90 px-2.5 py-1.5 text-[9px] text-[#718096]"><span className="h-1.5 w-1.5 rounded-full bg-[#21B8A6]"/> Selección activa</div>
-                        <div className="absolute left-1/2 top-[118px] -translate-x-1/2 rounded-full border border-dashed border-[#D6E0EC] bg-white/70 px-4 py-1.5 text-[9px] font-medium uppercase tracking-[.16em] text-[#9AA9BA]">Zona de diseño del circuito</div>
-                        {components.length === 0 && <div className="absolute inset-0 flex flex-col items-center justify-center text-center"><div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl border border-dashed border-[#CBD5E1] bg-white text-[#8865D8]"><Icon name="plus" size={25}/></div><p className="text-sm font-medium text-[#526575]">El lienzo está vacío</p><p className="mt-1 text-xs text-[#718096]">Añade componentes desde la barra superior.</p></div>}
-                        <div className="absolute bottom-4 left-5 flex items-center gap-3 text-[9px] text-[#A0AEC0]"><span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full border-2 border-[#8865D8] bg-white"/>Terminales</span><span>•</span><span>{connections.length} conexiones</span><span>•</span><span>Ajuste {snapEnabled ? 'activo' : 'libre'}</span></div>
-                        <div className="absolute bottom-4 right-5 rounded-md border border-[#E7EDF5] bg-[#F0F7FF] px-2 py-1 text-[9px] text-[#718096]">{components.length} componentes · {connections.length} cables · {Math.round(zoom * 100)}%</div>
-                      </div>
-
-                      {/* Solo los componentes y los cables reciben la transformación de zoom. */}
-                      <div
-                        className="absolute left-0 top-0 h-[1000px] w-[1600px]"
-                        style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}
-                      >
-                        <svg className="absolute inset-0 z-[1] h-full w-full" viewBox="0 0 1600 1000" preserveAspectRatio="none" aria-label="Conexiones del circuito">
-                          {connections.map((connection) => {
-                            const fromComponent = components.find((item) => item.id === connection.from.componentId);
-                            const toComponent = components.find((item) => item.id === connection.to.componentId);
-                            if (!fromComponent || !toComponent) return null;
-                            const from = getTerminalPoint(fromComponent, connection.from.side);
-                            const to = getTerminalPoint(toComponent, connection.to.side);
-                            const middle = (from.x + to.x) / 2;
-                            const active = selectedConnectionId === connection.id;
-                            return <g key={connection.id}><path d={`M ${from.x} ${from.y} H ${middle} V ${to.y} H ${to.x}`} fill="none" stroke={active ? '#8865D8' : '#21B8A6'} strokeWidth={active ? 5 : 3} strokeLinecap="round" strokeLinejoin="round" pointerEvents="stroke" className="cursor-pointer" onClick={(event) => { event.stopPropagation(); setSelectedConnectionId(connection.id); setSelectedId(null); setPropertiesOpen(false); setNotice('Cable seleccionado. Puedes eliminarlo con el botón Eliminar o la tecla Suprimir.'); }}/><circle cx={from.x} cy={from.y} r="3.5" fill={active ? '#8865D8' : '#21B8A6'} pointerEvents="none"/><circle cx={to.x} cy={to.y} r="3.5" fill={active ? '#8865D8' : '#21B8A6'} pointerEvents="none"/></g>;
-                          })}
-                        </svg>
-                        <div className="pointer-events-none absolute inset-0 z-[2]" onPointerMove={handleCanvasPointerMove} onPointerUp={() => setDragging(null)} onPointerCancel={() => setDragging(null)} onPointerLeave={() => setDragging(null)}>
-                          {components.map((component) => <CircuitNode key={component.id} component={component} selected={selectedId === component.id} onSelect={() => { setSelectedConnectionId(null); setSelectedId(component.id); openProperties(); setNotice(`${component.reference} seleccionado.`); }} onDragStart={handleDragStart} onTerminalClick={handleTerminalClick} pendingTerminal={pendingTerminal} />)}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </section>
-
-                <aside className="sticky top-4 hidden max-h-[calc(100dvh-112px)] min-h-[420px] self-start overflow-hidden rounded-2xl border border-[#E7EDF5] bg-white shadow-xl shadow-black/10 xl:flex xl:flex-col">
-                  <div className="flex shrink-0 items-center justify-between border-b border-[#E7EDF5] px-4 py-3.5">
-                    <div><p className="text-xs font-semibold text-[#34445D]">Panel del editor</p><p className="mt-0.5 text-[10px] text-[#718096]">Propiedades y resultados</p></div>
-                    <Icon name={inspectorTab === 'resultados' ? 'activity' : 'sliders'} size={17} className="text-[#718096]"/>
-                  </div>
-                  <div className="grid shrink-0 grid-cols-2 border-b border-[#E7EDF5] px-2 pt-1">
-                    <button type="button" onClick={() => setInspectorTab('propiedades')} aria-pressed={inspectorTab === 'propiedades'} className={`border-b-2 px-2 py-2.5 text-[10px] font-semibold transition ${inspectorTab === 'propiedades' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096] hover:text-[#34445D]'}`}>Propiedades</button>
-                    <button type="button" onClick={() => setInspectorTab('resultados')} aria-pressed={inspectorTab === 'resultados'} className={`border-b-2 px-2 py-2.5 text-[10px] font-semibold transition ${inspectorTab === 'resultados' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096] hover:text-[#34445D]'}`}>Resultados{(simulationResult || transientResult) && <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#21B8A6]"/>}</button>
-                  </div>
-                  <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3">
-                    {inspectorTab === 'propiedades'
-                      ? <PropertiesFields component={selectedComponent} onSaveHistory={saveHistory} onUpdate={updateSelected}/>
-                      : <ResultsContent simulationResult={simulationResult} transientResult={transientResult}/>}
-                  </div>
-                </aside>
+          <div className="overflow-auto bg-[#F7FAFC]">
+            <div
+              className="relative"
+              style={{
+                width: `${1600 * zoom}px`,
+                height: `${1000 * zoom}px`,
+                minWidth: `${1600 * zoom}px`,
+                backgroundImage: 'radial-gradient(rgba(113,128,150,.16) 1px, transparent 1px)',
+                backgroundSize: '22px 22px',
+              }}
+            >
+              {/* Elementos fijos del lienzo: no cambian con el zoom. */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(247,250,252,.45),transparent_18%,transparent_82%,rgba(247,250,252,.45))]" />
+                <div className="absolute left-5 top-5 rounded-md border border-[#E7EDF5] bg-[#F0F7FF]/90 px-2.5 py-1.5 text-[9px] font-medium uppercase tracking-[.14em] text-[#718096]">Esquema · vista de diseño</div>
+                <div className="absolute right-5 top-5 flex items-center gap-2 rounded-md border border-[#E7EDF5] bg-[#F0F7FF]/90 px-2.5 py-1.5 text-[9px] text-[#718096]"><span className="h-1.5 w-1.5 rounded-full bg-[#21B8A6]" /> Selección activa</div>
+                <div className="absolute left-1/2 top-[118px] -translate-x-1/2 rounded-full border border-dashed border-[#D6E0EC] bg-white/70 px-4 py-1.5 text-[9px] font-medium uppercase tracking-[.16em] text-[#9AA9BA]">Zona de diseño del circuito</div>
+                {components.length === 0 && <div className="absolute inset-0 flex flex-col items-center justify-center text-center"><div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl border border-dashed border-[#CBD5E1] bg-white text-[#8865D8]"><Icon name="plus" size={25} /></div><p className="text-sm font-medium text-[#526575]">El lienzo está vacío</p><p className="mt-1 text-xs text-[#718096]">Añade componentes desde la barra superior.</p></div>}
+                <div className="absolute bottom-4 left-5 flex items-center gap-3 text-[9px] text-[#A0AEC0]"><span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full border-2 border-[#8865D8] bg-white" />Terminales</span><span>•</span><span>{connections.length} conexiones</span><span>•</span><span>Ajuste {snapEnabled ? 'activo' : 'libre'}</span></div>
+                <div className="absolute bottom-4 right-5 rounded-md border border-[#E7EDF5] bg-[#F0F7FF] px-2 py-1 text-[9px] text-[#718096]">{components.length} componentes · {connections.length} cables · {Math.round(zoom * 100)}%</div>
               </div>
 
-              {propertiesOpen && (
-                <div className="xl:hidden">
-                  <button type="button" onClick={() => setPropertiesOpen(false)} className="fixed inset-0 z-[60] bg-[#24324A]/25 backdrop-blur-[1px]" aria-label="Cerrar panel del editor" />
-                  <aside id="responsive-properties-dialog" role="dialog" aria-modal="true" aria-labelledby="responsive-properties-title" className={`fixed inset-x-0 bottom-0 z-[70] flex flex-col overflow-hidden rounded-t-2xl border border-[#E7EDF5] bg-white shadow-[0_-12px_40px_rgba(36,50,74,.18)] ${inspectorTab === 'resultados' ? 'max-h-[88dvh]' : 'max-h-[78dvh]'} md:bottom-4 md:left-auto md:right-4 md:top-[92px] md:max-h-none md:w-[min(420px,calc(100vw-2rem))] md:rounded-2xl`}>
-                    <div className="relative flex shrink-0 items-center justify-between border-b border-[#E7EDF5] px-4 py-3.5 sm:px-5">
-                      <div className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-[#DCE5F0] md:hidden" />
-                      <div><p id="responsive-properties-title" className="text-xs font-semibold text-[#34445D]">Panel del editor</p><p className="mt-0.5 text-[10px] text-[#718096]">{inspectorTab === 'resultados' ? 'Resultados de la simulación' : selectedComponent ? `Editando ${selectedComponent.reference}` : 'Configuración del elemento'}</p></div>
-                      <button type="button" onClick={() => setPropertiesOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-lg text-[#718096] transition hover:bg-[#F5F9FF] hover:text-[#24324A] focus:outline-none focus:ring-2 focus:ring-[#8865D8]" aria-label="Cerrar panel"><Icon name="close" size={19}/></button>
-                    </div>
-                    <div className="grid shrink-0 grid-cols-2 border-b border-[#E7EDF5] px-3 pt-1">
-                      <button type="button" onClick={() => setInspectorTab('propiedades')} aria-pressed={inspectorTab === 'propiedades'} className={`border-b-2 px-2 py-3 text-[11px] font-semibold transition ${inspectorTab === 'propiedades' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096]'}`}>Propiedades</button>
-                      <button type="button" onClick={() => setInspectorTab('resultados')} aria-pressed={inspectorTab === 'resultados'} className={`border-b-2 px-2 py-3 text-[11px] font-semibold transition ${inspectorTab === 'resultados' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096]'}`}>Resultados{(simulationResult || transientResult) && <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#21B8A6]"/>}</button>
-                    </div>
-                    <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-                      {inspectorTab === 'propiedades'
-                        ? <PropertiesFields component={selectedComponent} onSaveHistory={saveHistory} onUpdate={updateSelected}/>
-                        : <ResultsContent simulationResult={simulationResult} transientResult={transientResult}/>}
-                    </div>
-                  </aside>
+              {/* Solo los componentes y los cables reciben la transformación de zoom. */}
+              <div
+                className="absolute left-0 top-0 h-[1000px] w-[1600px]"
+                style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}
+              >
+                <svg className="absolute inset-0 z-[1] h-full w-full" viewBox="0 0 1600 1000" preserveAspectRatio="none" aria-label="Conexiones del circuito">
+                  {connections.map((connection) => {
+                    const fromComponent = components.find((item) => item.id === connection.from.componentId);
+                    const toComponent = components.find((item) => item.id === connection.to.componentId);
+                    if (!fromComponent || !toComponent) return null;
+                    const from = getTerminalPoint(fromComponent, connection.from.side);
+                    const to = getTerminalPoint(toComponent, connection.to.side);
+                    const middle = (from.x + to.x) / 2;
+                    const active = selectedConnectionId === connection.id;
+                    return <g key={connection.id}><path d={`M ${from.x} ${from.y} H ${middle} V ${to.y} H ${to.x}`} fill="none" stroke={active ? '#8865D8' : '#21B8A6'} strokeWidth={active ? 5 : 3} strokeLinecap="round" strokeLinejoin="round" pointerEvents="stroke" className="cursor-pointer" onClick={(event) => { event.stopPropagation(); setSelectedConnectionId(connection.id); setSelectedId(null); setPropertiesOpen(false); setNotice('Cable seleccionado. Puedes eliminarlo con el botón Eliminar o la tecla Suprimir.'); }} /><circle cx={from.x} cy={from.y} r="3.5" fill={active ? '#8865D8' : '#21B8A6'} pointerEvents="none" /><circle cx={to.x} cy={to.y} r="3.5" fill={active ? '#8865D8' : '#21B8A6'} pointerEvents="none" /></g>;
+                  })}
+                </svg>
+                <div className="pointer-events-none absolute inset-0 z-[2]" onPointerMove={handleCanvasPointerMove} onPointerUp={() => setDragging(null)} onPointerCancel={() => setDragging(null)} onPointerLeave={() => setDragging(null)}>
+                  {components.map((component) => <CircuitNode key={component.id} component={component} selected={selectedId === component.id} onSelect={() => { setSelectedConnectionId(null); setSelectedId(component.id); openProperties(); setNotice(`${component.reference} seleccionado.`); }} onDragStart={handleDragStart} onTerminalClick={handleTerminalClick} pendingTerminal={pendingTerminal} />)}
                 </div>
-              )}
-
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 px-1 text-[10px] text-[#A0AEC0]"><span>ElectroLab · Entorno de prácticas de electrónica</span><span className="flex items-center gap-1.5"><Icon name="check" size={12} className="text-[#21B8A6]"/>Motores de simulación DC y RC disponibles</span></div>
-              {evaluationModalOpen && evaluationResult && <EvaluationModal result={evaluationResult} dialogRef={evaluationDialogRef} onClose={() => setEvaluationModalOpen(false)} onReviewResults={() => { setEvaluationModalOpen(false); openResults(); }}/>} 
+              </div>
             </div>
           </div>
-        </main>
+
+        </section>
+
+        <aside className="sticky top-4 hidden max-h-[calc(100dvh-112px)] min-h-[420px] self-start overflow-hidden rounded-2xl border border-[#E7EDF5] bg-white shadow-xl shadow-black/10 xl:flex xl:flex-col">
+          <div className="flex shrink-0 items-center justify-between border-b border-[#E7EDF5] px-4 py-3.5">
+            <div><p className="text-xs font-semibold text-[#34445D]">Panel del editor</p><p className="mt-0.5 text-[10px] text-[#718096]">Propiedades y resultados</p></div>
+            <Icon name={inspectorTab === 'resultados' ? 'activity' : 'sliders'} size={17} className="text-[#718096]" />
+          </div>
+          <div className="grid shrink-0 grid-cols-2 border-b border-[#E7EDF5] px-2 pt-1">
+            <button type="button" onClick={() => setInspectorTab('propiedades')} aria-pressed={inspectorTab === 'propiedades'} className={`border-b-2 px-2 py-2.5 text-[10px] font-semibold transition ${inspectorTab === 'propiedades' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096] hover:text-[#34445D]'}`}>Propiedades</button>
+            <button type="button" onClick={() => setInspectorTab('resultados')} aria-pressed={inspectorTab === 'resultados'} className={`border-b-2 px-2 py-2.5 text-[10px] font-semibold transition ${inspectorTab === 'resultados' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096] hover:text-[#34445D]'}`}>Resultados{(simulationResult || transientResult) && <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#21B8A6]" />}</button>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3">
+            {inspectorTab === 'propiedades'
+              ? <PropertiesFields component={selectedComponent} onSaveHistory={saveHistory} onUpdate={updateSelected} />
+              : <ResultsContent simulationResult={simulationResult} transientResult={transientResult} />}
+          </div>
+        </aside>
       </div>
+
+      {propertiesOpen && (
+        <div className="xl:hidden">
+          <button type="button" onClick={() => setPropertiesOpen(false)} className="fixed inset-0 z-[60] bg-[#24324A]/25 backdrop-blur-[1px]" aria-label="Cerrar panel del editor" />
+          <aside id="responsive-properties-dialog" role="dialog" aria-modal="true" aria-labelledby="responsive-properties-title" className={`fixed inset-x-0 bottom-0 z-[70] flex flex-col overflow-hidden rounded-t-2xl border border-[#E7EDF5] bg-white shadow-[0_-12px_40px_rgba(36,50,74,.18)] ${inspectorTab === 'resultados' ? 'max-h-[88dvh]' : 'max-h-[78dvh]'} md:bottom-4 md:left-auto md:right-4 md:top-[92px] md:max-h-none md:w-[min(420px,calc(100vw-2rem))] md:rounded-2xl`}>
+            <div className="relative flex shrink-0 items-center justify-between border-b border-[#E7EDF5] px-4 py-3.5 sm:px-5">
+              <div className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-[#DCE5F0] md:hidden" />
+              <div><p id="responsive-properties-title" className="text-xs font-semibold text-[#34445D]">Panel del editor</p><p className="mt-0.5 text-[10px] text-[#718096]">{inspectorTab === 'resultados' ? 'Resultados de la simulación' : selectedComponent ? `Editando ${selectedComponent.reference}` : 'Configuración del elemento'}</p></div>
+              <button type="button" onClick={() => setPropertiesOpen(false)} className="flex h-10 w-10 items-center justify-center rounded-lg text-[#718096] transition hover:bg-[#F5F9FF] hover:text-[#24324A] focus:outline-none focus:ring-2 focus:ring-[#8865D8]" aria-label="Cerrar panel"><Icon name="close" size={19} /></button>
+            </div>
+            <div className="grid shrink-0 grid-cols-2 border-b border-[#E7EDF5] px-3 pt-1">
+              <button type="button" onClick={() => setInspectorTab('propiedades')} aria-pressed={inspectorTab === 'propiedades'} className={`border-b-2 px-2 py-3 text-[11px] font-semibold transition ${inspectorTab === 'propiedades' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096]'}`}>Propiedades</button>
+              <button type="button" onClick={() => setInspectorTab('resultados')} aria-pressed={inspectorTab === 'resultados'} className={`border-b-2 px-2 py-3 text-[11px] font-semibold transition ${inspectorTab === 'resultados' ? 'border-[#21B8A6] text-[#7654C5]' : 'border-transparent text-[#718096]'}`}>Resultados{(simulationResult || transientResult) && <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-[#21B8A6]" />}</button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-3" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+              {inspectorTab === 'propiedades'
+                ? <PropertiesFields component={selectedComponent} onSaveHistory={saveHistory} onUpdate={updateSelected} />
+                : <ResultsContent simulationResult={simulationResult} transientResult={transientResult} />}
+            </div>
+          </aside>
+        </div>
+      )}
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-2 px-1 text-[10px] text-[#A0AEC0]"><span>ElectroLab · Entorno de prácticas de electrónica</span><span className="flex items-center gap-1.5"><Icon name="check" size={12} className="text-[#21B8A6]" />Motores de simulación DC y RC disponibles</span></div>
+      {evaluationModalOpen && evaluationResult && <EvaluationModal result={evaluationResult} dialogRef={evaluationDialogRef} onClose={() => setEvaluationModalOpen(false)} onReviewResults={() => { setEvaluationModalOpen(false); openResults(); }} />}
     </div>
+            
   );
 }
 

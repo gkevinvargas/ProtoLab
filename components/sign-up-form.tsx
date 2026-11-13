@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -50,7 +49,7 @@ export function SignUpForm() {
           email: email.trim().toLowerCase(),
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/confirm?next=/protected`,
+            emailRedirectTo: `${window.location.origin}/confirm?next=/inicio`,
           },
         });
 
@@ -59,12 +58,12 @@ export function SignUpForm() {
       }
 
       if (data.session) {
-        router.replace("/protected");
+        router.replace("/inicio");
         router.refresh();
         return;
       }
 
-      router.push("/auth/sign-up-success");
+      router.push("/sign-up-success");
 
     } catch (error: unknown) {
       setError(
@@ -215,7 +214,7 @@ export function SignUpForm() {
       <p className="pt-3 text-center text-sm text-[#718096]">
         ¿Ya tienes una cuenta?{" "}
         <Link
-          href="/auth/login"
+          href="/"
           className="font-semibold text-[#3478F6] hover:underline"
         >
           Iniciar sesión

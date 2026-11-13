@@ -1,6 +1,6 @@
-import robo01 from "@/app/robolab/clase-teorica.json";
-import robo02 from "@/app/robolab/RL-CT-02.json";
-import { practicasRoboLab } from "@/app/robolab/robolab-data";
+import robo01 from "@/app/(panel)/robolab/clase-teorica.json";
+import robo02 from "@/app/(panel)/robolab/RL-CT-02.json";
+import { practicasRoboLab } from "@/app/(panel)/robolab/robolab-data";
 import electro01 from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.json";
 import electro02 from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
 import electro03 from "@/lib/electrolab/clases/EL-CT-03-ley-ohm-resistencia-led.json";
