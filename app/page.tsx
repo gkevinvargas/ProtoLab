@@ -33,19 +33,19 @@ type Module = {
 
 const modules : Module[] = [
   {
-    name: "Diagnostico vocacional",
+    name: "Diagnóstico vocacional",
     description:
-    "Descubre cuales son tus intereses y conoce las areas de conocimiento con las que se pueden relacionar",
+    "Descubre cuáles son tus intereses y conoce las áreas de conocimiento con las que se pueden relacionar",
     icon: IconClipboardText,
     color: "bg-[#FFF3DD]",
     accent: "text-[#D9020]",
     status: "---",
-    href: "/diagnostico",
+    href: "/diagnóstico",
   },
   {
     name: "Robolab",
     description:
-    "Construye instrucciones y resuleve los desafios utilizando tu logica y la ayuda de un robot virtual.",
+    "Construye instrucciones y resuleve los desafíos utilizando tu lógica y la ayuda de un robot virtual.",
     icon: IconRobot,
     color: "bg-[#E8F0FF]",
     accent: "text-[#3479F6]",
@@ -56,7 +56,7 @@ const modules : Module[] = [
   {
     name: "Datalab",
     description:
-    "Explora en un conujunto de datos, interpretalos en graficas y resuelve las actividades.",
+    "Explora en un conjunto de datos, interpretados en gráficas y resuelve las actividades.",
     icon: IconChartLine,
     color: "bg-[#E1F7F2]",
     accent: "text-[#159B89]",
@@ -66,7 +66,7 @@ const modules : Module[] = [
   {
     name: "Electrolab",
     description:
-    "Experimenta con modelos electronicos y modifica circuitos virtuales.",
+    "Experimenta con modelos electrónicos y modifica circuitos virtuales.",
     icon: IconCpu,
     color: "bg-[#F0EAFE]",
     accent: "text-[#8865D8]",
@@ -173,7 +173,7 @@ useEffect(() => {
         </Link>
 
         <p className="mb-3 text-xs font-bold uppercase tracking-wider text-[#A0AEC0]">
-          Menu principal
+          Menú principal
         </p>
 
         <nav className="flex flex-col gap-2 font-semibold">
@@ -188,7 +188,7 @@ useEffect(() => {
           href="#modulos"
           className="flex items-center gap-3 rounded-xl px-4 py-3 text-[#718096] transiton hover:bg-[#F5F9FF] hover:text-[#3478F6]">
             <IconLayoutGrid size={21} stroke={1.8}/>
-            Mis modulos
+            Mis módulos
           </a>
 
           <a 
@@ -205,7 +205,7 @@ useEffect(() => {
           <div className="mb-2 text-[#FFB547]">
             <IconBulb size={21} stroke={1.8}/>
           </div>
-          <h3 className="font-bold">¡Continua explorando!</h3>
+          <h3 className="font-bold">¡Continúa explorando!</h3>
           <p className="mt-1 text-sm leading-5 text-[718096]">
             ¡Cada una de las actividades es una nueva oportunidad de aprender algo!
           </p>
@@ -229,7 +229,7 @@ useEffect(() => {
             <div className="hidden text-right sm:block">
               <p className="text-sm font.bold"> Estudiante</p>
               <p className="text-xs text-[#718096]">
-              Mi area de estudio
+              Mi área de estudio
               </p>
             </div>
 
@@ -243,21 +243,21 @@ useEffect(() => {
         <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:-10">
           <div className="relative z-10 max-w-xl">
             <span className="inline-block rounded-full bg-white/20 px-3 py-3 py-1 text-xs font-semibold">
-            Tu area para descubrir 
+            Tu área para descubrir 
             </span>
             
             <h2 className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl">
-              Aprende y decubre cuales son tus talentos
+              Aprende y descubre cuáles son tus talentos
             </h2>
 
             <p className="mt-4 max-w-lg text-sm leading-6 text-blue-50 sm:text-base">
-              Explora las diferentes areas tecnologicas, encuentra, resuelve desafios y desarrolla nuevas habilidades a tu propio ritmo
+              Explora las diferentes áreas tecnológicas, encuentra, resuelve desafíos y desarrolla nuevas habilidades a tu propio ritmo
             </p>
 
             <a
             href = "#modulos"
             className="mt-7 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#3478F6] transition hover:bg-blue-50">
-            Explorar modulos...  
+            Explorar módulos...  
             </a>
           </div>
 
@@ -287,7 +287,7 @@ useEffect(() => {
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-2xl border border-[#E7EDF5] bg-white p-5">
             <p className="text-sm: text-[#718096]">
-              Modulos disponibles
+              Módulos disponibles
             </p>
             <p className="mt-3 text-3xl font-extrabold text-[#3478F6]">
               4
@@ -388,10 +388,10 @@ useEffect(() => {
       <section id="modulos">
         <div className="mb-5">
           <h2 className="text-xl font-extrabold">
-          Explora tus modulos
+          Explora tus módulos
           </h2>
           <p className="mt-1 text-sm text-[#718096]">
-            Elige un area y comienza a descubir nuevas habilidades.
+            Elige un área y comienza a descubir nuevas habilidades.
           </p>
         </div>
 
@@ -422,7 +422,7 @@ useEffect(() => {
 
                 <div className="mt-5 flex items-center justify-between">
                   <span className={`text-sm font-bold ${module.accent}`}>
-                    Explorar area
+                    Explorar área
                   </span>
 
                   <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
