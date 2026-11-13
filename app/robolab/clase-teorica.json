@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "version_contenido": "1.0.0",
+  "identificador": "RL-CT-01",
+  "laboratorio_id": "robolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Secuencias, repeticiones y sensores",
+  "descripcion": "Aprende a ordenar instrucciones, repetir bloques y usar una lectura de distancia para decidir si un robot debe avanzar.",
+  "orden": 1,
+  "duracion_estimada_minutos": 15,
+  "objetivos": [
+    "Predecir cómo cambia el recorrido de un robot cuando se altera el orden de sus instrucciones.",
+    "Calcular el desplazamiento de un robot después de repetir un bloque.",
+    "Explicar cuándo debe avanzar o detenerse un robot según la distancia a un obstáculo."
+  ],
+  "secciones": [
+    {
+      "titulo": "El orden de las instrucciones",
+      "parrafos": [
+        "Una secuencia indica qué acciones ejecuta el robot y en qué orden.",
+        "Si el robot gira a la derecha y luego avanza, se desplaza en la dirección nueva. Si avanza antes de girar, termina en otro punto."
+      ]
+    },
+    {
+      "titulo": "Repetir un bloque de acciones",
+      "parrafos": [
+        "El robot completa todas las acciones de un bloque antes de iniciar la siguiente repetición.",
+        "Si repite tres veces el bloque «avanza dos pasos y retrocede uno», gana un paso por repetición y termina tres pasos por delante del punto de partida."
+      ]
+    },
+    {
+      "titulo": "Decidir con una lectura de distancia",
+      "parrafos": [
+        "Un sensor de distancia mide qué tan lejos está un objeto. El programa compara esa lectura con un límite para decidir qué acción ejecutar.",
+        "Antes de cada avance, el robot mide la distancia. Si la lectura es mayor de 10 cm, avanza un paso. Si es de 10 cm o menos, se detiene y termina el recorrido.",
+        "Si las lecturas son 18 cm, 12 cm y 10 cm, el robot avanza dos pasos y se detiene en la tercera comprobación."
+      ]
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "RL-PI-01",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Construir un recorrido con un bloque repetido y comprobar que la posición final del robot coincide con la predicción."
+    },
+    {
+      "practica_id": "RL-PC-01",
+      "tipo_contenido": "practica_complementaria",
+      "aplicacion": "Combinar una secuencia repetida con lecturas de un sensor de distancia y comprobar que el robot se detiene al llegar al límite indicado."
+    }
+  ]
+}
