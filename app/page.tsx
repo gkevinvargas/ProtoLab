@@ -1,4 +1,12 @@
-import { collectRoutesUsingEdgeRuntime } from "next/dist/build/utils";
+"use client"
+import { useEffect, useState } from "react";
+import robo01 from "@/app/robolab/clase-teorica.json";
+import robo02 from "@/app/robolab/RL-CT-02.json";
+import electro01 from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.json";
+import electro02 from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
+import electro03 from "@/lib/electrolab/clases/EL-CT-03-ley-ohm-resistencia-led.json";
+import data01 from "@/lib/datalab/DL-CT-01.json";
+import data02 from "@/lib/datalab/DL-CT-02.json";
 import Link from "next/link";
 import {
   IconUserCircle,
@@ -66,8 +74,85 @@ const modules : Module[] = [
     href: "/electrolab",
   },
 ];
+const laboratoriosRuta = {
+  robolab: { nombre: "RoboLab", clases: [robo01, robo02] },
+  electrolab: { nombre: "ElectroLab", clases: [electro01, electro02, electro03] },
+  datalab: { nombre: "DataLab", clases: [data01, data02] },
+};
+
+type AreaRuta = keyof typeof laboratoriosRuta;
+
+function esAreaRuta(valor: unknown): valor is AreaRuta {
+  return valor === "robolab" || valor === "electrolab" || valor === "datalab";
+}
+
+function leerResumenRuta() {
+  const guardada: unknown = JSON.parse(
+    localStorage.getItem("protolab:ruta-aprendizaje") ?? "null"
+  );
+
+  if (!Array.isArray(guardada)) return null;
+
+  const [principal, complementaria] = guardada;
+  if (
+    !esAreaRuta(principal) ||
+    !esAreaRuta(complementaria) ||
+    principal === complementaria
+  ) {
+    return null;
+  }
+
+  const areas = [laboratoriosRuta[principal], laboratoriosRuta[complementaria]];
+  const clases = areas.flatMap(({ nombre, clases }) =>
+    [...clases].sort((a, b) => a.orden - b.orden).map((clase) => ({
+      id: clase.identificador,
+      titulo: clase.titulo,
+      laboratorio: nombre,
+    }))
+  );
+  const avance: unknown = JSON.parse(
+    localStorage.getItem(`protolab:avance-ruta:${principal}:${complementaria}`) ?? "[]"
+  );
+  const vistas = new Set(Array.isArray(avance) ? avance : []);
+  const actividades = clases.map((clase) => ({
+    ...clase,
+    completada: vistas.has(clase.id),
+  }));
+
+  return {
+    nombres: areas.map(({ nombre }) => nombre),
+    actividades,
+    siguiente: actividades.find((clase) => !clase.completada),
+    completadas: actividades.filter((clase) => clase.completada).length,
+    total: actividades.length,
+  };
+}
 
 export default function Home(){
+  const [resumenRuta, setResumenRuta] =
+  useState<ReturnType<typeof leerResumenRuta>>(null);
+const [cargandoRuta, setCargandoRuta] = useState(true);
+
+useEffect(() => {
+  function actualizarRuta() {
+    try {
+      setResumenRuta(leerResumenRuta());
+    } catch {
+      setResumenRuta(null);
+    } finally {
+      setCargandoRuta(false);
+    }
+  }
+
+  actualizarRuta();
+  window.addEventListener("pageshow", actualizarRuta);
+  window.addEventListener("storage", actualizarRuta);
+
+  return () => {
+    window.removeEventListener("pageshow", actualizarRuta);
+    window.removeEventListener("storage", actualizarRuta);
+  };
+}, []);
   return(
     <div className="min-h-screen md:flex">
       {/*Menu*/}
@@ -211,7 +296,7 @@ export default function Home(){
               Actividades completadas
             </p>
             <p className="mt-3 text-3xl font-extrabold text-[#21B8A6]">
-              0
+              {cargandoRuta ? "…" : resumenRuta?.completadas ?? 0}
             </p>
             <p className="mt-1 text-xs text-[#718096]">
               Comienza el aprendizaje
@@ -219,16 +304,83 @@ export default function Home(){
           </div>
 
           <div className="rounded-2xl border border-[#E7EDF5] bg-white p-5">
-            <p className="text-sm text-[#718096]">
-              Avance general
-            </p>
-            <p className="mt-3 text-3xl font-extrabold text-[#A78BFA]">
-              0
-            </p>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#F0EAFE]">
-              <div className="h-full w-0 rounded-full bg-[#A78BFA]" />
-            </div>
-          </div>
+  <h3 className="font-semibold text-slate-900">Tu ruta de aprendizaje</h3>
+
+  {cargandoRuta ? (
+    <p role="status" className="mt-3 text-sm text-slate-600">
+      Cargando tu ruta…
+    </p>
+  ) : resumenRuta ? (
+    <>
+      <p className="mt-2 text-sm text-slate-700">
+        {resumenRuta.nombres.join(" → ")}
+      </p>
+      <p className="mt-2 text-sm text-slate-600">
+        {resumenRuta.completadas} de {resumenRuta.total} actividades completadas
+      </p>
+      <progress
+        aria-label="Avance de tu ruta"
+        value={resumenRuta.completadas}
+        max={resumenRuta.total}
+        className="mt-3 block h-2 w-full accent-blue-600"
+      />
+      {resumenRuta.siguiente && (
+        <p className="mt-3 text-sm text-slate-700">
+          Siguiente clase: <strong>{resumenRuta.siguiente.titulo}</strong>
+        </p>
+      )}
+      <details className="mt-3 text-sm text-slate-700">
+        <summary className="cursor-pointer font-medium text-blue-700">
+          {resumenRuta.siguiente ? "Ver clases de la ruta" : "Ver clases completadas"}
+        </summary>
+        <ol className="mt-2 space-y-2">
+          {resumenRuta.actividades.map((clase) => (
+            <li
+              key={clase.id}
+              className={`rounded-lg border p-2 ${
+                clase.completada
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+                  : clase.id === resumenRuta.siguiente?.id
+                    ? "border-blue-200 bg-blue-50 text-blue-900"
+                    : "border-slate-200 bg-slate-50 text-slate-700"
+              }`}
+            >
+              <p className="font-medium">{clase.titulo}</p>
+              <p className="text-xs text-slate-600">
+                {clase.laboratorio} ·{" "}
+                {clase.completada
+                  ? "Completada"
+                  : clase.id === resumenRuta.siguiente?.id
+                    ? "Siguiente"
+                    : "Pendiente"}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </details>
+      {resumenRuta.siguiente && (
+        <Link
+          href="/ruta"
+          className="mt-4 inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+        >
+          {resumenRuta.completadas > 0 ? "Continuar ruta" : "Empezar ruta"}
+        </Link>
+      )}
+    </>
+  ) : (
+    <>
+      <p className="mt-2 text-sm text-slate-600">
+        Completa el diagnóstico y guarda tu ruta para empezar.
+      </p>
+      <Link
+        href="/protected/diagnostico"
+        className="mt-4 inline-block text-sm font-semibold text-blue-700 underline"
+      >
+        Hacer diagnóstico
+      </Link>
+    </>
+  )}
+</div>
         </div>
       </section>
 

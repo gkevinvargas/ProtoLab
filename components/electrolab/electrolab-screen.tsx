@@ -479,7 +479,13 @@ function ResultsContent({
   );
 }
 
-export default function ElectroLabScreen() {
+type ElectroLabScreenProps = {
+  onApproved?: (score: number) => void;
+};
+
+export default function ElectroLabScreen({
+  onApproved,
+}: ElectroLabScreenProps) {
   const [currentPractice, setCurrentPractice] = useState<ElectroLabPractice | null>(defaultPractice);
   const [practiceFileName, setPracticeFileName] = useState('led-basico.json');
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -614,6 +620,13 @@ export default function ElectroLabScreen() {
       if (!evaluated) {
         setNotice(`Primero ejecuta el análisis ${mode.toUpperCase()} requerido por esta práctica.`);
         return;
+      }
+
+      if (
+        evaluated.passed &&
+        currentPractice.practice.id === defaultPractice?.practice.id
+      ) {
+        onApproved?.(evaluated.score);
       }
 
       setEvaluationResult(evaluated);
@@ -1013,7 +1026,9 @@ export default function ElectroLabScreen() {
             <div className="flex items-center gap-2 sm:gap-3">
               <span className="hidden items-center gap-2 rounded-full border border-[#E7EDF5] bg-[#F7FAFC] px-3 py-1.5 text-[11px] text-[#718096] lg:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400"/> JSON local</span>
               <input ref={practiceFileInputRef} type="file" accept=".json,application/json" className="sr-only" onChange={handlePracticeFileChange} aria-label="Seleccionar archivo JSON de una práctica" />
-              <button type="button" onClick={() => practiceFileInputRef.current?.click()} className="flex items-center gap-2 rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-3 py-2 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC]"><Icon name="upload" size={15}/><span>Cargar JSON</span></button>
+              {!onApproved && (
+                <button type="button" onClick={() => practiceFileInputRef.current?.click()} className="flex items-center gap-2 rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-3 py-2 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC]"><Icon name="upload" size={15}/><span>Cargar JSON</span></button>
+              )}
             </div>
           </header>
 
@@ -1067,11 +1082,13 @@ export default function ElectroLabScreen() {
               <section aria-label="Controles de la práctica" className="mb-4 rounded-2xl border border-[#E7EDF5] bg-white p-3 shadow-sm sm:p-4">
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end">
-                    <label className="flex w-full min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096] sm:max-w-[380px]">Práctica de ejemplo
-                      <select aria-label="Cargar una práctica de ejemplo" defaultValue="" onChange={(event) => { const selected = event.target.value; if (selected === 'led') loadEmbeddedPractice(ledPracticeJson as unknown, 'led-basico.json'); if (selected === 'rc-charge') loadEmbeddedPractice(rcChargePracticeJson as unknown, 'rc-carga.json'); if (selected === 'rc-discharge') loadEmbeddedPractice(rcDischargePracticeJson as unknown, 'rc-descarga.json'); event.currentTarget.value = ''; }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
-                        <option value="">Seleccionar ejemplo…</option><option value="led">LED básico</option><option value="rc-charge">Carga RC</option><option value="rc-discharge">Descarga RC</option>
-                      </select>
-                    </label>
+                    {!onApproved && (
+                      <label className="flex w-full min-w-0 flex-col gap-1 text-[9px] font-medium text-[#718096] sm:max-w-[380px]">Práctica de ejemplo
+                        <select aria-label="Cargar una práctica de ejemplo" defaultValue="" onChange={(event) => { const selected = event.target.value; if (selected === 'led') loadEmbeddedPractice(ledPracticeJson as unknown, 'led-basico.json'); if (selected === 'rc-charge') loadEmbeddedPractice(rcChargePracticeJson as unknown, 'rc-carga.json'); if (selected === 'rc-discharge') loadEmbeddedPractice(rcDischargePracticeJson as unknown, 'rc-descarga.json'); event.currentTarget.value = ''; }} className="h-11 w-full min-w-0 rounded-lg border border-[#E7EDF5] bg-white px-3 text-xs text-[#34445D] outline-none focus:border-[#8865D8] focus:ring-2 focus:ring-[#8865D8]/15">
+                          <option value="">Seleccionar ejemplo…</option><option value="led">LED básico</option><option value="rc-charge">Carga RC</option><option value="rc-discharge">Descarga RC</option>
+                        </select>
+                      </label>
+                    )}
                     <button type="button" onClick={runSimulation} disabled={!currentPractice || components.length === 0} title="Calcular el punto de operación de corriente continua" className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-[#3478F6] px-4 text-xs font-semibold text-white transition hover:bg-[#2868DD] disabled:cursor-not-allowed disabled:opacity-45"><Icon name="play" size={15}/>Simular DC</button>
                     <button ref={evaluationButtonRef} type="button" onClick={runEvaluation} disabled={!canEvaluate} title={!currentPractice?.practice.evaluation ? 'Esta práctica no tiene criterios de evaluación' : !canEvaluate ? `Ejecuta primero el análisis ${requiredAnalysis?.toUpperCase() ?? 'requerido'}` : 'Evaluar el circuito con la rúbrica de la práctica'} className="flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-[#BFE7D3] bg-[#ECFDF5] px-4 text-xs font-semibold text-[#16804A] transition hover:bg-[#DDF8E9] disabled:cursor-not-allowed disabled:border-[#E7EDF5] disabled:bg-[#F7FAFC] disabled:text-[#A0AEC0]"><Icon name="check" size={15}/>Evaluar práctica</button>
                   </div>

@@ -11,15 +11,24 @@ import {
   IconBulb, IconBrain, IconTrophy, IconArrowRight, IconDownload, IconFileDescription, IconMathFunction
 } from '@tabler/icons-react';
 
-export const DataLabOverview = () => {
+type DataLabOverviewProps = {
+  onApproved?: (score: number) => void;
+  onReset?: () => void;
+};
+
+export const DataLabOverview = ({
+  onApproved,
+  onReset,
+}: DataLabOverviewProps) => {
   const [datasetActivo, setDatasetActivo] = useState(0);
   const [tipoGrafica, setTipoGrafica] = useState<'barras' | 'dispersion' | 'libre'>('barras');
   const [respuestaTecnica, setRespuestaTecnica] = useState('');
   const [filtroTabla, setFiltroTabla] = useState('Todo');
 
   // Estados de Progreso Real e Historial de XP
-  const [aciertos, setAciertos] = useState(0);
-  const [puntosXP, setPuntosXP] = useState(0);
+  const [datasetsResueltos, setDatasetsResueltos] = useState<number[]>([]);
+  const aciertos = datasetsResueltos.length;
+  const puntosXP = aciertos * 100;
   const [modalAbierto, setModalAbierto] = useState(false);
   const [fueExito, setFueExito] = useState(false);
 
@@ -91,9 +100,13 @@ export const DataLabOverview = () => {
     const esCorrecto = opcionSeleccionada ? opcionSeleccionada.correcta : false;
 
     setFueExito(esCorrecto);
-    if (esCorrecto) {
-      setAciertos(prev => Math.min(prev + 1, retosPorDataset.length));
-      setPuntosXP(prev => prev + 100);
+    if (esCorrecto && !datasetsResueltos.includes(datasetActivo)) {
+      const resueltos = [...datasetsResueltos, datasetActivo];
+      setDatasetsResueltos(resueltos);
+
+      if (resueltos.length === retosPorDataset.length) {
+        onApproved?.(100);
+      }
     }
     setModalAbierto(true);
   };
@@ -133,7 +146,7 @@ export const DataLabOverview = () => {
                 </span>
              </div>
              <button 
-               onClick={() => window.location.reload()}
+               onClick={() => onReset ? onReset() : window.location.reload()}
                className="text-slate-400 hover:text-slate-700 text-sm flex items-center gap-1.5 transition-colors cursor-pointer"
              >
                <IconRefresh size={16} stroke={1.5} /> Reiniciar
@@ -334,7 +347,11 @@ export const DataLabOverview = () => {
                       setDatasetActivo(prev => prev + 1);
                       setRespuestaTecnica('');
                     } else {
-                      alert("¡Has analizado y completado los 4 datasets de DataLab con éxito!");
+                      alert(
+                        aciertos === retosPorDataset.length
+                          ? "¡Completaste todos los retos de DataLab!"
+                          : "Resuelve todos los retos para completar la práctica."
+                      );
                     }
                   }}
                   className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-colors shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 cursor-pointer"
