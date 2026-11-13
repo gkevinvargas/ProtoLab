@@ -1,0 +1,183 @@
+
+{
+  "schema_version": "1.0.0",
+  "contenido_id": "diagnostico-vocacional",
+  "version_contenido": "1.0.0",
+  "estado_publicacion": "borrador",
+  "tipo_contenido": "diagnostico_vocacional",
+  "metadatos": {
+    "titulo": "Diagnóstico vocacional",
+    "descripcion": "Identificación de afinidades entre intereses, aptitudes y oportunidades laborales.",
+    "idioma": "es-MX"
+  },
+  "dimensiones": [
+    {
+      "dimension_id": "intereses",
+      "nombre": "Intereses"
+    },
+    {
+      "dimension_id": "aptitudes",
+      "nombre": "Aptitudes"
+    },
+    {
+      "dimension_id": "oferta_laboral",
+      "nombre": "Oferta laboral"
+    }
+  ],
+  "areas": [
+    {
+      "area_id": "robolab",
+      "nombre": "RoboLab"
+    },
+    {
+      "area_id": "electrolab",
+      "nombre": "ElectroLab"
+    },
+    {
+      "area_id": "datalab",
+      "nombre": "DataLab"
+    }
+  ],
+  "catalogo_intereses": {
+    "seleccion": {
+      "tipo": "multiple",
+      "minimo": 1,
+      "maximo": 3,
+      "conservar_orden": true
+    },
+    "intereses": [
+      {
+        "identificador": "INT01",
+        "etiqueta": "Programación y desarrollo de software",
+        "areas_relacionadas": ["robolab"]
+      },
+      {
+        "identificador": "INT02",
+        "etiqueta": "Robótica y automatización",
+        "areas_relacionadas": ["robolab"]
+      },
+      {
+        "identificador": "INT03",
+        "etiqueta": "Inteligencia artificial",
+        "areas_relacionadas": ["robolab", "datalab"]
+      },
+      {
+        "identificador": "INT04",
+        "etiqueta": "Electrónica y circuitos",
+        "areas_relacionadas": ["electrolab"]
+      },
+      {
+        "identificador": "INT05",
+        "etiqueta": "Inventos y dispositivos tecnológicos",
+        "areas_relacionadas": ["electrolab"]
+      },
+      {
+        "identificador": "INT06",
+        "etiqueta": "Matemáticas y resolución de problemas",
+        "areas_relacionadas": ["datalab"]
+      },
+      {
+        "identificador": "INT07",
+        "etiqueta": "Análisis de datos y gráficas",
+        "areas_relacionadas": ["datalab"]
+      },
+      {
+        "identificador": "INT08",
+        "etiqueta": "Ciencia y experimentación",
+        "areas_relacionadas": ["robolab", "electrolab", "datalab"]
+      }
+    ]
+  },
+  "preguntas": [
+  {
+    "identificador": "LP01",
+    "area": "robolab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "Un robot repite dos veces este bloque: avanzar 3 pasos y retroceder 1 paso. ¿A cuántos pasos por delante del punto de partida termina?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "2 pasos" },
+      { "opcion_id": "B", "texto": "4 pasos" },
+      { "opcion_id": "C", "texto": "5 pasos" },
+      { "opcion_id": "D", "texto": "6 pasos" }
+    ],
+    "ponderacion_maxima": 1
+  },
+  {
+    "identificador": "LP02",
+    "area": "robolab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "Un robot debe detenerse si detecta un obstáculo a 10 cm o menos. En cualquier otro caso, debe avanzar. ¿Qué hará si el sensor mide exactamente 10 cm?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "Avanzará" },
+      { "opcion_id": "B", "texto": "Retrocederá" },
+      { "opcion_id": "C", "texto": "Girará" },
+      { "opcion_id": "D", "texto": "Se detendrá" }
+    ],
+    "ponderacion_maxima": 1
+  },
+  {
+    "identificador": "EL01",
+    "area": "electrolab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "Una pila alimenta dos focos conectados en serie, en un solo camino. Si retiras uno de los focos, ¿qué pasa con el otro?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "Se apaga porque el circuito queda abierto" },
+      { "opcion_id": "B", "texto": "Brilla más porque recibe toda la corriente" },
+      { "opcion_id": "C", "texto": "Sigue encendido con el mismo brillo" },
+      { "opcion_id": "D", "texto": "Parpadea porque la corriente cambia de dirección" }
+    ],
+    "ponderacion_maxima": 1
+  },
+  {
+    "identificador": "EL02",
+    "area": "electrolab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "Una fuente mantiene 6 V en una resistencia. Si cambias la resistencia de 100 Ω a 200 Ω y el voltaje sigue siendo el mismo, ¿qué pasa con la corriente?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "Se duplica" },
+      { "opcion_id": "B", "texto": "Se mantiene igual" },
+      { "opcion_id": "C", "texto": "Se reduce a la mitad" },
+      { "opcion_id": "D", "texto": "Se reduce a cero" }
+    ],
+    "ponderacion_maxima": 1
+  },
+  {
+    "identificador": "PE01",
+    "area": "datalab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "Un equipo registró 2, 3, 3 y 12 minutos en cuatro intentos. ¿Qué medida representa mejor un tiempo típico si quieres reducir el efecto del valor más alto?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "La media de 5 minutos" },
+      { "opcion_id": "B", "texto": "El mínimo de 2 minutos" },
+      { "opcion_id": "C", "texto": "El rango de 10 minutos" },
+      { "opcion_id": "D", "texto": "La mediana de 3 minutos" }
+    ],
+    "ponderacion_maxima": 1
+  },
+  {
+    "identificador": "PE02",
+    "area": "datalab",
+    "dimension": "aptitudes",
+    "tipo": "seleccion_unica",
+    "enunciado": "En una caja hay 5 fichas azules, 3 verdes y 2 rojas. Si sacas una ficha al azar, ¿cuál es la probabilidad de que sea verde o roja?",
+    "obligatoria": true,
+    "opciones": [
+      { "opcion_id": "A", "texto": "20 %" },
+      { "opcion_id": "B", "texto": "50 %" },
+      { "opcion_id": "C", "texto": "30 %" },
+      { "opcion_id": "D", "texto": "80 %" }
+    ],
+    "ponderacion_maxima": 1
+  }
+]
+}
