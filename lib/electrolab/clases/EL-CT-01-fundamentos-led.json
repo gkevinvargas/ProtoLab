@@ -1,63 +1,166 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
   "identificador": "EL-CT-01",
   "laboratorio_id": "electrolab",
   "tipo_contenido": "clase_teorica",
   "estado_publicacion": "borrador",
   "titulo": "Fundamentos del LED",
-  "descripcion": "Identifica qué es un LED, cómo produce luz y cuáles son sus terminales antes de construir un circuito sencillo.",
+  "descripcion": "Conoce qué es un LED, identifica sus terminales y comprende de forma sencilla cómo produce luz.",
   "orden": 1,
-  "duracion_estimada_minutos": 5,
+  "duracion_estimada_minutos": 10,
   "objetivos": [
-    "Describir la función básica de un LED.",
-    "Identificar el ánodo y el cátodo de un LED.",
-    "Distinguir el sentido en el que debe circular la corriente para encenderlo."
+    "Identificar el LED como un diodo semiconductor que emite luz.",
+    "Distinguir el ánodo y el cátodo de un LED.",
+    "Explicar de forma general cómo se produce la emisión de luz."
   ],
   "secciones": [
     {
       "titulo": "¿Qué es un LED?",
       "parrafos": [
-        "Un LED (diodo emisor de luz) es un componente semiconductor que produce luz cuando circula corriente a través de él en el sentido adecuado.",
-        "A diferencia de una resistencia, no se comporta igual en ambos sentidos: permite el paso de corriente principalmente cuando está polarizado directamente."
+        "LED significa diodo emisor de luz. Es un componente semiconductor que permite el paso de corriente principalmente en un sentido y puede emitir luz cuando trabaja con polarización directa.",
+        "El color de la luz depende del material semiconductor utilizado. Por eso existen LED rojos, verdes, azules y de otros colores."
       ]
     },
     {
-      "titulo": "Sus dos terminales",
+      "titulo": "Ánodo y cátodo: identifica sus terminales",
       "parrafos": [
-        "Ánodo (A): terminal que debe conectarse hacia el lado positivo de la fuente, pasando por el circuito.",
-        "Cátodo (K): terminal que debe conectarse hacia el lado negativo de la fuente.",
-        "En un LED físico, la pata más larga suele ser el ánodo y el borde plano de la cápsula suele señalar el cátodo. Comprueba siempre las marcas del componente."
+        "El ánodo (A) es el terminal que se conecta hacia el positivo de la fuente en una conexión directa. El cátodo (K) se conecta hacia el negativo.",
+        "En muchos LED de orificio pasante, la pata larga suele ser el ánodo y el borde plano del encapsulado señala el cátodo. Estas referencias pueden variar; ante una duda, consulta la hoja de datos del componente."
       ]
     },
     {
-      "titulo": "Voltaje y corriente",
+      "titulo": "¿Cómo produce luz?",
       "parrafos": [
-        "El voltaje es la diferencia de potencial que impulsa las cargas eléctricas y se mide en voltios (V).",
-        "La corriente representa el flujo de carga eléctrica y se mide en amperios (A) o miliamperios (mA).",
-        "Un LED necesita una corriente limitada para funcionar sin dañarse; por eso normalmente se utiliza junto con una resistencia."
+        "Al aplicar polarización directa, circula corriente por la unión semiconductora. En ella, electrones y huecos se recombinan y parte de la energía se libera en forma de fotones, que percibimos como luz.",
+        "Si el LED se conecta con polaridad inversa, no funcionará como se espera y, si se supera su tensión inversa máxima, puede dañarse."
       ]
     },
     {
-      "titulo": "Ejemplo resuelto",
+      "titulo": "Ejemplo rápido",
       "parrafos": [
-        "Se desea encender un LED cuyos terminales están identificados como A (ánodo) y K (cátodo).",
-        "Se conecta el ánodo hacia el positivo de la batería y el cátodo hacia el negativo, incluyendo una resistencia en el recorrido.",
-        "Con la polaridad correcta y un camino cerrado puede circular corriente y el LED enciende. Si se invierten sus terminales, normalmente no circula corriente y permanece apagado."
+        "Una batería tiene un terminal positivo y otro negativo. Para polarizar directamente un LED, conecta el positivo hacia el ánodo y el cátodo hacia el negativo, siempre incluyendo una resistencia limitadora en el circuito.",
+        "Recuerda: ánodo hacia el positivo y cátodo hacia el negativo. La resistencia se estudiará con más detalle en las siguientes clases."
       ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "EL-CT-01-ACT-01",
+      "tipo": "animacion_secuencial",
+      "titulo": "Observa cómo se enciende un LED",
+      "instrucciones": "Reproduce la animación y avanza por cada etapa para observar qué ocurre dentro del LED.",
+      "duracion_estimada_minutos": 2,
+      "obligatoria": true,
+      "configuracion": {
+        "escenario": "led_emision_luz",
+        "reproduccion": {
+          "inicio_automatico": false,
+          "repetir": false,
+          "controles": [
+            "reproducir",
+            "pausar",
+            "anterior",
+            "siguiente",
+            "reiniciar"
+          ]
+        },
+        "pasos": [
+          {
+            "orden": 1,
+            "duracion_ms": 2500,
+            "estado_visual": "sin_polarizacion",
+            "titulo": "LED sin alimentación",
+            "explicacion": "Sin una fuente conectada, no circula corriente y el LED permanece apagado.",
+            "resaltar": [
+              "led",
+              "union_semiconductora"
+            ]
+          },
+          {
+            "orden": 2,
+            "duracion_ms": 3000,
+            "estado_visual": "polarizacion_directa",
+            "titulo": "Se aplica polarización directa",
+            "explicacion": "El positivo de la fuente se conecta al ánodo y el negativo al cátodo. La unión permite el paso de corriente.",
+            "resaltar": [
+              "anodo",
+              "catodo",
+              "union_semiconductora"
+            ]
+          },
+          {
+            "orden": 3,
+            "duracion_ms": 3000,
+            "estado_visual": "recombinacion",
+            "titulo": "Ocurre la recombinación",
+            "explicacion": "En la unión del semiconductor, electrones y huecos se recombinan y liberan energía.",
+            "resaltar": [
+              "electrones",
+              "huecos",
+              "union_semiconductora"
+            ]
+          },
+          {
+            "orden": 4,
+            "duracion_ms": 2500,
+            "estado_visual": "emision_fotones",
+            "titulo": "Se emite luz",
+            "explicacion": "Parte de la energía liberada sale en forma de fotones: por eso vemos encendido el LED.",
+            "resaltar": [
+              "fotones",
+              "luz_emitida"
+            ]
+          }
+        ]
+      }
     },
     {
-      "titulo": "Idea clave",
-      "parrafos": [
-        "Antes de conectar un LED, identifica sus terminales. La polaridad determina si podrá conducir y emitir luz."
-      ]
+      "id": "EL-CT-01-ACT-02",
+      "tipo": "ordenar_bloques",
+      "titulo": "Ordena el proceso de emisión de luz",
+      "instrucciones": "Arrastra los bloques para ordenar las etapas desde que se aplica voltaje hasta que el LED emite luz.",
+      "duracion_estimada_minutos": 2,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "Se aplica polarización directa a la unión."
+          },
+          {
+            "id": "b2",
+            "texto": "Circula corriente por el semiconductor."
+          },
+          {
+            "id": "b3",
+            "texto": "Electrones y huecos se recombinan."
+          },
+          {
+            "id": "b4",
+            "texto": "Parte de la energía se libera como fotones."
+          }
+        ],
+        "orden_correcto": [
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Bien hecho! Ordenaste correctamente el proceso general de emisión de luz.",
+          "incorrecta": "Revisa la animación: primero se aplica polarización directa, después circula corriente y ocurre la recombinación."
+        }
+      }
     }
   ],
   "prepara_para": [
     {
       "practica_id": "encendido-led-basico",
       "tipo_contenido": "practica_individual",
-      "aplicacion": "Reconocer el LED y sus terminales para colocarlo con la polaridad correcta durante la construcción del circuito de encendido."
+      "aplicacion": "Aplicar los conceptos de esta clase para construir, conectar, simular y evaluar el circuito de encendido de un LED."
     }
   ]
 }

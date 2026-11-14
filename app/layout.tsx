@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css";
+import "../components/learning/learning-activities.css";
 import React from "react";
 import { Header } from "@/components/ui/labs/Header";
 import { Sidebar } from "@/components/ui/sidebar";

@@ -1,64 +1,235 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
   "identificador": "EL-CT-02",
   "laboratorio_id": "electrolab",
   "tipo_contenido": "clase_teorica",
   "estado_publicacion": "borrador",
-  "titulo": "Conexión del LED en un circuito en serie",
-  "descripcion": "Aprende a construir una trayectoria cerrada y comprende la función de cada componente del circuito de encendido de un LED.",
+  "titulo": "Conexión del LED en serie",
+  "descripcion": "Aprende cómo conectar una batería, una resistencia y un LED para formar un circuito en serie.",
   "orden": 2,
-  "duracion_estimada_minutos": 5,
+  "duracion_estimada_minutos": 10,
   "objetivos": [
-    "Reconocer los elementos de un circuito básico en serie.",
-    "Ordenar correctamente la batería, la resistencia y el LED.",
-    "Explicar qué sucede cuando el circuito está abierto o el LED tiene la polaridad invertida."
+    "Reconocer la función de la fuente, la resistencia y el LED en el circuito.",
+    "Describir el recorrido de la corriente convencional en un circuito en serie.",
+    "Identificar la conexión correcta de la polaridad del LED."
   ],
   "secciones": [
     {
-      "titulo": "¿Qué es un circuito en serie?",
+      "titulo": "¿Qué significa conectar en serie?",
       "parrafos": [
-        "Un circuito en serie conecta los componentes uno después de otro y ofrece una sola trayectoria para la corriente.",
-        "En una conexión en serie, la misma corriente atraviesa cada componente del recorrido. Si el camino se interrumpe, deja de circular corriente."
+        "En una conexión en serie, los componentes se colocan uno después de otro y existe un solo camino para la corriente.",
+        "Si el camino se interrumpe en cualquier punto, deja de circular corriente por todo el circuito."
       ]
     },
     {
-      "titulo": "Función de cada componente",
+      "titulo": "La función de cada componente",
       "parrafos": [
-        "La batería proporciona energía eléctrica y establece el voltaje del circuito.",
-        "La resistencia limita la corriente que circula por el LED.",
-        "El LED transforma parte de la energía eléctrica en luz cuando está conectado con la polaridad correcta."
+        "La batería proporciona la diferencia de potencial que impulsa la corriente. El LED transforma parte de la energía eléctrica en luz.",
+        "La resistencia se coloca en serie para limitar la corriente y ayudar a proteger el LED. No debe omitirse en un circuito real."
       ]
     },
     {
-      "titulo": "Recorrido correcto de la corriente",
+      "titulo": "Recorrido de la corriente convencional",
       "parrafos": [
-        "Para la práctica, sigue este orden: positivo de la batería → resistencia → ánodo del LED → cátodo del LED → negativo de la batería.",
-        "Las conexiones deben formar un camino cerrado. No deben quedar terminales necesarios sin conectar.",
-        "Si se desconecta un cable o se invierte el LED, el circuito no tendrá el funcionamiento esperado."
+        "Por convenio, la corriente convencional sale del terminal positivo de la fuente, atraviesa la resistencia y el LED en sentido ánodo-cátodo, y regresa al terminal negativo.",
+        "Esta dirección convencional se utiliza en los diagramas eléctricos. No debe confundirse con el sentido del movimiento de los electrones en los conductores metálicos."
       ]
     },
     {
-      "titulo": "Ejemplo resuelto",
+      "titulo": "Ejemplo de conexión",
       "parrafos": [
-        "Se tienen una batería de 9 V, una resistencia y un LED con terminales A y K.",
-        "Primero se conecta el positivo de la batería a un extremo de la resistencia. Después, el otro extremo de la resistencia se conecta al ánodo A.",
-        "Por último, se conecta el cátodo K al negativo de la batería. El resultado es una sola trayectoria cerrada: batería → resistencia → LED → batería.",
-        "Si se retira la conexión entre la resistencia y el ánodo, el circuito queda abierto y el LED se apaga."
+        "Para un circuito sencillo, conecta: positivo de la batería → resistencia → ánodo del LED → cátodo del LED → negativo de la batería.",
+        "Si inviertes el LED o dejas una conexión abierta, el circuito no funcionará como se espera. Comprueba cada terminal antes de iniciar la simulación."
       ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "EL-CT-02-ACT-01",
+      "tipo": "animacion_secuencial",
+      "titulo": "Sigue el recorrido de la corriente",
+      "instrucciones": "Avanza por la animación y observa cómo se completa el circuito y cuál es el sentido de la corriente convencional.",
+      "duracion_estimada_minutos": 2,
+      "obligatoria": true,
+      "configuracion": {
+        "escenario": "circuito_led_serie",
+        "reproduccion": {
+          "inicio_automatico": false,
+          "repetir": false,
+          "controles": [
+            "reproducir",
+            "pausar",
+            "anterior",
+            "siguiente",
+            "reiniciar"
+          ]
+        },
+        "pasos": [
+          {
+            "orden": 1,
+            "duracion_ms": 2500,
+            "estado_visual": "circuito_abierto",
+            "titulo": "Un camino incompleto",
+            "explicacion": "Observa que todavía existe una interrupción: no hay un recorrido cerrado para la corriente.",
+            "resaltar": [
+              "bateria",
+              "resistencia",
+              "led",
+              "interrupcion"
+            ]
+          },
+          {
+            "orden": 2,
+            "duracion_ms": 3000,
+            "estado_visual": "circuito_cerrado",
+            "titulo": "Se completa la conexión",
+            "explicacion": "La batería, la resistencia y el LED quedan conectados en un único camino en serie.",
+            "resaltar": [
+              "bateria",
+              "resistencia",
+              "led",
+              "conexiones"
+            ]
+          },
+          {
+            "orden": 3,
+            "duracion_ms": 3500,
+            "estado_visual": "corriente_convencional",
+            "titulo": "La corriente recorre el circuito",
+            "explicacion": "La corriente convencional sale del positivo, pasa por la resistencia y el LED desde el ánodo al cátodo, y vuelve al negativo.",
+            "resaltar": [
+              "terminal_positivo",
+              "resistencia",
+              "anodo",
+              "catodo",
+              "terminal_negativo"
+            ],
+            "animaciones": [
+              {
+                "tipo": "flujo_corriente",
+                "direccion": "convencional",
+                "recorrido": [
+                  "terminal_positivo",
+                  "resistencia",
+                  "anodo",
+                  "catodo",
+                  "terminal_negativo"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     },
     {
-      "titulo": "Idea clave",
-      "parrafos": [
-        "Un circuito funcional necesita una trayectoria cerrada, conexiones correctas y la orientación adecuada del LED."
-      ]
+      "id": "EL-CT-02-ACT-02",
+      "tipo": "completar_enunciados",
+      "titulo": "Completa las conexiones",
+      "instrucciones": "Selecciona o arrastra el bloque adecuado a cada espacio para completar las ideas del circuito.",
+      "duracion_estimada_minutos": 2,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "arrastrar_bloques",
+        "mezclar_opciones": true,
+        "permitir_reintentar": true,
+        "banco_bloques": [
+          {
+            "id": "positivo",
+            "texto": "positivo"
+          },
+          {
+            "id": "negativo",
+            "texto": "negativo"
+          },
+          {
+            "id": "anodo",
+            "texto": "ánodo"
+          },
+          {
+            "id": "catodo",
+            "texto": "cátodo"
+          },
+          {
+            "id": "serie",
+            "texto": "en serie"
+          },
+          {
+            "id": "paralelo",
+            "texto": "en paralelo"
+          }
+        ],
+        "enunciados": [
+          {
+            "id": "e1",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "La corriente convencional sale del terminal "
+              },
+              {
+                "tipo": "espacio",
+                "id": "e1-h1",
+                "respuesta": "positivo"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " de la batería."
+              }
+            ],
+            "retroalimentacion": "La dirección convencional de la corriente se define desde el terminal positivo hacia el negativo."
+          },
+          {
+            "id": "e2",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "El terminal del LED que se conecta hacia el positivo es el "
+              },
+              {
+                "tipo": "espacio",
+                "id": "e2-h1",
+                "respuesta": "anodo"
+              },
+              {
+                "tipo": "texto",
+                "contenido": "."
+              }
+            ],
+            "retroalimentacion": "El ánodo es el terminal que se orienta hacia el positivo cuando el LED está polarizado directamente."
+          },
+          {
+            "id": "e3",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "La resistencia se conecta "
+              },
+              {
+                "tipo": "espacio",
+                "id": "e3-h1",
+                "respuesta": "serie"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " para limitar la corriente que atraviesa el LED."
+              }
+            ],
+            "retroalimentacion": "La resistencia debe compartir el único camino de corriente con el LED: se conecta en serie."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Excelente! Identificaste la polaridad y la conexión de los componentes.",
+          "incorrecta": "Vuelve a revisar el sentido de la corriente convencional y la función de la resistencia."
+        }
+      }
     }
   ],
   "prepara_para": [
     {
       "practica_id": "encendido-led-basico",
       "tipo_contenido": "practica_individual",
-      "aplicacion": "Construir el circuito en serie conectando la batería, la resistencia y el LED en el orden indicado, y comprobar que no existan interrupciones ni polaridad invertida."
+      "aplicacion": "Aplicar los conceptos de esta clase para construir, conectar, simular y evaluar el circuito de encendido de un LED."
     }
   ]
 }
