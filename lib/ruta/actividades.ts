@@ -1,5 +1,6 @@
-import robo01 from "@/app/(panel)/robolab/clase-teorica.json";
-import robo02 from "@/app/(panel)/robolab/RL-CT-02.json";
+import robo01 from "@/content/robolab/RB-CT-01-fundamentos-robotica.json";
+import robo02 from "@/content/robolab/RB-CT-02-sensores-decisiones.json";
+import robo03 from "@/content/robolab/RB-CT-03-cinematica-velocidad.json"
 import { practicasRoboLab } from "@/app/(panel)/robolab/robolab-data";
 import electro01 from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.json";
 import electro02 from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
@@ -15,7 +16,7 @@ const practicaRoboLab = practicasRoboLab[0];
 const laboratorios = {
   robolab: {
     nombre: "RoboLab",
-    clases: [robo01, robo02],
+    clases: [robo01, robo02, robo03],
     practica: {
       id: practicaRoboLab.contenido_id,
       titulo: practicaRoboLab.metadatos.titulo_practica,
