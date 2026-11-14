@@ -1,0 +1,825 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://protolab.local/schemas/clase-teorica-interactiva-1.1.0.schema.json",
+  "title": "Clase teórica interactiva de ProtoLab",
+  "description": "Formato común para clases teóricas de RoboLab, ElectroLab y DataLab.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "version_contenido",
+    "identificador",
+    "laboratorio_id",
+    "tipo_contenido",
+    "estado_publicacion",
+    "titulo",
+    "descripcion",
+    "orden",
+    "duracion_estimada_minutos",
+    "objetivos",
+    "secciones",
+    "actividades_interactivas",
+    "prepara_para"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.1.0"
+    },
+    "version_contenido": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "identificador": {
+      "type": "string",
+      "minLength": 1
+    },
+    "laboratorio_id": {
+      "enum": [
+        "robolab",
+        "electrolab",
+        "datalab"
+      ]
+    },
+    "tipo_contenido": {
+      "const": "clase_teorica"
+    },
+    "estado_publicacion": {
+      "enum": [
+        "borrador",
+        "publicado",
+        "archivado"
+      ]
+    },
+    "titulo": {
+      "type": "string",
+      "minLength": 1
+    },
+    "descripcion": {
+      "type": "string"
+    },
+    "orden": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duracion_estimada_minutos": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "objetivos": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "secciones": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "titulo",
+          "parrafos"
+        ],
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parrafos": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actividades_interactivas": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "tipo",
+              "titulo",
+              "instrucciones",
+              "duracion_estimada_minutos",
+              "obligatoria",
+              "configuracion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo": {
+                "const": "animacion_secuencial"
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instrucciones": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duracion_estimada_minutos": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "obligatoria": {
+                "type": "boolean"
+              },
+              "configuracion": {
+                "type": "object",
+                "required": [
+                  "escenario",
+                  "reproduccion",
+                  "pasos"
+                ],
+                "properties": {
+                  "escenario": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "reproduccion": {
+                    "type": "object",
+                    "required": [
+                      "inicio_automatico",
+                      "repetir",
+                      "controles"
+                    ],
+                    "properties": {
+                      "inicio_automatico": {
+                        "type": "boolean"
+                      },
+                      "repetir": {
+                        "type": "boolean"
+                      },
+                      "controles": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "reproducir",
+                            "pausar",
+                            "anterior",
+                            "siguiente",
+                            "reiniciar"
+                          ]
+                        },
+                        "uniqueItems": true
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "pasos": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "orden",
+                        "duracion_ms",
+                        "estado_visual",
+                        "titulo",
+                        "explicacion",
+                        "resaltar"
+                      ],
+                      "properties": {
+                        "orden": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "duracion_ms": {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        "estado_visual": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "titulo": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "explicacion": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "resaltar": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "animaciones": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "tipo",
+              "titulo",
+              "instrucciones",
+              "duracion_estimada_minutos",
+              "obligatoria",
+              "configuracion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo": {
+                "const": "ordenar_bloques"
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instrucciones": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duracion_estimada_minutos": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "obligatoria": {
+                "type": "boolean"
+              },
+              "configuracion": {
+                "type": "object",
+                "required": [
+                  "mezclar_al_cargar",
+                  "permitir_reintentar",
+                  "bloques",
+                  "orden_correcto",
+                  "retroalimentacion"
+                ],
+                "properties": {
+                  "mezclar_al_cargar": {
+                    "type": "boolean"
+                  },
+                  "permitir_reintentar": {
+                    "type": "boolean"
+                  },
+                  "bloques": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "texto"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "texto": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "orden_correcto": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 2
+                  },
+                  "retroalimentacion": {
+                    "$ref": "#/$defs/feedback"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "tipo",
+              "titulo",
+              "instrucciones",
+              "duracion_estimada_minutos",
+              "obligatoria",
+              "configuracion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo": {
+                "const": "completar_enunciados"
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instrucciones": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duracion_estimada_minutos": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "obligatoria": {
+                "type": "boolean"
+              },
+              "configuracion": {
+                "type": "object",
+                "required": [
+                  "modo_respuesta",
+                  "mezclar_opciones",
+                  "permitir_reintentar",
+                  "banco_bloques",
+                  "enunciados",
+                  "retroalimentacion"
+                ],
+                "properties": {
+                  "modo_respuesta": {
+                    "enum": [
+                      "arrastrar_bloques",
+                      "seleccion"
+                    ]
+                  },
+                  "mezclar_opciones": {
+                    "type": "boolean"
+                  },
+                  "permitir_reintentar": {
+                    "type": "boolean"
+                  },
+                  "banco_bloques": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "texto"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "texto": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "enunciados": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "segmentos",
+                        "retroalimentacion"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "segmentos": {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "required": [
+                                  "tipo",
+                                  "contenido"
+                                ],
+                                "properties": {
+                                  "tipo": {
+                                    "const": "texto"
+                                  },
+                                  "contenido": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": false
+                              },
+                              {
+                                "type": "object",
+                                "required": [
+                                  "tipo",
+                                  "id",
+                                  "respuesta"
+                                ],
+                                "properties": {
+                                  "tipo": {
+                                    "const": "espacio"
+                                  },
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "respuesta": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": false
+                              }
+                            ]
+                          }
+                        },
+                        "retroalimentacion": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "retroalimentacion": {
+                    "$ref": "#/$defs/feedback"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "tipo",
+              "titulo",
+              "instrucciones",
+              "duracion_estimada_minutos",
+              "obligatoria",
+              "configuracion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo": {
+                "const": "calculo_guiado"
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instrucciones": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duracion_estimada_minutos": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "obligatoria": {
+                "type": "boolean"
+              },
+              "configuracion": {
+                "type": "object",
+                "required": [
+                  "modo_respuesta",
+                  "permitir_reintentar",
+                  "datos",
+                  "formula_principal",
+                  "nota_unidades",
+                  "pasos",
+                  "retroalimentacion"
+                ],
+                "properties": {
+                  "modo_respuesta": {
+                    "const": "entrada_numerica_por_pasos"
+                  },
+                  "permitir_reintentar": {
+                    "type": "boolean"
+                  },
+                  "datos": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "etiqueta",
+                        "valor",
+                        "unidad"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "etiqueta": {
+                          "type": "string"
+                        },
+                        "valor": {
+                          "type": "number"
+                        },
+                        "unidad": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "formula_principal": {
+                    "type": "string"
+                  },
+                  "nota_unidades": {
+                    "type": "string"
+                  },
+                  "pasos": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "consigna",
+                        "formula",
+                        "respuesta_esperada",
+                        "unidad",
+                        "tolerancia_absoluta",
+                        "pista",
+                        "explicacion"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "consigna": {
+                          "type": "string"
+                        },
+                        "formula": {
+                          "type": "string"
+                        },
+                        "respuesta_esperada": {
+                          "type": "number"
+                        },
+                        "unidad": {
+                          "type": "string"
+                        },
+                        "tolerancia_absoluta": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "pista": {
+                          "type": "string"
+                        },
+                        "explicacion": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "retroalimentacion": {
+                    "$ref": "#/$defs/feedback"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "tipo",
+              "titulo",
+              "instrucciones",
+              "duracion_estimada_minutos",
+              "obligatoria",
+              "configuracion"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "tipo": {
+                "const": "sopa_letras"
+              },
+              "titulo": {
+                "type": "string",
+                "minLength": 1
+              },
+              "instrucciones": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duracion_estimada_minutos": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "obligatoria": {
+                "type": "boolean"
+              },
+              "configuracion": {
+                "type": "object",
+                "required": [
+                  "filas",
+                  "columnas",
+                  "relleno",
+                  "mostrar_lista_palabras",
+                  "permitir_reintentar",
+                  "direcciones_permitidas",
+                  "cuadricula",
+                  "palabras",
+                  "soluciones",
+                  "retroalimentacion"
+                ],
+                "properties": {
+                  "filas": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "columnas": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "relleno": {
+                    "type": "string"
+                  },
+                  "mostrar_lista_palabras": {
+                    "type": "boolean"
+                  },
+                  "permitir_reintentar": {
+                    "type": "boolean"
+                  },
+                  "direcciones_permitidas": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "horizontal",
+                        "vertical"
+                      ]
+                    },
+                    "minItems": 1
+                  },
+                  "cuadricula": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "palabras": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "texto",
+                        "pista"
+                      ],
+                      "properties": {
+                        "texto": {
+                          "type": "string"
+                        },
+                        "pista": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "soluciones": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "palabra",
+                        "fila_inicio",
+                        "columna_inicio",
+                        "direccion"
+                      ],
+                      "properties": {
+                        "palabra": {
+                          "type": "string"
+                        },
+                        "fila_inicio": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "columna_inicio": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "direccion": {
+                          "enum": [
+                            "horizontal",
+                            "vertical"
+                          ]
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "retroalimentacion": {
+                    "type": "object",
+                    "required": [
+                      "completada",
+                      "ayuda"
+                    ],
+                    "properties": {
+                      "completada": {
+                        "type": "string"
+                      },
+                      "ayuda": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "prepara_para": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "practica_id",
+          "tipo_contenido",
+          "aplicacion"
+        ],
+        "properties": {
+          "practica_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tipo_contenido": {
+            "enum": [
+              "practica_individual",
+              "practica_complementaria"
+            ]
+          },
+          "aplicacion": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "feedback": {
+      "type": "object",
+      "required": [
+        "correcta",
+        "incorrecta"
+      ],
+      "properties": {
+        "correcta": {
+          "type": "string"
+        },
+        "incorrecta": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.1.0",
+  "proposito": "Catálogo inicial de tipos de actividades interactivas reutilizables en RoboLab, ElectroLab y DataLab.",
+  "tipos": [
+    {
+      "tipo": "animacion_secuencial",
+      "componente_sugerido": "AnimacionSecuencial",
+      "descripcion": "Escena visual reproducible organizada en pasos."
+    },
+    {
+      "tipo": "ordenar_bloques",
+      "componente_sugerido": "OrdenarBloques",
+      "descripcion": "Ordenar bloques por una secuencia lógica."
+    },
+    {
+      "tipo": "completar_enunciados",
+      "componente_sugerido": "CompletarEnunciados",
+      "descripcion": "Completar frases con bloques en espacios."
+    },
+    {
+      "tipo": "calculo_guiado",
+      "componente_sugerido": "CalculoGuiado",
+      "descripcion": "Resolver un procedimiento numérico mediante pasos."
+    },
+    {
+      "tipo": "sopa_letras",
+      "componente_sugerido": "SopaLetras",
+      "descripcion": "Encontrar términos en una cuadrícula."
+    }
+  ]
+}
