@@ -41,7 +41,7 @@ const modules: Module[] = [
     color: "bg-[#FFF3DD]",
     accent: "text-[#D9020]",
     status: "---",
-    href: "/diagnóstico",
+    href: "/diagnostico",
   },
   {
     name: "Robolab",
@@ -156,7 +156,7 @@ export default function Home() {
   }, []);
   return (
 
-    <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
+    <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
       <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:-10">
         <div className="relative z-10 max-w-xl">
           <span className="inline-block rounded-full bg-white/20 px-3 py-3 py-1 text-xs font-semibold">
@@ -313,7 +313,9 @@ export default function Home() {
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-2">
           {modules.map((module) => (
-            <article
+
+            <Link key={module.name} href={module.href}>
+              <article
               key={module.name}
               className="group rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50">
               <div className="mb-5 flex items-center justify-between">
@@ -346,6 +348,8 @@ export default function Home() {
                 </span>
               </div>
             </article>
+            </Link>
+
           ))}
         </div>
       </section>

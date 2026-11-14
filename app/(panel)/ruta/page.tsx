@@ -71,7 +71,7 @@ export default function RutaPage() {
       <main className="mx-auto max-w-3xl space-y-3 p-6">
         <h1 className="text-2xl font-bold">Tu ruta de aprendizaje</h1>
         <p>{error || "Completa el diagnóstico y guarda tu ruta para empezar."}</p>
-        <Link href="/protected/diagnostico" className="text-blue-700 underline">
+        <Link href="/diagnostico" className="text-blue-700 underline">
           Ir al diagnóstico
         </Link>
       </main>
@@ -135,11 +135,11 @@ export default function RutaPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50/70 p-4 text-slate-800 md:p-8">
-      <div className="mx-auto max-w-6xl space-y-6">
+      <div className="mx-auto max-w-[1700px] p-2 sm:p-6 space-y-6">
+        
         <header className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white md:p-8">
           <Link
-            href="/"
+            href="/inicio"
             className="inline-block rounded-lg bg-white px-3 py-2 text-sm font-semibold text-blue-700"
           >
             ← Volver a Inicio
@@ -267,6 +267,5 @@ export default function RutaPage() {
           </p>
         )}
       </div>
-    </main>
   );
 }

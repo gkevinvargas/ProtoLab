@@ -19,9 +19,9 @@ export function BannerPractica({
                     <span className="bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full uppercase tracking-wider">
                         {nombreLaboratorio}
                     </span>
-                    <span className=" bg-amber-300 text-slate-900 px-3 py-1 rounded-full font-semibold">
+                    {/**<span className=" bg-amber-300 text-slate-900 px-3 py-1 rounded-full font-semibold">
                         {nombrePractica}
-                    </span>
+                    </span> */}
                     <span className="bg-white text-blue-700 px-3 py-1 rounded-full font-semibold">
                         {nivelPractica}
                     </span>

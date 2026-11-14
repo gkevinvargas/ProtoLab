@@ -5,7 +5,7 @@ import fundamentosLed from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.jso
 import conexionSerieLed from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
 import leyOhmLed from "@/lib/electrolab/clases/EL-CT-03-ley-ohm-resistencia-led.json";
 
-const clasesElectroLab = [fundamentosLed, conexionSerieLed, leyOhmLed] as unknown as readonly any[];
+const clasesElectroLab = [fundamentosLed, conexionSerieLed, leyOhmLed];
 
 export default function ElectroLabPage() {
   return (

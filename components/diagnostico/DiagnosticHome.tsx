@@ -370,8 +370,8 @@ export default function DiagnosticHome() {
   const answeredCount = questions.filter(isQuestionAnswered).length;
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10">
-      <div className="mx-auto max-w-5xl">
+
+      <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
         <header className="mb-8">
           <p className="mb-2 text-sm font-semibold text-blue-600">
             PROTOLAB / DIAGNÓSTICO VOCACIONAL
@@ -800,6 +800,5 @@ export default function DiagnosticHome() {
           </>
         )}
       </div>
-    </main>
   );
 }
