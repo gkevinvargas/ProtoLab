@@ -48,7 +48,7 @@ const modules: Module[] = [
     icon: IconRobot,
     color: "bg-[#E8F0FF]",
     accent: "text-[#3479F6]",
-    href: "/robolab2",
+    href: "/robolab",
   },
   {
     name: "DataLab",
@@ -337,15 +337,9 @@ export default function Home() {
                         className={`rounded-lg border p-2 ${clase.completada
                             ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                             : clase.id === resumenRuta.siguiente?.id
-<<<<<<< HEAD
-                              ? "border-blue-200 bg-blue-50 text-blue-900"
-                              : "border-slate-200 bg-slate-50 text-slate-700"
-                          }`}
-=======
                             ? "border-blue-200 bg-blue-50 text-blue-900"
                             : "border-slate-200 bg-slate-50 text-slate-700"
                         }`}
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
                       >
                         <p className="font-medium">
                           {clase.titulo}
@@ -447,23 +441,9 @@ export default function Home() {
                     </span>
                   </div>
 
-<<<<<<< HEAD
                   <h3 className="text-lg font-extrabold">
                     {module.name}
                   </h3>
-=======
-                  <span
-                    className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
-                      disponible
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-slate-100 text-slate-500"
-                    }`}
-                  >
-                    {!disponible && <IconLock size={13} />}
-                    {disponible ? "Disponible" : "Bloqueado"}
-                  </span>
-                </div>
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
 
                   <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
                     {module.description}
@@ -496,19 +476,6 @@ export default function Home() {
                 </article>
               </Link>
 
-<<<<<<< HEAD
-
-=======
-                  {disponible ? (
-                    <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  ) : (
-                    <IconLock size={20} className="text-slate-400" />
-                  )}
-                </div>
-              </article>
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
             );
           })}
         </div>

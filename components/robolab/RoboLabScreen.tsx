@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { practicasRoboLab, type Orientation } from "@/app/(panel)/robolab/robolab-data";import RoboLabGrid from '@/components/robolab/RoboLabGrid';
 import ClaseTeorica from "@/components/laboratorios/ClaseTeorica";
-import claseTeorica from "@/app/(panel)/robolab/clase-teorica.json";
-import segundaClase from "@/app/(panel)/robolab/RL-CT-02.json";
+import claseTeorica from "@/content/robolab/RB-CT-02-sensores-decisiones.json";
+import segundaClase from "@/content/robolab/RB-CT-03-cinematica-velocidad.json";
 
 type CommandType = 'AVANZAR' | 'IZQUIERDA' | 'DERECHA';
 
@@ -295,11 +295,7 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
       })}
     </ol>
 
-    <ClaseTeorica
-      key={claseActual.identificador}
-      clase={claseActual}
-      abierta
-    />
+    
 
     <button
       type="button"

@@ -16,14 +16,16 @@
   ],
   "secciones": [
     {
-      "id": "sec-01-cinematica",
       "titulo": "¿Cómo sabe Botty cuánto avanzar si no tiene GPS?",
-      "contenido": "En robótica móvil básica, cuando no contamos con mapas externos, controlamos el desplazamiento calculando la relación entre la velocidad constante de los motores (v), la distancia objetivo (d) y el tiempo que permanecen encendidos (t)."
+      "parrafos": [
+        "En robótica móvil básica, cuando no contamos con mapas externos, podemos estimar el desplazamiento mediante la relación entre la velocidad de los motores (v), la distancia objetivo (d) y el tiempo que permanecen activados (t). Esta estimación supone una velocidad aproximadamente constante; en un robot real también influyen la batería, la superficie y la calibración de los motores."
+      ]
     },
     {
-      "id": "sec-02-formula",
       "titulo": "Cálculo de tiempos de ejecución",
-      "contenido": "Si sabemos que Botty avanza a una velocidad constante de 0.25 m/s y necesitamos que recorra exactamente 1.5 metros antes de girar, dividimos la distancia entre la velocidad (t = d / v) para programar los segundos exactos de activación de los motores."
+      "parrafos": [
+        "Si Botty avanza a una velocidad constante de 0.25 m/s y necesita recorrer 1.5 metros antes de girar, dividimos la distancia entre la velocidad: t = d / v. El resultado es el tiempo durante el cual deben activarse los motores para cubrir el tramo estimado."
+      ]
     }
   ],
   "actividades_interactivas": [
@@ -31,60 +33,114 @@
       "id": "RB-ACT-05",
       "tipo": "calculo_guiado",
       "titulo": "Cálculo de trayectoria recta para Botty",
-      "instrucciones": "Resuelve paso a paso el tiempo que debes programar en los motores para que Botty llegue exactamente a la meta.",
+      "instrucciones": "Resuelve paso a paso el tiempo que debes programar en los motores para que Botty llegue a la meta.",
       "duracion_estimada_minutos": 5,
       "obligatoria": true,
       "configuracion": {
+        "modo_respuesta": "entrada_numerica_por_pasos",
+        "permitir_reintentar": true,
         "datos": [
-          { "nombre": "Distancia objetivo (d)", "valor": 1.5, "unidad": "m" },
-          { "nombre": "Velocidad lineal de Botty (v)", "valor": 0.25, "unidad": "m/s" }
+          {
+            "id": "distancia-1",
+            "etiqueta": "Distancia del primer tramo (d₁)",
+            "valor": 1.5,
+            "unidad": "m"
+          },
+          {
+            "id": "velocidad-1",
+            "etiqueta": "Velocidad del primer tramo (v₁)",
+            "valor": 0.25,
+            "unidad": "m/s"
+          },
+          {
+            "id": "distancia-2",
+            "etiqueta": "Distancia del segundo tramo (d₂)",
+            "valor": 0.5,
+            "unidad": "m"
+          },
+          {
+            "id": "velocidad-2",
+            "etiqueta": "Velocidad del segundo tramo (v₂)",
+            "valor": 0.125,
+            "unidad": "m/s"
+          }
         ],
         "formula_principal": "t = d / v",
+        "nota_unidades": "La distancia se expresa en metros (m), la velocidad en metros por segundo (m/s) y el tiempo en segundos (s).",
         "pasos": [
           {
             "id": "paso-1",
-            "consigna": "Calcula cuántos segundos (t) deben permanecer encendidos los motores para recorrer 1.5 m a 0.25 m/s.",
-            "formula": "t = 1.5 / 0.25",
+            "consigna": "¿Cuántos segundos deben permanecer encendidos los motores para recorrer 1.5 m a 0.25 m/s?",
+            "formula": "t₁ = 1.5 / 0.25",
             "respuesta_esperada": 6,
             "unidad": "s",
-            "tolerancia": 0.1,
-            "explicacion": "Al dividir 1.5 metros entre 0.25 m/s obtenemos exactamente 6 segundos de avance continuo."
+            "tolerancia_absoluta": 0.1,
+            "pista": "Divide la distancia entre la velocidad. Comprueba que las unidades m ÷ (m/s) dan como resultado segundos.",
+            "explicacion": "Al dividir 1.5 m entre 0.25 m/s obtenemos 6 segundos de avance continuo."
           },
           {
             "id": "paso-2",
-            "consigna": "Si después de avanzar decides reducir la velocidad a la mitad (0.125 m/s) para recorrer 0.5 m de precisión, ¿cuántos segundos tardará ese segundo tramo?",
-            "formula": "t2 = 0.5 / 0.125",
+            "consigna": "Si reduces la velocidad a la mitad (0.125 m/s) para recorrer 0.5 m, ¿cuántos segundos tardará ese segundo tramo?",
+            "formula": "t₂ = 0.5 / 0.125",
             "respuesta_esperada": 4,
             "unidad": "s",
-            "tolerancia": 0.1,
-            "explicacion": "0.5 metros dividido entre 0.125 m/s equivale a 4 segundos adicionales."
+            "tolerancia_absoluta": 0.1,
+            "pista": "Utiliza la misma relación entre distancia, velocidad y tiempo, pero con los valores del segundo tramo.",
+            "explicacion": "0.5 m dividido entre 0.125 m/s equivale a 4 segundos adicionales."
           }
-        ]
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Excelente! Calculaste correctamente los tiempos de ambos tramos y consideraste las unidades.",
+          "incorrecta": "Revisa la relación entre distancia, velocidad y tiempo. Asegúrate de dividir la distancia entre la velocidad y expresar el resultado en segundos."
+        }
       }
     },
     {
       "id": "RB-ACT-06",
       "tipo": "ordenar_bloques",
       "titulo": "Rutina completa de navegación",
-      "instrucciones": "Ordena la secuencia final de programación antes de abrir el simulador de RoboLab.",
+      "instrucciones": "Ordena la secuencia de programación antes de abrir el simulador de RoboLab.",
       "duracion_estimada_minutos": 3,
       "obligatoria": true,
       "configuracion": {
         "mezclar_al_cargar": true,
-        "bloques": [
-          { "id": "nav-1", "texto": "Inicializar sensores y calibrar motores a velocidad base." },
-          { "id": "nav-2", "texto": "Avanzar en línea recta durante el tiempo calculado." },
-          { "id": "nav-3", "texto": "Verificar lectura del sensor ultrasónico frente a obstáculos." },
-          { "id": "nav-4", "texto": "Detener motores al alcanzar el punto objetivo." }
-        ],
-        "orden_correcto": ["nav-1", "nav-2", "nav-3", "nav-4"],
         "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "nav-1",
+            "texto": "Inicializar los sensores y calibrar los motores a la velocidad base."
+          },
+          {
+            "id": "nav-2",
+            "texto": "Leer el sensor ultrasónico y comprobar que el tramo esté libre de obstáculos."
+          },
+          {
+            "id": "nav-3",
+            "texto": "Avanzar en línea recta durante el tiempo calculado, supervisando el entorno."
+          },
+          {
+            "id": "nav-4",
+            "texto": "Detener los motores al alcanzar el punto objetivo."
+          }
+        ],
+        "orden_correcto": [
+          "nav-1",
+          "nav-2",
+          "nav-3",
+          "nav-4"
+        ],
         "retroalimentacion": {
-          "correcto": "¡Listo! Ya tienes toda la base teórica y matemática para superar la práctica en el simulador.",
-          "incorrecto": "Recuerda que siempre debes inicializar y calibrar los componentes antes de iniciar el movimiento."
+          "correcta": "¡Listo! Inicializaste y verificaste los sensores antes de mover a Botty, aplicaste el tiempo calculado y detuviste los motores en el objetivo.",
+          "incorrecta": "Recuerda inicializar y calibrar primero, comprobar que el camino esté libre y después avanzar con supervisión hasta detenerte en la meta."
         }
       }
     }
   ],
-  "prepara_para": "evasion-obstaculos-botty"
+  "prepara_para": [
+    {
+      "practica_id": "evasion-obstaculos-botty",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Aplicar la relación entre distancia, velocidad y tiempo para programar los desplazamientos de Botty, junto con la lectura del sensor ultrasónico para supervisar la ruta y evitar obstáculos."
+    }
+  ]
 }

@@ -16,14 +16,16 @@
   ],
   "secciones": [
     {
-      "id": "sec-01-ultrasonido",
       "titulo": "¿Cómo mide Botty sin tocar los objetos?",
-      "contenido": "El sensor ultrasónico funciona igual que el sonar de un murciélago: envía una onda sonora de alta frecuencia (Trigger) y cronometra cuánto tarda en rebotar y regresar (Echo). Si el tiempo de regreso es muy corto, el obstáculo está cerca; si es largo, el camino está despejado."
+      "parrafos": [
+        "El sensor ultrasónico funciona igual que el sonar de un murciélago: envía una onda sonora de alta frecuencia (Trigger) y cronometra cuánto tarda en rebotar y regresar (Echo). Si el tiempo de regreso es muy corto, el obstáculo está cerca; si es largo, el camino está despejado."
+      ]
     },
     {
-      "id": "sec-02-condicionales",
       "titulo": "Umbrales y estructuras condicionales",
-      "contenido": "Para que Botty tome decisiones inteligentes establecemos un umbral numérico, por ejemplo 15 cm. Mediante una estructura condicional (SI distancia < 15 ENTONCES girar, SI NO avanzar), el robot transforma números crudos en comportamiento autónomo."
+      "parrafos": [
+        "Para que Botty tome decisiones inteligentes establecemos un umbral numérico, por ejemplo 15 cm. Mediante una estructura condicional (SI distancia < 15 ENTONCES girar, SI NO avanzar), el robot transforma números crudos en comportamiento autónomo."
+      ]
     }
   ],
   "actividades_interactivas": [
@@ -35,38 +37,79 @@
       "duracion_estimada_minutos": 3,
       "obligatoria": true,
       "configuracion": {
-        "modo_respuesta": "seleccionar_bloques",
+        "modo_respuesta": "seleccion",
+        "mezclar_opciones": true,
+        "permitir_reintentar": true,
         "banco_bloques": [
-          { "id": "b-trigger", "texto": "Trigger" },
-          { "id": "b-echo", "texto": "Echo" },
-          { "id": "b-umbral", "texto": "umbral" },
-          { "id": "b-condicional", "texto": "condicional" }
+          {
+            "id": "b-trigger",
+            "texto": "Trigger"
+          },
+          {
+            "id": "b-echo",
+            "texto": "Echo"
+          },
+          {
+            "id": "b-umbral",
+            "texto": "umbral"
+          },
+          {
+            "id": "b-condicional",
+            "texto": "condicional"
+          }
         ],
         "enunciados": [
           {
             "id": "enun-u1",
             "segmentos": [
-              { "tipo": "texto", "contenido": "El pin encargado de disparar el pulso ultrasónico se llama " },
-              { "tipo": "espacio", "id": "esp-u1", "respuesta": "b-trigger" },
-              { "tipo": "texto", "contenido": ", mientras que el pin que recibe el rebote de la onda es " },
-              { "tipo": "espacio", "id": "esp-u2", "respuesta": "b-echo" },
-              { "tipo": "texto", "contenido": "." }
+              {
+                "tipo": "texto",
+                "contenido": "El pin encargado de disparar el pulso ultrasónico se llama "
+              },
+              {
+                "tipo": "espacio",
+                "id": "esp-u1",
+                "respuesta": "b-trigger"
+              },
+              {
+                "tipo": "texto",
+                "contenido": ", mientras que el pin que recibe el rebote de la onda es "
+              },
+              {
+                "tipo": "espacio",
+                "id": "esp-u2",
+                "respuesta": "b-echo"
+              },
+              {
+                "tipo": "texto",
+                "contenido": "."
+              }
             ],
-            "explicacion": "Trigger dispara la señal sonora y Echo mide el tiempo que tarda en volver el rebote."
+            "retroalimentacion": "Trigger dispara la señal ultrasónica y Echo permite medir el tiempo que tarda en regresar el eco."
           },
           {
             "id": "enun-u2",
             "segmentos": [
-              { "tipo": "texto", "contenido": "El valor límite de distancia que activa un cambio de ruta en el robot se conoce como " },
-              { "tipo": "espacio", "id": "esp-u3", "respuesta": "b-umbral" },
-              { "tipo": "texto", "contenido": "." }
+              {
+                "tipo": "texto",
+                "contenido": "El valor límite de distancia que activa un cambio de ruta en el robot se conoce como "
+              },
+              {
+                "tipo": "espacio",
+                "id": "esp-u3",
+                "respuesta": "b-umbral"
+              },
+              {
+                "tipo": "texto",
+                "contenido": "."
+              }
             ],
-            "explicacion": "Definir un umbral adecuado evita que el robot choque o frene demasiado lejos."
+            "retroalimentacion": "El umbral establece el límite que utiliza el programa para decidir cuándo cambiar el comportamiento del robot."
           }
         ],
         "retroalimentacion": {
-          "correcto": "¡Muy bien! Comprendes cómo funcionan los pines del sensor y los límites de decisión.",
-          "incorrecto": "Revisa cuál pin envía la señal y cuál recibe el rebote del sonido."
+          "correcta": "¡Muy bien! Comprendes cómo funcionan los pines del sensor y los límites de decisión.",
+          "incorrecta": "Revisa cuál pin envía la señal y cuál recibe el rebote del sonido. Después, identifica el valor límite que activa una acción."
         }
       }
     },
@@ -74,12 +117,19 @@
       "id": "RB-ACT-04",
       "tipo": "sopa_letras",
       "titulo": "Conceptos clave de percepción robótica",
-      "instrucciones": "Encuentra en la cuadrícula los 4 términos fundamentales de esta lección.",
+      "instrucciones": "Encuentra en la cuadrícula los cuatro términos fundamentales de esta lección. Selecciona la primera y la última letra de cada palabra.",
       "duracion_estimada_minutos": 4,
       "obligatoria": true,
       "configuracion": {
         "filas": 8,
         "columnas": 8,
+        "relleno": "X",
+        "mostrar_lista_palabras": true,
+        "permitir_reintentar": true,
+        "direcciones_permitidas": [
+          "horizontal",
+          "vertical"
+        ],
         "cuadricula": [
           "SENSORXM",
           "UQLOGICA",
@@ -91,20 +141,61 @@
           "ACTUADOR"
         ],
         "palabras": [
-          { "palabra": "SENSOR", "pista": "Dispositivo que detecta cambios en el entorno." },
-          { "palabra": "LOGICA", "pista": "Conjunto de reglas con las que decide el programa." },
-          { "palabra": "UMBRAL", "pista": "Valor límite que dispara una acción." },
-          { "palabra": "ACTUADOR", "pista": "Componente que ejecuta el movimiento físico." }
+          {
+            "texto": "SENSOR",
+            "pista": "Dispositivo que detecta cambios en el entorno."
+          },
+          {
+            "texto": "LOGICA",
+            "pista": "Conjunto de reglas con las que decide el programa."
+          },
+          {
+            "texto": "UMBRAL",
+            "pista": "Valor límite que dispara una acción."
+          },
+          {
+            "texto": "ACTUADOR",
+            "pista": "Componente que ejecuta el movimiento físico."
+          }
         ],
         "soluciones": [
-          { "palabra": "SENSOR", "fila_inicio": 0, "columna_inicio": 0, "direccion": "horizontal" },
-          { "palabra": "LOGICA", "fila_inicio": 1, "columna_inicio": 2, "direccion": "horizontal" },
-          { "palabra": "UMBRAL", "fila_inicio": 1, "columna_inicio": 0, "direccion": "vertical" },
-          { "palabra": "ACTUADOR", "fila_inicio": 7, "columna_inicio": 0, "direccion": "horizontal" }
+          {
+            "palabra": "SENSOR",
+            "fila_inicio": 0,
+            "columna_inicio": 0,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "LOGICA",
+            "fila_inicio": 1,
+            "columna_inicio": 2,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "UMBRAL",
+            "fila_inicio": 1,
+            "columna_inicio": 0,
+            "direccion": "vertical"
+          },
+          {
+            "palabra": "ACTUADOR",
+            "fila_inicio": 7,
+            "columna_inicio": 0,
+            "direccion": "horizontal"
+          }
         ],
-        "direcciones_permitidas": ["horizontal", "vertical"]
+        "retroalimentacion": {
+          "completada": "¡Excelente! Encontraste todos los conceptos clave de percepción y control robótico.",
+          "ayuda": "Utiliza las pistas para identificar cada término. Recuerda que las palabras pueden aparecer horizontal o verticalmente."
+        }
       }
     }
   ],
-  "prepara_para": "evasion-obstaculos-botty"
+  "prepara_para": [
+    {
+      "practica_id": "evasion-obstaculos-botty",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Aplicar las lecturas del sensor ultrasónico y las condiciones IF / ELSE para decidir cuándo Botty debe avanzar o cambiar de dirección al detectar un obstáculo."
+    }
+  ]
 }
