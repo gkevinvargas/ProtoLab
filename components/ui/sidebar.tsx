@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const secciones = [
   { href: "/inicio", label: "Inicio", icon: IconHome },
-  { href: "#modulos", label: "Mis módulos", icon: IconLayoutGrid },
+  { href: "/inicio#modulos", label: "Mis módulos", icon: IconLayoutGrid },
   { href: "/ruta", label: "Mi progreso", icon: IconClock },
 ]
 

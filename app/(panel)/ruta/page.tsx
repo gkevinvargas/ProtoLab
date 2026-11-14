@@ -218,7 +218,7 @@ export default function RutaPage() {
           >
             ← Volver a Inicio
           </Link>
-          <h1 className="mt-4 text-3xl font-bold">Tu ruta de aprendizaje</h1>
+          <h1 className="mt-4 text-3xl font-extrabold">Tu ruta de aprendizaje</h1>
           <p className="mt-2 text-blue-100">{laboratorios.join(" → ")}</p>
         </header>
 

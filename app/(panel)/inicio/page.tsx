@@ -39,12 +39,7 @@ const modules: Module[] = [
       "Descubre cuáles son tus intereses y conoce las áreas de conocimiento con las que se pueden relacionar.",
     icon: IconClipboardText,
     color: "bg-[#FFF3DD]",
-<<<<<<< HEAD
-    accent: "text-[#D9020]",
-    status: "---",
-=======
     accent: "text-[#D97706]",
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
     href: "/diagnostico",
   },
   {
@@ -162,8 +157,8 @@ function leerResumenRuta() {
   const vistas = new Set<string>(
     Array.isArray(avance)
       ? avance.filter(
-          (id): id is string => typeof id === "string"
-        )
+        (id): id is string => typeof id === "string"
+      )
       : []
   );
 
@@ -221,16 +216,11 @@ export default function Home() {
     };
   }, []);
 
-<<<<<<< HEAD
-    <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
-      <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:-10">
-=======
   return (
     <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
 
       {/* ENCABEZADO */}
       <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:p-10">
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
         <div className="relative z-10 max-w-xl">
           <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">
             Tu área para descubrir
@@ -352,13 +342,12 @@ export default function Home() {
                     {resumenRuta.actividades.map((clase) => (
                       <li
                         key={clase.id}
-                        className={`rounded-lg border p-2 ${
-                          clase.completada
+                        className={`rounded-lg border p-2 ${clase.completada
                             ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                             : clase.id === resumenRuta.siguiente?.id
                               ? "border-blue-200 bg-blue-50 text-blue-900"
                               : "border-slate-200 bg-slate-50 text-slate-700"
-                        }`}
+                          }`}
                       >
                         <p className="font-medium">
                           {clase.titulo}
@@ -419,20 +408,6 @@ export default function Home() {
           </p>
         </div>
 
-<<<<<<< HEAD
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-2">
-          {modules.map((module) => (
-
-            <Link key={module.name} href={module.href}>
-              <article
-              key={module.name}
-              className="group rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50">
-              <div className="mb-5 flex items-center justify-between">
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-2xl text-3xl ${module.color}`}
-                >
-                  <module.icon size={28} stroke={1.8} />
-=======
         {!rutaConfirmada && !cargandoRuta && (
           <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
             <strong>Laboratorios bloqueados.</strong>{" "}
@@ -448,86 +423,71 @@ export default function Home() {
             const Icono = module.icon;
 
             return (
-              <article
-                key={module.name}
-                aria-disabled={!disponible}
-                className={`rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 ${
-                  disponible
-                    ? "group hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50"
-                    : "cursor-not-allowed opacity-65"
-                }`}
-              >
-                <div className="mb-5 flex items-center justify-between">
-                  <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl text-3xl ${module.color}`}
-                  >
-                    <Icono size={28} stroke={1.8} />
+
+              <Link key={module.name} href={module.href}>
+                <article
+                  aria-disabled={!disponible}
+                  className={`rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 ${disponible
+                      ? "group hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50"
+                      : "cursor-not-allowed opacity-65"
+                    }`}
+                >
+                  <div className="mb-5 flex items-center justify-between">
+                    <div
+                      className={`flex h-14 w-14 items-center justify-center rounded-2xl text-3xl ${module.color}`}
+                    >
+                      <Icono size={28} stroke={1.8} />
+                    </div>
+
+                    <span
+                      className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${disponible
+                          ? "bg-emerald-50 text-emerald-700"
+                          : "bg-slate-100 text-slate-500"
+                        }`}
+                    >
+                      {!disponible && <IconLock size={13} />}
+                      {disponible ? "Disponible" : "Bloqueado"}
+                    </span>
                   </div>
 
-                  <span
-                    className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
-                      disponible
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-slate-100 text-slate-500"
-                    }`}
-                  >
-                    {!disponible && <IconLock size={13} />}
-                    {disponible ? "Disponible" : "Bloqueado"}
-                  </span>
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
-                </div>
+                  <h3 className="text-lg font-extrabold">
+                    {module.name}
+                  </h3>
 
-                <h3 className="text-lg font-extrabold">
-                  {module.name}
-                </h3>
+                  <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
+                    {module.description}
+                  </p>
 
-                <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
-                  {module.description}
-                </p>
+                  <div className="mt-5 flex items-center justify-between">
+                    {disponible ? (
+                      <Link
+                        href={module.href}
+                        className={`text-sm font-bold ${module.accent}`}
+                      >
+                        {esDiagnostico
+                          ? "Realizar diagnóstico"
+                          : "Explorar área"}
+                      </Link>
+                    ) : (
+                      <span className="text-sm font-semibold text-slate-400">
+                        Confirma tu diagnóstico para acceder
+                      </span>
+                    )}
 
-                <div className="mt-5 flex items-center justify-between">
-                  {disponible ? (
-                    <Link
-                      href={module.href}
-                      className={`text-sm font-bold ${module.accent}`}
-                    >
-                      {esDiagnostico
-                        ? "Realizar diagnóstico"
-                        : "Explorar área"}
-                    </Link>
-                  ) : (
-                    <span className="text-sm font-semibold text-slate-400">
-                      Confirma tu diagnóstico para acceder
-                    </span>
-                  )}
+                    {disponible ? (
+                      <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
+                        →
+                      </span>
+                    ) : (
+                      <IconLock size={20} className="text-slate-400" />
+                    )}
+                  </div>
+                </article>
+              </Link>
 
-<<<<<<< HEAD
-              <div className="mt-5 flex items-center justify-between">
-                <span className={`text-sm font-bold ${module.accent}`}>
-                  Explorar área
-                </span>
 
-                <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </article>
-            </Link>
-
-          ))}
-=======
-                  {disponible ? (
-                    <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
-                      →
-                    </span>
-                  ) : (
-                    <IconLock size={20} className="text-slate-400" />
-                  )}
-                </div>
-              </article>
             );
           })}
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
         </div>
       </section>
 

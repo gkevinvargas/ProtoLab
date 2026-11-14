@@ -18,18 +18,22 @@ export function Header({ nombreLaboratorio, tipoContenido, tipoEditor }: HeaderP
             <div className="flex items-center gap-3">
                 <div>
                     <div className="flex items-center gap-2 text-[11px] text-[#718096]">
-                        <span>
+                        {/**
+                         <span>
                             {nombreLaboratorio}
                         </span>
                         <IconChevronRight size={18} stroke={2} />
                         <span>
                             {tipoContenido}
                         </span>
+                         */}
                     </div>
 
-                    <h1 className="mt-1 text-[15px] font-semibold tracking-tight text-[#24324A] sm:text-base">
+                    {/**
+                     <h1 className="mt-1 text-[15px] font-semibold tracking-tight text-[#24324A] sm:text-base">
                         {tipoEditor}
                     </h1>
+                     */}
                 </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
