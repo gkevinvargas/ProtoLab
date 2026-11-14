@@ -39,12 +39,7 @@ const modules: Module[] = [
       "Descubre cuáles son tus intereses y conoce las áreas de conocimiento con las que se pueden relacionar.",
     icon: IconClipboardText,
     color: "bg-[#FFF3DD]",
-<<<<<<< HEAD
-    accent: "text-[#D9020]",
-    status: "---",
-=======
     accent: "text-[#D97706]",
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
     href: "/diagnostico",
   },
   {
@@ -221,16 +216,11 @@ export default function Home() {
     };
   }, []);
 
-<<<<<<< HEAD
-    <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
-      <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:-10">
-=======
   return (
     <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
 
       {/* ENCABEZADO */}
       <section className="relative mb-10 overflow-hidden rounded-[28px] bg-[#2478F6] p-7 text-white sm:p-10">
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
         <div className="relative z-10 max-w-xl">
           <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">
             Tu área para descubrir
@@ -419,20 +409,6 @@ export default function Home() {
           </p>
         </div>
 
-<<<<<<< HEAD
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-2">
-          {modules.map((module) => (
-
-            <Link key={module.name} href={module.href}>
-              <article
-              key={module.name}
-              className="group rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50">
-              <div className="mb-5 flex items-center justify-between">
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-2xl text-3xl ${module.color}`}
-                >
-                  <module.icon size={28} stroke={1.8} />
-=======
         {!rutaConfirmada && !cargandoRuta && (
           <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
             <strong>Laboratorios bloqueados.</strong>{" "}
@@ -474,7 +450,6 @@ export default function Home() {
                     {!disponible && <IconLock size={13} />}
                     {disponible ? "Disponible" : "Bloqueado"}
                   </span>
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
                 </div>
 
                 <h3 className="text-lg font-extrabold">
@@ -501,21 +476,6 @@ export default function Home() {
                     </span>
                   )}
 
-<<<<<<< HEAD
-              <div className="mt-5 flex items-center justify-between">
-                <span className={`text-sm font-bold ${module.accent}`}>
-                  Explorar área
-                </span>
-
-                <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-            </article>
-            </Link>
-
-          ))}
-=======
                   {disponible ? (
                     <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
                       →
@@ -527,7 +487,6 @@ export default function Home() {
               </article>
             );
           })}
->>>>>>> c691a09073efe4f7493a17bd2e741904bb7063d6
         </div>
       </section>
 
