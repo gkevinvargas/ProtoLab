@@ -59,7 +59,7 @@ export default function ClaseTeorica({
               Duración: {clase.duracion_estimada_minutos} min
             </span>
             <span className="rounded-full bg-slate-100 px-3 py-1">
-              {clase.actividades_interactivas.length} actividades
+            {clase.actividades_interactivas?.length ?? 0} actividades
             </span>
           </div>
         </header>
@@ -108,7 +108,7 @@ export default function ClaseTeorica({
           ))}
         </section>
 
-        {clase.actividades_interactivas.length > 0 && (
+        {(clase.actividades_interactivas?.length ?? 0) > 0 && (
           <section
             aria-labelledby={actividadesId}
             className="space-y-4 border-t border-slate-200 pt-6"

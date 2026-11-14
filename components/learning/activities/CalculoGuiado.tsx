@@ -42,8 +42,13 @@ export function CalculoGuiado({ actividad }: Props) {
         <span className="pl-step-count">Paso {stepIndex + 1} / {config.pasos.length}</span>
       </div>
       <div className="pl-data-grid">
-        {config.datos.map((item) => <div className="pl-data-tile" key={item.id}><span>{item.etiqueta}</span><strong>{item.valor} {item.unidad}</strong></div>)}
-      </div>
+  {Array.isArray(config?.datos) && config.datos.map((item: any, index: number) => (
+    <div className="pl-data-tile" key={item.id || index}>
+      <span>{item.etiqueta || item.variable}</span>
+      <strong>{item.valor} {item.unidad}</strong>
+    </div>
+  ))}
+</div>
       <div className="pl-formula-box"><span>Fórmula principal</span><strong>{config.formula_principal}</strong><small>{config.nota_unidades}</small></div>
       <div className="pl-step-progress" aria-label="Pasos del cálculo">
         {config.pasos.map((item, index) => <span key={item.id} className={verified[item.id] ? "is-done" : index === stepIndex ? "is-current" : ""}>{verified[item.id] ? "✓" : index + 1}</span>)}
