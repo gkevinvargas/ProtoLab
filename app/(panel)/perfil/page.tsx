@@ -165,7 +165,7 @@ export default function PerfilPage() {
               </span>
             </div>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   );
