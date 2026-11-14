@@ -1,6 +1,7 @@
 // components/datalab/datalab-overview.tsx
 "use client";
 
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DatasetTable } from './dataset-table';
@@ -11,6 +12,25 @@ import {
   IconTable, IconChartLine, IconChartBar, IconArrowRight, IconDatabase, IconTerminal 
 } from '@tabler/icons-react';
 import { BannerPractica } from '../ui/labs/banner';
+=======
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { DatasetTable } from "./dataset-table";
+import { DataChart } from "./data-chart";
+import { DataLabResults } from "./datalab-results";
+import { BannerPractica } from "@/components/ui/labs/banner";
+import {
+  IconChartHistogram,
+  IconRefresh,
+  IconBolt,
+  IconTable,
+  IconChartLine,
+  IconChartBar,
+  IconArrowRight,
+  IconDatabase,
+  IconTerminal,
+} from "@tabler/icons-react";
+>>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
 
 interface DataLabOverviewProps {
   onApproved?: (puntaje: number) => void;
@@ -141,7 +161,7 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
     {
       id: 7,
       tituloDataset: "DL-CT-04: Modelado Predictivo",
-      pregunta: "En la última fase de validación de modelos, ¿qué indicador confirma la estabilidad del conjunto analizado?",
+      pregunta: "En la última fase de validación de modelos, qué indicador confirma la estabilidad del conjunto analizado?",
       opciones: [
         { letra: "A", texto: "Baja dispersión y convergencia en los residuos del modelo", correcta: true },
         { letra: "B", texto: "Saturación total de la memoria RAM del servidor", correcta: false },
@@ -361,6 +381,12 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
   return (
     <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <main className="max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col gap-6">
+        <BannerPractica
+          nombreLaboratorio="DataLab"
+          nombrePractica="Análisis de conjunto de datos"
+          nivelPractica="Nivel intermedio"
+          descripcionPractica="Laboratorio interactivo de análisis, visualización y formulación de hipótesis con datos reales."
+        />
 
         {/* ENCABEZADO */}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">

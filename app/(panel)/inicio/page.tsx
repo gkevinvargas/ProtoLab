@@ -334,7 +334,8 @@ export default function Home() {
                     {resumenRuta.actividades.map((clase) => (
                       <li
                         key={clase.id}
-                        className={`rounded-lg border p-2 ${clase.completada
+                        className={`rounded-lg border p-2 ${
+                          clase.completada
                             ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                             : clase.id === resumenRuta.siguiente?.id
                             ? "border-blue-200 bg-blue-50 text-blue-900"
@@ -414,14 +415,14 @@ export default function Home() {
             const Icono = module.icon;
 
             return (
-
               <Link key={module.name} href={module.href}>
                 <article
                   aria-disabled={!disponible}
-                  className={`rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 ${disponible
+                  className={`rounded-2xl border border-[#E7EDF5] bg-white p-6 transition duration-200 ${
+                    disponible
                       ? "group hover:translate-y-1 hover:border-[#C8D9F5] hover:shadow-lg hover:shadow-blue-100/50"
                       : "cursor-not-allowed opacity-65"
-                    }`}
+                  }`}
                 >
                   <div className="mb-5 flex items-center justify-between">
                     <div
@@ -431,34 +432,35 @@ export default function Home() {
                     </div>
 
                     <span
-                      className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${disponible
+                      className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
+                        disponible
                           ? "bg-emerald-50 text-emerald-700"
                           : "bg-slate-100 text-slate-500"
-                        }`}
+                      }`}
                     >
                       {!disponible && <IconLock size={13} />}
                       {disponible ? "Disponible" : "Bloqueado"}
                     </span>
                   </div>
 
+<<<<<<< HEAD
                   <h3 className="text-lg font-extrabold">
                     {module.name}
                   </h3>
 
+=======
+>>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
                   <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
                     {module.description}
                   </p>
 
                   <div className="mt-5 flex items-center justify-between">
                     {disponible ? (
-                      <Link
-                        href={module.href}
-                        className={`text-sm font-bold ${module.accent}`}
-                      >
+                      <span className={`text-sm font-bold ${module.accent}`}>
                         {esDiagnostico
                           ? "Realizar diagnóstico"
                           : "Explorar área"}
-                      </Link>
+                      </span>
                     ) : (
                       <span className="text-sm font-semibold text-slate-400">
                         Confirma tu diagnóstico para acceder
@@ -475,7 +477,10 @@ export default function Home() {
                   </div>
                 </article>
               </Link>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
             );
           })}
         </div>
