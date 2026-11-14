@@ -45,7 +45,7 @@
               <div><div className="flex items-center gap-2 text-[11px] text-[#718096]"><span>ElectroLab</span><Icon name="chevron" size={12}/><span className="text-[#526575]">Prácticas</span></div><h1 className="mt-1 text-[15px] font-semibold tracking-tight text-[#24324A] sm:text-base">Editor de circuitos</h1></div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
-              <span className="hidden items-center gap-2 rounded-full border border-[#E7EDF5] bg-[#F7FAFC] px-3 py-1.5 text-[11px] text-[#718096] lg:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400"/> JSON local</span>
+              <span className="hidden items-center gap-2 rounded-full border border-[rgb(24,109,220)] bg-[#F7FAFC] px-3 py-1.5 text-[11px] text-[#718096] lg:flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400"/> JSON local</span>
               <input ref={practiceFileInputRef} type="file" accept=".json,application/json" className="sr-only" onChange={handlePracticeFileChange} aria-label="Seleccionar archivo JSON de una práctica" />
               {!onApproved && (
                 <button type="button" onClick={() => practiceFileInputRef.current?.click()} className="flex items-center gap-2 rounded-lg border border-[#C9BDF0] bg-[#F0EAFE] px-3 py-2 text-xs font-semibold text-[#7654C5] transition hover:bg-[#E9E1FC]"><Icon name="upload" size={15}/><span>Cargar JSON</span></button>
