@@ -1,31 +1,54 @@
 // components/datalab/datalab-overview.tsx
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { DatasetTable } from './dataset-table';
-import { DataChart } from './data-chart';
-import { DataLabResults } from './datalab-results';
-import { 
-  IconChartHistogram, IconRefresh, IconBolt, 
-  IconTable, IconChartLine, IconChartBar, IconArrowRight, IconDatabase, IconTerminal 
-} from '@tabler/icons-react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { DatasetTable } from "./dataset-table";
+import { DataChart } from "./data-chart";
+import { DataLabResults } from "./datalab-results";
+import {
+  IconChartHistogram,
+  IconRefresh,
+  IconBolt,
+  IconTable,
+  IconChartLine,
+  IconChartBar,
+  IconArrowRight,
+  IconDatabase,
+  IconTerminal,
+} from "@tabler/icons-react";
 
-export const DataLabOverview = () => {
+interface DataLabOverviewProps {
+  onApproved?: (puntaje: number) => void;
+  onReset?: () => void;
+}
+
+export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
+  onApproved,
+  onReset,
+}) => {
   const router = useRouter();
+
   const [pasoActivo, setPasoActivo] = useState(0);
-  const [tipoGrafica, setTipoGrafica] = useState<'barras' | 'dispersion' | 'libre'>('barras');
-  const [respuestaTecnica, setRespuestaTecnica] = useState('');
-  const [filtroTabla, setFiltroTabla] = useState('Todo');
+  const [tipoGrafica, setTipoGrafica] = useState<
+    "barras" | "dispersion" | "libre"
+  >("barras");
+  const [respuestaTecnica, setRespuestaTecnica] = useState("");
+  const [filtroTabla, setFiltroTabla] = useState("Todo");
 
   const [aciertos, setAciertos] = useState(0);
+  const [practicasCompletadas, setPracticasCompletadas] = useState<number[]>([]);
   const [puntosXP, setPuntosXP] = useState(0);
   const [modalAbierto, setModalAbierto] = useState(false);
   const [fueExito, setFueExito] = useState(false);
 
-  // Estado para alternar a la interfaz completamente distinta de Base de Datos
-  const [vistaActual, setVistaActual] = useState<'datalab' | 'database_lab'>('datalab');
-  const [querySql, setQuerySql] = useState("SELECT * FROM fact_consumo_energetico WHERE zona = 'Centro' LIMIT 5;");
+  // Alterna entre las prácticas de DataLab y Database Studio.
+  const [vistaActual, setVistaActual] = useState<
+    "datalab" | "database_lab"
+  >("datalab");
+  const [querySql, setQuerySql] = useState(
+    "SELECT * FROM fact_consumo_energetico WHERE zona = 'Centro' LIMIT 5;"
+  );
   const [resultadoQuery, setResultadoQuery] = useState(false);
 
   // Secuencia de los 8 módulos normales
@@ -149,32 +172,113 @@ export const DataLabOverview = () => {
 
   const contenidoActual = secuenciaCurricula[pasoActivo] || secuenciaCurricula[0];
 
+  // Avanza únicamente después de aprobar la práctica actual.
   const handleNextStep = () => {
-    if (pasoActivo < secuenciaCurricula.length - 1) {
-      setPasoActivo(prev => prev + 1);
-      setRespuestaTecnica('');
-    } else {
-      // AQUÍ OCURRE LA MAGIA: Al presionar el botón en el último módulo, 
-      // cambiamos a la interfaz totalmente distinta de Base de Datos.
-      setVistaActual('database_lab');
+    if (!fueExito) return;
+
+    // Incluye la práctica actual para evitar depender de una actualización
+    // de estado que pudiera seguir pendiente.
+    const completadas = new Set(practicasCompletadas);
+    completadas.add(pasoActivo);
+
+    const nuevasCompletadas = Array.from(completadas);
+    setPracticasCompletadas(nuevasCompletadas);
+
+    // Si el usuario seleccionó los módulos en otro orden, busca el siguiente
+    // que todavía no haya aprobado.
+    const siguientePendiente = secuenciaCurricula.find(
+      ({ id }) => !completadas.has(id)
+    );
+
+    setRespuestaTecnica("");
+    setFueExito(false);
+    setModalAbierto(false);
+
+    if (siguientePendiente) {
+      setPasoActivo(siguientePendiente.id);
+      return;
     }
+
+    // Database Studio solo se abre después de aprobar las ocho prácticas.
+    setVistaActual("database_lab");
   };
 
+  // Evalúa la respuesta seleccionada y registra cada práctica una sola vez.
   const procesarEvaluacion = () => {
     if (!respuestaTecnica) {
       alert("Por favor selecciona una opción antes de evaluar.");
       return;
     }
 
-    const opcionSeleccionada = contenidoActual.opciones.find(op => op.letra === respuestaTecnica);
-    const esCorrecto = opcionSeleccionada ? opcionSeleccionada.correcta : false;
+    const opcionSeleccionada = contenidoActual.opciones.find(
+      (op) => op.letra === respuestaTecnica
+    );
+    const esCorrecto = opcionSeleccionada?.correcta ?? false;
 
     setFueExito(esCorrecto);
-    if (esCorrecto) {
-      setAciertos(prev => prev + 1);
-      setPuntosXP(prev => prev + 100);
-    }
     setModalAbierto(true);
+
+    if (
+      esCorrecto &&
+      !practicasCompletadas.includes(pasoActivo)
+    ) {
+      setPracticasCompletadas((actuales) =>
+        actuales.includes(pasoActivo)
+          ? actuales
+          : [...actuales, pasoActivo]
+      );
+      setAciertos((prev) => prev + 1);
+      setPuntosXP((prev) => prev + 100);
+    }
+  };
+
+  // Reinicia DataLab. Si el componente padre administra el avance,
+  // delega el reinicio para mantener sincronizada la ruta.
+  const reiniciar = () => {
+    if (onReset) {
+      onReset();
+      return;
+    }
+
+    setPasoActivo(0);
+    setTipoGrafica("barras");
+    setRespuestaTecnica("");
+    setFiltroTabla("Todo");
+    setAciertos(0);
+    setPracticasCompletadas([]);
+    setPuntosXP(0);
+    setModalAbierto(false);
+    setFueExito(false);
+    setVistaActual("datalab");
+    setQuerySql(
+      "SELECT * FROM fact_consumo_energetico WHERE zona = 'Centro' LIMIT 5;"
+    );
+    setResultadoQuery(false);
+  };
+
+  // Registra la aprobación final únicamente después de completar
+  // las ocho prácticas y ejecutar la consulta de Database Studio.
+  const finalizarPractica = () => {
+    if (practicasCompletadas.length !== secuenciaCurricula.length) {
+      alert("Debes aprobar las ocho prácticas antes de continuar.");
+      return;
+    }
+
+    if (!resultadoQuery) {
+      alert("Primero ejecuta la consulta SQL.");
+      return;
+    }
+
+    const puntaje = Math.round(
+      (practicasCompletadas.length / secuenciaCurricula.length) * 100
+    );
+
+    if (onApproved) {
+      onApproved(puntaje);
+      return;
+    }
+
+    router.push("/electrolab");
   };
 
   // =========================================================================
@@ -195,8 +299,8 @@ export const DataLabOverview = () => {
           </div>
           <div className="flex items-center gap-3">
             <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-lg border border-emerald-500/20">PostgreSQL / SQL Activo</span>
-            <button 
-              onClick={() => setVistaActual('datalab')} 
+            <button
+              onClick={() => setVistaActual('datalab')}
               className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-colors cursor-pointer border border-slate-700"
             >
               ← Regresar a DataLab
@@ -213,13 +317,13 @@ export const DataLabOverview = () => {
             <p className="text-xs text-slate-400 leading-relaxed">
               Escribe y ejecuta consultas SQL directamente sobre el esquema relacional de consumo energético para validar la integridad de los datos almacenados:
             </p>
-            <textarea 
+            <textarea
               rows={6}
               value={querySql}
               onChange={(e) => setQuerySql(e.target.value)}
               className="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 font-mono text-xs text-emerald-300 outline-none focus:border-emerald-500 shadow-inner"
             />
-            <button 
+            <button
               onClick={() => setResultadoQuery(true)}
               className="py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-widest transition-colors cursor-pointer shadow-lg shadow-emerald-900/20 flex items-center justify-center gap-2"
             >
@@ -232,7 +336,7 @@ export const DataLabOverview = () => {
             <h3 className="text-sm font-bold text-cyan-400 flex items-center gap-2">
               <IconTable size={18} /> Salida del Servidor de Base de Datos
             </h3>
-            
+
             <div className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-xs font-mono text-slate-300 overflow-x-auto min-h-[160px] flex flex-col justify-center">
               {resultadoQuery ? (
                 <table className="w-full text-left">
@@ -257,11 +361,17 @@ export const DataLabOverview = () => {
 
             <div className="pt-2 border-t border-slate-700/60 flex flex-col gap-3">
               <span className="text-[11px] text-slate-400">¿Has completado la validación de la base de datos?</span>
-              <button 
-                onClick={() => router.push('/electrolab')}
-                className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={finalizarPractica}
+                disabled={
+                  !resultadoQuery ||
+                  practicasCompletadas.length !== secuenciaCurricula.length
+                }
+                className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2"
               >
-                <span>Finalizar Práctica y Saltar a ElectroLab</span> <IconArrowRight size={16} />
+                <span>Finalizar práctica y continuar</span>
+                <IconArrowRight size={16} />
               </button>
             </div>
           </div>
@@ -276,7 +386,7 @@ export const DataLabOverview = () => {
   return (
     <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <main className="max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col gap-6">
-        
+
         {/* ENCABEZADO */}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center gap-3">
@@ -288,6 +398,16 @@ export const DataLabOverview = () => {
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Módulo #{pasoActivo + 1} de {secuenciaCurricula.length}
             </span>
             <span className="text-cyan-600 font-semibold bg-cyan-50 px-2.5 py-1 rounded-lg border border-cyan-100">Sincronizado</span>
+            <button
+              type="button"
+              onClick={reiniciar}
+              className="text-slate-500 hover:text-slate-800 font-semibold transition-colors"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <IconRefresh size={15} />
+                Reiniciar
+              </span>
+            </button>
           </div>
         </div>
 
@@ -296,13 +416,16 @@ export const DataLabOverview = () => {
           {datasetsMock.map((ds) => (
             <button
               key={ds.id}
+              type="button"
               onClick={() => {
                 setPasoActivo(ds.id);
-                setRespuestaTecnica('');
+                setRespuestaTecnica("");
+                setFueExito(false);
+                setModalAbierto(false);
               }}
               className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                pasoActivo === ds.id 
-                  ? 'bg-cyan-50/80 border-cyan-300 shadow-sm ring-2 ring-cyan-500/10' 
+                pasoActivo === ds.id
+                  ? 'bg-cyan-50/80 border-cyan-300 shadow-sm ring-2 ring-cyan-500/10'
                   : 'bg-white border-slate-200 hover:border-slate-300'
               }`}
             >
@@ -316,7 +439,7 @@ export const DataLabOverview = () => {
 
         {/* SECCIÓN PRINCIPAL: TABLA Y GRÁFICA */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
+
           <div className="lg:col-span-5 flex flex-col gap-4">
             <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center justify-between mb-4">
@@ -376,7 +499,7 @@ export const DataLabOverview = () => {
 
         {/* SECCIÓN INFERIOR: DESAFÍO Y PROGRESO */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pb-8">
-          
+
           <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <span className="text-xs font-extrabold tracking-wider text-slate-900 uppercase">
@@ -395,8 +518,8 @@ export const DataLabOverview = () => {
                   key={idx}
                   onClick={() => setRespuestaTecnica(op.letra)}
                   className={`p-4 rounded-xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
-                    respuestaTecnica === op.letra 
-                      ? 'bg-cyan-50 border-cyan-300 font-semibold text-cyan-900 shadow-sm' 
+                    respuestaTecnica === op.letra
+                      ? 'bg-cyan-50 border-cyan-300 font-semibold text-cyan-900 shadow-sm'
                       : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
@@ -408,7 +531,7 @@ export const DataLabOverview = () => {
               ))}
             </div>
 
-            <button 
+            <button
               onClick={procesarEvaluacion}
               disabled={!respuestaTecnica}
               className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-sm"
@@ -444,9 +567,11 @@ export const DataLabOverview = () => {
             </div>
 
             <div className="flex flex-col gap-2.5">
-              <button 
+              <button
+                type="button"
                 onClick={handleNextStep}
-                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                disabled={!fueExito}
+                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Siguiente Dataset o Módulo</span> <IconArrowRight size={16} />
               </button>
@@ -457,15 +582,19 @@ export const DataLabOverview = () => {
 
       </main>
 
-      <DataLabResults 
-        isOpen={modalAbierto} 
+      <DataLabResults
+        isOpen={modalAbierto}
         esExito={fueExito}
         mensajeExito={contenidoActual.mensajeExito}
         mensajeError={contenidoActual.mensajeError}
-        onReintentar={() => setModalAbierto(false)}
+        onReintentar={() => {
+          setModalAbierto(false);
+          setFueExito(false);
+          setRespuestaTecnica("");
+        }}
         onAvanzar={() => {
           setModalAbierto(false);
-          setRespuestaTecnica('');
+          setRespuestaTecnica("");
           handleNextStep();
         }}
       />

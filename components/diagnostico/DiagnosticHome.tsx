@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import diagnosticPublicContent from "@/data/diagnostico/diagnostic-public.json";
 
@@ -60,6 +60,179 @@ const nombresLaboratorios = Object.fromEntries(laboratorios);
 const clasificaciones = ["Principal", "Complementaria", "Exploratoria"];
 const pasosAprendizaje = ["Empieza en", "Complementa con"];
 
+const CLAVE_RUTA_APRENDIZAJE = "protolab:ruta-aprendizaje";
+const CLAVE_RUTA_PROVISIONAL = "protolab:ruta-aprendizaje:provisional";
+
+type PuntajesDiagnostico = {
+  aptitudes: DiagnosticAptitudeScores;
+  intereses: Record<DiagnosticAreaId, number>;
+  presenciaEmpresarial: Record<DiagnosticAreaId, number> | null;
+  rankingPreliminar: DiagnosticPreliminaryRanking;
+};
+
+type RutaProvisional = {
+  version: 1;
+  orden: [DiagnosticAreaId, DiagnosticAreaId, DiagnosticAreaId];
+  puntajes: PuntajesDiagnostico;
+  prioridadesEmpate: DiagnosticAreaId[];
+  selectedInterests: string[];
+  answers: DiagnosticAnswer[];
+  guardadaEn: string;
+};
+
+function esObjeto(valor: unknown): valor is Record<string, unknown> {
+  return typeof valor === "object" && valor !== null && !Array.isArray(valor);
+}
+
+function esAreaDiagnostica(valor: unknown): valor is DiagnosticAreaId {
+  return valor === "robolab" || valor === "electrolab" || valor === "datalab";
+}
+
+function esRegistroDePuntajes(
+  valor: unknown
+): valor is Record<DiagnosticAreaId, number> {
+  return (
+    esObjeto(valor) &&
+    ["robolab", "electrolab", "datalab"].every(
+      (area) =>
+        typeof valor[area] === "number" &&
+        Number.isFinite(valor[area])
+    )
+  );
+}
+
+function esRespuestaDiagnostica(valor: unknown): valor is DiagnosticAnswer {
+  return (
+    esObjeto(valor) &&
+    typeof valor.identificador_pregunta === "string" &&
+    Array.isArray(valor.opciones_seleccionadas) &&
+    valor.opciones_seleccionadas.every(
+      (opcion) => typeof opcion === "string"
+    )
+  );
+}
+
+function esPuntajeDeAptitud(
+  valor: unknown
+): valor is { puntos: number; maximo: number } {
+  return (
+    esObjeto(valor) &&
+    typeof valor.puntos === "number" &&
+    Number.isFinite(valor.puntos) &&
+    typeof valor.maximo === "number" &&
+    Number.isFinite(valor.maximo)
+  );
+}
+
+function esPuntajesDiagnostico(
+  valor: unknown
+): valor is PuntajesDiagnostico {
+  if (!esObjeto(valor)) return false;
+
+  const aptitudes = valor.aptitudes;
+
+  if (!esObjeto(aptitudes)) return false;
+
+  const areas: DiagnosticAreaId[] = [
+    "robolab",
+    "electrolab",
+    "datalab",
+  ];
+
+  const aptitudesValidas = areas.every((area) =>
+    esPuntajeDeAptitud(aptitudes[area])
+  );
+
+  const presenciaEmpresarial = valor.presenciaEmpresarial;
+
+  const presenciaValida =
+    presenciaEmpresarial === null ||
+    esRegistroDePuntajes(presenciaEmpresarial);
+
+  const ranking = valor.rankingPreliminar;
+
+  const rankingValido =
+    Array.isArray(ranking) &&
+    ranking.every(
+      (grupo) =>
+        esObjeto(grupo) &&
+        typeof grupo.puntuacion === "number" &&
+        Number.isFinite(grupo.puntuacion) &&
+        Array.isArray(grupo.areas) &&
+        grupo.areas.length > 0 &&
+        grupo.areas.every(esAreaDiagnostica)
+    );
+
+  return (
+    aptitudesValidas &&
+    esRegistroDePuntajes(valor.intereses) &&
+    presenciaValida &&
+    rankingValido
+  );
+}
+
+/**
+ * Recupera y valida la ruta provisional almacenada en este navegador.
+ * No realiza ninguna petición al servidor, por lo que funciona sin internet.
+ */
+function leerRutaProvisional(): RutaProvisional | null {
+  try {
+    const guardada = localStorage.getItem(CLAVE_RUTA_PROVISIONAL);
+    if (!guardada) return null;
+
+    const datos: unknown = JSON.parse(guardada);
+
+    if (!esObjeto(datos)) return null;
+
+    const ordenValido =
+      Array.isArray(datos.orden) &&
+      datos.orden.length === 3 &&
+      datos.orden.every(esAreaDiagnostica) &&
+      new Set(datos.orden).size === 3;
+
+    const ranking = esPuntajesDiagnostico(datos.puntajes)
+      ? datos.puntajes.rankingPreliminar.flatMap((grupo) => grupo.areas)
+      : [];
+
+    const rankingValido =
+      ranking.length === 3 &&
+      ranking.every(esAreaDiagnostica) &&
+      new Set(ranking).size === 3;
+
+    const prioridadesValidas =
+      Array.isArray(datos.prioridadesEmpate) &&
+      datos.prioridadesEmpate.every(esAreaDiagnostica) &&
+      new Set(datos.prioridadesEmpate).size === datos.prioridadesEmpate.length;
+
+    const interesesValidos =
+      Array.isArray(datos.selectedInterests) &&
+      datos.selectedInterests.every(
+        (interes) => typeof interes === "string"
+      );
+
+    const respuestasValidas =
+      Array.isArray(datos.answers) &&
+      datos.answers.every(esRespuestaDiagnostica);
+
+    if (
+      datos.version !== 1 ||
+      !ordenValido ||
+      !esPuntajesDiagnostico(datos.puntajes) ||
+      !rankingValido ||
+      !prioridadesValidas ||
+      !interesesValidos ||
+      !respuestasValidas ||
+      typeof datos.guardadaEn !== "string"
+    ) {
+      return null;
+    }
+
+    return datos as unknown as RutaProvisional;
+  } catch {
+    return null;
+  }
+}
+
 export default function DiagnosticHome() {
   const [step, setStep] = useState<"interests" | "questions">("interests");
 
@@ -69,12 +242,7 @@ export default function DiagnosticHome() {
 
   const [showValidation, setShowValidation] = useState(false);
 
-  const [puntajes, setPuntajes] = useState<{
-    aptitudes: DiagnosticAptitudeScores;
-    intereses: Record<DiagnosticAreaId, number>;
-    presenciaEmpresarial: Record<DiagnosticAreaId, number> | null;
-    rankingPreliminar: DiagnosticPreliminaryRanking;
-  } | null>(null);
+  const [puntajes, setPuntajes] = useState<PuntajesDiagnostico | null>(null);
 
   const [mensajeRuta, setMensajeRuta] = useState("");
 
@@ -83,6 +251,22 @@ export default function DiagnosticHome() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [serverErrors, setServerErrors] = useState<string[]>([]);
+
+  // Recuperar una ruta provisional al volver a abrir el diagnóstico.
+  useEffect(() => {
+    const provisional = leerRutaProvisional();
+
+    if (!provisional) return;
+
+    setStep("questions");
+    setSelectedInterests(provisional.selectedInterests);
+    setAnswers(provisional.answers);
+    setPuntajes(provisional.puntajes);
+    setPrioridadesEmpate(provisional.prioridadesEmpate);
+    setMensajeRuta(
+      "Recuperamos tu ruta provisional guardada en este dispositivo. Puedes confirmarla para continuar."
+    );
+  }, []);
 
   let posicionInicial = 0;
   const gruposRanking = (puntajes?.rankingPreliminar ?? []).map(({ puntuacion, areas }) => {
@@ -96,18 +280,88 @@ export default function DiagnosticHome() {
   });
   const ordenAprendizaje = gruposRanking.flatMap(({ ordenadas }) => ordenadas);
   const rutaLista = ordenAprendizaje.length === laboratorios.length;
+  const ordenRutaKey = ordenAprendizaje.join("|");
+
+  // Guardar automáticamente la ruta completa cuando se genera.
+  // El almacenamiento local no requiere conexión a internet.
+  useEffect(() => {
+    if (!puntajes || !rutaLista) return;
+
+    try {
+      const orden = ordenRutaKey.split("|") as [
+        DiagnosticAreaId,
+        DiagnosticAreaId,
+        DiagnosticAreaId
+      ];
+
+      const provisional: RutaProvisional = {
+        version: 1,
+        orden,
+        puntajes,
+        prioridadesEmpate,
+        selectedInterests,
+        answers,
+        guardadaEn: new Date().toISOString(),
+      };
+
+      localStorage.setItem(
+        CLAVE_RUTA_PROVISIONAL,
+        JSON.stringify(provisional)
+      );
+
+      setMensajeRuta(
+        "Ruta guardada provisionalmente en este dispositivo. Confírmala para activar tu ruta de aprendizaje."
+      );
+    } catch {
+      setMensajeRuta(
+        "No se pudo guardar provisionalmente la ruta. Comprueba el almacenamiento del navegador."
+      );
+    }
+  }, [
+    puntajes,
+    rutaLista,
+    ordenRutaKey,
+    prioridadesEmpate,
+    selectedInterests,
+    answers,
+  ]);
 
   function guardarRuta() {
     if (!rutaLista) return;
 
     try {
+      // Se prefiere la copia provisional para confirmar exactamente
+      // la ruta que se guardó automáticamente.
+      const provisional = leerRutaProvisional();
+      const orden = provisional?.orden ?? ordenAprendizaje;
+
+      if (
+        orden.length !== laboratorios.length ||
+        !orden.every(esAreaDiagnostica) ||
+        new Set(orden).size !== laboratorios.length
+      ) {
+        setMensajeRuta(
+          "La ruta provisional no es válida. Vuelve a generar el diagnóstico."
+        );
+        return;
+      }
+
+      // Se conserva el formato de dos áreas que ya utiliza ProtoLab.
       localStorage.setItem(
-        "protolab:ruta-aprendizaje",
-        JSON.stringify(ordenAprendizaje.slice(0, 2))
+        CLAVE_RUTA_APRENDIZAJE,
+        JSON.stringify(orden.slice(0, 2))
       );
-      setMensajeRuta("Tu ruta quedó guardada en este navegador.");
+
+      // La copia provisional se elimina únicamente después de confirmar.
+      localStorage.removeItem(CLAVE_RUTA_PROVISIONAL);
+
+      setMensajeRuta(
+        "¡Ruta confirmada correctamente! Ya puedes comenzar tu aprendizaje."
+      );
     } catch {
-      setMensajeRuta("No se pudo guardar la ruta en este navegador.");
+      setMensajeRuta(
+        "No se pudo confirmar la ruta. Inténtalo nuevamente."
+      );
     }
   }
 
@@ -135,11 +389,26 @@ export default function DiagnosticHome() {
       return [...current, interestId];
     });
 
+    setPuntajes(null);
+    setPrioridadesEmpate([]);
+    setMensajeRuta("");
     setServerErrors([]);
+
+    try {
+      localStorage.removeItem(CLAVE_RUTA_PROVISIONAL);
+    } catch {
+      // La validación y el guardado mostrarán el error si el almacenamiento falla.
+    }
   }
 
   function handleContinue() {
     if (!canContinue) return;
+
+    try {
+      localStorage.removeItem(CLAVE_RUTA_PROVISIONAL);
+    } catch {
+      // No se interrumpe el diagnóstico si el navegador bloquea el almacenamiento.
+    }
 
     setStep("questions");
     setShowValidation(false);
@@ -158,7 +427,15 @@ export default function DiagnosticHome() {
     optionId: string
   ) {
     setPuntajes(null);
+    setPrioridadesEmpate([]);
+    setMensajeRuta("");
     setServerErrors([]);
+
+    try {
+      localStorage.removeItem(CLAVE_RUTA_PROVISIONAL);
+    } catch {
+      // No se interrumpe la edición de respuestas.
+    }
 
     setAnswers((current) => {
       const existing = current.find(
@@ -757,7 +1034,7 @@ export default function DiagnosticHome() {
                       onClick={guardarRuta}
                       className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                     >
-                      Guardar ruta de aprendizaje
+                      Confirmar ruta de aprendizaje
                     </button>
                     <p role="status" className="mt-2 text-sm text-slate-600">
                       {mensajeRuta}
