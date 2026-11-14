@@ -1,10 +1,10 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
   "identificador": "DL-CT-02",
   "laboratorio_id": "datalab",
-  "tipo_contenido": "clase_teorica",
-  "estado_publicacion": "borrador",
+  "tipo_contenido": "teoria_interactiva",
+  "estado_publicacion": "publicado",
   "titulo": "Filtrado analítico y toma de decisiones",
   "descripcion": "Descubre cómo aislar subconjuntos de datos mediante filtros condicionales para extraer conclusiones precisas en escenarios complejos.",
   "orden": 2,
@@ -16,18 +16,92 @@
   ],
   "secciones": [
     {
+      "id": "sec-1",
       "titulo": "El propósito del filtrado de datos",
-      "parrafos": [
-        "Cuando manejamos grandes volúmenes de información, observar todos los registros a la vez dificulta la detección de patrones.",
-        "Filtrar por categorías específicas (como 'Horas Pico' o 'Valle nocturno') permite aislar comportamientos particulares y evaluar su impacto real."
-      ]
+      "contenido": "Cuando manejamos grandes volúmenes de información, observar todos los registros a la vez dificulta la detección de patrones. Filtrar por categorías específicas (como 'Horas Pico' o 'Valle nocturno') permite aislar comportamientos particulares y evaluar su impacto real."
     },
     {
+      "id": "sec-2",
       "titulo": "Correlación entre variables operativas",
-      "parrafos": [
-        "El análisis avanzado busca relaciones causales entre distintos conjuntos de datos, como el rendimiento académico frente al consumo de recursos en un makerspace.",
-        "Cruzar estas variables evita conjeturas subjetivas y fortalece el pensamiento crítico basado en métricas."
-      ]
+      "contenido": "El análisis avanzado busca relaciones causales entre distintos conjuntos de datos, como el rendimiento académico frente al consumo de recursos en un makerspace. Cruzar estas variables evita conjeturas subjetivas y fortalece el pensamiento crítico basado en métricas."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "act-1",
+      "tipo": "ordenar_bloques",
+      "titulo": "Secuencia de Filtrado Cruzado",
+      "instrucciones": "Ordena los pasos lógicos necesarios para aplicar un filtrado analítico exitoso en el explorador de registros.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "Cargar el dataset bruto en la tabla interactiva."
+          },
+          {
+            "id": "b2",
+            "texto": "Seleccionar las variables o categorías a cruzar (ej. Horas Pico vs. Valle)."
+          },
+          {
+            "id": "b3",
+            "texto": "Aplicar el filtro condicional para aislar el subconjunto de interés."
+          },
+          {
+            "id": "b4",
+            "texto": "Analizar el resultado y sustentar la decisión técnica con evidencia."
+          }
+        ],
+        "orden_correcto": [
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "retroalimentacion": "¡Excelente! Seguir este orden metodológico garantiza un análisis estructurado y libre de sesgos subjetivos."
+      }
+    },
+    {
+      "id": "act-2",
+      "tipo": "calculo_guiado",
+      "titulo": "Cálculo de Proporción por Filtrado",
+      "instrucciones": "Calcula el porcentaje que representan los registros de 'Horas Pico' si se aislaron 50 registros de un total de 200 en la muestra.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "datos": {
+          "registros_filtrados": {
+            "valor": 50,
+            "unidad": "registros"
+          },
+          "total_muestra": {
+            "valor": 200,
+            "unidad": "registros"
+          }
+        },
+        "formula_principal": "Proporción (%) = (Registros Filtrados / Total Muestra) * 100",
+        "pasos": [
+          {
+            "consigna": "Divide los registros filtrados (50) entre el total de la muestra (200).",
+            "formula": "División = 50 / 200",
+            "respuesta_esperada": 0.25,
+            "unidad": "adimensional",
+            "tolerancia": 0.01,
+            "explicacion": "La proporción del subconjunto aislado es 0.25 respecto al total."
+          },
+          {
+            "consigna": "Multiplica el resultado anterior por 100 para obtener el porcentaje.",
+            "formula": "Porcentaje = 0.25 * 100",
+            "respuesta_esperada": 25,
+            "unidad": "%",
+            "tolerancia": 0,
+            "explicacion": "El subconjunto filtrado representa el 25% de la carga total analizada."
+          }
+        ]
+      }
     }
   ],
   "prepara_para": [

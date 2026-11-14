@@ -23,50 +23,44 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-      <div 
-        className={`w-full max-w-md p-8 rounded-2xl shadow-2xl border-2 transform transition-all scale-100 ${
-          esExito ? 'bg-slate-900 border-green-500' : 'bg-slate-900 border-red-500'
-        }`}
-      >
-        {/* 1. Icono visual de estado */}
-        <div className="flex justify-center mb-6">
-          {esExito ? (
-            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.5)]">
-              <span className="text-white text-5xl font-bold">✓</span>
-            </div>
-          ) : (
-            <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-              <span className="text-white text-5xl font-bold">✕</span>
-            </div>
-          )}
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4 animate-fadeIn">
+      <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
+        
+        {/* 1. Icono visual de estado acorde al tema claro */}
+        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm ${
+          esExito 
+            ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' 
+            : 'bg-rose-50 text-rose-600 border border-rose-100'
+        }`}>
+          <span className="text-2xl font-black">{esExito ? '✓' : '✕'}</span>
         </div>
 
-        {/* 2. Título de Retroalimentación */}
-        <h3 className={`text-3xl font-bold text-center mb-4 ${esExito ? 'text-green-400' : 'text-red-400'}`}>
-          {esExito ? '¡Reto Completado!' : 'Hay un detalle...'}
-        </h3>
+        {/* 2. Título y Mensaje de Retroalimentación */}
+        <div className="flex flex-col gap-1.5">
+          <h3 className="text-xl font-black text-slate-900">
+            {esExito ? '¡Reto Completado!' : 'Hay un detalle...'}
+          </h3>
+          
+          <p className="text-slate-600 text-xs leading-relaxed px-2">
+            {esExito ? mensajeExito : mensajeError}
+          </p>
+        </div>
 
-        {/* 3. Mensaje dinámico sacado de tu JSON */}
-        <p className="text-slate-300 text-center text-lg mb-8 leading-relaxed">
-          {esExito ? mensajeExito : mensajeError}
-        </p>
-
-        {/* 4. Bifurcación (Tu diagrama de flujo en código) */}
-        <div className="flex flex-col gap-3">
+        {/* 3. Botones de acción con el estilo corporativo de ProtoLab */}
+        <div className="w-full pt-2">
           {esExito ? (
             <button
               onClick={onAvanzar}
-              className="w-full py-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg uppercase tracking-widest transition-colors flex justify-center items-center gap-2"
+              className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer flex justify-center items-center gap-2 shadow-sm"
             >
-              Guardar en Portafolio <span>→</span>
+              <span>Guardar en Portafolio</span> <span>→</span>
             </button>
           ) : (
             <button
               onClick={onReintentar}
-              className="w-full py-4 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg uppercase tracking-widest transition-colors flex justify-center items-center gap-2"
+              className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer flex justify-center items-center gap-2 shadow-sm"
             >
-              <span>↺</span> Reintentar
+              <span>↺ Reintentar</span>
             </button>
           )}
         </div>

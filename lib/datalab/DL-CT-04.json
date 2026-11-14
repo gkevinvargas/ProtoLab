@@ -1,40 +1,106 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
-  "identificador": "DL-CT-03",
+  "identificador": "DL-CT-04",
   "laboratorio_id": "datalab",
-  "tipo_contenido": "clase_teorica",
-  "estado_publicacion": "borrador",
-  "titulo": "Análisis de Tendencias y Detección de Outliers",
-  "descripcion": "Comprende cómo identificar valores atípicos y proyectar tendencias a futuro mediante el estudio histórico de series temporales.",
-  "orden": 3,
+  "tipo_contenido": "teoria_interactiva",
+  "estado_publicacion": "publicado",
+  "titulo": "Modelado Predictivo y Validación de Modelos",
+  "descripcion": "Aprende los fundamentos de la validación de modelos predictivos mediante el análisis de residuos y la convergencia de datos.",
+  "orden": 4,
   "duracion_estimada_minutos": 15,
   "objetivos": [
-    "Reconocer valores atípicos (outliers) que alteran las métricas promedio de una muestra.",
-    "Interpretar proyecciones de crecimiento basadas en registros históricos.",
-    "Validar la integridad de los datos antes de exportar informes ejecutivos."
+    "Comprender el concepto de residuo en modelos predictivos.",
+    "Identificar indicadores de estabilidad en conjuntos de datos analizados.",
+    "Evaluar la convergencia de modelos matemáticos sencillos."
   ],
   "secciones": [
     {
-      "titulo": "Identificación de valores atípicos",
-      "parrafos": [
-        "Un valor atípico es una observación que se desvía significativamente del resto de la muestra, pudiendo representar errores de medición o eventos extraordinarios.",
-        "Detectar estos puntos evita sesgos analíticos al calcular promedios y desviaciones estándar."
-      ]
+      "id": "sec-1",
+      "titulo": "¿Qué es la Validación Predictiva?",
+      "contenido": "Construir un modelo o tendencia es solo el primer paso; el paso crítico en DataLab es validar su estabilidad. Comprobamos si las predicciones se acercan a la realidad midiendo los errores o residuos."
     },
     {
-      "titulo": "Proyección de tendencias",
-      "parrafos": [
-        "Analizar el comportamiento histórico de los datos permite anticipar escenarios de carga o demanda a mediano plazo.",
-        "Las herramientas visuales de líneas y dispersión facilitan la lectura de estas trayectorias de crecimiento."
-      ]
+      "id": "sec-2",
+      "titulo": "Indicadores de Estabilidad",
+      "contenido": "Una baja dispersión y la convergencia en los residuos del modelo confirman que el conjunto analizado es estable y apto para la toma de decisiones."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "act-1",
+      "tipo": "ordenar_bloques",
+      "titulo": "Pasos para la Validación de Modelos",
+      "instrucciones": "Ordena los pasos lógicos para validar un modelo predictivo en DataLab.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "Generar la predicción del modelo basada en registros históricos."
+          },
+          {
+            "id": "b2",
+            "texto": "Calcular los residuos o diferencias respecto al valor real."
+          },
+          {
+            "id": "b3",
+            "texto": "Evaluar la dispersión y convergencia de los errores."
+          },
+          {
+            "id": "b4",
+            "texto": "Confirmar la estabilidad del modelo para la toma de decisiones."
+          }
+        ],
+        "orden_correcto": [
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "retroalimentacion": "¡Excelente! Este flujo garantiza que el modelo predictivo sea confiable antes de su implementación."
+      }
+    },
+    {
+      "id": "act-2",
+      "tipo": "calculo_guiado",
+      "titulo": "Cálculo del Residuo Absoluto",
+      "instrucciones": "Calcula el residuo (diferencia absoluta) entre el valor real de consumo (500 kWh) y la predicción del modelo (480 kWh).",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "datos": {
+          "valor_real": {
+            "valor": 500,
+            "unidad": "kWh"
+          },
+          "prediccion": {
+            "valor": 480,
+            "unidad": "kWh"
+          }
+        },
+        "formula_principal": "Residuo = |Valor Real - Predicción|",
+        "pasos": [
+          {
+            "consigna": "Resta la predicción al valor real (500 - 480).",
+            "formula": "Residuo = 500 - 480",
+            "respuesta_esperada": 20,
+            "unidad": "kWh",
+            "tolerancia": 0,
+            "explicacion": "El error residual del modelo en esta muestra es de 20 kWh."
+          }
+        ]
+      }
     }
   ],
   "prepara_para": [
     {
-      "practica_id": "DL-PI-03",
+      "practica_id": "DL-PI-04",
       "tipo_contenido": "practica_individual",
-      "aplicacion": "Detectar anomalías en los datasets de crecimiento regional y consumo energético."
+      "aplicacion": "Validar modelos predictivos en el simulador de DataLab."
     }
   ]
 }
