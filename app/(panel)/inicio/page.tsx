@@ -443,13 +443,10 @@ export default function Home() {
                     </span>
                   </div>
 
-<<<<<<< HEAD
                   <h3 className="text-lg font-extrabold">
                     {module.name}
                   </h3>
 
-=======
->>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
                   <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
                     {module.description}
                   </p>
@@ -477,10 +474,6 @@ export default function Home() {
                   </div>
                 </article>
               </Link>
-<<<<<<< HEAD
-
-=======
->>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
             );
           })}
         </div>

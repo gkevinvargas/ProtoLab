@@ -1,7 +1,6 @@
 // components/datalab/datalab-overview.tsx
 "use client";
 
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DatasetTable } from './dataset-table';
@@ -12,25 +11,6 @@ import {
   IconTable, IconChartLine, IconChartBar, IconArrowRight, IconDatabase, IconTerminal 
 } from '@tabler/icons-react';
 import { BannerPractica } from '../ui/labs/banner';
-=======
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import { DatasetTable } from "./dataset-table";
-import { DataChart } from "./data-chart";
-import { DataLabResults } from "./datalab-results";
-import { BannerPractica } from "@/components/ui/labs/banner";
-import {
-  IconChartHistogram,
-  IconRefresh,
-  IconBolt,
-  IconTable,
-  IconChartLine,
-  IconChartBar,
-  IconArrowRight,
-  IconDatabase,
-  IconTerminal,
-} from "@tabler/icons-react";
->>>>>>> 45dbbaaef0157e135edd2829050b3ab83d05b7ad
 
 interface DataLabOverviewProps {
   onApproved?: (puntaje: number) => void;
