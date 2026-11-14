@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
-, "lib/datalab/RL-CT-02"  ],
+    ".next/dev/types/**/*.ts",
+    "lib/datalab/RL-CT-02"
+  ],
   "exclude": ["node_modules"]
 }

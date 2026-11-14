@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "RB-CT-03",
+  "laboratorio_id": "robolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "publicado",
+  "titulo": "Cinemática Básica y Control de Velocidad",
+  "descripcion": "Calcula la distancia recorrida y el tiempo de desplazamiento de Botty para programar trayectorias exactas.",
+  "orden": 3,
+  "duracion_estimada_minutos": 10,
+  "objetivos": [
+    "Relacionar velocidad lineal, distancia y tiempo en un robot móvil.",
+    "Calcular el tiempo necesario para que Botty recorra un tramo recto sin pasarse.",
+    "Integrar tiempos de avance y giro antes de pasar al simulador práctico."
+  ],
+  "secciones": [
+    {
+      "id": "sec-01-cinematica",
+      "titulo": "¿Cómo sabe Botty cuánto avanzar si no tiene GPS?",
+      "contenido": "En robótica móvil básica, cuando no contamos con mapas externos, controlamos el desplazamiento calculando la relación entre la velocidad constante de los motores (v), la distancia objetivo (d) y el tiempo que permanecen encendidos (t)."
+    },
+    {
+      "id": "sec-02-formula",
+      "titulo": "Cálculo de tiempos de ejecución",
+      "contenido": "Si sabemos que Botty avanza a una velocidad constante de 0.25 m/s y necesitamos que recorra exactamente 1.5 metros antes de girar, dividimos la distancia entre la velocidad (t = d / v) para programar los segundos exactos de activación de los motores."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "RB-ACT-05",
+      "tipo": "calculo_guiado",
+      "titulo": "Cálculo de trayectoria recta para Botty",
+      "instrucciones": "Resuelve paso a paso el tiempo que debes programar en los motores para que Botty llegue exactamente a la meta.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "datos": [
+          { "nombre": "Distancia objetivo (d)", "valor": 1.5, "unidad": "m" },
+          { "nombre": "Velocidad lineal de Botty (v)", "valor": 0.25, "unidad": "m/s" }
+        ],
+        "formula_principal": "t = d / v",
+        "pasos": [
+          {
+            "id": "paso-1",
+            "consigna": "Calcula cuántos segundos (t) deben permanecer encendidos los motores para recorrer 1.5 m a 0.25 m/s.",
+            "formula": "t = 1.5 / 0.25",
+            "respuesta_esperada": 6,
+            "unidad": "s",
+            "tolerancia": 0.1,
+            "explicacion": "Al dividir 1.5 metros entre 0.25 m/s obtenemos exactamente 6 segundos de avance continuo."
+          },
+          {
+            "id": "paso-2",
+            "consigna": "Si después de avanzar decides reducir la velocidad a la mitad (0.125 m/s) para recorrer 0.5 m de precisión, ¿cuántos segundos tardará ese segundo tramo?",
+            "formula": "t2 = 0.5 / 0.125",
+            "respuesta_esperada": 4,
+            "unidad": "s",
+            "tolerancia": 0.1,
+            "explicacion": "0.5 metros dividido entre 0.125 m/s equivale a 4 segundos adicionales."
+          }
+        ]
+      }
+    },
+    {
+      "id": "RB-ACT-06",
+      "tipo": "ordenar_bloques",
+      "titulo": "Rutina completa de navegación",
+      "instrucciones": "Ordena la secuencia final de programación antes de abrir el simulador de RoboLab.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "bloques": [
+          { "id": "nav-1", "texto": "Inicializar sensores y calibrar motores a velocidad base." },
+          { "id": "nav-2", "texto": "Avanzar en línea recta durante el tiempo calculado." },
+          { "id": "nav-3", "texto": "Verificar lectura del sensor ultrasónico frente a obstáculos." },
+          { "id": "nav-4", "texto": "Detener motores al alcanzar el punto objetivo." }
+        ],
+        "orden_correcto": ["nav-1", "nav-2", "nav-3", "nav-4"],
+        "permitir_reintentar": true,
+        "retroalimentacion": {
+          "correcto": "¡Listo! Ya tienes toda la base teórica y matemática para superar la práctica en el simulador.",
+          "incorrecto": "Recuerda que siempre debes inicializar y calibrar los componentes antes de iniciar el movimiento."
+        }
+      }
+    }
+  ],
+  "prepara_para": "evasion-obstaculos-botty"
+}

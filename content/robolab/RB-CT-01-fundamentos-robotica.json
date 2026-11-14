@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "RB-CT-01",
+  "laboratorio_id": "robolab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "publicado",
+  "titulo": "Fundamentos de Automatización y Control con Botty",
+  "descripcion": "Comprende cómo un robot móvil percibe su entorno, procesa decisiones lógicas y ejecuta movimientos evitando fallos comunes.",
+  "orden": 1,
+  "duracion_estimada_minutos": 8,
+  "objetivos": [
+    "Identificar la anomalía lógica cuando un robot móvil gira en círculos sin avanzar.",
+    "Distinguir la función de sensores, controladores y actuadores en un sistema autónomo.",
+    "Ordenar el ciclo básico de percepción, decisión y acción en robótica."
+  ],
+  "secciones": [
+    {
+      "id": "sec-01-anomalia",
+      "titulo": "Reto inicial: ¿Por qué Botty se quedó girando en círculos?",
+      "contenido": "Imagina que programas a Botty para avanzar en línea recta por la pista, pero al encenderlo lo único que hace es girar sobre su propio eje infinitamente. Antes de revisar los cables, piensa en la lógica: si el sensor ultrasónico frontal está mal calibrado y detecta un obstáculo fantasma a 0 cm todo el tiempo, el programa entra en su rutina de evasión sin detenerse nunca."
+    },
+    {
+      "id": "sec-02-arquitectura",
+      "titulo": "El ciclo Percepción - Decisión - Acción",
+      "contenido": "Al igual que el sistema de atención de nuestro cerebro filtra estímulos para reaccionar ante lo inesperado, un robot móvil opera en un bucle continuo: los sensores capturan datos del entorno (entradas), el microcontrolador evalúa condiciones lógicas (procesamiento) y los motores ejecutan el movimiento (salidas)."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "RB-ACT-01",
+      "tipo": "ordenar_bloques",
+      "titulo": "Secuencia lógica de evasión de obstáculos",
+      "instrucciones": "Ordena los pasos de arriba hacia abajo según el flujo correcto en el que Botty debe procesar una lectura de su sensor.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "1. El sensor ultrasónico emite un pulso y mide la distancia al frente."
+          },
+          {
+            "id": "b2",
+            "texto": "2. El microcontrolador compara la distancia medida contra el límite de seguridad."
+          },
+          {
+            "id": "b3",
+            "texto": "3. Si hay un obstáculo cerca, el controlador envía la señal de detener avance."
+          },
+          {
+            "id": "b4",
+            "texto": "4. Los actuadores (motores) giran en sentidos opuestos para cambiar de dirección."
+          }
+        ],
+        "orden_correcto": ["b1", "b2", "b3", "b4"],
+        "permitir_reintentar": true,
+        "retroalimentacion": {
+          "correcto": "¡Exacto! Todo sistema autónomo sigue estrictamente el ciclo: capturar dato (sensor), evaluar condición (controlador) y ejecutar movimiento (actuador).",
+          "incorrecto": "Revisa el flujo: el robot no puede decidir ni mover sus motores antes de leer primero la información de su sensor."
+        }
+      }
+    },
+    {
+      "id": "RB-ACT-02",
+      "tipo": "completar_enunciados",
+      "titulo": "Componentes de un sistema robótico",
+      "instrucciones": "Selecciona los bloques correspondientes para completar cada afirmación sobre la arquitectura de Botty.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "seleccionar_bloques",
+        "banco_bloques": [
+          { "id": "blk-sensores", "texto": "sensores" },
+          { "id": "blk-actuadores", "texto": "actuadores" },
+          { "id": "blk-micro", "texto": "microcontrolador" },
+          { "id": "blk-bucle", "texto": "bucle de control" }
+        ],
+        "enunciados": [
+          {
+            "id": "enun-1",
+            "segmentos": [
+              { "tipo": "texto", "contenido": "Los dispositivos encargados de captar variables físicas del entorno como luz o distancia son los " },
+              { "tipo": "espacio", "id": "esp-1", "respuesta": "blk-sensores" },
+              { "tipo": "texto", "contenido": "." }
+            ],
+            "explicacion": "Los sensores traducen magnitudes físicas del entorno en señales eléctricas que el robot puede interpretar."
+          },
+          {
+            "id": "enun-2",
+            "segmentos": [
+              { "tipo": "texto", "contenido": "Los motores y servomotores que transforman señales eléctricas en movimiento físico se denominan " },
+              { "tipo": "espacio", "id": "esp-2", "respuesta": "blk-actuadores" },
+              { "tipo": "texto", "contenido": "." }
+            ],
+            "explicacion": "Los actuadores son los encargados de ejecutar las acciones físicas sobre el entorno."
+          }
+        ],
+        "retroalimentacion": {
+          "correcto": "¡Excelente! Dominas la diferencia entre entradas sensoriales y salidas físicas.",
+          "incorrecto": "Verifica qué componente recibe información del exterior y cuál genera movimiento físico."
+        }
+      }
+    }
+  ],
+  "prepara_para": "evasion-obstaculos-botty"
+}

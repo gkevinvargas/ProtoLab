@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "EL-CT-01-EJEMPLO",
+  "laboratorio_id": "electrolab",
+  "tipo_contenido": "teoria_interactiva",
+  "estado_publicacion": "publicado",
+  "titulo": "Fundamentos y Comportamiento del LED",
+  "descripcion": "Comprende qué es un diodo emisor de luz y cómo interactúa la corriente mediante prácticas interactivas.",
+  "orden": 1,
+  "duracion_estimada_minutos": 10,
+  "objetivos": [
+    "Identificar la polaridad de un LED.",
+    "Comprender la relación entre corriente y emisión lumínica."
+  ],
+  "secciones": [
+    {
+      "titulo": "1. ¿Qué es un LED?",
+      "contenido": "Un Diodo Emisor de Luz (LED) es un componente semiconductor que emite luz cuando pasa corriente eléctrica a través de él en sentido directo."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "act-animacion-01",
+      "tipo": "animacion_secuencial",
+      "titulo": "Observa el flujo de electrones",
+      "instrucciones": "Reproduce la animación para entender el paso de la corriente por la unión PN.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "escenario": "led_emision_luz",
+        "reproduccion": {
+          "inicio_automatico": false,
+          "repetir": true
+        },
+        "pasos": [
+          {
+            "orden": 1,
+            "duracion_ms": 2500,
+            "estado_visual": "apagado",
+            "titulo": "Circuito abierto",
+            "explicacion": "Sin voltaje aplicado, los portadores de carga están en equilibrio."
+          },
+          {
+            "orden": 2,
+            "duracion_ms": 3000,
+            "estado_visual": "encendido",
+            "titulo": "Circuito cerrado",
+            "explicacion": "Al aplicar voltaje directo, los electrones cruzan la barrera y emiten fotones (luz)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "act-bloques-02",
+      "tipo": "ordenar_bloques",
+      "titulo": "Rompecabezas de conexión",
+      "instrucciones": "Ordena los pasos necesarios para encender un LED correctamente en un circuito básico.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "bloques": [
+          { "id": "b1", "texto": "Conectar la fuente de alimentación respetando la polaridad (+ y -)." },
+          { "id": "b2", "texto": "Intercalar una resistencia limitadora para proteger el componente." },
+          { "id": "b3", "texto": "Conectar el ánodo del LED hacia el lado positivo y el cátodo hacia negativo." }
+        ],
+        "orden_correcto": ["b1", "b2", "b3"],
+        "permitir_reintentar": true
+      }
+    }
+  ],
+  "prepara_para": ["encendido-led-basico"]
+}

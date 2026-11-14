@@ -1,12 +1,11 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { ElementType } from "react";
 
-import robo01 from "@/app/(panel)/robolab/clase-teorica.json";
-import robo02 from "@/app/(panel)/robolab/RL-CT-02.json";
+import robo01 from "@/content/robolab/RB-CT-01-fundamentos-robotica.json";
+import robo02 from "@/content/robolab/RB-CT-02-sensores-decisiones.json";
 import electro01 from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.json";
 import electro02 from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
 import electro03 from "@/lib/electrolab/clases/EL-CT-03-ley-ohm-resistencia-led.json";
@@ -180,10 +179,8 @@ function leerResumenRuta() {
 
 export default function Home() {
   const [rutaConfirmada, setRutaConfirmada] = useState(false);
-
   const [resumenRuta, setResumenRuta] =
     useState<ReturnType<typeof leerResumenRuta>>(null);
-
   const [cargandoRuta, setCargandoRuta] = useState(true);
 
   useEffect(() => {
@@ -253,10 +250,6 @@ export default function Home() {
           aria-hidden="true"
           className="absolute -bottom-24 right-32 h-48 w-48 rounded-full bg-[#21B8A6] opacity-80"
         />
-
-        <div className="absolute right-10 top-10 hidden text-7xl sm:block">
-          ---
-        </div>
       </section>
 
       {/* AVANCE GENERAL */}
@@ -272,7 +265,6 @@ export default function Home() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-
           <div className="rounded-2xl border border-[#E7EDF5] bg-white p-5">
             <p className="text-sm text-[#718096]">
               Módulos disponibles
@@ -345,9 +337,15 @@ export default function Home() {
                         className={`rounded-lg border p-2 ${clase.completada
                             ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                             : clase.id === resumenRuta.siguiente?.id
+<<<<<<< HEAD
                               ? "border-blue-200 bg-blue-50 text-blue-900"
                               : "border-slate-200 bg-slate-50 text-slate-700"
                           }`}
+=======
+                            ? "border-blue-200 bg-blue-50 text-blue-900"
+                            : "border-slate-200 bg-slate-50 text-slate-700"
+                        }`}
+>>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
                       >
                         <p className="font-medium">
                           {clase.titulo}
@@ -358,8 +356,8 @@ export default function Home() {
                           {clase.completada
                             ? "Completada"
                             : clase.id === resumenRuta.siguiente?.id
-                              ? "Siguiente"
-                              : "Pendiente"}
+                            ? "Siguiente"
+                            : "Pendiente"}
                         </p>
                       </li>
                     ))}
@@ -416,7 +414,6 @@ export default function Home() {
         )}
 
         <div className="grid gap-5 sm:grid-cols-2">
-
           {modules.map((module) => {
             const esDiagnostico = module.href === "/diagnostico";
             const disponible = esDiagnostico || rutaConfirmada;
@@ -450,9 +447,23 @@ export default function Home() {
                     </span>
                   </div>
 
+<<<<<<< HEAD
                   <h3 className="text-lg font-extrabold">
                     {module.name}
                   </h3>
+=======
+                  <span
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold ${
+                      disponible
+                        ? "bg-emerald-50 text-emerald-700"
+                        : "bg-slate-100 text-slate-500"
+                    }`}
+                  >
+                    {!disponible && <IconLock size={13} />}
+                    {disponible ? "Disponible" : "Bloqueado"}
+                  </span>
+                </div>
+>>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
 
                   <p className="mt-2 min-h-12 text-sm leading-6 text-[#718096]">
                     {module.description}
@@ -485,7 +496,19 @@ export default function Home() {
                 </article>
               </Link>
 
+<<<<<<< HEAD
 
+=======
+                  {disponible ? (
+                    <span className="text-lg text-[#A0AEC0] transition group-hover:translate-x-1">
+                      →
+                    </span>
+                  ) : (
+                    <IconLock size={20} className="text-slate-400" />
+                  )}
+                </div>
+              </article>
+>>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
             );
           })}
         </div>
