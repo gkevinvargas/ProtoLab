@@ -1,23 +1,12 @@
 // components/datalab/datalab-overview.tsx
 "use client";
 
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { DatasetTable } from './dataset-table';
-import { DataChart } from './data-chart';
-import { DataLabResults } from './datalab-results';
-import { 
-  IconChartHistogram, IconRefresh, IconBolt, 
-  IconTable, IconChartLine, IconChartBar, IconArrowRight, IconDatabase, IconTerminal 
-} from '@tabler/icons-react';
-import { BannerPractica } from '../ui/labs/banner';
-=======
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DatasetTable } from "./dataset-table";
 import { DataChart } from "./data-chart";
 import { DataLabResults } from "./datalab-results";
+import { BannerPractica } from "@/components/ui/labs/banner";
 import {
   IconChartHistogram,
   IconRefresh,
@@ -29,7 +18,6 @@ import {
   IconDatabase,
   IconTerminal,
 } from "@tabler/icons-react";
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
 
 interface DataLabOverviewProps {
   onApproved?: (puntaje: number) => void;
@@ -160,7 +148,7 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
     {
       id: 7,
       tituloDataset: "DL-CT-04: Modelado Predictivo",
-      pregunta: "En la última fase de validación de modelos, ¿qué indicador confirma la estabilidad del conjunto analizado?",
+      pregunta: "En la última fase de validación de modelos, qué indicador confirma la estabilidad del conjunto analizado?",
       opciones: [
         { letra: "A", texto: "Baja dispersión y convergencia en los residuos del modelo", correcta: true },
         { letra: "B", texto: "Saturación total de la memoria RAM del servidor", correcta: false },
@@ -378,73 +366,14 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
   }
 
   return (
-<<<<<<< HEAD
-    
-    <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
-      
-      <BannerPractica
-        nombreLaboratorio='DataLab'
-        nombrePractica={'Análisis de conjunto de datos'}
-        nivelPractica={'Nivel intermedio'}
-        descripcionPractica={'Laboratorio interactivo de análisis, visualización y formulación de hipótesis con datos reales.'}
-      />
-      
-      <main className="flex flex-col gap-6">
-        
-      {/* ENCABEZADO */}
-
-      {/**
-       * 
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold text-slate-600">Conjunto de datos para análisis:</span>
-          <span className="text-sm font-extrabold text-cyan-600">{contenidoActual.tituloDataset}</span>
-        </div>
-        <div className="flex items-center gap-3 text-xs">
-          <span className="flex items-center gap-1.5 text-slate-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Módulo #{pasoActivo + 1} de {secuenciaCurricula.length}
-          </span>
-          <span className="text-cyan-600 font-semibold bg-cyan-50 px-2.5 py-1 rounded-lg border border-cyan-100">Sincronizado</span>
-        </div>
-      </div>
-       */}
-      
-      {/* SELECTOR SUPERIOR DE MÓDULOS */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        {datasetsMock.map((ds) => (
-          <button
-            key={ds.id}
-            onClick={() => {
-              setPasoActivo(ds.id);
-              setRespuestaTecnica('');
-            }}
-            className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-              pasoActivo === ds.id 
-                ? 'bg-cyan-50/80 border-cyan-300 shadow-sm ring-2 ring-cyan-500/10' 
-                : 'bg-white border-slate-200 hover:border-slate-300'
-            }`}
-          >
-            <span className={`text-xs font-bold flex items-center gap-1.5 mb-1 truncate ${pasoActivo === ds.id ? 'text-cyan-700' : 'text-slate-700'}`}>
-              <IconBolt size={14} className={ds.color} /> {ds.nombre}
-            </span>
-            <span className="text-[10px] text-slate-400 truncate block">{ds.desc}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* SECCIÓN PRINCIPAL: TABLA Y GRÁFICA */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-slate-900 font-bold text-sm flex items-center gap-2">
-                <IconTable size={18} stroke={1.5} className="text-slate-400" /> Explorador de Registros
-              </h3>
-              <span className="text-xs text-slate-500 font-medium">{contenidoActual.tituloDataset}</span>
-=======
     <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <main className="max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col gap-6">
+        <BannerPractica
+          nombreLaboratorio="DataLab"
+          nombrePractica="Análisis de conjunto de datos"
+          nivelPractica="Nivel intermedio"
+          descripcionPractica="Laboratorio interactivo de análisis, visualización y formulación de hipótesis con datos reales."
+        />
 
         {/* ENCABEZADO */}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
@@ -528,16 +457,9 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
                   <span className="text-xs font-extrabold text-cyan-600">Sincronizado</span>
                 </div>
               </div>
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
             </div>
           </div>
 
-<<<<<<< HEAD
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-                <span className="text-xs font-black">fx</span>
-=======
           <div className="lg:col-span-7 flex flex-col gap-4">
             <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col gap-2">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
@@ -622,7 +544,6 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
               <div className="border-x border-slate-100">
                 <span className="text-xl font-black text-emerald-500 block">+{puntosXP}</span>
                 <span className="text-[9px] uppercase font-bold text-slate-400">Puntos XP</span>
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
               </div>
               <div>
                 <span className="text-xl font-black text-indigo-600 block">Nivel 5</span>
@@ -630,64 +551,12 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
               </div>
             </div>
 
-<<<<<<< HEAD
-        <div className="lg:col-span-7 flex flex-col gap-4">
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col gap-2">
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-              <h3 className="text-slate-900 font-bold text-sm flex items-center gap-2">
-                <IconChartLine size={18} stroke={1.5} className="text-slate-400" /> Visualización Dinámica ({contenidoActual.tituloDataset})
-              </h3>
-              <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
-                <button onClick={() => setTipoGrafica('barras')} className={tipoGrafica === 'barras' ? 'text-cyan-600 flex items-center gap-1 cursor-pointer font-bold' : 'hover:text-slate-800 flex items-center gap-1 cursor-pointer'}><IconChartBar size={16} /> Barras</button>
-                <button onClick={() => setTipoGrafica('dispersion')} className={tipoGrafica === 'dispersion' ? 'text-cyan-600 flex items-center gap-1 cursor-pointer font-bold' : 'hover:text-slate-800 flex items-center gap-1 cursor-pointer'}><IconChartLine size={16} /> Líneas</button>
-              </div>
-            </div>
-            <div className="w-full bg-white rounded-lg min-h-[225px] flex items-center justify-center">
-              <DataChart datasetId={contenidoActual.id} tipoGrafica={tipoGrafica} />
-            </div>
-          </div>
-
-          <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-3 text-xs text-slate-500">
-            <span className="text-indigo-500"><IconChartHistogram size={20} /></span>
-            <p><strong>Interpretación Analítica:</strong> Analiza la gráfica y la tabla para resolver el desafío planteado abajo.</p>
-          </div>
-        </div>
-
-      </div>
-
-      {/* SECCIÓN INFERIOR: DESAFÍO Y PROGRESO */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pb-8">
-        
-        <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span className="text-xs font-extrabold tracking-wider text-slate-900 uppercase">
-              Desafío {pasoActivo + 1} de {secuenciaCurricula.length}
-            </span>
-            <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">Evaluación Técnica</span>
-          </div>
-
-          <h3 className="text-slate-800 font-bold text-sm leading-relaxed">
-            {contenidoActual.pregunta}
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {contenidoActual.opciones.map((op, idx) => (
-              <button
-                key={idx}
-                onClick={() => setRespuestaTecnica(op.letra)}
-                className={`p-4 rounded-xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
-                  respuestaTecnica === op.letra 
-                    ? 'bg-cyan-50 border-cyan-300 font-semibold text-cyan-900 shadow-sm' 
-                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                }`}
-=======
             <div className="flex flex-col gap-2.5">
               <button
                 type="button"
                 onClick={handleNextStep}
                 disabled={!fueExito}
                 className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
->>>>>>> efe3b6a3e45275037fc9d0c6529c182141636341
               >
                 <span>Siguiente Dataset o Módulo</span> <IconArrowRight size={16} />
               </button>
