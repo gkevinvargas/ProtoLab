@@ -1,22 +1,43 @@
-import type { ClaseTeorica as ClaseTeoricaContenido } from "../../lib/content/types";
+import { validateClaseTeorica } from "../../lib/content/validate-class";
 import { ActivityRenderer } from "../learning/ActivityRenderer";
 
+interface SeccionTeorica {
+  titulo: string;
+  parrafos?: readonly string[];
+  contenido?: string;
+}
+
 interface ClaseTeoricaProps {
-  clase: ClaseTeoricaContenido;
+  clase: {
+    tipo_contenido: string;
+    identificador: string;
+    titulo: string;
+    descripcion: string;
+    duracion_estimada_minutos: number;
+    laboratorio_id: string;
+    orden: number;
+    objetivos: readonly string[];
+    secciones: readonly SeccionTeorica[];
+    prepara_para: readonly {
+      practica_id: string;
+      tipo_contenido: string;
+      aplicacion: string;
+    }[];
+    actividades_interactivas?: unknown;
+  };
   abierta?: boolean;
 }
 
-/**
- * Presenta el contenido teórico y las actividades interactivas definidas
- * en el mismo JSON de la clase.
- *
- * Ubicación sugerida: components/learning/ClaseTeorica.tsx
- */
 export default function ClaseTeorica({
   clase,
   abierta = false,
 }: ClaseTeoricaProps) {
   if (clase.tipo_contenido !== "clase_teorica") return null;
+
+  const actividades =
+    clase.actividades_interactivas === undefined
+      ? []
+      : (validateClaseTeorica(clase).value?.actividades_interactivas ?? []);
 
   const tituloId = `${clase.identificador}-titulo`;
   const contenidoId = `${clase.identificador}-contenido`;
@@ -51,16 +72,17 @@ export default function ClaseTeorica({
           <h2 id={tituloId} className="text-xl font-bold sm:text-2xl">
             {clase.titulo}
           </h2>
-          <p className="leading-relaxed text-slate-600">
-            {clase.descripcion}
-          </p>
+          <p className="leading-relaxed text-slate-600">{clase.descripcion}</p>
           <div className="flex flex-wrap gap-2 pt-1 text-sm text-slate-500">
             <span className="rounded-full bg-slate-100 px-3 py-1">
               Duración: {clase.duracion_estimada_minutos} min
             </span>
-            <span className="rounded-full bg-slate-100 px-3 py-1">
-              {clase.actividades_interactivas.length} actividades
-            </span>
+            {actividades.length > 0 && (
+              <span className="rounded-full bg-slate-100 px-3 py-1">
+                {actividades.length}{" "}
+                {actividades.length === 1 ? "actividad" : "actividades"}
+              </span>
+            )}
           </div>
         </header>
 
@@ -84,31 +106,37 @@ export default function ClaseTeorica({
 
         <section aria-label="Contenido teórico" className="space-y-5">
           <h3 className="font-semibold text-slate-900">Aprende los conceptos</h3>
-          {clase.secciones.map((seccion, indice) => (
-            <section
-              key={`${clase.identificador}-seccion-${indice}`}
-              className="space-y-2 rounded-xl bg-slate-50 p-4 sm:p-5"
-              aria-labelledby={`${clase.identificador}-seccion-titulo-${indice}`}
-            >
-              <h4
-                id={`${clase.identificador}-seccion-titulo-${indice}`}
-                className="font-semibold text-slate-900"
+          {clase.secciones.map((seccion, indice) => {
+            const seccionId = `${clase.identificador}-seccion-${indice}`;
+            const parrafos =
+              seccion.parrafos ?? (seccion.contenido ? [seccion.contenido] : []);
+
+            return (
+              <section
+                key={seccionId}
+                className="space-y-2 rounded-xl bg-slate-50 p-4 sm:p-5"
+                aria-labelledby={`${seccionId}-titulo`}
               >
-                {seccion.titulo}
-              </h4>
-              {seccion.parrafos.map((parrafo, indiceParrafo) => (
-                <p
-                  key={`${clase.identificador}-parrafo-${indice}-${indiceParrafo}`}
-                  className="leading-relaxed text-slate-700"
+                <h4
+                  id={`${seccionId}-titulo`}
+                  className="font-semibold text-slate-900"
                 >
-                  {parrafo}
-                </p>
-              ))}
-            </section>
-          ))}
+                  {seccion.titulo}
+                </h4>
+                {parrafos.map((parrafo, indiceParrafo) => (
+                  <p
+                    key={`${seccionId}-parrafo-${indiceParrafo}`}
+                    className="leading-relaxed text-slate-700"
+                  >
+                    {parrafo}
+                  </p>
+                ))}
+              </section>
+            );
+          })}
         </section>
 
-        {clase.actividades_interactivas.length > 0 && (
+        {actividades.length > 0 && (
           <section
             aria-labelledby={actividadesId}
             className="space-y-4 border-t border-slate-200 pt-6"
@@ -124,7 +152,7 @@ export default function ClaseTeorica({
             </div>
 
             <ol className="space-y-5">
-              {clase.actividades_interactivas.map((actividad, indice) => (
+              {actividades.map((actividad, indice) => (
                 <li
                   key={actividad.id}
                   className="space-y-2"
@@ -148,7 +176,6 @@ export default function ClaseTeorica({
                     </span>
                   </div>
 
-                  {/* El renderer selecciona el componente React según actividad.tipo. */}
                   <ActivityRenderer actividad={actividad} />
                 </li>
               ))}
