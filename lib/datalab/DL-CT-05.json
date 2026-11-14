@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-05",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "teoria_interactiva",
+  "estado_publicacion": "publicado",
+  "titulo": "Filtrado Avanzado y Detección de Outliers",
+  "descripcion": "Clase teórica interactiva enfocada en el filtrado condicional cruzado y el impacto de los valores atípicos en conjuntos de datos.",
+  "orden": 5,
+  "duracion_estimada_minutos": 15,
+  "objetivos": [
+    "Comprender la secuencia lógica para aplicar filtros cruzados en un dataset.",
+    "Calcular el impacto matemático de un valor atípico (outlier) en el promedio de la muestra."
+  ],
+  "secciones": [
+    {
+      "id": "sec-dl-01",
+      "titulo": "Secuencia de Filtrado Analítico",
+      "contenido": "Para aislar tendencias específicas sin alterar la integridad global del análisis, es necesario seguir un proceso estructurado de limpieza y segmentación."
+    },
+    {
+      "id": "sec-dl-02",
+      "titulo": "Impacto de los Outliers",
+      "contenido": "Un valor fuera de rango puede sesgar de forma significativa los cálculos estadísticos básicos si no se aísla o trata correctamente."
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "act-dl-01",
+      "tipo": "ordenar_bloques",
+      "titulo": "Ordena el Flujo de Análisis de Datos",
+      "instrucciones": "Organiza los bloques en el orden correcto para realizar un filtrado y detección de anomalías exitoso.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "Cargar el conjunto de datos bruto en el explorador de registros"
+          },
+          {
+            "id": "b2",
+            "texto": "Aplicar filtros condicionales cruzados para segmentar variables"
+          },
+          {
+            "id": "b3",
+            "texto": "Detectar y aislar los valores atípicos (outliers)"
+          },
+          {
+            "id": "b4",
+            "texto": "Generar la visualización dinámica y validar métricas"
+          }
+        ],
+        "orden_correcto": [
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "retroalimentacion": "El análisis estructurado siempre comienza con la carga y termina con la validación visual y métrica."
+      }
+    },
+    {
+      "id": "act-dl-02",
+      "tipo": "calculo_guiado",
+      "titulo": "Cálculo de Promedio Afectado por Outlier",
+      "instrucciones": "Resuelve los pasos para determinar cómo un valor atípico modifica la media aritmética de un conjunto de registros de prueba.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "datos": {
+          "n_muestras": {
+            "valor": 4,
+            "unidad": "registros"
+          },
+          "suma_base": {
+            "valor": 200,
+            "unidad": "unidades"
+          },
+          "outlier": {
+            "valor": 300,
+            "unidad": "unidades"
+          }
+        },
+        "formula_principal": "Promedio = (Suma de Valores) / (Cantidad de Muestras)",
+        "pasos": [
+          {
+            "consigna": "Calcula la suma total incluyendo el valor atípico (suma_base + outlier).",
+            "formula": "200 + 300",
+            "respuesta_esperada": 500,
+            "unidad": "unidades",
+            "tolerancia": 0,
+            "explicacion": "Al sumar el outlier de 300 al acumulado base de 200, obtenemos un total de 500."
+          },
+          {
+            "consigna": "Calcula el promedio final dividiendo el total anterior entre el número de muestras (4).",
+            "formula": "500 / 4",
+            "respuesta_esperada": 125,
+            "unidad": "unidades",
+            "tolerancia": 0.1,
+            "explicacion": "El promedio se eleva a 125 debido al arrastre del valor atípico, demostrando la necesidad de filtrarlo."
+          }
+        ]
+      }
+    }
+  ],
+  "prepara_para": [
+    "practica-datalab-avanzada"
+  ]
+}

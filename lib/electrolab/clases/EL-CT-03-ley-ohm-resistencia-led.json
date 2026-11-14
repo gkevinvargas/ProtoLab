@@ -1,67 +1,238 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
   "identificador": "EL-CT-03",
   "laboratorio_id": "electrolab",
   "tipo_contenido": "clase_teorica",
   "estado_publicacion": "borrador",
-  "titulo": "Ley de Ohm y resistencia limitadora para un LED",
-  "descripcion": "Utiliza la ley de Ohm para estimar la corriente del LED y comprender por qué se elige una resistencia en serie.",
+  "titulo": "Ley de Ohm y resistencia limitadora",
+  "descripcion": "Aprende a calcular la resistencia en serie necesaria para limitar la corriente de un LED.",
   "orden": 3,
-  "duracion_estimada_minutos": 5,
+  "duracion_estimada_minutos": 12,
   "objetivos": [
-    "Aplicar la ley de Ohm para calcular corriente y resistencia.",
-    "Estimar la corriente de un circuito con LED a partir del voltaje de la fuente y la caída del LED.",
-    "Explicar cómo la resistencia ayuda a proteger el LED."
+    "Relacionar voltaje, corriente y resistencia mediante la ley de Ohm.",
+    "Calcular la resistencia limitadora considerando el voltaje de la fuente y la caída del LED.",
+    "Interpretar el resultado y seleccionar un valor comercial cercano."
   ],
   "secciones": [
     {
-      "titulo": "Ley de Ohm",
+      "titulo": "La ley de Ohm",
       "parrafos": [
-        "La ley de Ohm relaciona voltaje, corriente y resistencia mediante la expresión V = I × R.",
-        "Para calcular corriente se utiliza I = V / R. Para calcular resistencia se utiliza R = V / I.",
-        "La resistencia se mide en ohmios (Ω), el voltaje en voltios (V) y la corriente en amperios (A)."
+        "La ley de Ohm relaciona el voltaje (V), la corriente (I) y la resistencia (R): V = I × R.",
+        "También podemos despejarla para calcular corriente (I = V / R) o resistencia (R = V / I). Usa voltios (V), amperios (A) y ohmios (Ω)."
       ]
     },
     {
-      "titulo": "¿Cómo se calcula la resistencia del LED?",
+      "titulo": "¿Por qué el LED necesita una resistencia?",
       "parrafos": [
-        "La resistencia debe absorber la diferencia entre el voltaje de la fuente y la caída de voltaje del LED.",
-        "La fórmula simplificada es: R = (Vfuente − VLED) / ILED.",
-        "Una resistencia mayor reduce la corriente; una resistencia menor permite una corriente mayor. La corriente debe mantenerse dentro de los límites indicados por el fabricante del LED."
+        "Un LED no debe conectarse directamente a una fuente ideal de voltaje. La resistencia en serie limita la corriente y reduce el riesgo de dañarlo.",
+        "Para estimar su valor, se resta la caída de tensión del LED al voltaje de la fuente y se divide el resultado entre la corriente deseada: R = (Vfuente − VLED) / I."
       ]
     },
     {
-      "titulo": "Ejemplo resuelto: elegir una resistencia",
+      "titulo": "Ejemplo resuelto",
       "parrafos": [
-        "Datos: fuente de 9 V, caída del LED de 2 V y corriente objetivo de 18 mA (0.018 A).",
-        "Voltaje en la resistencia: 9 V − 2 V = 7 V.",
-        "Aplicando la fórmula: R = 7 V / 0.018 A = 388.9 Ω.",
-        "Se puede elegir el valor comercial cercano de 390 Ω. La corriente aproximada será I = 7 V / 390 Ω = 0.0179 A, es decir, 17.9 mA."
+        "Datos: fuente de 9 V, caída del LED de 2 V y corriente objetivo de 15 mA. Primero convierte 15 mA a amperios: 0.015 A.",
+        "Voltaje en la resistencia: 9 V − 2 V = 7 V. Resistencia calculada: R = 7 V / 0.015 A = 466.7 Ω. Se puede elegir el valor comercial cercano de 470 Ω.",
+        "Con 470 Ω, la corriente aproximada es 7 V / 470 Ω = 0.0149 A, es decir, 14.9 mA."
       ]
     },
     {
       "titulo": "Relación con la práctica del simulador",
       "parrafos": [
-        "El circuito de ejemplo de ElectroLab utiliza una batería de 9 V, un LED de 2 V y una resistencia de 220 Ω.",
-        "Con el modelo ideal simplificado, la corriente estimada es I = (9 V − 2 V) / 220 Ω = 0.0318 A, aproximadamente 31.8 mA. El simulador puede mostrar una variación por el modelo eléctrico aproximado del LED.",
-        "Este valor sirve para analizar el ejemplo dentro del simulador. Para un montaje físico no debe asumirse que 220 Ω es adecuado para cualquier LED: se debe consultar su hoja de datos y calcular una resistencia que respete su corriente máxima. En el ejemplo de 18 mA, 390 Ω es una elección más apropiada."
+        "La práctica virtual de referencia utiliza una batería de 9 V, una resistencia de 220 Ω y un LED con una caída aproximada de 2 V para observar el comportamiento del circuito.",
+        "Ese valor produce una corriente mayor que el ejemplo de diseño de 15 mA. En un montaje físico, selecciona la resistencia de acuerdo con la hoja de datos del LED y los límites recomendados; no copies automáticamente el valor de la práctica virtual."
       ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "EL-CT-03-ACT-01",
+      "tipo": "calculo_guiado",
+      "titulo": "Calcula la resistencia del LED",
+      "instrucciones": "Resuelve cada paso. Escribe el valor numérico y utiliza la unidad indicada.",
+      "duracion_estimada_minutos": 4,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "entrada_numerica_por_pasos",
+        "permitir_reintentar": true,
+        "datos": [
+          {
+            "id": "vs",
+            "etiqueta": "Voltaje de la fuente",
+            "valor": 9,
+            "unidad": "V"
+          },
+          {
+            "id": "vf",
+            "etiqueta": "Caída de tensión del LED",
+            "valor": 2,
+            "unidad": "V"
+          },
+          {
+            "id": "i",
+            "etiqueta": "Corriente objetivo",
+            "valor": 15,
+            "unidad": "mA"
+          }
+        ],
+        "formula_principal": "R = (Vfuente - VLED) / I",
+        "nota_unidades": "Convierte la corriente de miliamperios a amperios antes de dividir.",
+        "pasos": [
+          {
+            "id": "p1",
+            "consigna": "Calcula el voltaje que debe absorber la resistencia.",
+            "formula": "VR = Vfuente - VLED",
+            "respuesta_esperada": 7,
+            "unidad": "V",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Resta la caída del LED al voltaje de la fuente.",
+            "explicacion": "9 V − 2 V = 7 V."
+          },
+          {
+            "id": "p2",
+            "consigna": "Convierte la corriente objetivo a amperios.",
+            "formula": "I(A) = I(mA) / 1000",
+            "respuesta_esperada": 0.015,
+            "unidad": "A",
+            "tolerancia_absoluta": 1e-05,
+            "pista": "Un amperio equivale a 1000 miliamperios.",
+            "explicacion": "15 mA / 1000 = 0.015 A."
+          },
+          {
+            "id": "p3",
+            "consigna": "Calcula la resistencia teórica necesaria.",
+            "formula": "R = VR / I",
+            "respuesta_esperada": 466.67,
+            "unidad": "Ω",
+            "tolerancia_absoluta": 0.1,
+            "pista": "Divide el voltaje obtenido entre la corriente expresada en amperios.",
+            "explicacion": "7 V / 0.015 A = 466.67 Ω aproximadamente."
+          },
+          {
+            "id": "p4",
+            "consigna": "Selecciona el valor comercial cercano utilizado en el ejemplo.",
+            "formula": "Valor comercial cercano a 466.67 Ω",
+            "respuesta_esperada": 470,
+            "unidad": "Ω",
+            "tolerancia_absoluta": 0.1,
+            "pista": "Elige un valor comercial normalizado cercano al cálculo.",
+            "explicacion": "470 Ω es un valor comercial cercano. Con él, la corriente aproximada es 14.9 mA."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Excelente! Aplicaste correctamente la ley de Ohm y seleccionaste un valor comercial cercano.",
+          "incorrecta": "Revisa las unidades: la corriente debe estar expresada en amperios antes de calcular la resistencia."
+        }
+      }
     },
     {
-      "titulo": "¿Qué debes comprobar?",
-      "parrafos": [
-        "Verifica el valor de la resistencia y la caída de voltaje configurada para el LED.",
-        "Después de simular, revisa el voltaje y la corriente obtenidos. Compara el resultado con el cálculo teórico y considera las aproximaciones del modelo.",
-        "Una corriente excesiva puede dañar un LED real; la resistencia en serie ayuda a limitarla."
-      ]
+      "id": "EL-CT-03-ACT-02",
+      "tipo": "sopa_letras",
+      "titulo": "Encuentra los conceptos eléctricos",
+      "instrucciones": "Localiza las palabras relacionadas con el circuito LED. Pueden aparecer horizontalmente o verticalmente.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "filas": 12,
+        "columnas": 12,
+        "relleno": "aleatorio_fijo_en_json",
+        "mostrar_lista_palabras": true,
+        "permitir_reintentar": true,
+        "direcciones_permitidas": [
+          "horizontal",
+          "vertical"
+        ],
+        "cuadricula": [
+          "OCORRIENTECQ",
+          "EOHMIODBMBRD",
+          "TJAJPAUVXVJQ",
+          "WNIZVOLTAJEB",
+          "PYMKVXJEZFCL",
+          "PRESISTENCIA",
+          "YZMIZMKQBQOV",
+          "XNLRODJIAAAX",
+          "FWFVVECPLENQ",
+          "GMKVCATODOOH",
+          "GNKCSYCQFTDH",
+          "WQNWWTXCZEOA"
+        ],
+        "palabras": [
+          {
+            "texto": "RESISTENCIA",
+            "pista": "Componente que limita la corriente."
+          },
+          {
+            "texto": "CORRIENTE",
+            "pista": "Flujo ordenado de carga eléctrica."
+          },
+          {
+            "texto": "VOLTAJE",
+            "pista": "Diferencia de potencial eléctrico."
+          },
+          {
+            "texto": "CATODO",
+            "pista": "Terminal del LED que se orienta hacia el negativo en polarización directa."
+          },
+          {
+            "texto": "ANODO",
+            "pista": "Terminal del LED que se orienta hacia el positivo en polarización directa."
+          },
+          {
+            "texto": "OHMIO",
+            "pista": "Unidad de medida de la resistencia eléctrica."
+          }
+        ],
+        "soluciones": [
+          {
+            "palabra": "RESISTENCIA",
+            "fila_inicio": 5,
+            "columna_inicio": 1,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "CORRIENTE",
+            "fila_inicio": 0,
+            "columna_inicio": 1,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "VOLTAJE",
+            "fila_inicio": 3,
+            "columna_inicio": 4,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "CATODO",
+            "fila_inicio": 9,
+            "columna_inicio": 4,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "ANODO",
+            "fila_inicio": 7,
+            "columna_inicio": 10,
+            "direccion": "vertical"
+          },
+          {
+            "palabra": "OHMIO",
+            "fila_inicio": 1,
+            "columna_inicio": 1,
+            "direccion": "horizontal"
+          }
+        ],
+        "retroalimentacion": {
+          "completada": "¡Muy bien! Encontraste todos los conceptos del circuito.",
+          "ayuda": "Utiliza las pistas para recordar la función de cada término."
+        }
+      }
     }
   ],
   "prepara_para": [
     {
       "practica_id": "encendido-led-basico",
       "tipo_contenido": "practica_individual",
-      "aplicacion": "Aplicar la ley de Ohm para estimar la corriente del circuito de 9 V, 220 Ω y LED de 2 V; comparar el cálculo con las mediciones de la simulación y evaluar la función de la resistencia limitadora."
+      "aplicacion": "Aplicar los conceptos de esta clase para construir, conectar, simular y evaluar el circuito de encendido de un LED."
     }
   ]
 }

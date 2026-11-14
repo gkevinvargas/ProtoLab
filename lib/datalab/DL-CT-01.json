@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "version_contenido": "1.0.0",
   "identificador": "DL-CT-01",
   "laboratorio_id": "datalab",
@@ -28,6 +28,69 @@
         "Los puntos más altos en un histograma de consumo o rendimiento señalan sobreposiciones de cargas o eventos críticos.",
         "Por ejemplo, ubicar un pico de 580 kWh entre las 16:00 y las 20:00 hrs permite deducir el momento exacto de mayor exigencia en el sistema."
       ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "act-1",
+      "tipo": "ordenar_bloques",
+      "titulo": "Secuencia para el análisis de picos operativos",
+      "instrucciones": "Ordena los pasos lógicos para identificar correctamente un pico de demanda en el conjunto de datos.",
+      "duracion_estimada_minutos": 3,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          { "id": "b1", "texto": "Agrupar los registros de consumo por intervalos temporales." },
+          { "id": "b2", "texto": "Comparar la altura de las barras o la tendencia de las líneas." },
+          { "id": "b3", "texto": "Localizar el punto más alto o valor atípico de la muestra." },
+          { "id": "b4", "texto": "Interpretar el momento de mayor exigencia en el sistema." }
+        ],
+        "orden_correcto": ["b1", "b2", "b3", "b4"],
+        "retroalimentacion": "¡Excelente! Seguir este orden te permite analizar distribuciones y detectar picos operativos con precisión analítica."
+      }
+    },
+    {
+      "id": "act-2",
+      "tipo": "calculo_guiado",
+      "titulo": "Cálculo de Demanda Máxima",
+      "instrucciones": "Calcula el porcentaje de incremento si el consumo base era de 400 kWh y el pico operativo alcanzó los 580 kWh.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "datos": {
+          "consumo_base": { "valor": 400, "unidad": "kWh" },
+          "pico_maximo": { "valor": 580, "unidad": "kWh" }
+        },
+        "formula_principal": "Incremento (%) = ((Pico - Base) / Base) * 100",
+        "pasos": [
+          {
+            "consigna": "Calcula la diferencia absoluta entre el pico máximo y el consumo base (580 - 400).",
+            "formula": "Diferencia = 580 - 400",
+            "respuesta_esperada": 180,
+            "unidad": "kWh",
+            "tolerancia": 0,
+            "explicacion": "El incremento absoluto sobre la base es de 180 kWh."
+          },
+          {
+            "consigna": "Divide la diferencia (180) entre el consumo base (400).",
+            "formula": "Proporción = 180 / 400",
+            "respuesta_esperada": 0.45,
+            "unidad": "adimensional",
+            "tolerancia": 0.01,
+            "explicacion": "La proporción de aumento respecto a la base es 0.45."
+          },
+          {
+            "consigna": "Multiplica la proporción por 100 para obtener el porcentaje final de incremento.",
+            "formula": "Porcentaje = 0.45 * 100",
+            "respuesta_esperada": 45,
+            "unidad": "%",
+            "tolerancia": 0,
+            "explicacion": "El pico operativo representa un incremento del 45% sobre el consumo base."
+          }
+        ]
+      }
     }
   ],
   "prepara_para": [

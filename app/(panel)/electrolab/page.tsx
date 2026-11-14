@@ -11,7 +11,7 @@ const clasesElectroLab = [
   fundamentosLed,
   conexionSerieLed,
   leyOhmLed,
-];
+] as unknown as readonly any[];
 
 export default function ElectroLabPage() {
   return (
