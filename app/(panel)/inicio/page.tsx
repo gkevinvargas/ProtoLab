@@ -1,12 +1,11 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { ElementType } from "react";
 
-import robo01 from "@/app/(panel)/robolab/clase-teorica.json";
-import robo02 from "@/app/(panel)/robolab/RL-CT-02.json";
+import robo01 from "@/content/robolab/RB-CT-01-fundamentos-robotica.json";
+import robo02 from "@/content/robolab/RB-CT-02-sensores-decisiones.json";
 import electro01 from "@/lib/electrolab/clases/EL-CT-01-fundamentos-led.json";
 import electro02 from "@/lib/electrolab/clases/EL-CT-02-conexion-serie-led.json";
 import electro03 from "@/lib/electrolab/clases/EL-CT-03-ley-ohm-resistencia-led.json";
@@ -180,10 +179,8 @@ function leerResumenRuta() {
 
 export default function Home() {
   const [rutaConfirmada, setRutaConfirmada] = useState(false);
-
   const [resumenRuta, setResumenRuta] =
     useState<ReturnType<typeof leerResumenRuta>>(null);
-
   const [cargandoRuta, setCargandoRuta] = useState(true);
 
   useEffect(() => {
@@ -253,10 +250,6 @@ export default function Home() {
           aria-hidden="true"
           className="absolute -bottom-24 right-32 h-48 w-48 rounded-full bg-[#21B8A6] opacity-80"
         />
-
-        <div className="absolute right-10 top-10 hidden text-7xl sm:block">
-          ---
-        </div>
       </section>
 
       {/* AVANCE GENERAL */}
@@ -272,7 +265,6 @@ export default function Home() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-
           <div className="rounded-2xl border border-[#E7EDF5] bg-white p-5">
             <p className="text-sm text-[#718096]">
               Módulos disponibles
@@ -346,8 +338,8 @@ export default function Home() {
                           clase.completada
                             ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                             : clase.id === resumenRuta.siguiente?.id
-                              ? "border-blue-200 bg-blue-50 text-blue-900"
-                              : "border-slate-200 bg-slate-50 text-slate-700"
+                            ? "border-blue-200 bg-blue-50 text-blue-900"
+                            : "border-slate-200 bg-slate-50 text-slate-700"
                         }`}
                       >
                         <p className="font-medium">
@@ -359,8 +351,8 @@ export default function Home() {
                           {clase.completada
                             ? "Completada"
                             : clase.id === resumenRuta.siguiente?.id
-                              ? "Siguiente"
-                              : "Pendiente"}
+                            ? "Siguiente"
+                            : "Pendiente"}
                         </p>
                       </li>
                     ))}
@@ -417,7 +409,6 @@ export default function Home() {
         )}
 
         <div className="grid gap-5 sm:grid-cols-2">
-
           {modules.map((module) => {
             const esDiagnostico = module.href === "/diagnostico";
             const disponible = esDiagnostico || rutaConfirmada;
