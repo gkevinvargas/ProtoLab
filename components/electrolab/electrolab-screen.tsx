@@ -974,7 +974,7 @@ export default function ElectroLabScreen({
 
   return (
 
-    <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
+    <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
 
       <BannerPractica
         nombreLaboratorio='ElectroLab'

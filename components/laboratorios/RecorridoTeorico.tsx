@@ -34,7 +34,7 @@ export default function RecorridoTeorico({
   }
 
   return (
-    <section aria-label="Clases teóricas" className="space-y-4">
+    <section aria-label="Clases teóricas" className="space-y-4 sm:p-6">
       <p aria-live="polite" className="text-sm font-semibold text-slate-700">
         Clase {indice + 1} de {ordenadas.length} · {vistas.length} de{" "}
         {ordenadas.length} vistas

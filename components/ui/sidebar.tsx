@@ -8,7 +8,7 @@ import { useState } from "react";
 const secciones = [
   { href: "/inicio", label: "Inicio", icon: IconHome },
   { href: "#modulos", label: "Mis módulos", icon: IconLayoutGrid },
-  { href: "/progreso", label: "Mi progreso", icon: IconClock },
+  { href: "/ruta", label: "Mi progreso", icon: IconClock },
 ]
 
 export function Sidebar() {

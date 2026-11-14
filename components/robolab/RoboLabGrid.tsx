@@ -1,5 +1,5 @@
-import React from 'react';
-import { Coord, Orientation } from '@/app/robolab/robolab-data';
+import React from "react";
+import type { Coord, Orientation } from "@/app/(panel)/robolab/robolab-data";
 
 interface RoboLabGridProps {
   dimensions: { rows: number; cols: number };

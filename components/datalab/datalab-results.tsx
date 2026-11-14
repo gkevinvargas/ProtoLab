@@ -25,11 +25,11 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4 animate-fadeIn">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
-        
+
         {/* 1. Icono visual de estado acorde al tema claro */}
         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm ${
-          esExito 
-            ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' 
+          esExito
+            ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
             : 'bg-rose-50 text-rose-600 border border-rose-100'
         }`}>
           <span className="text-2xl font-black">{esExito ? '✓' : '✕'}</span>
@@ -40,7 +40,7 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
           <h3 className="text-xl font-black text-slate-900">
             {esExito ? '¡Reto Completado!' : 'Hay un detalle...'}
           </h3>
-          
+
           <p className="text-slate-600 text-xs leading-relaxed px-2">
             {esExito ? mensajeExito : mensajeError}
           </p>

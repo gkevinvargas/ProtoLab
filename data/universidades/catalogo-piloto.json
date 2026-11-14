@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "fuente": "Oferta académica oficial de las instituciones",
+  "fechaConsulta": "2026-11-13",
+  "instituciones": [
+    {
+      "id": "tec-monterrey-guadalajara",
+      "nombre": "Tecnológico de Monterrey",
+      "campus": "Campus Guadalajara",
+      "municipio": "Zapopan",
+      "estado": "Jalisco",
+      "descripcion": "Campus con programas completos en robótica y en inteligencia artificial aplicada a datos.",
+      "urlOferta": "https://tec.mx/es/guadalajara",
+      "programas": [
+        {
+          "nombre": "Ingeniería en Robótica y Sistemas Inteligentes",
+          "areas": ["robolab", "electrolab"]
+        },
+        {
+          "nombre": "Ingeniería en Inteligencia Artificial y Ciencia de Datos",
+          "areas": ["datalab"]
+        }
+      ]
+    },
+    {
+      "id": "tecnologico-superior-jalisco-zapopan",
+      "nombre": "Tecnológico Superior de Jalisco",
+      "campus": "Unidad Académica Zapopan",
+      "municipio": "Zapopan",
+      "estado": "Jalisco",
+      "descripcion": "Institución pública con ingenierías presenciales en electrónica y electromecánica.",
+      "urlOferta": "https://www.tecmm.edu.mx/ofertaEducativa",
+      "programas": [
+        {
+          "nombre": "Ingeniería Electrónica",
+          "areas": ["electrolab"]
+        },
+        {
+          "nombre": "Ingeniería Electromecánica",
+          "areas": ["robolab", "electrolab"]
+        }
+      ]
+    },
+    {
+      "id": "universidad-panamericana-guadalajara",
+      "nombre": "Universidad Panamericana",
+      "campus": "Campus Guadalajara",
+      "municipio": "Zapopan",
+      "estado": "Jalisco",
+      "descripcion": "Su programa de Mecatrónica combina mecánica, electrónica, programación y control.",
+      "urlOferta": "https://movil.up.edu.mx/gdl/ingenieria-mecatronica",
+      "programas": [
+        {
+          "nombre": "Ingeniería Mecatrónica",
+          "areas": ["robolab", "electrolab"]
+        }
+      ]
+    }
+  ]
+}
