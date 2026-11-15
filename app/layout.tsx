@@ -35,12 +35,26 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen">
+      <body className="min-h-screen bg-slate-50 text-slate-900">
+        {/*CONTENEDOR RESPONSIVO*/}
+        <div className="min-h-screen flex flex-col lg:flex-row">
+          <aside className="w-full lg:w-64 bg-white border-b lg:border-r border-slate-200 flex-shrink-0">
+            <Sidebar/>
+            </aside>
+            <main className="flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8">
+              <div className="max-w-7xl mx-auto w-full flex flex-col gap-6">
+                {children}
+                </div>
+                </main>
+                </div>
 
-        {/* CONTENIDO PRINCIPAL */}
-        {children}
+              
+              </body>
+            
+       
 
-      </body>
+       
+    
     </html>
   )
 }
