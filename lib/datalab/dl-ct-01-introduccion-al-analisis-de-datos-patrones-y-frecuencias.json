@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-01",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Introducción al análisis de datos: patrones y frecuencias",
+  "descripcion": "Aprende a reconocer cómo se organizan los registros y cómo las frecuencias ayudan a descubrir comportamientos repetidos dentro de un conjunto de datos.",
+  "orden": 1,
+  "duracion_estimada_minutos": 19,
+  "objetivos": [
+    "Distinguir datos de información.",
+    "Identificar variables y categorías dentro de un conjunto de datos.",
+    "Explicar qué representa una frecuencia.",
+    "Reconocer patrones básicos a partir de conteos."
+  ],
+  "secciones": [
+    {
+      "titulo": "1. ¿Qué es analizar datos?",
+      "parrafos": [
+        "Analizar datos consiste en revisar, organizar y estudiar registros para responder preguntas. Un dato aislado puede tener poco significado, pero al relacionarlo con otros puede aportar información.",
+        "Por ejemplo, una lista de consumos eléctricos diarios permite conocer cuánto se utiliza un equipo, comparar días y detectar periodos de mayor demanda."
+      ]
+    },
+    {
+      "titulo": "2. Variables y categorías",
+      "parrafos": [
+        "Una variable es una característica que puede tomar distintos valores, como temperatura, consumo, edad o tipo de dispositivo. Las categorías son los grupos en los que podemos clasificar ciertos valores.",
+        "Antes de contar frecuencias conviene identificar qué variable responde mejor a la pregunta que queremos investigar."
+      ]
+    },
+    {
+      "titulo": "3. Frecuencias y patrones",
+      "parrafos": [
+        "La frecuencia absoluta indica cuántas veces aparece un valor o categoría. Una tabla de frecuencias resume esos conteos y facilita la comparación.",
+        "Un patrón es un comportamiento o una repetición que se observa al comparar los datos. Encontrar un patrón no significa demostrar una causa; es una pista que puede orientar un análisis posterior."
+      ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "dl01-animacion-ciclo",
+      "tipo": "animacion_secuencial",
+      "titulo": "Del dato al patrón",
+      "instrucciones": "Avanza por las etapas para observar cómo un conjunto de datos se convierte en información útil.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "escenario": "Un tablero de análisis recibe registros de consumo eléctrico y los organiza para descubrir patrones.",
+        "reproduccion": {
+          "inicio_automatico": false,
+          "repetir": true,
+          "controles": [
+            "anterior",
+            "siguiente",
+            "reproducir",
+            "pausar",
+            "reiniciar"
+          ]
+        },
+        "pasos": [
+          {
+            "orden": 1,
+            "duracion_ms": 1200,
+            "estado_visual": "registros_sin_orden",
+            "titulo": "Registros originales",
+            "explicacion": "Cada fila representa una observación. Por sí solos, los registros todavía no explican qué está ocurriendo.",
+            "resaltar": [
+              "filas",
+              "columnas"
+            ]
+          },
+          {
+            "orden": 2,
+            "duracion_ms": 1200,
+            "estado_visual": "datos_clasificados",
+            "titulo": "Clasificación",
+            "explicacion": "Agrupamos los registros por una característica, como día, equipo o tipo de consumo.",
+            "resaltar": [
+              "categoria",
+              "grupo"
+            ]
+          },
+          {
+            "orden": 3,
+            "duracion_ms": 1200,
+            "estado_visual": "frecuencias",
+            "titulo": "Conteo de frecuencias",
+            "explicacion": "Contamos cuántas veces aparece cada categoría para comparar su frecuencia.",
+            "resaltar": [
+              "conteo",
+              "frecuencia"
+            ]
+          },
+          {
+            "orden": 4,
+            "duracion_ms": 1200,
+            "estado_visual": "patron_detectado",
+            "titulo": "Patrón identificado",
+            "explicacion": "Al comparar frecuencias podemos reconocer comportamientos repetidos o categorías predominantes.",
+            "resaltar": [
+              "patron",
+              "categoria_mayor"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "dl01-ordenar-proceso",
+      "tipo": "ordenar_bloques",
+      "titulo": "Ordena el análisis de frecuencias",
+      "instrucciones": "Coloca las acciones en el orden lógico para encontrar patrones en un conjunto de datos.",
+      "duracion_estimada_minutos": 4,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "b1",
+            "texto": "Reunir los registros del conjunto de datos."
+          },
+          {
+            "id": "b2",
+            "texto": "Elegir la variable o categoría que se analizará."
+          },
+          {
+            "id": "b3",
+            "texto": "Contar cuántas veces aparece cada categoría."
+          },
+          {
+            "id": "b4",
+            "texto": "Comparar los resultados e interpretar el patrón."
+          }
+        ],
+        "orden_correcto": [
+          "b1",
+          "b2",
+          "b3",
+          "b4"
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Correcto! Primero se reúnen los datos, después se define qué observar, se cuentan las frecuencias y finalmente se interpretan.",
+          "incorrecta": "Revisa el proceso: no se puede interpretar un patrón antes de organizar y contar los datos."
+        }
+      }
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-CT-01",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Aplicar conteos y tablas de frecuencia a un conjunto de registros de consumo energético."
+    }
+  ]
+}

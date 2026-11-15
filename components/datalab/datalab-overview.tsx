@@ -8,44 +8,38 @@ import { DataChart } from './data-chart';
 import { DataLabResults } from './datalab-results';
 import { 
   IconChartHistogram, IconRefresh, IconBolt, 
-  IconTable, IconChartLine, IconChartBar, IconArrowRight, IconDatabase, IconTerminal 
+  IconTable, IconChartLine, IconChartBar, IconArrowRight, IconCheck, IconRotate 
 } from '@tabler/icons-react';
-import { BannerPractica } from '../ui/labs/banner';
 
-interface DataLabOverviewProps {
-  onApproved?: (puntaje: number) => void;
-  onReset?: () => void;
-}
+// Importamos tu JSON oficial de la práctica analítica
+import dlCt05 from '@/lib/datalab/DL-CT-05.json';
 
-export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
-  onApproved,
-  onReset,
-}) => {
+export const DataLabOverview = () => {
   const router = useRouter();
-
   const [pasoActivo, setPasoActivo] = useState(0);
-  const [tipoGrafica, setTipoGrafica] = useState<
-    "barras" | "dispersion" | "libre"
-  >("barras");
-  const [respuestaTecnica, setRespuestaTecnica] = useState("");
-  const [filtroTabla, setFiltroTabla] = useState("Todo");
+  const [tipoGrafica, setTipoGrafica] = useState<'barras' | 'dispersion' | 'libre'>('barras');
+  const [respuestaTecnica, setRespuestaTecnica] = useState('');
+  const [filtroTabla, setFiltroTabla] = useState('Todo');
 
   const [aciertos, setAciertos] = useState(0);
-  const [practicasCompletadas, setPracticasCompletadas] = useState<number[]>([]);
   const [puntosXP, setPuntosXP] = useState(0);
   const [modalAbierto, setModalAbierto] = useState(false);
   const [fueExito, setFueExito] = useState(false);
 
-  // Alterna entre las prácticas de DataLab y Database Studio.
-  const [vistaActual, setVistaActual] = useState<
-    "datalab" | "database_lab"
-  >("datalab");
-  const [querySql, setQuerySql] = useState(
-    "SELECT * FROM fact_consumo_energetico WHERE zona = 'Centro' LIMIT 5;"
-  );
-  const [resultadoQuery, setResultadoQuery] = useState(false);
+  // Estados interactivos para la Práctica DL-CT-05 leída del JSON
+  const act1Config: any = dlCt05.actividades_interactivas.find(a => a.tipo === 'ordenar_bloques')?.configuracion;
+  const act2Config: any = dlCt05.actividades_interactivas.find(a => a.tipo === 'calculo_guiado')?.configuracion;
 
-  // Secuencia de los 8 módulos normales
+  const [bloquesUsuario, setBloquesUsuario] = useState<any[]>(
+    act1Config && act1Config.bloques ? [...act1Config.bloques].sort(() => Math.random() - 0.5) : []
+  );
+  const [resultadoOrden, setResultadoOrden] = useState<boolean | null>(null);
+
+  const [paso1Input, setPaso1Input] = useState('');
+  const [paso2Input, setPaso2Input] = useState('');
+  const [resultadoCalculo, setResultadoCalculo] = useState<boolean | null>(null);
+
+  // Secuencia de los 8 módulos anteriores + la Práctica DL-CT-05 (Módulo 9)
   const secuenciaCurricula = [
     {
       id: 0,
@@ -141,7 +135,7 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
     {
       id: 7,
       tituloDataset: "DL-CT-04: Modelado Predictivo",
-      pregunta: "En la última fase de validación de modelos, qué indicador confirma la estabilidad del conjunto analizado?",
+      pregunta: "En la última fase de validación de modelos, ¿qué indicador confirma la estabilidad del conjunto analizado?",
       opciones: [
         { letra: "A", texto: "Baja dispersión y convergencia en los residuos del modelo", correcta: true },
         { letra: "B", texto: "Saturación total de la memoria RAM del servidor", correcta: false },
@@ -150,6 +144,11 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
       ],
       mensajeExito: "¡Fantástico! Concluiste con éxito todos los módulos y prácticas de DataLab.",
       mensajeError: "Incorrecto. Revisa los parámetros de estabilidad y residuos del modelo."
+    },
+    {
+      id: 8,
+      tituloDataset: dlCt05.titulo,
+      pregunta: dlCt05.descripcion
     }
   ];
 
@@ -162,33 +161,18 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
     { id: 5, nombre: "DL-CT-02: Filtrado", desc: "Filtros condicionales cruzados", color: "text-rose-500" },
     { id: 6, nombre: "DL-CT-03: Outliers", desc: "Tendencias y valores atípicos", color: "text-indigo-500" },
     { id: 7, nombre: "DL-CT-04: Modelado", desc: "Validación y estabilidad", color: "text-teal-500" },
+    { id: 8, nombre: dlCt05.identificador, desc: "Práctica interactiva JSON", color: "text-blue-600" },
   ];
 
   const contenidoActual = secuenciaCurricula[pasoActivo] || secuenciaCurricula[0];
 
   const handleNextStep = () => {
-    if (!fueExito) return;
-
-    const completadas = new Set(practicasCompletadas);
-    completadas.add(pasoActivo);
-
-    const nuevasCompletadas = Array.from(completadas);
-    setPracticasCompletadas(nuevasCompletadas);
-
-    const siguientePendiente = secuenciaCurricula.find(
-      ({ id }) => !completadas.has(id)
-    );
-
-    setRespuestaTecnica("");
-    setFueExito(false);
-    setModalAbierto(false);
-
-    if (siguientePendiente) {
-      setPasoActivo(siguientePendiente.id);
-      return;
+    if (pasoActivo < secuenciaCurricula.length - 1) {
+      setPasoActivo(prev => prev + 1);
+      setRespuestaTecnica('');
+    } else {
+      router.push('/electrolab');
     }
-
-    setVistaActual("database_lab");
   };
 
   const procesarEvaluacion = () => {
@@ -196,217 +180,56 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
       alert("Por favor selecciona una opción antes de evaluar.");
       return;
     }
-
-    const opcionSeleccionada = contenidoActual.opciones.find(
-      (op) => op.letra === respuestaTecnica
-    );
-    const esCorrecto = opcionSeleccionada?.correcta ?? false;
+    const opcionSeleccionada = contenidoActual.opciones?.find(op => op.letra === respuestaTecnica);
+    const esCorrecto = opcionSeleccionada ? opcionSeleccionada.correcta : false;
 
     setFueExito(esCorrecto);
+    if (esCorrecto) {
+      setAciertos(prev => prev + 1);
+      setPuntosXP(prev => prev + 100);
+    }
     setModalAbierto(true);
-
-    if (
-      esCorrecto &&
-      !practicasCompletadas.includes(pasoActivo)
-    ) {
-      setPracticasCompletadas((actuales) =>
-        actuales.includes(pasoActivo)
-          ? actuales
-          : [...actuales, pasoActivo]
-      );
-      setAciertos((prev) => prev + 1);
-      setPuntosXP((prev) => prev + 100);
-    }
   };
 
-  const reiniciar = () => {
-    if (onReset) {
-      onReset();
-      return;
-    }
-
-    setPasoActivo(0);
-    setTipoGrafica("barras");
-    setRespuestaTecnica("");
-    setFiltroTabla("Todo");
-    setAciertos(0);
-    setPracticasCompletadas([]);
-    setPuntosXP(0);
-    setModalAbierto(false);
-    setFueExito(false);
-    setVistaActual("datalab");
-    setQuerySql(
-      "SELECT * FROM fact_consumo_energetico WHERE zona = 'Centro' LIMIT 5;"
-    );
-    setResultadoQuery(false);
+  const moverBloque = (index: number, dir: 'arriba' | 'abajo') => {
+    const arr = [...bloquesUsuario];
+    const destino = dir === 'arriba' ? index - 1 : index + 1;
+    if (destino < 0 || destino >= arr.length) return;
+    const temp = arr[index];
+    arr[index] = arr[destino];
+    arr[destino] = temp;
+    setBloquesUsuario(arr);
   };
-
-  const finalizarPractica = () => {
-    if (practicasCompletadas.length !== secuenciaCurricula.length) {
-      alert("Debes aprobar las ocho prácticas antes de continuar.");
-      return;
-    }
-
-    if (!resultadoQuery) {
-      alert("Primero ejecuta la consulta SQL.");
-      return;
-    }
-
-    const puntaje = Math.round(
-      (practicasCompletadas.length / secuenciaCurricula.length) * 100
-    );
-
-    if (onApproved) {
-      onApproved(puntaje);
-      return;
-    }
-
-    router.push("/electrolab");
-  };
-
-  if (vistaActual === 'database_lab') {
-    return (
-      <div className="min-h-screen bg-slate-900 text-slate-100 p-6 sm:p-10 flex flex-col gap-6 font-sans">
-        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
-              <IconDatabase size={22} />
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Módulo de Práctica Avanzada</span>
-              <h1 className="text-xl font-black text-white">Database Studio: Consultas y Esquema FactConsumo</h1>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-lg border border-emerald-500/20">PostgreSQL / SQL Activo</span>
-            <button
-              onClick={() => setVistaActual('datalab')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-colors cursor-pointer border border-slate-700"
-            >
-              ← Regresar a DataLab
-            </button>
-          </div>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-6 bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 flex flex-col gap-4 shadow-xl">
-            <h3 className="text-sm font-bold text-emerald-400 flex items-center gap-2">
-              <IconTerminal size={18} /> Consola SQL Interactiva
-            </h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Escribe y ejecuta consultas SQL directamente sobre el esquema relacional de consumo energético para validar la integridad de los datos almacenados:
-            </p>
-            <textarea
-              rows={6}
-              value={querySql}
-              onChange={(e) => setQuerySql(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 font-mono text-xs text-emerald-300 outline-none focus:border-emerald-500 shadow-inner"
-            />
-            <button
-              onClick={() => setResultadoQuery(true)}
-              className="py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs uppercase tracking-widest transition-colors cursor-pointer shadow-lg shadow-emerald-900/20 flex items-center justify-center gap-2"
-            >
-              <span>Ejecutar Consulta SQL</span> <IconArrowRight size={16} />
-            </button>
-          </div>
-
-          <div className="lg:col-span-6 bg-slate-800/50 border border-slate-700/60 rounded-2xl p-6 flex flex-col gap-5 shadow-xl">
-            <h3 className="text-sm font-bold text-cyan-400 flex items-center gap-2">
-              <IconTable size={18} /> Salida del Servidor de Base de Datos
-            </h3>
-
-            <div className="bg-slate-950 border border-slate-700 rounded-xl p-4 text-xs font-mono text-slate-300 overflow-x-auto min-h-[160px] flex flex-col justify-center">
-              {resultadoQuery ? (
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="border-b border-slate-800 text-cyan-400 text-[11px]">
-                      <th className="pb-2">id_transaccion</th>
-                      <th className="pb-2">zona_operativa</th>
-                      <th className="pb-2">kwh_registrados</th>
-                      <th className="pb-2">estado</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-[11px]">
-                    <tr className="border-b border-slate-800/50"><td className="py-2">501</td><td>Centro / Villahermosa</td><td>450.2 kWh</td><td className="text-emerald-400">Normal</td></tr>
-                    <tr className="border-b border-slate-800/50"><td className="py-2">502</td><td>Centro / Villahermosa</td><td>683.0 kWh</td><td className="text-amber-400">Pico</td></tr>
-                    <tr><td className="py-2">503</td><td>Macuspana</td><td>310.8 kWh</td><td className="text-emerald-400">Normal</td></tr>
-                  </tbody>
-                </table>
-              ) : (
-                <span className="text-slate-500 text-center italic">Presiona "Ejecutar Consulta SQL" para desplegar los registros...</span>
-              )}
-            </div>
-
-            <div className="pt-2 border-t border-slate-700/60 flex flex-col gap-3">
-              <span className="text-[11px] text-slate-400">¿Has completado la validación de la base de datos?</span>
-              <button
-                type="button"
-                onClick={finalizarPractica}
-                disabled={
-                  !resultadoQuery ||
-                  practicasCompletadas.length !== secuenciaCurricula.length
-                }
-                className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2"
-              >
-                <span>Finalizar práctica y continuar</span>
-                <IconArrowRight size={16} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <main className="max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col gap-6">
-        <BannerPractica
-          nombreLaboratorio="DataLab"
-          nombrePractica="Análisis de conjunto de datos"
-          nivelPractica="Nivel intermedio"
-          descripcionPractica="Laboratorio interactivo de análisis, visualización y formulación de hipótesis con datos reales."
-        />
-
+        
         {/* ENCABEZADO */}
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-slate-600">Conjunto de datos para análisis:</span>
+            <span className="text-xs font-bold text-slate-600">Módulo Activo:</span>
             <span className="text-sm font-extrabold text-cyan-600">{contenidoActual.tituloDataset}</span>
           </div>
           <div className="flex items-center gap-3 text-xs">
             <span className="flex items-center gap-1.5 text-slate-500">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Módulo #{pasoActivo + 1} de {secuenciaCurricula.length}
             </span>
-            <span className="text-cyan-600 font-semibold bg-cyan-50 px-2.5 py-1 rounded-lg border border-cyan-100">Sincronizado</span>
-            <button
-              type="button"
-              onClick={reiniciar}
-              className="text-slate-500 hover:text-slate-800 font-semibold transition-colors cursor-pointer"
-            >
-              <span className="inline-flex items-center gap-1.5">
-                <IconRefresh size={15} />
-                Reiniciar
-              </span>
-            </button>
           </div>
         </div>
 
-        {/* SELECTOR SUPERIOR DE MÓDULOS */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {/* SELECTOR SUPERIOR DE MÓDULOS (9 TARJETAS) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
           {datasetsMock.map((ds) => (
             <button
               key={ds.id}
-              type="button"
               onClick={() => {
                 setPasoActivo(ds.id);
-                setRespuestaTecnica("");
-                setFueExito(false);
-                setModalAbierto(false);
+                setRespuestaTecnica('');
               }}
               className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
-                pasoActivo === ds.id
-                  ? 'bg-cyan-50/80 border-cyan-300 shadow-sm ring-2 ring-cyan-500/10'
+                pasoActivo === ds.id 
+                  ? 'bg-cyan-50/80 border-cyan-300 shadow-sm ring-2 ring-cyan-500/10' 
                   : 'bg-white border-slate-200 hover:border-slate-300'
               }`}
             >
@@ -418,160 +241,191 @@ export const DataLabOverview: React.FC<DataLabOverviewProps> = ({
           ))}
         </div>
 
-        {/* SECCIÓN PRINCIPAL: TABLA Y GRÁFICA */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-slate-900 font-bold text-sm flex items-center gap-2">
-                  <IconTable size={18} stroke={1.5} className="text-slate-400" /> Explorador de Registros
-                </h3>
-                <span className="text-xs text-slate-500 font-medium">{contenidoActual.tituloDataset}</span>
-              </div>
-              <DatasetTable datasetId={contenidoActual.id} filtroCategoria={filtroTabla} />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-                  <span className="text-xs font-black">fx</span>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Promedio Muestra</span>
-                  <span className="text-xs font-extrabold text-slate-800">Activo v{pasoActivo + 1}</span>
-                </div>
-              </div>
-              <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-600">
-                  <IconRefresh size={18} />
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Estado Análisis</span>
-                  <span className="text-xs font-extrabold text-cyan-600">Sincronizado</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm flex flex-col gap-2">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
-                <h3 className="text-slate-900 font-bold text-sm flex items-center gap-2">
-                  <IconChartLine size={18} stroke={1.5} className="text-slate-400" /> Visualización Dinámica ({contenidoActual.tituloDataset})
-                </h3>
-                <div className="flex items-center gap-4 text-xs font-semibold text-slate-500">
-                  <button onClick={() => setTipoGrafica('barras')} className={tipoGrafica === 'barras' ? 'text-cyan-600 flex items-center gap-1 cursor-pointer font-bold' : 'hover:text-slate-800 flex items-center gap-1 cursor-pointer'}><IconChartBar size={16} /> Barras</button>
-                  <button onClick={() => setTipoGrafica('dispersion')} className={tipoGrafica === 'dispersion' ? 'text-cyan-600 flex items-center gap-1 cursor-pointer font-bold' : 'hover:text-slate-800 flex items-center gap-1 cursor-pointer'}><IconChartLine size={16} /> Líneas</button>
-                </div>
-              </div>
-              <div className="w-full bg-white rounded-lg min-h-[225px] flex items-center justify-center">
-                <DataChart datasetId={contenidoActual.id} tipoGrafica={tipoGrafica} />
-              </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex items-center gap-3 text-xs text-slate-500">
-              <span className="text-indigo-500"><IconChartHistogram size={20} /></span>
-              <p><strong>Interpretación Analítica:</strong> Analiza la gráfica y la tabla para resolver el desafío planteado abajo.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* SECCIÓN INFERIOR: DESAFÍO Y PROGRESO */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pb-8">
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <span className="text-xs font-extrabold tracking-wider text-slate-900 uppercase">
-                Desafío {pasoActivo + 1} de {secuenciaCurricula.length}
-              </span>
-              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">Evaluación Técnica</span>
-            </div>
-
-            <h3 className="text-slate-800 font-bold text-sm leading-relaxed">
-              {contenidoActual.pregunta}
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {contenidoActual.opciones.map((op, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setRespuestaTecnica(op.letra)}
-                  className={`p-4 rounded-xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
-                    respuestaTecnica === op.letra
-                      ? 'bg-cyan-50 border-cyan-300 font-semibold text-cyan-900 shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                  }`}
-                >
-                  <span className={`font-bold text-xs w-5 h-5 rounded-md flex items-center justify-center shrink-0 ${respuestaTecnica === op.letra ? 'bg-cyan-600 text-white' : 'bg-slate-100 text-slate-700'}`}>
-                    {op.letra}
-                  </span>
-                  <span className="text-xs font-medium leading-tight pt-0.5">{op.texto}</span>
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={procesarEvaluacion}
-              disabled={!respuestaTecnica}
-              className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-sm"
-            >
-              Evaluar Respuesta
-            </button>
-          </div>
-
-          <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tu Rendimiento</span>
-              <span className="text-[10px] font-bold text-slate-500">En tiempo real</span>
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <h4 className="text-lg font-black text-slate-900">DataLab Master</h4>
-              <p className="text-xs text-slate-500">Al completar el último módulo abrirás el Database Studio.</p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 py-3 border-y border-slate-100 text-center">
+        {/* VISTA CONDICIONAL: SI ES EL MÓDULO 8 (CARGADO DEL JSON DL-CT-05 - ESTADÍSTICA Y OUTLIERS) */}
+        {pasoActivo === 8 ? (
+          <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm flex flex-col gap-8 animate-fadeIn">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
               <div>
-                <span className="text-xl font-black text-cyan-600 block">{aciertos}/{secuenciaCurricula.length}</span>
-                <span className="text-[9px] uppercase font-bold text-slate-400">Aciertos</span>
+                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">JSON: {dlCt05.identificador}</span>
+                <h2 className="text-2xl font-black text-slate-900">{dlCt05.titulo}</h2>
               </div>
-              <div className="border-x border-slate-100">
-                <span className="text-xl font-black text-emerald-500 block">+{puntosXP}</span>
-                <span className="text-[9px] uppercase font-bold text-slate-400">Puntos XP</span>
-              </div>
-              <div>
-                <span className="text-xl font-black text-indigo-600 block">Nivel 5</span>
-                <span className="text-[9px] uppercase font-bold text-slate-400">Rango</span>
-              </div>
+              <span className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full">Teórica Interactiva / Estadística</span>
             </div>
 
-            <div className="flex flex-col gap-2.5">
+            <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+              {dlCt05.descripcion}
+            </p>
+
+            {/* Actividad 1: Ordenar Bloques (Flujo Analítico) */}
+            <div className="flex flex-col gap-3">
+              <h3 className="text-sm font-bold text-slate-900">
+                1. {dlCt05.actividades_interactivas[0].titulo}
+              </h3>
+              <p className="text-xs text-slate-500">{dlCt05.actividades_interactivas[0].instrucciones}</p>
+              
+              <div className="flex flex-col gap-2">
+                {bloquesUsuario.map((b, idx) => (
+                  <div key={b.id} className="flex items-center justify-between p-3.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 shadow-xs">
+                    <span>{idx + 1}. {b.texto}</span>
+                    <div className="flex gap-1.5">
+                      <button onClick={() => moverBloque(idx, 'arriba')} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700 cursor-pointer font-bold">▲</button>
+                      <button onClick={() => moverBloque(idx, 'abajo')} className="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 rounded text-slate-700 cursor-pointer font-bold">▼</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
               <button
-                type="button"
-                onClick={handleNextStep}
-                disabled={!fueExito}
-                className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                onClick={() => {
+                  const esCorrecto = bloquesUsuario[0].id === 'b1' &&
+                                     bloquesUsuario[1].id === 'b2' &&
+                                     bloquesUsuario[2].id === 'b3' &&
+                                     bloquesUsuario[3].id === 'b4';
+                  setResultadoOrden(esCorrecto);
+                }}
+                className="self-start px-5 py-2.5 bg-slate-900 text-white font-bold rounded-xl text-xs uppercase cursor-pointer mt-1"
               >
-                <span>Siguiente Dataset o Módulo</span> <IconArrowRight size={16} />
+                Comprobar Orden
+              </button>
+
+              {resultadoOrden !== null && (
+                <div className={`p-3 rounded-xl text-xs font-bold ${resultadoOrden ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}`}>
+                  {resultadoOrden ? dlCt05.actividades_interactivas[0].configuracion.retroalimentacion : "El orden lógico no es correcto. Recuerda que se inicia cargando los datos y se termina validando métricas."}
+                </div>
+              )}
+            </div>
+
+            {/* Actividad 2: Cálculo Guiado (Impacto de Outliers) */}
+            <div className="flex flex-col gap-3 pt-6 border-t border-slate-100">
+              <h3 className="text-sm font-bold text-slate-900">
+                2. {dlCt05.actividades_interactivas[1].titulo}
+              </h3>
+              <p className="text-xs text-slate-500">{dlCt05.actividades_interactivas[1].instrucciones}</p>
+              <p className="text-xs font-mono text-cyan-700 bg-cyan-50 p-2.5 rounded-lg border border-cyan-100">
+                Fórmula: {dlCt05.actividades_interactivas[1].configuracion.formula_principal}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-slate-700">Paso 1: Suma total (200 + 300)</label>
+                  <input
+                    type="text"
+                    placeholder="Ej. 500"
+                    value={paso1Input}
+                    onChange={(e) => setPaso1Input(e.target.value)}
+                    className="p-3 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 outline-none focus:border-cyan-500"
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold text-slate-700">Paso 2: Promedio final (Total / 4)</label>
+                  <input
+                    type="text"
+                    placeholder="Ej. 125"
+                    value={paso2Input}
+                    onChange={(e) => setPaso2Input(e.target.value)}
+                    className="p-3 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 outline-none focus:border-cyan-500"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  const paso1Ok = paso1Input.trim() === '500';
+                  const paso2Ok = paso2Input.trim() === '125';
+                  setResultadoCalculo(paso1Ok && paso2Ok);
+                }}
+                className="self-start px-5 py-2.5 bg-slate-900 text-white font-bold rounded-xl text-xs uppercase cursor-pointer mt-1"
+              >
+                Comprobar Cálculos
+              </button>
+
+              {resultadoCalculo !== null && (
+                <div className={`p-3 rounded-xl text-xs font-bold ${resultadoCalculo ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}`}>
+                  {resultadoCalculo ? "¡Cálculos correctos! El promedio se eleva a 125 debido al arrastre del valor atípico." : "Revisa los valores numéricos (Suma base 200 + Outlier 300 = 500; entre 4 muestras = 125)."}
+                </div>
+              )}
+            </div>
+
+            <div className="pt-4 border-t border-slate-100 flex justify-end">
+              <button
+                onClick={() => router.push('/electrolab')}
+                className="px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider cursor-pointer flex items-center gap-2 shadow-sm"
+              >
+                <span>Finalizar Práctica y Saltar a ElectroLab</span> <IconArrowRight size={16} />
               </button>
             </div>
           </div>
-        </div>
+        ) : (
+          /* ================= VISTA NORMAL (MÓDULOS 0 AL 7) ================= */
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                <h3 className="text-slate-900 font-bold text-sm mb-4 flex items-center gap-2">
+                  <IconTable size={18} /> Explorador de Registros
+                </h3>
+                <DatasetTable datasetId={contenidoActual.id} filtroCategoria={filtroTabla} />
+              </div>
+
+              <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                <h3 className="text-slate-900 font-bold text-sm mb-4 flex items-center gap-2">
+                  <IconChartLine size={18} /> Visualización Dinámica
+                </h3>
+                <div className="w-full min-h-[225px] flex items-center justify-center">
+                  <DataChart datasetId={contenidoActual.id} tipoGrafica={tipoGrafica} />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pb-8">
+              <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
+                <h3 className="text-slate-800 font-bold text-sm">{contenidoActual.pregunta}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {contenidoActual.opciones?.map((op, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setRespuestaTecnica(op.letra)}
+                      className={`p-4 rounded-xl border text-left flex items-start gap-3 cursor-pointer ${
+                        respuestaTecnica === op.letra ? 'bg-cyan-50 border-cyan-300 font-semibold' : 'bg-white border-slate-200'
+                      }`}
+                    >
+                      <span className="font-bold text-xs">{op.letra}</span>
+                      <span className="text-xs">{op.texto}</span>
+                    </button>
+                  ))}
+                </div>
+                <button 
+                  onClick={procesarEvaluacion}
+                  disabled={!respuestaTecnica}
+                  className="w-full py-3.5 bg-slate-900 text-white font-bold rounded-xl text-xs uppercase cursor-pointer"
+                >
+                  Evaluar Respuesta
+                </button>
+              </div>
+
+              <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
+                <h4 className="text-lg font-black text-slate-900">DataLab Master</h4>
+                <button 
+                  onClick={handleNextStep}
+                  className="w-full py-3.5 bg-blue-600 text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Siguiente Módulo</span> <IconArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
 
       </main>
 
-      <DataLabResults
-        isOpen={modalAbierto}
+      <DataLabResults 
+        isOpen={modalAbierto} 
         esExito={fueExito}
-        mensajeExito={contenidoActual.mensajeExito}
-        mensajeError={contenidoActual.mensajeError}
-        onReintentar={() => {
-          setModalAbierto(false);
-          setFueExito(false);
-          setRespuestaTecnica("");
-        }}
+        mensajeExito={contenidoActual.mensajeExito || "¡Correcto!"}
+        mensajeError={contenidoActual.mensajeError || "Incorrecto."}
+        onReintentar={() => setModalAbierto(false)}
         onAvanzar={() => {
           setModalAbierto(false);
-          setRespuestaTecnica("");
+          setRespuestaTecnica('');
           handleNextStep();
         }}
       />

@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-04",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Introducción al modelado predictivo",
+  "descripcion": "Comprende el propósito de los modelos predictivos, las etapas básicas de entrenamiento y evaluación, y una forma sencilla de estimar tendencias.",
+  "orden": 4,
+  "duracion_estimada_minutos": 22,
+  "objetivos": [
+    "Explicar qué es un modelo predictivo.",
+    "Diferenciar datos de entrenamiento y de prueba.",
+    "Reconocer la importancia de evaluar un modelo.",
+    "Realizar una estimación lineal básica e interpretar sus límites."
+  ],
+  "secciones": [
+    {
+      "titulo": "1. ¿Qué es un modelo predictivo?",
+      "parrafos": [
+        "Un modelo predictivo utiliza datos disponibles para estimar un resultado que todavía no conocemos. Puede ayudar a anticipar demanda, consumo, rendimiento u otros comportamientos.",
+        "Una predicción es una estimación, no una certeza. Su calidad depende de los datos, de las variables seleccionadas y de los supuestos del modelo."
+      ]
+    },
+    {
+      "titulo": "2. Entrenamiento y prueba",
+      "parrafos": [
+        "En un flujo común, los datos se dividen en conjuntos. Los datos de entrenamiento se utilizan para ajustar el modelo, mientras que los datos de prueba se reservan para comprobar su comportamiento con observaciones que no participaron en el ajuste.",
+        "Separar los datos ayuda a detectar si el modelo simplemente memorizó ejemplos o si puede responder razonablemente ante información nueva."
+      ]
+    },
+    {
+      "titulo": "3. Evaluación e interpretación",
+      "parrafos": [
+        "La evaluación utiliza métricas apropiadas para comparar las predicciones con los valores observados. La métrica depende del tipo de problema: no se evalúa igual una predicción numérica que una clasificación.",
+        "Una estimación basada en una tendencia lineal puede servir como primer acercamiento, pero debe interpretarse con cuidado. Los patrones pueden cambiar y el contexto puede afectar los resultados."
+      ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "dl04-completar-modelo",
+      "tipo": "completar_enunciados",
+      "titulo": "Completa el flujo de un modelo predictivo",
+      "instrucciones": "Elige el concepto que corresponde a cada etapa del proceso de modelado.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "seleccion",
+        "mezclar_opciones": true,
+        "permitir_reintentar": true,
+        "banco_bloques": [
+          {
+            "id": "entrenamiento",
+            "texto": "entrenamiento"
+          },
+          {
+            "id": "prueba",
+            "texto": "prueba"
+          },
+          {
+            "id": "prediccion",
+            "texto": "predicción"
+          },
+          {
+            "id": "evaluacion",
+            "texto": "evaluación"
+          }
+        ],
+        "enunciados": [
+          {
+            "id": "m1",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "El conjunto de "
+              },
+              {
+                "tipo": "espacio",
+                "id": "mblank1",
+                "respuesta": "entrenamiento"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " se utiliza para ajustar el modelo."
+              }
+            ],
+            "retroalimentacion": "El entrenamiento permite que el modelo aprenda patrones a partir de ejemplos."
+          },
+          {
+            "id": "m2",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "El conjunto de "
+              },
+              {
+                "tipo": "espacio",
+                "id": "mblank2",
+                "respuesta": "prueba"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " permite revisar el comportamiento con datos no usados durante el ajuste."
+              }
+            ],
+            "retroalimentacion": "Los datos de prueba ayudan a estimar cómo responde el modelo ante datos nuevos."
+          },
+          {
+            "id": "m3",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "La "
+              },
+              {
+                "tipo": "espacio",
+                "id": "mblank3",
+                "respuesta": "evaluacion"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " mide qué tan bien funciona el modelo."
+              }
+            ],
+            "retroalimentacion": "La evaluación utiliza métricas para valorar el rendimiento."
+          },
+          {
+            "id": "m4",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "Una "
+              },
+              {
+                "tipo": "espacio",
+                "id": "mblank4",
+                "respuesta": "prediccion"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " es la salida estimada por el modelo para una entrada."
+              }
+            ],
+            "retroalimentacion": "La predicción es el resultado que produce el modelo."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Muy bien! Identificaste las etapas y conceptos del flujo predictivo.",
+          "incorrecta": "Recuerda: se entrena el modelo, se evalúa con datos separados y se generan predicciones."
+        }
+      }
+    },
+    {
+      "id": "dl04-calculo-tendencia",
+      "tipo": "calculo_guiado",
+      "titulo": "Estima una tendencia lineal sencilla",
+      "instrucciones": "Calcula el cambio promedio por periodo y estima el valor del siguiente periodo suponiendo que la tendencia continúa.",
+      "duracion_estimada_minutos": 7,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "numerico",
+        "permitir_reintentar": true,
+        "datos": [
+          {
+            "id": "v1",
+            "etiqueta": "Valor inicial",
+            "valor": 20,
+            "unidad": "unidades"
+          },
+          {
+            "id": "v2",
+            "etiqueta": "Valor final",
+            "valor": 32,
+            "unidad": "unidades"
+          },
+          {
+            "id": "n",
+            "etiqueta": "Número de intervalos",
+            "valor": 3,
+            "unidad": "periodos"
+          }
+        ],
+        "formula_principal": "Cambio promedio = (valor final - valor inicial) / número de intervalos",
+        "nota_unidades": "El cambio promedio se expresa en unidades por periodo.",
+        "pasos": [
+          {
+            "id": "t1",
+            "consigna": "Calcula el cambio total entre el valor final y el inicial.",
+            "formula": "32 - 20",
+            "respuesta_esperada": 12,
+            "unidad": "unidades",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Resta el valor inicial al valor final.",
+            "explicacion": "El cambio total es de 12 unidades."
+          },
+          {
+            "id": "t2",
+            "consigna": "Divide el cambio total entre los tres intervalos.",
+            "formula": "12 / 3",
+            "respuesta_esperada": 4,
+            "unidad": "unidades por periodo",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Distribuye el cambio total entre los intervalos.",
+            "explicacion": "El cambio promedio es de 4 unidades por periodo."
+          },
+          {
+            "id": "t3",
+            "consigna": "Estima el siguiente valor sumando el cambio promedio al valor final.",
+            "formula": "32 + 4",
+            "respuesta_esperada": 36,
+            "unidad": "unidades",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Continúa la tendencia un periodo más.",
+            "explicacion": "Bajo el supuesto de que la tendencia continúa, el valor estimado es 36 unidades."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Correcto! Obtienes una estimación sencilla. Recuerda que una tendencia lineal no garantiza que el valor real futuro sea exactamente ese.",
+          "incorrecta": "Revisa el orden: calcula el cambio total, divídelo entre los intervalos y suma el cambio promedio al último valor."
+        }
+      }
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-CT-04",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Construir e interpretar una estimación sencilla a partir de una tendencia en datos históricos."
+    }
+  ]
+}

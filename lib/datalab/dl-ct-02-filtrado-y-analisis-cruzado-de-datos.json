@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-02",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Filtrado y análisis cruzado de datos",
+  "descripcion": "Aprende a seleccionar registros mediante condiciones y a combinar criterios para estudiar segmentos específicos de un conjunto de datos.",
+  "orden": 2,
+  "duracion_estimada_minutos": 21,
+  "objetivos": [
+    "Explicar para qué sirve un filtro.",
+    "Diferenciar una variable de una condición.",
+    "Comprender el resultado de aplicar varios criterios.",
+    "Interpretar un subconjunto de datos."
+  ],
+  "secciones": [
+    {
+      "titulo": "1. Seleccionar información relevante",
+      "parrafos": [
+        "En un conjunto de datos puede haber cientos o miles de registros. Un filtro permite mostrar solo aquellos que cumplen una condición definida por el análisis.",
+        "Por ejemplo, en una tabla de consumo se pueden mostrar únicamente los registros de un mes, de un edificio o de equipos cuyo consumo supere cierto valor."
+      ]
+    },
+    {
+      "titulo": "2. Condiciones y operadores",
+      "parrafos": [
+        "Una condición expresa una regla que debe cumplir cada registro. Puede utilizar comparaciones como igual, diferente, mayor que, menor que o incluir un texto específico.",
+        "Los operadores lógicos permiten combinar condiciones. Con AND se requieren todas las condiciones; con OR basta con que se cumpla al menos una."
+      ]
+    },
+    {
+      "titulo": "3. Análisis cruzado",
+      "parrafos": [
+        "El análisis cruzado compara información desde más de una dimensión. Por ejemplo, se puede revisar el consumo por edificio y por tipo de equipo.",
+        "Es importante verificar que el subconjunto resultante siga siendo suficiente y pertinente para responder la pregunta inicial."
+      ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "dl02-completar-filtros",
+      "tipo": "completar_enunciados",
+      "titulo": "Completa los conceptos de filtrado",
+      "instrucciones": "Selecciona los conceptos correctos para completar cada enunciado sobre filtros y segmentación.",
+      "duracion_estimada_minutos": 5,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "seleccion",
+        "mezclar_opciones": true,
+        "permitir_reintentar": true,
+        "banco_bloques": [
+          {
+            "id": "filtro",
+            "texto": "filtro"
+          },
+          {
+            "id": "condicion",
+            "texto": "condición"
+          },
+          {
+            "id": "interseccion",
+            "texto": "intersección"
+          },
+          {
+            "id": "subconjunto",
+            "texto": "subconjunto"
+          }
+        ],
+        "enunciados": [
+          {
+            "id": "s1",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "Un "
+              },
+              {
+                "tipo": "espacio",
+                "id": "blank1",
+                "respuesta": "filtro"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " permite mostrar únicamente los registros que cumplen un criterio."
+              }
+            ],
+            "retroalimentacion": "El filtro limita los registros visibles según un criterio."
+          },
+          {
+            "id": "s2",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "Una "
+              },
+              {
+                "tipo": "espacio",
+                "id": "blank2",
+                "respuesta": "condicion"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " define qué debe cumplir un registro para permanecer en el resultado."
+              }
+            ],
+            "retroalimentacion": "La condición establece la regla que se evalúa."
+          },
+          {
+            "id": "s3",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "Al aplicar dos criterios simultáneos, podemos obtener la "
+              },
+              {
+                "tipo": "espacio",
+                "id": "blank3",
+                "respuesta": "interseccion"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " de los registros que cumplen ambos."
+              }
+            ],
+            "retroalimentacion": "La intersección conserva los registros que cumplen las dos condiciones."
+          },
+          {
+            "id": "s4",
+            "segmentos": [
+              {
+                "tipo": "texto",
+                "contenido": "El resultado de un filtrado es un "
+              },
+              {
+                "tipo": "espacio",
+                "id": "blank4",
+                "respuesta": "subconjunto"
+              },
+              {
+                "tipo": "texto",
+                "contenido": " del conjunto original."
+              }
+            ],
+            "retroalimentacion": "El filtrado devuelve una parte del conjunto original."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Bien hecho! Identificaste los conceptos esenciales para filtrar datos.",
+          "incorrecta": "Revisa la función de cada concepto: el filtro aplica una condición y devuelve un subconjunto."
+        }
+      }
+    },
+    {
+      "id": "dl02-sopa-terminos",
+      "tipo": "sopa_letras",
+      "titulo": "Encuentra los términos de filtrado",
+      "instrucciones": "Localiza en la cuadrícula los conceptos relacionados con la selección de registros. Las palabras aparecen horizontalmente o verticalmente.",
+      "duracion_estimada_minutos": 6,
+      "obligatoria": true,
+      "configuracion": {
+        "filas": 8,
+        "columnas": 8,
+        "relleno": "X",
+        "mostrar_lista_palabras": true,
+        "permitir_reintentar": true,
+        "direcciones_permitidas": [
+          "horizontal",
+          "vertical"
+        ],
+        "cuadricula": [
+          "FILTROXX",
+          "XXXXXXXX",
+          "XXXXXXXX",
+          "XXXXXXXX",
+          "DATOSXXX",
+          "XXXXXXXX",
+          "XXXXXXXX",
+          "XXXXXXXX"
+        ],
+        "palabras": [
+          {
+            "texto": "FILTRO",
+            "pista": "Herramienta para limitar los registros que se muestran."
+          },
+          {
+            "texto": "DATOS",
+            "pista": "Registros o valores que se analizan."
+          }
+        ],
+        "soluciones": [
+          {
+            "palabra": "FILTRO",
+            "fila_inicio": 0,
+            "columna_inicio": 0,
+            "direccion": "horizontal"
+          },
+          {
+            "palabra": "DATOS",
+            "fila_inicio": 4,
+            "columna_inicio": 0,
+            "direccion": "horizontal"
+          }
+        ],
+        "retroalimentacion": {
+          "completada": "¡Encontraste los términos!",
+          "ayuda": "Busca primero la palabra FILTRO en la primera fila y DATOS en la quinta."
+        }
+      }
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-CT-02",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Aplicar filtros combinados para comparar registros por categoría, periodo y condición."
+    }
+  ]
+}

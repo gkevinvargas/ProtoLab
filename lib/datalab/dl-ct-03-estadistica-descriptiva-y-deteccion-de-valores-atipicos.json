@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.1.0",
+  "version_contenido": "1.0.0",
+  "identificador": "DL-CT-03",
+  "laboratorio_id": "datalab",
+  "tipo_contenido": "clase_teorica",
+  "estado_publicacion": "borrador",
+  "titulo": "Estadística descriptiva y detección de valores atípicos",
+  "descripcion": "Conoce medidas básicas para resumir datos y aprende por qué una observación extrema debe revisarse antes de tomar decisiones.",
+  "orden": 3,
+  "duracion_estimada_minutos": 21,
+  "objetivos": [
+    "Calcular e interpretar la media aritmética.",
+    "Reconocer cómo un valor extremo puede afectar el promedio.",
+    "Distinguir una observación inusual de un error confirmado.",
+    "Describir un procedimiento responsable para revisar valores atípicos."
+  ],
+  "secciones": [
+    {
+      "titulo": "1. Resumir un conjunto de datos",
+      "parrafos": [
+        "La estadística descriptiva permite resumir un conjunto de observaciones mediante medidas y representaciones. Entre las medidas más comunes están la media, la mediana, la moda, el mínimo y el máximo.",
+        "La media se calcula sumando todos los valores y dividiendo el resultado entre la cantidad de observaciones."
+      ]
+    },
+    {
+      "titulo": "2. ¿Qué es un valor atípico?",
+      "parrafos": [
+        "Un valor atípico es una observación que se encuentra considerablemente alejada del comportamiento general del conjunto. Puede aparecer por un error de captura, una falla de medición o una situación real poco frecuente.",
+        "No todos los valores extremos son errores. Por eso deben investigarse considerando el contexto y el origen de los datos."
+      ]
+    },
+    {
+      "titulo": "3. Efecto sobre las medidas",
+      "parrafos": [
+        "La media es sensible a valores muy grandes o muy pequeños. La mediana suele ser más resistente ante observaciones extremas porque depende de la posición central de los datos ordenados.",
+        "Comparar media y mediana, revisar gráficos y consultar la fuente de los registros ayuda a comprender mejor una distribución."
+      ]
+    }
+  ],
+  "actividades_interactivas": [
+    {
+      "id": "dl03-calculo-promedio",
+      "tipo": "calculo_guiado",
+      "titulo": "Calcula el promedio e identifica un valor atípico",
+      "instrucciones": "Usa los datos proporcionados para calcular el promedio. Después compara el resultado con la observación más alta.",
+      "duracion_estimada_minutos": 7,
+      "obligatoria": true,
+      "configuracion": {
+        "modo_respuesta": "numerico",
+        "permitir_reintentar": true,
+        "datos": [
+          {
+            "id": "d1",
+            "etiqueta": "Consumo del día 1",
+            "valor": 10,
+            "unidad": "kWh"
+          },
+          {
+            "id": "d2",
+            "etiqueta": "Consumo del día 2",
+            "valor": 12,
+            "unidad": "kWh"
+          },
+          {
+            "id": "d3",
+            "etiqueta": "Consumo del día 3",
+            "valor": 11,
+            "unidad": "kWh"
+          },
+          {
+            "id": "d4",
+            "etiqueta": "Consumo del día 4",
+            "valor": 13,
+            "unidad": "kWh"
+          },
+          {
+            "id": "d5",
+            "etiqueta": "Consumo del día 5",
+            "valor": 54,
+            "unidad": "kWh"
+          }
+        ],
+        "formula_principal": "Promedio = suma de los valores / cantidad de valores",
+        "nota_unidades": "El resultado conserva la unidad de los datos: kWh.",
+        "pasos": [
+          {
+            "id": "p1",
+            "consigna": "Suma los cinco consumos.",
+            "formula": "10 + 12 + 11 + 13 + 54",
+            "respuesta_esperada": 100,
+            "unidad": "kWh",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Suma todos los valores antes de dividir.",
+            "explicacion": "La suma total de los cinco registros es 100 kWh."
+          },
+          {
+            "id": "p2",
+            "consigna": "Divide la suma entre la cantidad de registros.",
+            "formula": "100 / 5",
+            "respuesta_esperada": 20,
+            "unidad": "kWh",
+            "tolerancia_absoluta": 0.01,
+            "pista": "Hay cinco observaciones.",
+            "explicacion": "El promedio es 20 kWh."
+          }
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Correcto! Calculaste el promedio. Observa que el registro de 54 kWh es mucho mayor que los demás y eleva la media.",
+          "incorrecta": "Revisa la suma y recuerda dividir entre el número total de observaciones."
+        }
+      }
+    },
+    {
+      "id": "dl03-ordenar-deteccion",
+      "tipo": "ordenar_bloques",
+      "titulo": "Ordena el proceso de revisión de valores atípicos",
+      "instrucciones": "Organiza los pasos que seguirías para investigar un valor que parece alejarse del resto.",
+      "duracion_estimada_minutos": 4,
+      "obligatoria": true,
+      "configuracion": {
+        "mezclar_al_cargar": true,
+        "permitir_reintentar": true,
+        "bloques": [
+          {
+            "id": "a",
+            "texto": "Visualizar y resumir el conjunto de datos."
+          },
+          {
+            "id": "b",
+            "texto": "Detectar observaciones alejadas del comportamiento general."
+          },
+          {
+            "id": "c",
+            "texto": "Verificar si existe un error de captura o una causa real."
+          },
+          {
+            "id": "d",
+            "texto": "Decidir cómo tratar el dato y documentar la decisión."
+          }
+        ],
+        "orden_correcto": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "retroalimentacion": {
+          "correcta": "¡Exacto! Un valor atípico debe investigarse antes de eliminarse o modificarse.",
+          "incorrecta": "No conviene borrar un valor solo porque parece extraño. Primero hay que detectarlo y verificarlo."
+        }
+      }
+    }
+  ],
+  "prepara_para": [
+    {
+      "practica_id": "DL-CT-03",
+      "tipo_contenido": "practica_individual",
+      "aplicacion": "Calcular medidas descriptivas y analizar observaciones extremas en un dataset."
+    }
+  ]
+}

@@ -42,16 +42,23 @@ export function CalculoGuiado({ actividad }: Props) {
         <span className="pl-step-count">Paso {stepIndex + 1} / {config.pasos.length}</span>
       </div>
       <div className="pl-data-grid">
-  {Array.isArray(config?.datos) && config.datos.map((item: any, index: number) => (
-    <div className="pl-data-tile" key={item.id || index}>
-      <span>{item.etiqueta || item.variable}</span>
-      <strong>{item.valor} {item.unidad}</strong>
-    </div>
-  ))}
-</div>
+        {Array.isArray(config?.datos) && config.datos.map((item: any, index: number) => (
+          <div className="pl-data-tile" key={item.id || index}>
+            <span>{item.etiqueta || item.variable}</span>
+            <strong>{item.valor} {item.unidad}</strong>
+          </div>
+        ))}
+      </div>
       <div className="pl-formula-box"><span>Fórmula principal</span><strong>{config.formula_principal}</strong><small>{config.nota_unidades}</small></div>
       <div className="pl-step-progress" aria-label="Pasos del cálculo">
-        {config.pasos.map((item, index) => <span key={item.id} className={verified[item.id] ? "is-done" : index === stepIndex ? "is-current" : ""}>{verified[item.id] ? "✓" : index + 1}</span>)}
+        {Array.isArray(config?.pasos) && config.pasos.map((item: any, index: number) => (
+          <span 
+            key={item.id || index} 
+            className={verified[item.id] ? "is-done" : index === stepIndex ? "is-current" : ""}
+          >
+            {verified[item.id] ? "✓" : index + 1}
+          </span>
+        ))}
       </div>
       <div className="pl-calculation-prompt">
         <p className="pl-eyebrow">Resuelve el paso {stepIndex + 1}</p>
@@ -68,13 +75,13 @@ export function CalculoGuiado({ actividad }: Props) {
         </div>
         {showHint && <div className="pl-hint" role="note">Pista: {step.pista}</div>}
         {showExplanation && <div className="pl-feedback is-correct" role="status">{step.explicacion}</div>}
-        {hasChecked && !isCorrect && <p className="pl-inline-error" role="status">{config.retroalimentacion.incorrecta}</p>}
+        {hasChecked && !isCorrect && <p className="pl-inline-error" role="status">{config?.retroalimentacion?.incorrecta ?? "Respuesta incorrecta. Revisa tus cálculos."}</p>}
       </div>
       <div className="pl-controls">
         <button type="button" className="pl-button pl-button-quiet" onClick={reset}>Reiniciar cálculo</button>
         {stepIndex < config.pasos.length - 1 ? (
           <button type="button" className="pl-button pl-button-primary" onClick={next} disabled={!verified[step.id]}>Siguiente paso</button>
-        ) : <span className="pl-completion" role="status">{allCorrect ? config.retroalimentacion.correcta : "Completa todos los pasos para terminar."}</span>}
+        ) : <span className="pl-completion" role="status">{allCorrect ? (config?.retroalimentacion?.correcta ?? "¡Reto completado con éxito!") : "Completa todos los pasos para terminar."}</span>}
       </div>
     </section>
   );
