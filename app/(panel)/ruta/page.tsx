@@ -7,7 +7,7 @@ import { DataLabOverview } from "@/components/datalab/datalab-overview";
 import ElectroLabScreen from "@/components/electrolab/electrolab-screen";
 import ClaseTeorica from "@/components/laboratorios/ClaseTeorica";
 import RoboLabScreen from "@/components/robolab/RoboLabScreen";
-import catalogoUniversidades from "@/data/universidades/catalogo-piloto.json";
+import OpcionesUniversitarias from "@/components/universidades/OpcionesUniversitarias";
 import {
   actividadesDeRuta,
   claveAvance,
@@ -15,8 +15,6 @@ import {
   leerRuta,
   type Ruta,
 } from "@/lib/ruta/actividades";
-import { useRouter } from "next/navigation";
-import { Icon } from "lucide-react";
 import { IconBook } from "@tabler/icons-react";
 
 function leerMejorNota(ruta: Ruta, id: string): number | null {
@@ -29,79 +27,6 @@ function leerMejorNota(ruta: Ruta, id: string): number | null {
   return Number.isFinite(puntaje) && puntaje >= 0 && puntaje <= 100
     ? puntaje
     : null;
-}
-
-function OpcionesUniversitarias({ ruta }: { ruta: Ruta }) {
-  const opciones = catalogoUniversidades.instituciones
-    .map((institucion) => ({
-      ...institucion,
-      programas: institucion.programas.filter((programa) =>
-        ruta.some((area) => programa.areas.includes(area))
-      ),
-    }))
-    .filter((institucion) => institucion.programas.length > 0);
-
-  return (
-    <section
-      aria-labelledby="opciones-universitarias"
-      className="rounded-2xl border border-slate-200 bg-white p-5"
-    >
-      <h2 id="opciones-universitarias" className="text-xl font-bold">
-        Dónde puedes seguir estudiando
-      </h2>
-      <p className="mt-2 text-sm text-slate-600">
-        Explora carreras en Zapopan relacionadas con los laboratorios de tu ruta.
-      </p>
-
-      {opciones.length > 0 ? (
-        <ul className="mt-4 grid gap-4 md:grid-cols-2">
-          {opciones.map((institucion) => (
-            <li
-              key={institucion.id}
-              className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-4"
-            >
-              <h3 className="font-semibold text-slate-900">
-                {institucion.nombre}
-              </h3>
-              <p className="mt-1 text-sm text-slate-600">
-                {institucion.campus} · {institucion.municipio}, {institucion.estado}
-              </p>
-              <p className="mt-3 text-sm text-slate-700">
-                {institucion.descripcion}
-              </p>
-
-              <p className="mt-3 text-sm font-semibold">Carreras afines</p>
-              <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-slate-700">
-                {institucion.programas.map((programa) => (
-                  <li key={programa.nombre}>{programa.nombre}</li>
-                ))}
-              </ul>
-
-              <a
-                href={institucion.urlOferta}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto self-start pt-4 text-sm font-semibold text-blue-700 underline"
-              >
-                Consultar oferta de {institucion.nombre}
-              </a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-4 text-sm text-slate-600">
-          El catálogo piloto aún no tiene carreras afines a esta ruta.
-        </p>
-      )}
-
-      <p className="mt-4 text-xs text-slate-600">
-        Catálogo piloto · {catalogoUniversidades.fuente} · Fecha de consulta{" "}
-        <time dateTime={catalogoUniversidades.fechaConsulta}>
-          {catalogoUniversidades.fechaConsulta}
-        </time>
-      </p>
-    </section>
-  );
 }
 
 export default function RutaPage() {
