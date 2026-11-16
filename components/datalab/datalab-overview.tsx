@@ -11,7 +11,6 @@ import {
   IconTable, IconChartLine, IconChartBar, IconArrowRight, IconCheck, IconRotate 
 } from '@tabler/icons-react';
 
-// Importamos tu JSON oficial de la práctica analítica
 import dlCt05 from '@/lib/datalab/DL-CT-05.json';
 
 export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) => void }) => {
@@ -52,10 +51,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "12:00 - 16:00 hrs (Franja de meseta)", correcta: false },
       ],
       mensajeExito: "¡Correcto! Analizaste la gráfica y encontraste el horario exacto de mayor demanda.",
-      mensajeError: "Incorrecto. Revisa de nuevo las barras de la gráfica para ubicar el punto más alto."
-    },
-    {
-      id: 1,
+      mensajeError: "Incorrecto. Revisa de nuevo las barras de la gráfica para ubicar el punto más alto." },
+    { id: 1,
       tituloDataset: "Rendimiento STEM",
       pregunta: "¿Qué equipo evaluado obtuvo el puntaje más alto en las pruebas prácticas de ProtoLab?",
       opciones: [
@@ -65,10 +62,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "Equipo Delta", correcta: true },
       ],
       mensajeExito: "¡Excelente! Consultaste los registros y determinaste correctamente al equipo líder.",
-      mensajeError: "Incorrecto. Compara los valores de la tabla de registros para identificar al equipo con mayor puntaje."
-    },
-    {
-      id: 2,
+      mensajeError: "Incorrecto. Compara los valores de la tabla de registros para identificar al equipo con mayor puntaje." },
+    { id: 2,
       tituloDataset: "Ventas de Makerspace",
       pregunta: "De acuerdo con el inventario actual, ¿cuál componente lidera la distribución en unidades?",
       opciones: [
@@ -78,8 +73,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "Módulos de prototipado básico", correcta: false },
       ],
       mensajeExito: "¡Muy bien! Identificaste el componente con mayor rotación en el inventario.",
-      mensajeError: "Incorrecto. Revisa el listado en la tabla del Makerspace para encontrar el componente con más unidades."
-    },
+      mensajeError: "Incorrecto. Revisa el listado en la tabla del Makerspace para encontrar el componente con más unidades." },
     {
       id: 3,
       tituloDataset: "Crecimiento Local",
@@ -93,8 +87,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
       mensajeExito: "¡Correcto! Comprobaste los datos demográficos en el panel izquierdo.",
       mensajeError: "Incorrecto. Analiza el comparativo regional para ubicar la zona con mayor población."
     },
-    {
-      id: 4,
+    { id: 4,
       tituloDataset: "DL-CT-01: Patrones y Frecuencias",
       pregunta: "En la práctica de distribución de frecuencias, ¿qué intervalo concentra la mayor densidad operativa?",
       opciones: [
@@ -104,10 +97,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "Intervalo intermedio sin variaciones", correcta: false },
       ],
       mensajeExito: "¡Excelente! Interpretaste correctamente el histograma de frecuencias de la práctica DL-CT-01.",
-      mensajeError: "Incorrecto. Analiza la altura de las barras en el explorador para ubicar el intervalo con mayor densidad."
-    },
-    {
-      id: 5,
+      mensajeError: "Incorrecto. Analiza la altura de las barras en el explorador para ubicar el intervalo con mayor densidad." },
+    {id: 5,
       tituloDataset: "DL-CT-02: Filtrado Cruzado",
       pregunta: "Al aplicar filtros condicionales cruzados en la práctica, ¿qué tipo de tendencia se aísla con mayor precisión?",
       opciones: [
@@ -119,8 +110,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
       mensajeExito: "¡Muy bien! Comprendiste el propósito del filtrado analítico avanzado en DL-CT-02.",
       mensajeError: "Incorrecto. Revisa los criterios de filtrado condicional en la tabla de registros."
     },
-    {
-      id: 6,
+    { id: 6,
       tituloDataset: "DL-CT-03: Detección de Outliers",
       pregunta: "Durante el análisis de tendencias históricas de la práctica DL-CT-03, ¿cómo impacta un valor atípico (outlier)?",
       opciones: [
@@ -130,10 +120,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "Duplica la velocidad de procesamiento del servidor", correcta: false },
       ],
       mensajeExito: "¡Correcto! Identificaste cómo los outliers afectan las métricas analíticas.",
-      mensajeError: "Incorrecto. Analiza cómo un punto fuera de rango altera los cálculos generales."
-    },
-    {
-      id: 7,
+      mensajeError: "Incorrecto. Analiza cómo un punto fuera de rango altera los cálculos generales." },
+    { id: 7,
       tituloDataset: "DL-CT-04: Modelado Predictivo",
       pregunta: "En la última fase de validación de modelos, ¿qué indicador confirma la estabilidad del conjunto analizado?",
       opciones: [
@@ -143,10 +131,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         { letra: "D", texto: "Aumento descontrolado del margen de error", correcta: false },
       ],
       mensajeExito: "¡Fantástico! Concluiste con éxito todos los módulos y prácticas de DataLab.",
-      mensajeError: "Incorrecto. Revisa los parámetros de estabilidad y residuos del modelo."
-    },
-    {
-      id: 8,
+      mensajeError: "Incorrecto. Revisa los parámetros de estabilidad y residuos del modelo." },
+    { id: 8,
       tituloDataset: dlCt05.titulo,
       pregunta: dlCt05.descripcion
     }
@@ -165,7 +151,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
   ];
 
   const contenidoActual = secuenciaCurricula[pasoActivo] || secuenciaCurricula[0];
-
   const handleNextStep = () => {
     if (pasoActivo < secuenciaCurricula.length - 1) {
       setPasoActivo(prev => prev + 1);
@@ -179,10 +164,8 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
     if (!respuestaTecnica) {
       alert("Por favor selecciona una opción antes de evaluar.");
       return;
-    }
-    const opcionSeleccionada = contenidoActual.opciones?.find(op => op.letra === respuestaTecnica);
+    } const opcionSeleccionada = contenidoActual.opciones?.find(op => op.letra === respuestaTecnica);
     const esCorrecto = opcionSeleccionada ? opcionSeleccionada.correcta : false;
-
     setFueExito(esCorrecto);
     if (esCorrecto) {
       setAciertos(prev => prev + 1);
@@ -190,7 +173,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
     }
     setModalAbierto(true);
   };
-
   const moverBloque = (index: number, dir: 'arriba' | 'abajo') => {
     const arr = [...bloquesUsuario];
     const destino = dir === 'arriba' ? index - 1 : index + 1;
@@ -200,9 +182,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
     arr[destino] = temp;
     setBloquesUsuario(arr);
   };
-
-  return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
+  return (  <div className="min-h-screen bg-slate-50/50 text-slate-800 flex flex-col font-sans">
       <main className="max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col gap-6">
         
         {/* ENCABEZADO */}
@@ -241,7 +221,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
           ))}
         </div>
 
-        {/* VISTA CONDICIONAL: SI ES EL MÓDULO 8 (CARGADO DEL JSON DL-CT-05 - ESTADÍSTICA Y OUTLIERS) */}
+        {/* VISTA CONDICIONAL: CARGADO DEL JSON DL-CT-05 - ESTADÍSTICA Y OUTLIERS) */}
         {pasoActivo === 8 ? (
           <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm flex flex-col gap-8 animate-fadeIn">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -255,7 +235,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
             <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
               {dlCt05.descripcion}
             </p>
-
             {/* Actividad 1: Ordenar Bloques (Flujo Analítico) */}
             <div className="flex flex-col gap-3">
               <h3 className="text-sm font-bold text-slate-900">
@@ -287,14 +266,12 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
               >
                 Comprobar Orden
               </button>
-
               {resultadoOrden !== null && (
                 <div className={`p-3 rounded-xl text-xs font-bold ${resultadoOrden ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'}`}>
                   {resultadoOrden ? dlCt05.actividades_interactivas[0].configuracion.retroalimentacion : "El orden lógico no es correcto. Recuerda que se inicia cargando los datos y se termina validando métricas."}
                 </div>
               )}
             </div>
-
             {/* Actividad 2: Cálculo Guiado (Impacto de Outliers) */}
             <div className="flex flex-col gap-3 pt-6 border-t border-slate-100">
               <h3 className="text-sm font-bold text-slate-900">
@@ -304,7 +281,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
               <p className="text-xs font-mono text-cyan-700 bg-cyan-50 p-2.5 rounded-lg border border-cyan-100">
                 Fórmula: {dlCt05.actividades_interactivas[1].configuracion.formula_principal}
               </p>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold text-slate-700">Paso 1: Suma total (200 + 300)</label>
@@ -327,7 +303,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
                   />
                 </div>
               </div>
-
               <button
                 onClick={() => {
                   const paso1Ok = paso1Input.trim() === '500';
@@ -345,7 +320,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
                 </div>
               )}
             </div>
-
             <div className="pt-4 border-t border-slate-100 flex justify-end">
               <button
                 onClick={() => router.push('/electrolab')}
@@ -356,7 +330,7 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
             </div>
           </div>
         ) : (
-          /* ================= VISTA NORMAL (MÓDULOS 0 AL 7) ================= */
+          /* ================= VISTA NORMAL (MÓDULOS 0 AL 7) ============= */
           <>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
@@ -375,7 +349,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
                 </div>
               </div>
             </div>
-
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pb-8">
               <div className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-5">
                 <h3 className="text-slate-800 font-bold text-sm">{contenidoActual.pregunta}</h3>
@@ -401,7 +374,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
                   Evaluar Respuesta
                 </button>
               </div>
-
               <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col gap-6">
                 <h4 className="text-lg font-black text-slate-900">DataLab Master</h4>
                 <button 
@@ -416,7 +388,6 @@ export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) =
         )}
 
       </main>
-
       <DataLabResults 
         isOpen={modalAbierto} 
         esExito={fueExito}

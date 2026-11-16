@@ -5,7 +5,6 @@ import { IconAtom, IconHome, IconTrendingUp, IconChevronDown, IconChevronUp, Ico
 
 export const Sidebar = () => {
   const [modulosAbiertos, setModulosAbiertos] = useState(true);
-
   return (
     <aside className="w-64 flex-shrink-0 border-r border-slate-100 bg-white min-h-screen flex flex-col pt-6 pb-4">
       {/* Logo y Título */}
@@ -18,7 +17,6 @@ export const Sidebar = () => {
           <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wide">Aprende creando</span>
         </div>
       </div>
-
       {/* Menú de Navegación */}
       <nav className="flex flex-col px-4 gap-1">
         
@@ -36,7 +34,6 @@ export const Sidebar = () => {
             <span>Mis Módulos</span>
             {modulosAbiertos ? <IconChevronUp size={14} /> : <IconChevronDown size={14} />}
           </button>
-          
           {modulosAbiertos && (
             <div className="flex flex-col mt-2 pl-6 border-l-2 border-slate-100 ml-6 gap-1 relative">
               <button className="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors w-full text-left text-sm font-medium">
@@ -51,7 +48,6 @@ export const Sidebar = () => {
                 <span className="w-2 h-2 rounded-full bg-purple-600"></span>
                 ElectroLab
               </button>
-              
               {/* Opción Activa: DataLab */}
               <button className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-blue-600 text-white transition-colors w-full text-left text-sm font-bold shadow-md shadow-blue-600/20 mt-1 relative -left-4 w-[calc(100%+1rem)]">
                 <span className="w-2 h-2 rounded-full bg-cyan-300 ml-4"></span>
@@ -60,12 +56,10 @@ export const Sidebar = () => {
             </div>
           )}
         </div>
-
         {/* Mi Progreso */}
         <button className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 transition-colors w-full text-left font-medium text-sm mt-4">
           <IconTrendingUp size={20} stroke={1.5} /> Mi progreso
         </button>
-
       </nav>
     </aside>
   );

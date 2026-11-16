@@ -1,5 +1,3 @@
-
-
 export interface VariableData {
 nombre: string;
 tipo: string;

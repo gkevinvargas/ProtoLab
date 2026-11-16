@@ -8,29 +8,22 @@ interface AnalysisQuestionsProps {
   retoActivo: RetoDataLab;
   onEvaluar: (respuestas: { tecnica: string; reflexion: string }) => void;
 }
-
 export const AnalysisQuestions: React.FC<AnalysisQuestionsProps> = ({ retoActivo, onEvaluar }) => {
   const [respuestaTecnica, setRespuestaTecnica] = useState('');
   const [respuestaReflexion, setRespuestaReflexion] = useState('');
-
   const manejarEnvio = () => {
     const numPalabras = respuestaReflexion.trim().split(/\s+/).length;
     const minPalabras = retoActivo.evaluacion.pregunta_reflexion.longitud_minima_palabras;
-
     if (numPalabras < minPalabras && respuestaReflexion.length > 0) {
       alert(`Tu reflexión debe tener al menos ${minPalabras} palabras. Llevas ${numPalabras}.`);
       return;
     }
-
     onEvaluar({
       tecnica: respuestaTecnica,
       reflexion: respuestaReflexion
     });
   };
-
-  return (
-    <div className="bg-slate-800 p-5 rounded-lg border border-slate-700 mt-4 flex flex-col gap-6">
-      
+  return ( <div className="bg-slate-800 p-5 rounded-lg border border-slate-700 mt-4 flex flex-col gap-6">
       <div className="pregunta-objetiva">
         <h4 className="text-white font-bold mb-2">
           {retoActivo.evaluacion.pregunta_objetiva.enunciado}
@@ -52,7 +45,6 @@ export const AnalysisQuestions: React.FC<AnalysisQuestionsProps> = ({ retoActivo
             ))}
           </div>
         )}
-
         {retoActivo.evaluacion.pregunta_objetiva.tipo === 'entrada_texto' && (
           <input 
             type="text"
@@ -62,9 +54,7 @@ export const AnalysisQuestions: React.FC<AnalysisQuestionsProps> = ({ retoActivo
           />
         )}
       </div>
-
       <hr className="border-slate-700" />
-
       <div className="pregunta-reflexion">
         <h4 className="text-yellow-400 font-bold mb-2 text-sm flex items-center gap-2">
           <span>📝</span> Para tu Portafolio:
@@ -79,7 +69,6 @@ export const AnalysisQuestions: React.FC<AnalysisQuestionsProps> = ({ retoActivo
           onChange={(e) => setRespuestaReflexion(e.target.value)}
         />
       </div>
-
       <button 
         onClick={manejarEnvio}
         disabled={!respuestaTecnica || !respuestaReflexion}

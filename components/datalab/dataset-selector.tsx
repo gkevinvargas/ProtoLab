@@ -6,7 +6,6 @@ import { DataLabConfig } from '@/lib/datalab/types';
 interface DatasetSelectorProps {
   config: DataLabConfig['contenido']['configuracion_datos'];
 }
-
 export const DatasetSelector: React.FC<DatasetSelectorProps> = ({ config }) => {
   return (
     <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 mb-4 flex items-center justify-between">

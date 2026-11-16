@@ -21,11 +21,9 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
 }) => {
   // Si el modal no está abierto, no renderizamos nada
   if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 p-4 animate-fadeIn">
       <div className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-2xl flex flex-col items-center text-center gap-6">
-
         {/* 1. Icono visual de estado acorde al tema claro */}
         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm ${
           esExito
@@ -34,7 +32,6 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
         }`}>
           <span className="text-2xl font-black">{esExito ? '✓' : '✕'}</span>
         </div>
-
         {/* 2. Título y Mensaje de Retroalimentación */}
         <div className="flex flex-col gap-1.5">
           <h3 className="text-xl font-black text-slate-900">
@@ -45,7 +42,6 @@ export const DataLabResults: React.FC<DataLabResultsProps> = ({
             {esExito ? mensajeExito : mensajeError}
           </p>
         </div>
-
         {/* 3. Botones de acción con el estilo corporativo de ProtoLab */}
         <div className="w-full pt-2">
           {esExito ? (

@@ -3,10 +3,8 @@
 
 import React from 'react';
 import { practicasDataLab } from '@/lib/datalab/practices';
-
 export const DataLabHeader = () => {
   const { titulo, descripcion } = practicasDataLab.metadatos;
-
   return (
     <header className="bg-slate-900 border-b border-slate-800 px-8 py-6 shadow-md">
       <div className="max-w-7xl mx-auto">

@@ -2,12 +2,10 @@
 "use client";
 
 import React from 'react';
-
 interface DatasetTableProps {
   datasetId: number;
   filtroCategoria: string;
 }
-
 export const DatasetTable: React.FC<DatasetTableProps> = ({ datasetId }) => {
   // Definimos las filas de la tabla para cada dataset / práctica (0 al 6)
   const tablasPorId: Record<number, Array<{ col1: string; col2: string; col3: string; col4: string }>> = {
@@ -43,22 +41,18 @@ export const DatasetTable: React.FC<DatasetTableProps> = ({ datasetId }) => {
       { col1: "Clase 60-80%", col2: "Descenso de carga", col3: "45%", col4: "Regular" },
       { col1: "Clase 80-100%", col2: "Valle final", col3: "20%", col4: "Mínimo" },
     ],
-    5: [
-      { col1: "Filtro Base", col2: "Bruto", col3: "300 Reg.", col4: "Sin procesar" },
+    5: [ { col1: "Filtro Base", col2: "Bruto", col3: "300 Reg.", col4: "Sin procesar" },
       { col1: "Segmento A", col2: "Condicional 1", col3: "180 Reg.", col4: "Filtrado" },
       { col1: "Segmento B", col2: "Condicional 2", col3: "95 Reg.", col4: "Segmentado" },
       { col1: "Anómalo", col2: "Aislado cruzado", col3: "420 Reg.", col4: "Crítico" },
     ],
-    6: [
-      { col1: "Semana 1", col2: "Histórico", col3: "50 u.", col4: "Normal" },
+    6: [ { col1: "Semana 1", col2: "Histórico", col3: "50 u.", col4: "Normal" },
       { col1: "Semana 2", col2: "Histórico", col3: "55 u.", col4: "Normal" },
       { col1: "Semana 3", col2: "Histórico", col3: "53 u.", col4: "Normal" },
       { col1: "Semana 4", col2: "Outlier detectado", col3: "190 u.", col4: "Valor Atípico" },
     ]
   };
-
   const filas = tablasPorId[datasetId] || tablasPorId[0];
-
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-xs">

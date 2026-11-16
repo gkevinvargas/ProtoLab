@@ -13,8 +13,7 @@ export const secuenciaCurricula = [
     mensajeExito: "¡Correcto! Analizaste la gráfica y encontraste el horario exacto de mayor demanda.",
     mensajeError: "Incorrecto. Revisa de nuevo las barras de la gráfica para ubicar el punto más alto."
   },
-  {
-    id: 1,
+  { id: 1,
     tituloDataset: "Rendimiento STEM",
     pregunta: "¿Qué equipo evaluado obtuvo el puntaje más alto en las pruebas prácticas de ProtoLab?",
     opciones: [
@@ -26,8 +25,7 @@ export const secuenciaCurricula = [
     mensajeExito: "¡Excelente! Consultaste los registros y determinaste correctamente al equipo líder.",
     mensajeError: "Incorrecto. Compara los valores de la tabla de registros para identificar al equipo con mayor puntaje."
   },
-  {
-    id: 2,
+  { id: 2,
     tituloDataset: "Ventas de Makerspace",
     pregunta: "De acuerdo con el inventario actual, ¿cuál componente lidera la distribución en unidades?",
     opciones: [
@@ -39,8 +37,7 @@ export const secuenciaCurricula = [
     mensajeExito: "¡Muy bien! Identificaste el componente con mayor rotación en el inventario.",
     mensajeError: "Incorrecto. Revisa el listado en la tabla del Makerspace para encontrar el componente con más unidades."
   },
-  {
-    id: 3,
+  {  id: 3,
     tituloDataset: "Crecimiento Local",
     pregunta: "¿Cuál de los puntos analizados concentra la mayor densidad poblacional registrada?",
     opciones: [
@@ -52,8 +49,7 @@ export const secuenciaCurricula = [
     mensajeExito: "¡Correcto! Comprobaste los datos demográficos en el panel izquierdo.",
     mensajeError: "Incorrecto. Analiza el comparativo regional para ubicar la zona con mayor población."
   },
-  {
-    id: 4,
+  { id: 4,
     tituloDataset: "DL-CT-01: Patrones y Frecuencias",
     pregunta: "En la práctica de distribución de frecuencias, ¿qué intervalo concentra la mayor densidad operativa?",
     opciones: [
@@ -63,10 +59,8 @@ export const secuenciaCurricula = [
       { letra: "D", texto: "Intervalo intermedio sin variaciones", correcta: false },
     ],
     mensajeExito: "¡Excelente! Interpretaste correctamente el histograma de frecuencias de la práctica DL-CT-01.",
-    mensajeError: "Incorrecto. Analiza la altura de las barras en el explorador para ubicar el intervalo con mayor densidad."
-  },
-  {
-    id: 5,
+    mensajeError: "Incorrecto. Analiza la altura de las barras en el explorador para ubicar el intervalo con mayor densidad." },
+  { id: 5,
     tituloDataset: "DL-CT-02: Filtrado Cruzado",
     pregunta: "Al aplicar filtros condicionales cruzados en la práctica, ¿qué tipo de tendencia se aísla con mayor precisión?",
     opciones: [
@@ -76,8 +70,7 @@ export const secuenciaCurricula = [
       { letra: "D", texto: "Registros vacíos o nulos del sistema", correcta: false },
     ],
     mensajeExito: "¡Muy bien! Comprendiste el propósito del filtrado analítico avanzado en DL-CT-02.",
-    mensajeError: "Incorrecto. Revisa los criterios de filtrado condicional en la tabla de registros."
-  },
+    mensajeError: "Incorrecto. Revisa los criterios de filtrado condicional en la tabla de registros." },
   {
     id: 6,
     tituloDataset: "DL-CT-03: Detección de Outliers",
@@ -92,7 +85,6 @@ export const secuenciaCurricula = [
     mensajeError: "Incorrecto. Analiza cómo un punto fuera de rango altera los cálculos generales."
   }
 ];
-
 export const datasetsMock = [
   { id: 0, nombre: "Consumo Energético", desc: "kWh por franja horaria", color: "text-cyan-500" },
   { id: 1, nombre: "Rendimiento STEM", desc: "Calificaciones ProtoLab", color: "text-blue-600" },

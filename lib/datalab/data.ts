@@ -7,7 +7,6 @@ export interface RegistroDataset {
   metrica: string;
   estado: string;
 }
-
 export const datasetsData: Record<number, RegistroDataset[]> = {
   // Dataset 0: Consumo Energético
   0: [
