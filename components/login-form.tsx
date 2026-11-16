@@ -31,7 +31,7 @@ export function LoginForm() {
     try {
       const supabase = createClient();
 
-      const { error: authError } =
+      const { data, error: authError } =
         await supabase.auth.signInWithPassword({
           email: email.trim(),
           password,
@@ -41,7 +41,8 @@ export function LoginForm() {
         throw authError;
       }
 
-      router.replace("/inicio");
+      const diagnosticoPendiente = data.user?.user_metadata.diagnostico_pendiente === true;
+      router.replace(diagnosticoPendiente ? "/diagnostico" : "/inicio");
       router.refresh();
     } catch {
       setError(

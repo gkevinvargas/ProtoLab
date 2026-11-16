@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { practicasRoboLab, type Orientation } from "@/app/(panel)/robolab/robolab-data";import RoboLabGrid from '@/components/robolab/RoboLabGrid';
-import ClaseTeorica from "@/components/laboratorios/ClaseTeorica";
+import { practicasRoboLab, type Orientation } from "@/app/(panel)/robolab/robolab-data";
+import RoboLabGrid from '@/components/robolab/RoboLabGrid';
 import claseTeorica from "@/content/robolab/RB-CT-02-sensores-decisiones.json";
 import segundaClase from "@/content/robolab/RB-CT-03-cinematica-velocidad.json";
 
@@ -310,10 +310,33 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
     </button>
   </section>
 ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
+          {/* Misión de aprendizaje */}
+          <section className="bg-white rounded-2xl p-4 sm:p-6 lg:col-span-12 shadow-sm border border-slate-200/80 flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 font-bold">
+              ✓
+            </div>
+            <div className="flex-1 space-y-1.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[11px] font-bold tracking-wider uppercase text-indigo-600">
+                  MISIÓN DE APRENDIZAJE
+                </span>
+                <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full">
+                  Recompensa: +{metadatos.recompensa_xp} XP
+                </span>
+              </div>
+              <h3 className="font-bold text-slate-800 text-base">
+                {metadatos.mision_titulo}
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                {metadatos.mision_descripcion}
+              </p>
+            </div>
+          </section>
+
           {/* COLUMNA IZQUIERDA */}
           <div className="lg:col-span-7 space-y-6">
-            <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
+            <section className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80">
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
@@ -386,35 +409,12 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
                 </div>
               </div>
             </section>
-
-            {/* Misión de aprendizaje */}
-            <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 font-bold">
-                ✓
-              </div>
-              <div className="flex-1 space-y-1.5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-indigo-600">
-                    MISIÓN DE APRENDIZAJE
-                  </span>
-                  <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full">
-                    Recompensa: +{metadatos.recompensa_xp} XP
-                  </span>
-                </div>
-                <h3 className="font-bold text-slate-800 text-base">
-                  {metadatos.mision_titulo}
-                </h3>
-                <p className="text-xs text-slate-500 leading-relaxed">
-                  {metadatos.mision_descripcion}
-                </p>
-              </div>
-            </section>
           </div>
 
           {/* COLUMNA DERECHA */}
           <div className="lg:col-span-5 space-y-6">
             {/* Bloques de control */}
-            <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80">
+            <section className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="font-bold text-slate-800 text-base">Bloques de Control</h2>
@@ -461,7 +461,7 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
             </section>
 
             {/* Secuencia de ejecución */}
-            <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+            <section className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="font-bold text-slate-800 text-base">Secuencia de Ejecución</h2>
                 <div className="flex items-center gap-3">
@@ -543,7 +543,7 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
             </section>
 
             {/* Telemetría */}
-            <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 space-y-4">
+            <section className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 space-y-4">
               <h2 className="font-bold text-slate-800 text-base">Telemetría de la Práctica</h2>
 
               <div className="grid grid-cols-3 gap-2.5">

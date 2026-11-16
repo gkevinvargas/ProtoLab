@@ -9,7 +9,7 @@ import {
 
 export default function SignUpSuccessPage() {
   return (
-    <main className="min-h-screen bg-[#F5F9FF] flex items-center justify-center p-6">
+    <main className="min-h-screen bg-[#F5F9FF] flex items-center justify-center p-3 sm:p-6">
       <div className="w-full max-w-md">
         {/* Logo */}
         <Link
@@ -25,7 +25,7 @@ export default function SignUpSuccessPage() {
         </Link>
 
         {/* Tarjeta principal */}
-        <section className="bg-white rounded-3xl shadow-sm border border-[#E5EDF8] p-8 text-center">
+        <section className="bg-white rounded-3xl shadow-sm border border-[#E5EDF8] p-4 text-center sm:p-8">
           <div className="mx-auto mb-6 flex items-center justify-center w-20 h-20 rounded-full bg-[#E8F7F4] text-[#21B8A6]">
             <IconMailCheck size={42} stroke={1.7} />
           </div>
@@ -68,7 +68,7 @@ export default function SignUpSuccessPage() {
                   3
                 </span>
                 <span>
-                  Haz clic en el enlace para activar tu cuenta.
+                  Abre el enlace para activar tu cuenta e iniciar el diagnóstico vocacional.
                 </span>
               </li>
             </ol>
@@ -86,7 +86,7 @@ export default function SignUpSuccessPage() {
           </div>
 
           <Link
-            href="/auth/login"
+            href="/"
             className="w-full flex items-center justify-center gap-2 bg-[#3478F6] hover:bg-[#2865D5] text-white font-semibold py-3 px-5 rounded-xl transition-colors"
           >
             <IconArrowLeft size={18} />

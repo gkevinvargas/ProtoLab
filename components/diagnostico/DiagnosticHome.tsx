@@ -16,7 +16,8 @@ import type {
   DiagnosticAptitudeScores,
   DiagnosticPreliminaryRanking,
 } from "@/lib/diagnostico/diagnostic-engine";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 const content =
   diagnosticPublicContent as unknown as DiagnosticPublicContent;
@@ -249,6 +250,7 @@ export default function DiagnosticHome() {
   const [puntajes, setPuntajes] = useState<PuntajesDiagnostico | null>(null);
 
   const [mensajeRuta, setMensajeRuta] = useState("");
+  const [confirmandoRuta, setConfirmandoRuta] = useState(false);
 
   const [prioridadesEmpate, setPrioridadesEmpate] = useState<DiagnosticAreaId[]>([]);
 
@@ -330,8 +332,10 @@ export default function DiagnosticHome() {
     answers,
   ]);
 
-  function guardarRuta() {
-    if (!rutaLista) return;
+  async function guardarRuta() {
+    if (!rutaLista || confirmandoRuta) return;
+
+    setConfirmandoRuta(true);
 
     try {
       // Se prefiere la copia provisional para confirmar exactamente
@@ -363,11 +367,29 @@ export default function DiagnosticHome() {
         "¡Ruta confirmada correctamente! Ya puedes comenzar tu aprendizaje."
       );
 
-      router.push('/ruta', { scroll: true })
+      // El indicador de la cuenta solo controla el destino al iniciar sesión.
+      // La ruta se puede abrir aunque falle su actualización en Supabase.
+      try {
+        const supabase = createClient();
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (session?.user.user_metadata.diagnostico_pendiente === true) {
+          const { error } = await supabase.auth.updateUser({
+            data: { diagnostico_pendiente: false },
+          });
+          if (error) throw error;
+        }
+      } catch {
+        console.warn("No se pudo sincronizar el estado del diagnóstico.");
+      }
+
+      router.push("/ruta", { scroll: true });
     } catch {
       setMensajeRuta(
         "No se pudo confirmar la ruta. Inténtalo nuevamente."
       );
+    } finally {
+      setConfirmandoRuta(false);
     }
   }
 
@@ -656,13 +678,13 @@ export default function DiagnosticHome() {
 
   return (
 
-      <div className="mx-auto max-w-[1700px] p-4 sm:p-6 lg:p-7">
+      <div className="mx-auto max-w-[1700px] min-w-0 p-2 sm:p-6 lg:p-7">
         <header className="mb-8">
           <p className="mb-2 text-sm font-semibold text-blue-600">
             PROTOLAB / DIAGNÓSTICO VOCACIONAL
           </p>
 
-          <h1 className="text-3xl font-bold text-slate-800">
+          <h1 className="text-2xl font-bold text-slate-800 sm:text-3xl">
             Descubre tu área de mayor afinidad
           </h1>
 
@@ -675,7 +697,7 @@ export default function DiagnosticHome() {
 
         {step === "interests" ? (
           <>
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
               <h2 className="text-xl font-semibold text-slate-800">
                 ¿Cómo funciona?
               </h2>
@@ -709,7 +731,7 @@ export default function DiagnosticHome() {
               </div>
             </section>
 
-            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <section className="mb-8 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
               <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                 <div>
                   <h2 className="text-xl font-semibold text-slate-800">
@@ -1040,9 +1062,10 @@ export default function DiagnosticHome() {
                     <button
                       type="button"
                       onClick={guardarRuta}
-                      className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                      disabled={confirmandoRuta}
+                      className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
                     >
-                      Confirmar ruta de aprendizaje
+                      {confirmandoRuta ? "Confirmando…" : "Confirmar ruta de aprendizaje"}
                     </button>
                     <p role="status" className="mt-2 text-sm text-slate-600">
                       {mensajeRuta}
