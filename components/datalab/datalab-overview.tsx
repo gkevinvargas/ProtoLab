@@ -14,7 +14,7 @@ import {
 // Importamos tu JSON oficial de la práctica analítica
 import dlCt05 from '@/lib/datalab/DL-CT-05.json';
 
-export const DataLabOverview = () => {
+export const DataLabOverview = ({ onApproved }: { onApproved?: (score: number) => void }) => {
   const router = useRouter();
   const [pasoActivo, setPasoActivo] = useState(0);
   const [tipoGrafica, setTipoGrafica] = useState<'barras' | 'dispersion' | 'libre'>('barras');

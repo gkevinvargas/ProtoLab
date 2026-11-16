@@ -323,7 +323,6 @@ export default function RutaPage() {
               <DataLabOverview
                 key={intento}
                 onApproved={registrarAprobacion}
-                onReset={() => setIntento((anterior) => anterior + 1)}
               />
             )}
 
