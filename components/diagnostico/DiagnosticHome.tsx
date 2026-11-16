@@ -16,6 +16,7 @@ import type {
   DiagnosticAptitudeScores,
   DiagnosticPreliminaryRanking,
 } from "@/lib/diagnostico/diagnostic-engine";
+import { redirect, useRouter } from "next/navigation";
 
 const content =
   diagnosticPublicContent as unknown as DiagnosticPublicContent;
@@ -234,6 +235,9 @@ function leerRutaProvisional(): RutaProvisional | null {
 }
 
 export default function DiagnosticHome() {
+
+  const router = useRouter()
+
   const [step, setStep] = useState<"interests" | "questions">("interests");
 
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
@@ -358,6 +362,8 @@ export default function DiagnosticHome() {
       setMensajeRuta(
         "¡Ruta confirmada correctamente! Ya puedes comenzar tu aprendizaje."
       );
+
+      router.push('/ruta', { scroll: true })
     } catch {
       setMensajeRuta(
         "No se pudo confirmar la ruta. Inténtalo nuevamente."
@@ -414,6 +420,8 @@ export default function DiagnosticHome() {
     setShowValidation(false);
     setPuntajes(null);
     setServerErrors([]);
+
+    window.scrollTo( { top: 0, behavior: 'smooth' })
   }
 
   function getAnswer(questionId: string): DiagnosticAnswer | undefined {

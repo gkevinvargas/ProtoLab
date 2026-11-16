@@ -31,12 +31,12 @@ export default function PanelLayout({
 }) {
   return (
 
-    <div className="min-h-screen bg-[#F7FAFC] text-[#24324A]">
+    <div className="min-h-screen bg-[#f7fafcee] text-[#24324A]">
       <div className="flex min-h-screen">
         <Sidebar />
         <main className="flex min-w-0 flex-1 flex-col">
           <Header nombreLaboratorio="ElectroLab" tipoContenido='Prácticas' tipoEditor='Editor de circuitos' />
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto p-2.5 md:pl-2 md:pr-2 md:pt-0">
 
             {/* CONTENIDO PRINCIPAL */}
             {children}

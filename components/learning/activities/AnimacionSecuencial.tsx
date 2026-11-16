@@ -73,9 +73,9 @@ export function AnimacionSecuencial({ actividad }: Props) {
         <div className="pl-control-group">
           {hasControl("anterior") && <button type="button" className="pl-button pl-button-quiet" onClick={() => goTo(stepIndex - 1)} disabled={stepIndex === 0} aria-label="Paso anterior">Anterior</button>}
           {playing && hasControl("pausar") ? (
-            <button type="button" className="pl-button pl-button-primary" onClick={() => setPlaying(false)}>Pausar</button>
+            <button type="button" className="rounded-xl bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300" onClick={() => setPlaying(false)}>Pausar</button>
           ) : hasControl("reproducir") ? (
-            <button type="button" className="pl-button pl-button-primary" onClick={() => { if (isLast) setStepIndex(0); setPlaying(true); }}>{isLast ? "Repetir" : "Reproducir"}</button>
+            <button type="button" className="rounded-xl bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300" onClick={() => { if (isLast) setStepIndex(0); setPlaying(true); }}>{isLast ? "Repetir" : "Reproducir"}</button>
           ) : null}
           {hasControl("siguiente") && <button type="button" className="pl-button pl-button-quiet" onClick={() => goTo(stepIndex + 1)} disabled={isLast} aria-label="Paso siguiente">Siguiente</button>}
         </div>

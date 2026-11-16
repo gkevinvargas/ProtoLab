@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { IconLock } from "@tabler/icons-react";
 
 const CLAVE_RUTA = "protolab:ruta-aprendizaje";
 
@@ -66,7 +67,7 @@ export default function RequireConfirmedRoute({
       <main className="flex min-h-[70vh] items-center justify-center p-6">
         <section className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
           <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-3xl">
-            🔒
+            <IconLock size={30} stroke={2} className="text-yellow-500"/>
           </div>
 
           <h1 className="text-2xl font-bold text-slate-800">

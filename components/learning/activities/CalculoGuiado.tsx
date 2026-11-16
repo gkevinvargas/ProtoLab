@@ -71,7 +71,7 @@ export function CalculoGuiado({ actividad }: Props) {
         </div>
         <div className="pl-controls pl-controls-start">
           <button type="button" className="pl-button pl-button-quiet" onClick={() => setShowHint((value) => !value)}>{showHint ? "Ocultar pista" : "Mostrar pista"}</button>
-          <button type="button" className="pl-button pl-button-primary" onClick={check} disabled={values[step.id] === undefined || values[step.id].trim() === ""}>Comprobar</button>
+          <button type="button" className="rounded-xl bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300" onClick={check} disabled={values[step.id] === undefined || values[step.id].trim() === ""}>Comprobar</button>
         </div>
         {showHint && <div className="pl-hint" role="note">Pista: {step.pista}</div>}
         {showExplanation && <div className="pl-feedback is-correct" role="status">{step.explicacion}</div>}
@@ -80,7 +80,7 @@ export function CalculoGuiado({ actividad }: Props) {
       <div className="pl-controls">
         <button type="button" className="pl-button pl-button-quiet" onClick={reset}>Reiniciar cálculo</button>
         {stepIndex < config.pasos.length - 1 ? (
-          <button type="button" className="pl-button pl-button-primary" onClick={next} disabled={!verified[step.id]}>Siguiente paso</button>
+          <button type="button" className="rounded-xl bg-blue-600 px-4 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300" onClick={next} disabled={!verified[step.id]}>Siguiente paso</button>
         ) : <span className="pl-completion" role="status">{allCorrect ? (config?.retroalimentacion?.correcta ?? "¡Reto completado con éxito!") : "Completa todos los pasos para terminar."}</span>}
       </div>
     </section>

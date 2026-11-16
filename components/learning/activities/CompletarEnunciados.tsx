@@ -100,7 +100,7 @@ export function CompletarEnunciados({ actividad }: Props) {
       </div>
       <div className="pl-controls">
         <button type="button" className="pl-button pl-button-quiet" onClick={reset}>Reiniciar</button>
-        <button type="button" className="pl-button pl-button-primary" onClick={verify} disabled={!isComplete}>Comprobar respuestas</button>
+        <button type="button" className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300" onClick={verify} disabled={!isComplete}>Comprobar respuestas</button>
       </div>
       {showFeedback && <div className={`pl-feedback ${checked ? "is-correct" : "is-incorrect"}`} role="status">{checked ? config.retroalimentacion.correcta : config.retroalimentacion.incorrecta}</div>}
       {showFeedback && !checked && <div className="pl-sentence-feedback">{config.enunciados.filter((sentence) => sentence.segmentos.some((segment) => segment.tipo === "espacio" && answers[segment.id] !== segment.respuesta)).map((sentence) => <p key={sentence.id}>{sentence.retroalimentacion}</p>)}</div>}

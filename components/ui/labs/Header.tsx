@@ -4,6 +4,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { IconChevronDown, IconChevronRight, IconChevronsDown, IconLogout, IconUser } from "@tabler/icons-react";
 import Link from "next/link";
 import { DropdownMenuItemLogout } from '../logout-dropdown-item';
+import { useState } from 'react';
+import { Logo } from '../logo-protolab';
 
 interface HeaderProps {
     nombreLaboratorio: string
@@ -12,10 +14,15 @@ interface HeaderProps {
 }
 
 export function Header({ nombreLaboratorio, tipoContenido, tipoEditor }: HeaderProps) {
+    
+    const [menuTelefono, setMeunuTelefono] = useState(false);
 
     return (
-        <header className="flex h-[76px] shrink-0 items-center justify-between border-b border-[#E7EDF5] bg-white px-4 sm:px-7">
+        <header className="sticky z-40 top-0 flex h-[76px] shrink-0 items-center justify-between border-b border-[#E7EDF5] bg-white pl-16 pr-4 sm:pr-7 md:static px-4 md:px-7">
             <div className="flex items-center gap-3">
+
+                <Logo className="md:hidden" />
+
                 <div>
                     <div className="flex items-center gap-2 text-[11px] text-[#718096]">
                         {/**
@@ -74,6 +81,8 @@ export function Header({ nombreLaboratorio, tipoContenido, tipoEditor }: HeaderP
                 </DropdownMenu>
 
             </div>
+
+            
         </header>
     )
 }

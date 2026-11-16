@@ -15,6 +15,7 @@ import {
   leerRuta,
   type Ruta,
 } from "@/lib/ruta/actividades";
+import { useRouter } from "next/navigation";
 
 function leerMejorNota(ruta: Ruta, id: string): number | null {
   const guardada = localStorage.getItem(`${claveAvance(ruta)}:mejor:${id}`);
@@ -163,6 +164,7 @@ export default function RutaPage() {
   const esUltima = totalCompletadas === actividades.length - 1;
 
   function continuar() {
+
     if (!actual || (actual.tipo === "practica_individual" && nota === null)) {
       return;
     }
@@ -183,6 +185,8 @@ export default function RutaPage() {
       setCompletadas(nuevoAvance);
       setNota(notaSiguiente);
       setError("");
+
+      window.scroll({ top: 0, behavior: 'smooth'})
     } catch {
       setError("No se pudo guardar el avance. Intenta de nuevo.");
     }
