@@ -35,16 +35,13 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-slate-50 text-slate-900">
-        <main className="min-h-screen w-full- p-4 sm:p-6 lg:p-8">
-          <div className="mas-w-7xl max-auto w-full">
+      <body className="min-h-screen">
+        
             {children}
-          </div>
-        </main>
+          
        </body>
 
      
-    
     </html>
   )
 }

@@ -4,14 +4,22 @@ import { Header } from "@/components/ui/labs/Header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { usuarioAutenticado } from "@/lib/auth";
 
 async function AuthCheck({ children}: { children: React.ReactNode}) {
-  const supabase = await createClient();
+
+  {/**
+    
+    const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
 
   if (error || !data?.user) {
     redirect("/");
   }
+    
+    
+    */}
+  const user = await usuarioAutenticado()
 
   return <>{Children}</>
 }
