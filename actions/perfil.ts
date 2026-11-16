@@ -1,30 +1,95 @@
-"use server"
+"use server";
 
-import { usuarioAutenticado } from "@/lib/auth"
-import { createClient } from "@/lib/supabase/server"
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache";
 
+import municipiosJalisco from "@/data/municipios/jalisco.json";
+import { usuarioAutenticado } from "@/lib/auth";
+import { createClient } from "@/lib/supabase/server";
 
-export async function actualizarPerfil(formData: FormData) {
+export interface DatosActualizacionPerfil {
+  nombre: string;
+  apellido_paterno: string;
+  apellido_materno: string;
+  municipio: string;
+  semestre: string;
+}
 
-    const supabase = await createClient()
-    const usuario = await usuarioAutenticado()
+function limpiarTexto(valor: unknown, maximo = 80): string {
+  return typeof valor === "string" ? valor.trim().slice(0, maximo) : "";
+}
 
-    const nombre = formData.get('nombre') as string
-    const apellido_paterno = formData.get('apellidoPaterno') as string
-    const apellido_materno = formData.get('apellidoMaterno') as string
-    const municipio = formData.get('municipio') as string
-    const semestre = formData.get('semestre') as string
+export async function actualizarPerfil(
+  datos: DatosActualizacionPerfil
+): Promise<{ ok: boolean; message: string }> {
+  const usuario = await usuarioAutenticado();
 
-    const { error } = await supabase.from('perfiles')
-                                    .update({nombre, apellido_paterno, apellido_materno, municipio, semestre})
-                                    .eq('id', usuario.id)
+  try {
+    const nombre = limpiarTexto(datos?.nombre);
+    const apellido_paterno = limpiarTexto(datos?.apellido_paterno);
+    const apellido_materno = limpiarTexto(datos?.apellido_materno);
+    const municipio = limpiarTexto(datos?.municipio, 100);
+    const semestre = limpiarTexto(datos?.semestre, 1);
 
-    if (error) {
-        throw new Error(error.message)
+    if (!nombre || !apellido_paterno || !municipio || !semestre) {
+      return {
+        ok: false,
+        message:
+          "Completa nombre, apellido paterno, municipio y semestre.",
+      };
     }
 
-    revalidatePath('/perfil')
+    const municipiosPermitidos = Object.values(municipiosJalisco) as string[];
+    if (!municipiosPermitidos.includes(municipio)) {
+      return {
+        ok: false,
+        message: "Selecciona un municipio válido de Jalisco.",
+      };
+    }
+
+    if (!/^[1-6]$/.test(semestre)) {
+      return {
+        ok: false,
+        message: "Selecciona un semestre válido del 1 al 6.",
+      };
+    }
+
+    const supabase = await createClient();
+    const { error } = await supabase.from("perfiles").upsert(
+      {
+        id: usuario.id,
+        nombre,
+        apellido_paterno,
+        apellido_materno,
+        municipio,
+        semestre,
+      },
+      { onConflict: "id" }
+    );
+
+    if (error) {
+      console.error("No se pudo actualizar el perfil:", error);
+      return {
+        ok: false,
+        message:
+          "No fue posible guardar los cambios. Verifica los permisos de la tabla de perfiles e inténtalo nuevamente.",
+      };
+    }
+
+    revalidatePath("/perfil");
+    revalidatePath("/ruta");
+
+    return {
+      ok: true,
+      message: "Tu información se actualizó correctamente.",
+    };
+  } catch (error) {
+    console.error("Error al actualizar el perfil:", error);
+    return {
+      ok: false,
+      message:
+        "Ocurrió un error al actualizar tu perfil. Inténtalo nuevamente.",
+    };
+  }
 }
 
 

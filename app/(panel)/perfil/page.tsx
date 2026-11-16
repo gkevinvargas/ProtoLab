@@ -1,5 +1,6 @@
 import { IconUser } from "@tabler/icons-react";
 
+import { FormPerfil } from "@/components/perfil/form-perfil";
 import { usuarioAutenticado } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
@@ -10,55 +11,67 @@ function textoPerfil(valor: unknown): string {
   return typeof valor === "number" ? String(valor) : "";
 }
 
+function esObjeto(
+  valor: unknown
+): valor is Record<string, unknown> {
+  return typeof valor === "object" && valor !== null && !Array.isArray(valor);
+}
+
 export default async function PerfilPage() {
   const usuario = await usuarioAutenticado();
-  const datosRegistro = usuario.user_metadata.perfil_registro;
-  const datosGuardados =
-    typeof datosRegistro === "object" && datosRegistro !== null && !Array.isArray(datosRegistro)
-      ? (datosRegistro as Record<string, unknown>)
-      : null;
+  const supabase = await createClient();
 
-  let perfil = datosGuardados;
-  if (!perfil) {
-    const supabase = await createClient();
-    const { data, error } = await supabase
-      .from("perfiles")
-      .select("nombre, apellido_paterno, apellido_materno, municipio, semestre")
-      .eq("id", usuario.id)
-      .maybeSingle();
+  // La tabla perfiles es la fuente principal de información.
+  const { data: perfilTabla, error } = await supabase
+    .from("perfiles")
+    .select("nombre, apellido_paterno, apellido_materno, municipio, semestre")
+    .eq("id", usuario.id)
+    .maybeSingle();
 
-    if (error) throw new Error("No se pudo cargar el perfil.");
-    perfil = data;
+  if (error) {
+    throw new Error("No se pudo cargar el perfil.");
   }
 
-  const nombre = textoPerfil(perfil?.nombre);
-  const paterno = textoPerfil(perfil?.apellido_paterno);
-  const materno = textoPerfil(perfil?.apellido_materno);
-  const municipio = textoPerfil(perfil?.municipio);
-  const semestre = textoPerfil(perfil?.semestre);
+  // Compatibilidad con cuentas antiguas cuyos datos siguen en metadata.
+  const metadata = esObjeto(usuario.user_metadata)
+    ? usuario.user_metadata
+    : {};
+  const registro = esObjeto(metadata.perfil_registro)
+    ? metadata.perfil_registro
+    : {};
+
+  const nombre =
+    textoPerfil(perfilTabla?.nombre) || textoPerfil(registro.nombre);
+  const apellidoPaterno =
+    textoPerfil(perfilTabla?.apellido_paterno) ||
+    textoPerfil(registro.apellido_paterno);
+  const apellidoMaterno =
+    textoPerfil(perfilTabla?.apellido_materno) ||
+    textoPerfil(registro.apellido_materno);
+  const municipio =
+    textoPerfil(perfilTabla?.municipio) || textoPerfil(registro.municipio);
+  const semestreGuardado =
+    textoPerfil(perfilTabla?.semestre) || textoPerfil(registro.semestre);
+  const semestre = /^[1-6]$/.test(semestreGuardado)
+    ? semestreGuardado
+    : "";
   const correo = usuario.email ?? "";
-  const nombreCompleto = [nombre, paterno, materno].filter(Boolean).join(" ");
-  const iniciales = [nombre, paterno]
+
+  const nombreCompleto = [nombre, apellidoPaterno, apellidoMaterno]
+    .filter(Boolean)
+    .join(" ");
+  const iniciales = [nombre, apellidoPaterno]
     .map((parte) => parte.charAt(0))
     .join("")
     .toUpperCase();
-  const semestreVisible = /^[1-6]$/.test(semestre)
-    ? `${semestre}° semestre`
-    : semestre === "Selecciona una opción" ? "" : semestre;
-
-  const campos = [
-    { etiqueta: "Nombre(s)", valor: nombre },
-    { etiqueta: "Apellido paterno", valor: paterno },
-    { etiqueta: "Apellido materno", valor: materno },
-    { etiqueta: "Municipio", valor: municipio },
-    { etiqueta: "Semestre", valor: semestreVisible },
-    { etiqueta: "Correo electrónico", valor: correo },
-  ];
 
   return (
     <div className="mx-auto max-w-[1700px] space-y-6 p-2 sm:p-6 lg:p-7">
       <header className="flex items-center gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-2xl font-bold text-indigo-700" aria-hidden="true">
+        <div
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-2xl font-bold text-indigo-700"
+          aria-hidden="true"
+        >
           {iniciales || <IconUser size={30} />}
         </div>
         <div className="min-w-0">
@@ -69,18 +82,28 @@ export default async function PerfilPage() {
         </div>
       </header>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" aria-labelledby="datos-perfil">
-        <h2 id="datos-perfil" className="mb-4 font-semibold text-slate-900">
-          Datos del perfil
-        </h2>
-        <dl className="grid gap-4 sm:grid-cols-2">
-          {campos.map(({ etiqueta, valor }) => (
-            <div key={etiqueta} className="min-w-0 rounded-xl bg-slate-50 p-4">
-              <dt className="text-sm font-semibold text-slate-600">{etiqueta}</dt>
-              <dd className="mt-1 break-words text-slate-900">{valor || "Sin registrar"}</dd>
-            </div>
-          ))}
-        </dl>
+      <section
+        className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+        aria-labelledby="datos-perfil"
+      >
+        <div className="mb-5">
+          <h2 id="datos-perfil" className="font-semibold text-slate-900">
+            Datos del perfil
+          </h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Puedes actualizar tus datos personales. Tu correo electrónico y
+            contraseña no se modifican desde esta sección.
+          </p>
+        </div>
+
+        <FormPerfil
+          nombre={nombre}
+          apellido_paterno={apellidoPaterno}
+          apellido_materno={apellidoMaterno}
+          municipio={municipio}
+          semestre={semestre}
+          correo={correo}
+        />
       </section>
     </div>
   );
