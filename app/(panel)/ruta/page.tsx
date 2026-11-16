@@ -16,6 +16,8 @@ import {
   type Ruta,
 } from "@/lib/ruta/actividades";
 import { useRouter } from "next/navigation";
+import { Icon } from "lucide-react";
+import { IconBook } from "@tabler/icons-react";
 
 function leerMejorNota(ruta: Ruta, id: string): number | null {
   const guardada = localStorage.getItem(`${claveAvance(ruta)}:mejor:${id}`);
@@ -242,10 +244,22 @@ export default function RutaPage() {
           />
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5">
-          <h2 className="font-bold">
-            {actual ? "Actividades de tu ruta" : "Actividades completadas"}
-          </h2>
+
+        <details open aria-labelledby="practice-instructions-heading" className="group mb-5 rounded-2xl border border-[#DCE9FF] bg-white shadow-sm">
+        <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-2 rounded-t-2xl border-b border-[#E7EDF5] bg-[#F4F8FF] px-4 py-3 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#8865D8] sm:px-5">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EAF1FF] text-[#3478F6]"><IconBook name="book" size={17} /></span>
+            <div>
+              <h3 id="practice-instructions-heading" className="text-sm font-semibold text-[#24324A]">{actual ? "Actividades de tu ruta" : "Actividades completadas"}</h3>
+              <p className="mt-0.5 text-sm text-[#718096]">Estudia las clases para realizar las prácticas.</p>
+            </div>
+          </div>
+          <span className="flex items-center gap-2">
+            <span className="rounded-full border border-[#DCE9FF] bg-white px-2.5 py-1 text-[11px] font-medium text-[#526575]"> pasos</span>
+            <span aria-hidden="true" className="text-base text-[#718096] transition-transform group-open:rotate-180">⌄</span>
+          </span>
+        </summary>
+        <div className="space-y-4 px-4 py-4 sm:px-5">
 
           <ol className="mt-3 space-y-2">
             {actividades.map((actividad) => {
@@ -280,8 +294,11 @@ export default function RutaPage() {
               );
             })}
           </ol>
-        </section>
 
+        </div>
+      </details>
+
+       
         {actual?.tipo === "clase_teorica" && (
           <ClaseTeorica key={actual.id} clase={actual.clase} abierta />
         )}
