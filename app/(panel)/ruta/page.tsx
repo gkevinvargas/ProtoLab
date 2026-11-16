@@ -255,8 +255,7 @@ export default function RutaPage() {
             </div>
           </div>
           <span className="flex items-center gap-2">
-            <span className="rounded-full border border-[#DCE9FF] bg-white px-2.5 py-1 text-[11px] font-medium text-[#526575]"> pasos</span>
-            <span aria-hidden="true" className="text-base text-[#718096] transition-transform group-open:rotate-180">⌄</span>
+          <span aria-hidden="true" className="text-base text-[#718096] transition-transform group-open:rotate-180">⌄</span>
           </span>
         </summary>
         <div className="space-y-4 px-4 py-4 sm:px-5">

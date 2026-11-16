@@ -31,6 +31,8 @@ export default function RecorridoTeorico({
       actuales.includes(id) ? actuales : [...actuales, id]
     );
     setIndice(indice + 1);
+
+    window.scroll({ top: 0, behavior: 'smooth'})
   }
 
   return (

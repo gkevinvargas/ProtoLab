@@ -54,13 +54,13 @@ export function OrdenarBloques({ actividad }: Props) {
       className="pl-activity-card !border-blue-200/80 !bg-gradient-to-b !from-white !to-blue-50/40 shadow-md shadow-blue-900/5"
       aria-label={actividad.titulo}
     >
-      <div className="pl-activity-heading border-b border-blue-100 pb-4 mb-4">
+      <div className="flex flex-col md:flex-row gap-4 lg:flex-row pl-activity-heading border-b border-blue-100 pb-4 mb-4">
         <div>
           <p className="pl-eyebrow !text-blue-600 !font-bold tracking-wider">ROMPECABEZAS</p>
           <h3 className="text-slate-900 font-bold text-lg">{actividad.titulo}</h3>
           <p className="pl-muted text-slate-600">{actividad.instrucciones}</p>
         </div>
-        <span className="pl-step-count !bg-blue-100 !text-blue-700 !border !border-blue-200 !font-semibold">
+        <span className="mt-2 md:mt-0 lg:mt-0 pl-step-count !bg-blue-100 !text-blue-700 !border !border-blue-200 !font-semibold">
           {order.length} bloques
         </span>
       </div>

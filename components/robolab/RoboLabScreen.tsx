@@ -53,6 +53,8 @@ export default function RoboLabScreen({ onApproved }: RoboLabScreenProps) {
         : [...vistas, claseActual.identificador]
     );
     setIndiceClase(indiceClase + 1);
+
+    window.scroll({ top: 0, behavior: 'smooth'})
   }
 
   if (plantilla_id !== "robot-navigation-2d") {

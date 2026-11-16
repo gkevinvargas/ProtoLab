@@ -154,8 +154,7 @@ export default function ClaseTeorica({
                 Practica lo aprendido
               </h3>
               <p className="text-base leading-relaxed text-slate-600">
-                Realiza estas actividades para reforzar los conceptos antes de
-                pasar a la práctica del laboratorio.
+                Realiza estas actividades para reforzar los conceptos antes de pasar a la práctica del laboratorio.
               </p>
             </div>
 
@@ -163,10 +162,10 @@ export default function ClaseTeorica({
               {actividades.map((actividad: any, indice: number) => (
                 <li
                   key={actividad.id ?? indice}
-                  className="space-y-3 rounded-2xl border border-blue-200 bg-white p-5 sm:p-6 shadow-sm"
+                  className="space-y-3 rounded-2xl border border-blue-200 bg-white pt-5 sm:p-6 shadow-sm"
                   aria-label={`Actividad ${indice + 1}: ${actividad.titulo}`}
                 >
-                  <div className="flex flex-wrap items-center gap-3 text-sm">
+                  <div className="flex flex-wrap items-center gap-3 text-sm ml-3 mr-3 md:ml-0 md:mr-0 lg:ml-0 lg:mr-0">
                     <span className="font-bold bg-blue-600 text-white px-3 py-1 rounded-lg shadow-sm">
                       Actividad {indice + 1}
                     </span>
@@ -200,7 +199,7 @@ export default function ClaseTeorica({
               id={`${tituloId}-practicas`}
               className="text-lg font-bold text-slate-900"
             >
-              Cómo aplicarás lo aprendido
+              Como aplicarás lo aprendido
             </h3>
             <ul className="grid gap-4 sm:grid-cols-2">
               {preparaPara.map((practica) => (

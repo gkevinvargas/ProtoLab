@@ -55,6 +55,8 @@ export default function RoboLabScreen2({ onApproved }: RoboLabScreenProps) {
                 : [...vistas, claseActual.identificador]
         );
         setIndiceClase(indiceClase + 1);
+
+        window.scroll({ top: 0, behavior: 'smooth'})
     }
 
     if (plantilla_id !== "robot-navigation-2d") {
@@ -198,13 +200,6 @@ export default function RoboLabScreen2({ onApproved }: RoboLabScreenProps) {
 
 
                         <div className="mx-auto max-w-[1700px] p-2 sm:p-6 lg:p-7">
-
-                            <BannerPractica
-                                nombreLaboratorio='RoboLab'
-                                nombrePractica={metadatos.practica_num}
-                                nivelPractica={metadatos.nivel}
-                                descripcionPractica={metadatos.descripcion_banner}
-                            />
 
                             {claseActual ? (
                                 <section aria-label="Clases teóricas de RoboLab" className="space-y-4">
