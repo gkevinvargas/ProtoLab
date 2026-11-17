@@ -12,7 +12,7 @@ import {
   IconArrowRight,
 } from "@tabler/icons-react";
 
-import municipiosJalisco from "@/data/municipios/jalisco.json";
+import { municipioPredeterminado } from "@/lib/municipio-predeterminado";
 import { createClient } from "@/lib/supabase/client";
 
 const diagnosticPath = "/diagnostico";
@@ -22,10 +22,6 @@ const profileFields = [
   { name: "apellido_paterno", label: "Apellido paterno", autoComplete: "family-name" },
   { name: "apellido_materno", label: "Apellido materno" },
 ] as const;
-
-const municipiosPorNombre = Object.entries(municipiosJalisco).sort(
-  ([, nombreA], [, nombreB]) => nombreA.localeCompare(nombreB, "es")
-);
 
 const profileInputClass =
   "min-w-0 w-full rounded-xl border border-[#E7EDF5] bg-[#F8FAFD] px-4 py-3 text-sm text-[#24324A] outline-none focus:border-[#3478F6] focus:ring-2 focus:ring-blue-100";
@@ -56,20 +52,12 @@ export function SignUpForm() {
     }
 
     const formData = new FormData(event.currentTarget);
-    const municipioId = String(formData.get("municipio_id") ?? "");
-    const municipio = municipiosPorNombre.find(([clave]) => clave === municipioId);
-
-    if (!municipio) {
-      setError("Selecciona un municipio de Jalisco.");
-      return;
-    }
-
     const perfilRegistro = {
       nombre: String(formData.get("nombre") ?? "").trim(),
       apellido_paterno: String(formData.get("apellido_paterno") ?? "").trim(),
       apellido_materno: String(formData.get("apellido_materno") ?? "").trim(),
-      municipio: municipio[1],
-      municipio_id: municipioId,
+      municipio: municipioPredeterminado.nombre,
+      municipio_id: municipioPredeterminado.id,
       semestre: String(formData.get("semestre") ?? ""),
     };
 
@@ -146,21 +134,10 @@ export function SignUpForm() {
           </label>
         ))}
 
-        <label className="block min-w-0 text-sm font-semibold text-[#24324A]">
-          <span className="mb-2 block">Municipio de Jalisco</span>
-          <select
-            name="municipio_id"
-            defaultValue=""
-            autoComplete="address-level2"
-            required
-            className={profileInputClass}
-          >
-            <option value="" disabled>Selecciona tu municipio</option>
-            {municipiosPorNombre.map(([clave, nombre]) => (
-              <option key={clave} value={clave}>{nombre}</option>
-            ))}
-          </select>
-        </label>
+        <div className="min-w-0 text-sm text-[#24324A]">
+          <p className="mb-2 font-semibold">Municipio</p>
+          <p>{municipioPredeterminado.nombre}, {municipioPredeterminado.estado}</p>
+        </div>
 
         <label className="block min-w-0 text-sm font-semibold text-[#24324A]">
           <span className="mb-2 block">Semestre</span>

@@ -24,7 +24,7 @@ export default async function PerfilPage() {
   // La tabla perfiles es la fuente principal de información.
   const { data: perfilTabla, error } = await supabase
     .from("perfiles")
-    .select("nombre, apellido_paterno, apellido_materno, municipio, semestre")
+    .select("nombre, apellido_paterno, apellido_materno, semestre")
     .eq("id", usuario.id)
     .maybeSingle();
 
@@ -48,8 +48,6 @@ export default async function PerfilPage() {
   const apellidoMaterno =
     textoPerfil(perfilTabla?.apellido_materno) ||
     textoPerfil(registro.apellido_materno);
-  const municipio =
-    textoPerfil(perfilTabla?.municipio) || textoPerfil(registro.municipio);
   const semestreGuardado =
     textoPerfil(perfilTabla?.semestre) || textoPerfil(registro.semestre);
   const semestre = /^[1-6]$/.test(semestreGuardado)
@@ -100,7 +98,6 @@ export default async function PerfilPage() {
           nombre={nombre}
           apellido_paterno={apellidoPaterno}
           apellido_materno={apellidoMaterno}
-          municipio={municipio}
           semestre={semestre}
           correo={correo}
         />
