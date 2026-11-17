@@ -1,5 +1,5 @@
-import React from 'react';
-import type{Coord,Orientation} from "@/app/(panel)/robolab/robolab-data";
+import React from "react";
+import type { Coord, Orientation } from "@/app/(panel)/robolab/robolab-data";
 
 interface RoboLabGridProps {
   dimensions: { rows: number; cols: number };
@@ -8,12 +8,17 @@ interface RoboLabGridProps {
   obstacles: Coord[];
 }
 
-export default function RoboLabGrid({ dimensions, robotPos, goal, obstacles,}:RoboLabGridProps){
-  const rowsArray = Array.from({length: dimensions.rows}, (_,i)=> dimensions.rows-i);
-  const colsArray= Array.from({length: dimensions.cols}, (_,i)=> i+1);
+export default function RoboLabGrid({
+  dimensions,
+  robotPos,
+  goal,
+  obstacles,
+}: RoboLabGridProps) {
+  const rowsArray = Array.from({ length: dimensions.rows }, (_, i) => dimensions.rows - i);
+  const colsArray = Array.from({ length: dimensions.cols }, (_, i) => i + 1);
 
-  const getRotationClass=(orientation: Orientation)=>{
-    switch (orientation){
+  const getRotationClass = (orientation: Orientation) => {
+    switch (orientation) {
       case 'Norte':
         return 'rotate-0';
       case 'Este':
@@ -27,52 +32,55 @@ export default function RoboLabGrid({ dimensions, robotPos, goal, obstacles,}:Ro
 
   return (
     <div className="w-full">
-      {/* Cuadrícula X1 .. X6 */}
+      {/* Encabezado de columnas X1 .. X6 */}
       <div className="grid grid-cols-[32px_repeat(6,minmax(0,1fr))] gap-2 mb-2 text-center">
-
+        <div />
+        {colsArray.map((col) => (
+          <span key={`x-${col}`} className="text-xs font-medium text-slate-400">
+            X{col}
+          </span>
+        ))}
       </div>
-      {colsArray.map((col)=>(
-        <span key={`x-${col}`} className= "text-xs font-medium text-slate-400">
-          X{col}
-        </span>
-      ))}
 
       {/* Cuadrícula Y6 .. Y1 */}
-      <div className= "space-y-2 relative">
-        {rowsArray.map((row)=>(
+      <div className="space-y-2 relative">
+        {rowsArray.map((row) => (
           <div
-          key={`y-${row}`} 
-          className="grid grid-cols-[32px_repeat(6,minmax(0,1fr))] gap-2items-center">
+            key={`row-${row}`}
+            className="grid grid-cols-[32px_repeat(6,minmax(0,1fr))] gap-2 items-center"
+          >
             <span className="text-xs font-medium text-slate-400 text-center">Y{row}</span>
 
-            {colsArray.map((col)=>{
+            {colsArray.map((col) => {
               const esRobot = robotPos.x === col && robotPos.y === row;
               const esMeta = goal.x === col && goal.y === row;
-              const esObstaculo = obstacles.some((obs)=> obs.x === col && obs.y === row);
+              const esObstaculo = obstacles.some((obs) => obs.x === col && obs.y === row);
 
-              let cellStyle= 'bg-slate-50/90 border-slate-100 hover:border-slate-200';
+              let cellStyle =
+                'bg-slate-50/90 border border-slate-100 hover:border-slate-200';
               if (esObstaculo) {
-                cellStyle= 'bg-rose-50 border-rose-200';
+                cellStyle = 'bg-rose-50 border border-rose-200';
               } else if (esMeta) {
-                cellStyle= 'bg-emerald-50/70 border-emerald-200';
+                cellStyle = 'bg-emerald-50/70 border border-emerald-200';
               }
 
               return (
                 <div
-                key={`${col}-${row}`}
-              className={`aspect-square rounded-xl flex items-center justifity-center relative transition-colors duration-300 ${cellStyle}`}
-              >
-                {/*Robot Botty en SVG animado estilo Videojuego*/}
-                {esRobot && (
-                  <div
-                  className="absolute inset-1 bg-blue-600 rounded-xl shadow-lg shadow-blue-200 ring-4 ring-blue-100 flex items-center justify-center transition-all duration-300 ease-in-out z-10 animate-bounce" 
-                      title={`Botty(&{robotPos.orientation})`}
-                     >
-                     <div
-                     className={`w-9 h-9 flex items-center justify-center transition-transform duration-300 ease-in-out ${getRotationClass(
+                  key={`${col}-${row}`}
+                  className={`aspect-square rounded-xl flex items-center justify-center relative transition-colors duration-300 ${cellStyle}`}
+                >
+                  {/* Robot Botty en SVG Animado estilo Videojuego */}
+                  {esRobot && (
+                    <div
+                      className="absolute inset-1 bg-blue-600 rounded-xl shadow-lg shadow-blue-200 ring-4 ring-blue-100 flex items-center justify-center transition-all duration-300 ease-in-out z-10 animate-bounce"
+                      title={`Botty (${robotPos.orientation})`}
+                    >
+                      <div
+                        className={`w-9 h-9 flex items-center justify-center transition-transform duration-300 ease-in-out ${getRotationClass(
                           robotPos.orientation
                         )}`}
                       >
+
 
                         <svg
                           viewBox="0 0 64 64"
