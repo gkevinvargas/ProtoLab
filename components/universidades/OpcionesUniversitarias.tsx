@@ -145,7 +145,7 @@ export default function OpcionesUniversitarias({ ruta }: { ruta: Ruta }) {
 
       {cargando ? (
         <p className="mt-3 text-sm text-slate-600" role="status">
-          Consultando instituciones y carreras de tu municipio…
+          Consultando instituciones y carreras…
         </p>
       ) : error ? (
         <div
@@ -225,7 +225,7 @@ export default function OpcionesUniversitarias({ ruta }: { ruta: Ruta }) {
                           </p>
                         ) : (
                           <p className="mt-2 text-xs text-slate-500">
-                            Otra opción académica disponible en tu municipio.
+                            Otra opción académica disponible en {datos.municipio}.
                             No tiene una relación directa identificada con los
                             laboratorios de tu ruta.
                           </p>

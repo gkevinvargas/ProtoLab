@@ -1,8 +1,9 @@
+import { municipioPredeterminado } from "@/lib/municipio-predeterminado";
 import { createClient } from "@/lib/supabase/server";
 import { connection } from "next/server";
 
 const DATOS_MEXICO_API = "https://api.datosmexico.org";
-const ENTIDAD = "JALISCO";
+const ENTIDAD = municipioPredeterminado.estado.toUpperCase();
 const LIMITE_POR_PAGINA = 1000;
 const MAX_PAGINAS = 20;
 const REVALIDAR_SEGUNDOS = 60 * 60 * 12;
@@ -62,12 +63,6 @@ type InstitucionAgrupada = {
   clasificacion: string | null;
   programas: Map<string, ProgramaRelacionado>;
 };
-
-function esObjeto(
-  valor: unknown
-): valor is Record<string, unknown> {
-  return typeof valor === "object" && valor !== null && !Array.isArray(valor);
-}
 
 function normalizar(valor: string | null | undefined): string {
   return (valor ?? "")
@@ -334,59 +329,19 @@ export async function GET(request: Request) {
       );
     }
 
-    // La tabla perfiles es la fuente principal para que las modificaciones
-    // realizadas desde la página de perfil se reflejen en esta consulta.
-    const { data: perfil, error: perfilError } = await supabase
-      .from("perfiles")
-      .select("municipio")
-      .eq("id", user.id)
-      .maybeSingle();
-
-    if (perfilError) {
-      throw new Error("No se pudo recuperar el municipio del perfil.");
-    }
-
-    let municipio =
-      typeof perfil?.municipio === "string" ? perfil.municipio.trim() : "";
-
-    // Compatibilidad con cuentas antiguas cuyos datos aún están en metadata.
-    if (!municipio) {
-      const metadata = esObjeto(user.user_metadata)
-        ? user.user_metadata
-        : {};
-      const perfilRegistro = esObjeto(metadata.perfil_registro)
-        ? metadata.perfil_registro
-        : {};
-
-      municipio =
-        typeof perfilRegistro.municipio === "string"
-          ? perfilRegistro.municipio.trim()
-          : "";
-    }
-
-    if (!municipio) {
-      return Response.json(
-        {
-          error:
-            "Tu cuenta todavía no tiene un municipio registrado. Revisa los datos de tu perfil.",
-        },
-        { status: 422 }
-      );
-    }
-
     const ciclo = await obtenerCicloMasReciente();
     const programasDelCiclo = await obtenerProgramasDeJalisco(ciclo);
 
     const instituciones = agruparInstituciones(
       programasDelCiclo,
-      normalizar(municipio),
+      normalizar(municipioPredeterminado.nombre),
       areasSolicitadas
     );
 
     return Response.json(
       {
-        municipio,
-        entidad: "Jalisco",
+        municipio: municipioPredeterminado.nombre,
+        entidad: municipioPredeterminado.estado,
         ciclo,
         fuente: "Datos México · Anuario Estadístico de Educación Superior de ANUIES.",
         notaClasificacion:

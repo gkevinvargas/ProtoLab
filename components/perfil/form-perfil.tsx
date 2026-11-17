@@ -3,44 +3,25 @@
 import { useState, useTransition, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-import municipiosJalisco from "@/data/municipios/jalisco.json";
-import { actualizarPerfil } from "@/actions/perfil";
+import { actualizarPerfil, type DatosActualizacionPerfil } from "@/actions/perfil";
+import { municipioPredeterminado } from "@/lib/municipio-predeterminado";
 
-interface FormPerfilProps {
-  nombre: string;
-  apellido_paterno: string;
-  apellido_materno: string;
-  municipio: string;
-  semestre: string;
+interface FormPerfilProps extends DatosActualizacionPerfil {
   correo?: string;
 }
-
-interface DatosPerfil {
-  nombre: string;
-  apellido_paterno: string;
-  apellido_materno: string;
-  municipio: string;
-  semestre: string;
-}
-
-const municipios = Object.entries(municipiosJalisco).sort((a, b) =>
-  a[1].localeCompare(b[1], "es")
-);
 
 export function FormPerfil({
   nombre,
   apellido_paterno,
   apellido_materno,
-  municipio,
   semestre,
   correo = "",
 }: FormPerfilProps) {
   const router = useRouter();
-  const [datos, setDatos] = useState<DatosPerfil>({
+  const [datos, setDatos] = useState<DatosActualizacionPerfil>({
     nombre,
     apellido_paterno,
     apellido_materno,
-    municipio,
     semestre,
   });
   const [confirmando, setConfirmando] = useState(false);
@@ -48,11 +29,7 @@ export function FormPerfil({
   const [error, setError] = useState(false);
   const [pendiente, iniciarTransicion] = useTransition();
 
-  const municipioEstaEnLista = municipios.some(
-    ([, nombreMunicipio]) => nombreMunicipio === datos.municipio
-  );
-
-  function actualizarCampo(campo: keyof DatosPerfil, valor: string) {
+  function actualizarCampo(campo: keyof DatosActualizacionPerfil, valor: string) {
     setDatos((actuales) => ({ ...actuales, [campo]: valor }));
     setMensaje("");
     setError(false);
@@ -66,11 +43,10 @@ export function FormPerfil({
     if (
       !datos.nombre.trim() ||
       !datos.apellido_paterno.trim() ||
-      !datos.municipio ||
       !/^[1-6]$/.test(datos.semestre)
     ) {
       setMensaje(
-        "Completa nombre, apellido paterno, municipio y semestre antes de continuar."
+        "Completa nombre, apellido paterno y semestre antes de continuar."
       );
       setError(true);
       return;
@@ -151,30 +127,12 @@ export function FormPerfil({
             />
           </label>
 
-          <label className="flex min-w-0 flex-col rounded-xl border border-slate-100 bg-slate-50 p-3.5">
-            <span className="text-[13px] font-bold text-slate-600">
-              Municipio *
-            </span>
-            <select
-              value={datos.municipio}
-              onChange={(e) => actualizarCampo("municipio", e.target.value)}
-              required
-              className="mt-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            >
-              <option value="">Selecciona tu municipio</option>
-              {datos.municipio && !municipioEstaEnLista && (
-                <option value={datos.municipio}>{datos.municipio}</option>
-              )}
-              {municipios.map(([id, nombreMunicipio]) => (
-                <option key={id} value={nombreMunicipio}>
-                  {nombreMunicipio}
-                </option>
-              ))}
-            </select>
-            <span className="mt-1 text-xs text-slate-500">
-              Selecciona uno de los municipios de Jalisco.
-            </span>
-          </label>
+          <div className="flex min-w-0 flex-col rounded-xl border border-slate-100 bg-slate-50 p-3.5">
+            <p className="text-[13px] font-bold text-slate-600">Municipio</p>
+            <p className="mt-2 text-sm text-slate-900">
+              {municipioPredeterminado.nombre}, {municipioPredeterminado.estado}
+            </p>
+          </div>
 
           <label className="flex min-w-0 flex-col rounded-xl border border-slate-100 bg-slate-50 p-3.5">
             <span className="text-[13px] font-bold text-slate-600">
@@ -234,8 +192,7 @@ export function FormPerfil({
           </h3>
           <p className="mt-1 text-sm text-indigo-900">
             Revisa que la información sea correcta. Los cambios se guardarán en
-            tu perfil y se utilizará el nuevo municipio para consultar las
-            recomendaciones universitarias.
+            tu perfil.
           </p>
 
           <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
@@ -249,7 +206,9 @@ export function FormPerfil({
             </div>
             <div>
               <dt className="font-semibold text-indigo-800">Municipio</dt>
-              <dd className="text-indigo-950">{datos.municipio}</dd>
+              <dd className="text-indigo-950">
+                {municipioPredeterminado.nombre}, {municipioPredeterminado.estado}
+              </dd>
             </div>
             <div>
               <dt className="font-semibold text-indigo-800">Semestre</dt>

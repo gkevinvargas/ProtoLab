@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import municipiosJalisco from "@/data/municipios/jalisco.json";
+import { municipioPredeterminado } from "@/lib/municipio-predeterminado";
 import { usuarioAutenticado } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
@@ -10,7 +10,6 @@ export interface DatosActualizacionPerfil {
   nombre: string;
   apellido_paterno: string;
   apellido_materno: string;
-  municipio: string;
   semestre: string;
 }
 
@@ -27,22 +26,13 @@ export async function actualizarPerfil(
     const nombre = limpiarTexto(datos?.nombre);
     const apellido_paterno = limpiarTexto(datos?.apellido_paterno);
     const apellido_materno = limpiarTexto(datos?.apellido_materno);
-    const municipio = limpiarTexto(datos?.municipio, 100);
     const semestre = limpiarTexto(datos?.semestre, 1);
 
-    if (!nombre || !apellido_paterno || !municipio || !semestre) {
+    if (!nombre || !apellido_paterno || !semestre) {
       return {
         ok: false,
         message:
-          "Completa nombre, apellido paterno, municipio y semestre.",
-      };
-    }
-
-    const municipiosPermitidos = Object.values(municipiosJalisco) as string[];
-    if (!municipiosPermitidos.includes(municipio)) {
-      return {
-        ok: false,
-        message: "Selecciona un municipio válido de Jalisco.",
+          "Completa nombre, apellido paterno y semestre.",
       };
     }
 
@@ -60,7 +50,7 @@ export async function actualizarPerfil(
         nombre,
         apellido_paterno,
         apellido_materno,
-        municipio,
+        municipio: municipioPredeterminado.nombre,
         semestre,
       },
       { onConflict: "id" }
